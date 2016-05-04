@@ -1,0 +1,5 @@
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Constantes\bin\Debug\Constantes.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Constantes\bin\Debug\Constantes.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Constantes\obj\Debug\Constantes.csprojResolveAssemblyReference.cache
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Constantes\obj\Debug\Constantes.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Constantes\obj\Debug\Constantes.pdb

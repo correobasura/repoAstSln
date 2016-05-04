@@ -53,6 +53,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Constantes\Constantes.csproj">
+      <Project>{736eac34-b36d-4cc1-b387-01e31c452829}</Project>
+      <Name>Constantes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IView\IView.csproj">
       <Project>{94f82d9c-1be9-4792-916c-6fa834a81494}</Project>
       <Name>IView</Name>

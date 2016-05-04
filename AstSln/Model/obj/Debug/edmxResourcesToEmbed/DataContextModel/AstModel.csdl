@@ -5,11 +5,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="TIPO" Type="Boolean" />
-    <Property Name="POS_UNO" Type="Boolean" />
-    <Property Name="POS_DOS" Type="Boolean" />
-    <Property Name="POS_TRES" Type="Boolean" />
-    <Property Name="POS_CUATRO" Type="Boolean" />
+    <Property Name="TIPO" Type="Byte" />
+    <Property Name="POS_UNO" Type="Byte" />
+    <Property Name="POS_DOS" Type="Byte" />
+    <Property Name="POS_TRES" Type="Byte" />
+    <Property Name="POS_CUATRO" Type="Byte" />
     <Property Name="SIGN" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="NUM_SOR" Type="Int32" />
     <Property Name="FECHA" Type="DateTime" />

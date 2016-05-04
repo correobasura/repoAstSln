@@ -21,5 +21,6 @@ C:\Users\jhillon\Source\Repos\AstSln\AstSln\WebApp\bin\Oracle.ManagedDataAccess.
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\WebApp\bin\EntityFramework.xml
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\WebApp\bin\EntityFramework.SqlServer.xml
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\WebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\WebApp\obj\Debug\WebApp.csprojResolveAssemblyReference.cache
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\WebApp\obj\Debug\WebApp.dll
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\WebApp\obj\Debug\WebApp.pdb

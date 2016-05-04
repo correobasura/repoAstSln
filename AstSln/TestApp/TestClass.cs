@@ -15,7 +15,8 @@ namespace TestApp
         public TestClass()
         {
             _pAccesoDatos = new PAccesoDatos(this);
-            _pAccesoDatos.ObtenerResultados();
+            //_pAccesoDatos.ObtenerResultados();
+            _pAccesoDatos.ObtenerUltimoResultado();
         }
     }
 }

@@ -2,4 +2,3 @@ C:\Users\jhillon\Source\Repos\AstSln\AstSln\IView\bin\Debug\IView.dll
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\IView\bin\Debug\IView.pdb
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\IView\obj\Debug\IView.dll
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\IView\obj\Debug\IView.pdb
-C:\Users\jhillon\Source\Repos\AstSln\AstSln\IView\obj\Debug\IView.csprojResolveAssemblyReference.cache
