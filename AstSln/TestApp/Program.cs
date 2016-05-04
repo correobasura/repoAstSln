@@ -10,6 +10,7 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
+            TestClass t = new TestClass();
         }
     }
 }

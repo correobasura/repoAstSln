@@ -2,3 +2,13 @@ C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\Presenter.dll
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\Presenter.pdb
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\obj\Debug\Presenter.dll
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\obj\Debug\Presenter.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\Presenter.dll.config
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\EntityFramework.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\IView.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\Model.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\IView.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\Model.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\EntityFramework.xml
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\obj\Debug\Presenter.csprojResolveAssemblyReference.cache

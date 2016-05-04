@@ -9,3 +9,10 @@ C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\bin\Debug\EntityFramework.xm
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\obj\Debug\TestApp.exe
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\obj\Debug\TestApp.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\bin\Debug\IView.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\bin\Debug\Presenter.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\bin\Debug\Model.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\bin\Debug\IView.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\bin\Debug\Presenter.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\bin\Debug\Model.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\TestApp\obj\Debug\TestApp.csprojResolveAssemblyReference.cache
