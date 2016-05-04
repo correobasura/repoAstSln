@@ -1,0 +1,4 @@
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\Presenter.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\bin\Debug\Presenter.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\obj\Debug\Presenter.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Presenter\obj\Debug\Presenter.pdb

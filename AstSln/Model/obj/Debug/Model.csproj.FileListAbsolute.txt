@@ -1,0 +1,11 @@
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\Model.dll.config
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\Model.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\Model.pdb
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\EntityFramework.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\Oracle.ManagedDataAccess.EntityFramework.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\EntityFramework.xml
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\obj\Debug\Model.dll
+C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\obj\Debug\Model.pdb

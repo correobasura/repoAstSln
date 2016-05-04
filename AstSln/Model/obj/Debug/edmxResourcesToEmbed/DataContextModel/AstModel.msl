@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AstModelStoreContainer" CdmEntityContainer="AstEntities">
+    <EntitySetMapping Name="ASTR">
+      <EntityTypeMapping TypeName="AstModel.ASTR">
+        <MappingFragment StoreEntitySet="ASTR">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+          <ScalarProperty Name="POS_UNO" ColumnName="POS_UNO" />
+          <ScalarProperty Name="POS_DOS" ColumnName="POS_DOS" />
+          <ScalarProperty Name="POS_TRES" ColumnName="POS_TRES" />
+          <ScalarProperty Name="POS_CUATRO" ColumnName="POS_CUATRO" />
+          <ScalarProperty Name="SIGN" ColumnName="SIGN" />
+          <ScalarProperty Name="NUM_SOR" ColumnName="NUM_SOR" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
