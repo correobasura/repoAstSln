@@ -9,3 +9,15 @@ C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\EntityFramework.xml
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\obj\Debug\Model.dll
 C:\Users\jhillon\Source\Repos\AstSln\AstSln\Model\obj\Debug\Model.pdb
+C:\Users\Admin\Documents\AstSln\AstSln\Model\bin\Debug\Model.dll.config
+C:\Users\Admin\Documents\AstSln\AstSln\Model\bin\Debug\Model.dll
+C:\Users\Admin\Documents\AstSln\AstSln\Model\bin\Debug\Model.pdb
+C:\Users\Admin\Documents\AstSln\AstSln\Model\bin\Debug\EntityFramework.dll
+C:\Users\Admin\Documents\AstSln\AstSln\Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Admin\Documents\AstSln\AstSln\Model\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Admin\Documents\AstSln\AstSln\Model\bin\Debug\Oracle.ManagedDataAccess.EntityFramework.dll
+C:\Users\Admin\Documents\AstSln\AstSln\Model\bin\Debug\EntityFramework.xml
+C:\Users\Admin\Documents\AstSln\AstSln\Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Admin\Documents\AstSln\AstSln\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\AstSln\AstSln\Model\obj\Debug\Model.dll
+C:\Users\Admin\Documents\AstSln\AstSln\Model\obj\Debug\Model.pdb
