@@ -139,11 +139,11 @@ namespace Presenter
                 flagSign = this.ValidarMismoDato(5, item, sorComparador);
             }
 
-            this.EscribirNumerosDespuesActual(contadorPosUno, cadSort+"PosUnoDespActual");
-            this.EscribirNumerosDespuesActual(contadorPosDos, cadSort+"PosDosDespActual");
-            this.EscribirNumerosDespuesActual(contadorPosTres, cadSort+"PosTresDespActual");
-            this.EscribirNumerosDespuesActual(contadorPosCuatro, cadSort+"PosCuatroDespActual");
-            this.EscribirNumerosDespuesActualSign(clonedDictionary, cadSort+"SignDespActual");            
+            this.EscribirNumerosDespuesActual(contadorPosUno, cadSort + "PosUnoDespActual");
+            this.EscribirNumerosDespuesActual(contadorPosDos, cadSort + "PosDosDespActual");
+            this.EscribirNumerosDespuesActual(contadorPosTres, cadSort + "PosTresDespActual");
+            this.EscribirNumerosDespuesActual(contadorPosCuatro, cadSort + "PosCuatroDespActual");
+            this.EscribirNumerosDespuesActualSign(clonedDictionary, cadSort + "SignDespActual");
         }
 
         /// <summary>
@@ -441,13 +441,25 @@ namespace Presenter
                 this.AgruparRachas(listTempNegativa, dictContRachaNegativa);
                 Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
                 this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
-                sw.WriteLine("Ultimo Racha Item");
-                sw.WriteLine(item.Value.Last());
-                sw.WriteLine("Positiva agrupada");
-                this.EscribirDataDiccionario(sw, dictContRachaPositiva);
-                sw.WriteLine("");
-                sw.WriteLine("Negativa agrupada");
-                this.EscribirDataDiccionario(sw, dictContRachaNegativa);
+                sw.WriteLine("U\tP\tA\tTA Racha Item");
+                int ultimo = item.Value.Last();
+                sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
+                    + "\t" + item.Value.ElementAt(item.Value.Count - 5)
+                    + "\t" + item.Value.ElementAt(item.Value.Count - 7)
+                    + "\t" + item.Value.ElementAt(item.Value.Count - 9)
+                    + "\t" + item.Value.ElementAt(item.Value.Count - 11));
+                if (dictContRachaNegativa.ContainsKey(ultimo))
+                {
+                    sw.WriteLine("Ultimo dentro de histórico");
+                    sw.WriteLine(ultimo + "=" + dictContRachaNegativa[ultimo]);
+                }
+                //sw.WriteLine("Positiva agrupada");
+                //this.EscribirDataDiccionario(sw, dictContRachaPositiva);
+                //sw.WriteLine("");
+                //sw.WriteLine("Negativa agrupada");
+                //this.EscribirDataDiccionario(sw, dictContRachaNegativa);
+                //sw.WriteLine("");
+                this.EscribirDiezMayores(sw, dictContRachaNegativa);
                 sw.WriteLine("");
             }
             sw.Close();
@@ -477,16 +489,50 @@ namespace Presenter
                 this.AgruparRachas(listTempNegativa, dictContRachaNegativa);
                 Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
                 this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
-                sw.WriteLine("Ultimo Racha Item");
-                sw.WriteLine(item.Value.Last());
-                sw.WriteLine("Positiva agrupada");
-                this.EscribirDataDiccionario(sw, dictContRachaPositiva);
-                sw.WriteLine("");
-                sw.WriteLine("Negativa agrupada");
-                this.EscribirDataDiccionario(sw, dictContRachaNegativa);
+                sw.WriteLine("U\tP\tA\tTA, Racha Item");
+                int ultimo = item.Value.Last();
+                sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
+                    + "\t" + item.Value.ElementAt(item.Value.Count - 5)
+                    + "\t" + item.Value.ElementAt(item.Value.Count - 7)
+                    + "\t" + item.Value.ElementAt(item.Value.Count - 9)
+                    + "\t" + item.Value.ElementAt(item.Value.Count - 11));
+                if (dictContRachaNegativa.ContainsKey(ultimo))
+                {
+                    sw.WriteLine("Ultimo dentro de histórico");
+                    sw.WriteLine(ultimo + "=" + dictContRachaNegativa[ultimo]);
+                }
+                //sw.WriteLine("Positiva agrupada");
+                //this.EscribirDataDiccionario(sw, dictContRachaPositiva);
+                //sw.WriteLine("");
+                //this.EscribirDataDiccionario(sw, dictContRachaNegativa);
+                this.EscribirDiezMayores(sw, dictContRachaNegativa);
                 sw.WriteLine("");
             }
             sw.Close();
+        }
+
+        /// <summary>
+        /// Método que escribe los datos de los diez mayores contadores en el diccionario
+        /// para facilitar la revisión de datos
+        /// </summary>
+        /// <param name="sw">Objeto que escribe los datos</param>
+        /// <param name="dict">diccionario de numeros</param>
+        /// <param name="dictSign">diccionario de signos</param>
+        /// <param name="caso">caso que indica si se escribe el de numeros(1) o signos(2)</param>
+        private void EscribirDiezMayores(StreamWriter sw, Dictionary<int, int> dict)
+        {
+            sw.WriteLine("Rachas");
+            var sortedDict = from entry in dict orderby entry.Value descending select entry;
+            int i = 0;
+            foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
+            {
+                sw.Write(itemDic.Key + "=" + itemDic.Value + ",");
+                i++;
+                if (i == 10)
+                {
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -520,8 +566,6 @@ namespace Presenter
                     diccionarioAgrupador.Add(item, 1);
                 }
             }
-            var sortedDict = from entry in diccionarioAgrupador orderby entry.Value descending select entry;
-            diccionarioAgrupador = sortedDict.ToDictionary(x => x.Key, x => x.Value);
         }
 
         /// <summary>
