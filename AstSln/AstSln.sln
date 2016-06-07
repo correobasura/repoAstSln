@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Client", "01.Client", "{483493FC-6770-4C3E-A15D-044434621961}"
 EndProject
@@ -24,6 +24,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06.General", "06.General", "{8E0E8A6F-A7D0-4D9B-A3FE-91D138DC5A88}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constantes", "Constantes\Constantes.csproj", "{736EAC34-B36D-4CC1-B387-01E31C452829}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07.DTOs", "07.DTOs", "{2A956318-68B2-410A-9F80-F51B3AC9D72B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{FB12F56B-BD8B-43DC-878D-D2C96B1A3166}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,10 @@ Global
 		{736EAC34-B36D-4CC1-B387-01E31C452829}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{736EAC34-B36D-4CC1-B387-01E31C452829}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{736EAC34-B36D-4CC1-B387-01E31C452829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB12F56B-BD8B-43DC-878D-D2C96B1A3166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB12F56B-BD8B-43DC-878D-D2C96B1A3166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB12F56B-BD8B-43DC-878D-D2C96B1A3166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB12F56B-BD8B-43DC-878D-D2C96B1A3166}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +74,6 @@ Global
 		{ED0721B0-0C1E-4DE2-8E86-075489408C24} = {024AD790-6573-4168-BE87-CC64F5D386AB}
 		{AEA374C9-B8F4-4B7D-87D9-7DCFC5C3D3B6} = {483493FC-6770-4C3E-A15D-044434621961}
 		{736EAC34-B36D-4CC1-B387-01E31C452829} = {8E0E8A6F-A7D0-4D9B-A3FE-91D138DC5A88}
+		{FB12F56B-BD8B-43DC-878D-D2C96B1A3166} = {2A956318-68B2-410A-9F80-F51B3AC9D72B}
 	EndGlobalSection
 EndGlobal
