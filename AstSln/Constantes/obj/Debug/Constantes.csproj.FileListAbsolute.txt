@@ -8,3 +8,8 @@ C:\Users\Admin\Documents\AstSln\AstSln\Constantes\bin\Debug\Constantes.pdb
 C:\Users\Admin\Documents\AstSln\AstSln\Constantes\obj\Debug\Constantes.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Documents\AstSln\AstSln\Constantes\obj\Debug\Constantes.dll
 C:\Users\Admin\Documents\AstSln\AstSln\Constantes\obj\Debug\Constantes.pdb
+C:\Users\jhillon\Source\Repos\repoAstSln\AstSln\Constantes\bin\Debug\Constantes.dll
+C:\Users\jhillon\Source\Repos\repoAstSln\AstSln\Constantes\bin\Debug\Constantes.pdb
+C:\Users\jhillon\Source\Repos\repoAstSln\AstSln\Constantes\obj\Debug\Constantes.csprojResolveAssemblyReference.cache
+C:\Users\jhillon\Source\Repos\repoAstSln\AstSln\Constantes\obj\Debug\Constantes.dll
+C:\Users\jhillon\Source\Repos\repoAstSln\AstSln\Constantes\obj\Debug\Constantes.pdb

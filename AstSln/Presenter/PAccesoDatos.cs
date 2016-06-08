@@ -17,21 +17,39 @@ namespace Presenter
         private AstEntities _astEntities;
         private IAccesoDatos _iAccesoDatos;
         private ASTR _resultActualLun;
-        private ASTR _resultActualSol;
+        //private ASTR _resultActualSol;
         Dictionary<string, int> dicSign;
         Dictionary<int, int> dictPuntuadorCuatroLun;
-        Dictionary<int, int> dictPuntuadorCuatroSol;
+        //Dictionary<int, int> dictPuntuadorCuatroSol;
         Dictionary<int, int> dictPuntuadorDosLun;
-        Dictionary<int, int> dictPuntuadorDosSol;
+        //Dictionary<int, int> dictPuntuadorDosSol;
         Dictionary<string, int> dictPuntuadorSignLun;
-        Dictionary<string, int> dictPuntuadorSignSol;
+        //Dictionary<string, int> dictPuntuadorSignSol;
         Dictionary<int, int> dictPuntuadorTresLun;
-        Dictionary<int, int> dictPuntuadorTresSol;
+        //Dictionary<int, int> dictPuntuadorTresSol;
         Dictionary<int, int> dictPuntuadorUnoLun;
-        Dictionary<int, int> dictPuntuadorUnoSol;
+        //Dictionary<int, int> dictPuntuadorUnoSol;
         private List<ASTR> listaDatosGeneral;
         private List<ASTR> listaDatosLun;
-        private List<ASTR> listaDatosSol;
+        //private List<ASTR> listaDatosSol;
+        Dictionary<int, int> dicRachasPosUno = new Dictionary<int, int>();
+        Dictionary<int, int> dicRachasPosDos = new Dictionary<int, int>();
+        Dictionary<int, int> dicRachasPosTres = new Dictionary<int, int>();
+        Dictionary<int, int> dicRachasPosCuatro = new Dictionary<int, int>();
+        Dictionary<int, int> dicRachasSign = new Dictionary<int, int>();
+        Dictionary<int, int> varDicRachasPosUno = new Dictionary<int, int>();
+        Dictionary<int, int> varDicRachasPosDos = new Dictionary<int, int>();
+        Dictionary<int, int> varDicRachasPosTres = new Dictionary<int, int>();
+        Dictionary<int, int> varDicRachasPosCuatro = new Dictionary<int, int>();
+        Dictionary<int, int> varDicRachasSign = new Dictionary<int, int>();
+        Dictionary<int, int> ultimosRachasPosUno = new Dictionary<int, int>();
+        Dictionary<int, int> ultimosRachasPosDos = new Dictionary<int, int>();
+        Dictionary<int, int> ultimosRachasPosTres = new Dictionary<int, int>();
+        Dictionary<int, int> ultimosRachasPosCuatro = new Dictionary<int, int>();
+        Dictionary<int, int> ultimosRachasSign = new Dictionary<int, int>();
+
+
+        private string QUERY_GENERAL = "SELECT SUM(A.Total) AS Rank, A.Clave AS {11} FROM ( {0} UNION ALL {1} UNION ALL {2} UNION ALL {3} UNION ALL {4} UNION ALL {5} UNION ALL {6} UNION ALL {7} UNION ALL {8} UNION ALL {9} UNION ALL {10}) A GROUP BY A.Clave";
 
         /// <summary>
         /// Constructor de la clase
@@ -42,11 +60,11 @@ namespace Presenter
             this._astEntities = new AstEntities();
             this._iAccesoDatos = iAccesoDatos;
             this.dicSign = this.InicializarDiccionarioSignosEnteros();
-            this.dictPuntuadorCuatroSol = this.InicializarDiccionarioEnteros();
-            this.dictPuntuadorDosSol = this.InicializarDiccionarioEnteros();
-            this.dictPuntuadorTresSol = this.InicializarDiccionarioEnteros();
-            this.dictPuntuadorUnoSol = this.InicializarDiccionarioEnteros();
-            this.dictPuntuadorSignSol = this.InicializarDiccionarioSignosEnteros();
+            //this.dictPuntuadorCuatroSol = this.InicializarDiccionarioEnteros();
+            //this.dictPuntuadorDosSol = this.InicializarDiccionarioEnteros();
+            //this.dictPuntuadorTresSol = this.InicializarDiccionarioEnteros();
+            //this.dictPuntuadorUnoSol = this.InicializarDiccionarioEnteros();
+            //this.dictPuntuadorSignSol = this.InicializarDiccionarioSignosEnteros();
             this.dictPuntuadorCuatroLun = this.InicializarDiccionarioEnteros();
             this.dictPuntuadorDosLun = this.InicializarDiccionarioEnteros();
             this.dictPuntuadorTresLun = this.InicializarDiccionarioEnteros();
@@ -86,17 +104,17 @@ namespace Presenter
                 var objectContex = ((IObjectContextAdapter)context).ObjectContext;
                 //Si no se pagina la lista, se obtienen todos los resultados, de lo contrario, se traen los resultados solicitados
                 listaDatosGeneral = objectContex.CreateObjectSet<ASTR>().OrderBy(x => x.FECHA).ToList();
-                listaDatosSol = listaDatosGeneral.Where(x => x.TIPO == 1).ToList();
+                //listaDatosSol = listaDatosGeneral.Where(x => x.TIPO == 1).ToList();
                 listaDatosLun = listaDatosGeneral.Where(x => x.TIPO == 2).ToList();
             }
             this.ObtenerUltimoResultado();
             var date = DateTime.Today;
             this.RealizarPuntuacion();
-            if (date.DayOfWeek != DayOfWeek.Sunday)
-            {
-                this.GetNumerosDespuesDelActual(listaDatosSol, _resultActualSol, "SOL");
-                this.ValidarRachas(listaDatosSol, "SOL");
-            }
+            //if (date.DayOfWeek != DayOfWeek.Sunday)
+            //{
+            //    this.GetNumerosDespuesDelActual(listaDatosSol, _resultActualSol, "SOL");
+            //    this.ValidarRachas(listaDatosSol, "SOL");
+            //}
             this.GetNumerosDespuesDelActual(listaDatosLun, _resultActualLun, "LUN");
             this.ValidarRachas(listaDatosLun, "LUN");
             this.EscribirDatosPuntuacion();
@@ -106,35 +124,46 @@ namespace Presenter
         {
             string fic = @"C:\temp\PuntuacionesLun.txt";
             StreamWriter sw = new StreamWriter(fic);
-            this.EscribirPuntuaciones(sw, "Pos_uno", dictPuntuadorUnoLun);
-            this.EscribirPuntuaciones(sw, "Pos_dos", dictPuntuadorDosLun);
-            this.EscribirPuntuaciones(sw, "Pos_tres", dictPuntuadorTresLun);
-            this.EscribirPuntuaciones(sw, "Pos_cuatro", dictPuntuadorCuatroLun);
-            this.EscribirPuntuaciones(sw, "Pos_sign", dictPuntuadorSignLun);
+            this.EscribirPuntuaciones(sw, "Pos_uno", dictPuntuadorUnoLun, varDicRachasPosUno);
+            this.EscribirPuntuaciones(sw, "Pos_dos", dictPuntuadorDosLun, varDicRachasPosDos);
+            this.EscribirPuntuaciones(sw, "Pos_tres", dictPuntuadorTresLun, varDicRachasPosTres);
+            this.EscribirPuntuaciones(sw, "Pos_cuatro", dictPuntuadorCuatroLun, varDicRachasPosCuatro);
+            this.EscribirPuntuaciones(sw, "Pos_sign", dictPuntuadorSignLun, varDicRachasSign);
             sw.Close();
         }
 
-        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<int,int> dicDatos)
+        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<int,int> dicDatos, Dictionary<int, int> dicRachas)
         {
             sw.WriteLine(titulo);
             sw.WriteLine();
             var sortedDict = from entry in dicDatos orderby entry.Value descending select entry;
+            var sortedDict2 = from entry in dicRachas orderby entry.Value descending select entry;
             foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
             {
-                sw.WriteLine(itemDic.Key + "=" + itemDic.Value);
+                sw.WriteLine(itemDic.Key + "=" + itemDic.Value+"\tUlt:"+ dicRachas[13]);
+                foreach (var item in sortedDict2.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
+                {
+                    sw.Write(item.Key+"="+item.Value + ",");
+                }
             }
             sw.WriteLine();
         }
 
-        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<string, int> dicDatos)
+        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<string, int> dicDatos, Dictionary<int, int> dicRachas)
         {
             sw.WriteLine(titulo);
             sw.WriteLine();
             var sortedDict = from entry in dicDatos orderby entry.Value descending select entry;
+            var sortedDict2 = from entry in dicRachas orderby entry.Value descending select entry;
             foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
             {
-                sw.WriteLine(itemDic.Key + "=" + itemDic.Value);
+                sw.WriteLine(itemDic.Key + "=" + itemDic.Value + "\tUlt:" + dicRachas[13]);
+                foreach (var item in sortedDict2.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
+                {
+                    sw.Write(item.Key + "=" + item.Value + ",");
+                }
             }
+            sw.WriteLine();
         }
 
         /// <summary>
@@ -320,10 +349,10 @@ namespace Presenter
         /// </summary>
         /// <param name="dict">diccionario con datos</param>
         /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        private void EscribirDatosArchivo(Dictionary<int, List<int>> dict, string cad)
+        private void EscribirDatosArchivo(Dictionary<int, List<int>> dict, string cad, Dictionary<int, int> dictRachas)
         {
             string fic = @"C:\temp\" + cad + ".txt";
-            StreamWriter sw = new StreamWriter(fic);
+            StreamWriter sw = new StreamWriter(fic);            
             foreach (var item in dict)
             {
                 sw.WriteLine(item.Key + ":");
@@ -335,21 +364,22 @@ namespace Presenter
                                               select x).ToList();
                 listTempNegativa.Sort();
                 listTempPositiva.Sort();
-                Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
-                this.AgruparRachas(listTempNegativa, dictContRachaNegativa);
-                Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
-                this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
+                //Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
+                this.AgruparRachas(listTempNegativa, dictRachas);
+                //Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
+                //this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
                 sw.WriteLine("U\tP\tA\tTA Racha Item");
                 int ultimo = item.Value.Last();
+                this.ultimosRachasPosUno.Add(item.)
                 sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 5)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 7)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 9)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 11));
-                if (dictContRachaNegativa.ContainsKey(ultimo))
+                if (dictRachas.ContainsKey(ultimo))
                 {
                     sw.WriteLine("Ultimo dentro de histórico");
-                    sw.WriteLine(ultimo + "=" + dictContRachaNegativa[ultimo]);
+                    sw.WriteLine(ultimo + "=" + dictRachas[ultimo]);
                 }
                 //sw.WriteLine("Positiva agrupada");
                 //this.EscribirDataDiccionario(sw, dictContRachaPositiva);
@@ -357,7 +387,7 @@ namespace Presenter
                 //sw.WriteLine("Negativa agrupada");
                 //this.EscribirDataDiccionario(sw, dictContRachaNegativa);
                 //sw.WriteLine("");
-                this.EscribirDiezMayores(sw, dictContRachaNegativa);
+                this.EscribirDiezMayores(sw, dictRachas);
                 sw.WriteLine("");
             }
             sw.Close();
@@ -368,7 +398,7 @@ namespace Presenter
         /// </summary>
         /// <param name="dict">diccionario con datos</param>
         /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        private void EscribirDatosArchivoSign(Dictionary<string, List<int>> dict, string cad)
+        private void EscribirDatosArchivoSign(Dictionary<string, List<int>> dict, string cad, Dictionary<int, int> dictRachas)
         {
             string fic = @"C:\temp\" + cad + ".txt";
             StreamWriter sw = new StreamWriter(fic);
@@ -383,27 +413,28 @@ namespace Presenter
                                               select x).ToList();
                 listTempNegativa.Sort();
                 listTempPositiva.Sort();
-                Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
-                this.AgruparRachas(listTempNegativa, dictContRachaNegativa);
-                Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
-                this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
+                //Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
+                this.AgruparRachas(listTempNegativa, dictRachas);
+                //Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
+                //this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
                 sw.WriteLine("U\tP\tA\tTA, Racha Item");
                 int ultimo = item.Value.Last();
+                dictRachas.Add(13, ultimo);
                 sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 5)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 7)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 9)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 11));
-                if (dictContRachaNegativa.ContainsKey(ultimo))
+                if (dictRachas.ContainsKey(ultimo))
                 {
                     sw.WriteLine("Ultimo dentro de histórico");
-                    sw.WriteLine(ultimo + "=" + dictContRachaNegativa[ultimo]);
+                    sw.WriteLine(ultimo + "=" + dictRachas[ultimo]);
                 }
                 //sw.WriteLine("Positiva agrupada");
                 //this.EscribirDataDiccionario(sw, dictContRachaPositiva);
                 //sw.WriteLine("");
                 //this.EscribirDataDiccionario(sw, dictContRachaNegativa);
-                this.EscribirDiezMayores(sw, dictContRachaNegativa);
+                this.EscribirDiezMayores(sw, dictRachas);
                 sw.WriteLine("");
             }
             sw.Close();
@@ -426,7 +457,7 @@ namespace Presenter
             {
                 sw.Write(itemDic.Key + "=" + itemDic.Value + ",");
                 i++;
-                if (i == 10)
+                if (i == 15)
                 {
                     break;
                 }
@@ -517,22 +548,22 @@ namespace Presenter
                 flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
                 flagSign = this.ValidarMismoDato(5, item, sorComparador);
             }
-            if (sorComparador.TIPO.Equals(ConstantesTipoSor.TIPO_SOL))
-            {
-                //this.PuntuarNumerosDespuesActual(contadorPosUno,this.dictPuntuadorUnoSol);
-                //this.PuntuarNumerosDespuesActual(contadorPosDos, this.dictPuntuadorDosSol);
-                //this.PuntuarNumerosDespuesActual(contadorPosTres, this.dictPuntuadorTresSol);
-                //this.PuntuarNumerosDespuesActual(contadorPosCuatro, this.dictPuntuadorCuatroSol);
-                //this.PuntuarNumerosDespuesActual(clonedDictionary, this.dictPuntuadorSignSol);
-            }
-            else
-            {
+            //if (sorComparador.TIPO.Equals(ConstantesTipoSor.TIPO_SOL))
+            //{
+            //    //this.PuntuarNumerosDespuesActual(contadorPosUno,this.dictPuntuadorUnoSol);
+            //    //this.PuntuarNumerosDespuesActual(contadorPosDos, this.dictPuntuadorDosSol);
+            //    //this.PuntuarNumerosDespuesActual(contadorPosTres, this.dictPuntuadorTresSol);
+            //    //this.PuntuarNumerosDespuesActual(contadorPosCuatro, this.dictPuntuadorCuatroSol);
+            //    //this.PuntuarNumerosDespuesActual(clonedDictionary, this.dictPuntuadorSignSol);
+            //}
+            //else
+            //{
                 this.PuntuarNumerosDespuesActual(contadorPosUno, this.dictPuntuadorUnoLun);
                 this.PuntuarNumerosDespuesActual(contadorPosDos, this.dictPuntuadorDosLun);
                 this.PuntuarNumerosDespuesActual(contadorPosTres, this.dictPuntuadorTresLun);
                 this.PuntuarNumerosDespuesActual(contadorPosCuatro, this.dictPuntuadorCuatroLun);
                 this.PuntuarNumerosDespuesActual(clonedDictionary, this.dictPuntuadorSignLun);
-            }
+            //}
             //this.EscribirNumerosDespuesActual(contadorPosUno, cadSort + "PosUnoDespActual");
             //this.EscribirNumerosDespuesActual(contadorPosDos, cadSort + "PosDosDespActual");
             //this.EscribirNumerosDespuesActual(contadorPosTres, cadSort + "PosTresDespActual");
@@ -560,10 +591,15 @@ namespace Presenter
         {
             var sortedDict = from entry in dicContador orderby entry.Value descending select entry;
             int indexTemp = 1;
-            int anterior = 0;
+            int? anterior = null;
             foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
             {
-                indexTemp = itemDic.Value;
+                dicAcumulador[itemDic.Key] += (10 - indexTemp);
+                if (!anterior.Equals(itemDic.Value))
+                {
+                    indexTemp++;
+                }
+                anterior = itemDic.Value;
             }
         }
 
@@ -624,27 +660,39 @@ namespace Presenter
         /// <returns>Consulta generada</returns>
         private string ObtenerParametrosQuery(int caso)
         {
-            DateTime today = DateTime.Today;
+            DateTime today = DateTime.Today.AddDays(-1);
             switch (caso)
             {
                 ///Agrupa los contadores de acuerdo al día de la semana
                 case 1:
-                    return "AND TO_CHAR(fecha, 'D') = " + ((int)today.DayOfWeek + 1 -1);
+                    return "AND TO_CHAR(fecha, 'D') = " + ((int)today.DayOfWeek + 1);
                 ///Agrupa los contadores de acuerdo al día del mes
                 case 2:
                     return "AND TO_CHAR(fecha, 'DD') = " + today.Day;
                 ///Agrupa los contadores de acuerdo al día par o impar
                 case 3:
-                    return "AND MOD(TO_CHAR(fecha, 'DD'),2) = " + ((today.Day-1) % 2);
+                    return "AND MOD(TO_CHAR(fecha, 'DD'),2) = " + (today.Day % 2);
                 ///Agrupa los contadores de acuerdo al mes
                 case 4:
                     return "AND TO_CHAR(fecha, 'MM') = " + today.Month;
                 ///Agrupa los contadores de acuerdo al día del año
                 case 5:
-                    return "AND TO_CHAR(fecha, 'DDD') = " + (today.DayOfYear-1);
+                    return "AND TO_CHAR(fecha, 'DDD') = " + (today.DayOfYear);
                 ///Agrupa los contadores de acuerdo al día del año par o impar
                 case 6:
-                    return "AND MOD(TO_CHAR(fecha, 'DDD'),2) = " + ((today.DayOfYear-1) % 2);
+                    return "AND MOD(TO_CHAR(fecha, 'DDD'),2) = " + (today.DayOfYear % 2);
+                ///Agrupa los contadores de acuerdo al mes par o impar
+                case 7:
+                    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (today.Month % 2);
+                ///Agrupa los contadores de acuerdo al mes par o impar y el día par o impar
+                case 8:
+                    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (today.Month % 2) + " AND MOD(TO_CHAR(fecha, 'DD'),2) = " + (today.Day % 2);
+                ///Agrupa los contadores de acuerdo al mes y al día
+                case 9:
+                    return "AND TO_CHAR(fecha, 'MM') = " + today.Month + " AND TO_CHAR(fecha, 'DD') = " + today.Day;
+                ///Agrupa los contadores de acuerdo al año par o impar
+                case 10:
+                    return "AND MOD(TO_CHAR(fecha, 'YYYY'),2) = " + (today.Year % 2);
                 default:
                     return "";
             }
@@ -655,7 +703,7 @@ namespace Presenter
         /// </summary>
         private void ObtenerUltimoResultado()
         {
-            _resultActualSol = listaDatosSol.Last();
+            //_resultActualSol = listaDatosSol.Last();
             _resultActualLun = listaDatosLun.Last();
         }
 
@@ -664,14 +712,26 @@ namespace Presenter
         /// </summary>
         /// <param name="posicion">referencia la posición que se evalua dentro del registro (Pos_uno, Pos_dos...)</param>
         /// <param name="tipo">Referencia al tipo de registro que se evalua(Sol-Lun)</param>
-        private void PuntuarInformacion(string posicion, int tipo, int casoConsulta, Dictionary<int, int> dict, string aliasColumna)
+        private void PuntuarInformacion(string posicion, int tipo, Dictionary<int, int> dict, string aliasColumna)
         {
-            string query_base = "SELECT {0} AS {1}, DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank FROM astr WHERE tipo = {2} {3} GROUP BY {0}";
-            string query = string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(casoConsulta));
-            DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query);
+            string query_base = "SELECT {0} AS Clave, 10-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Total FROM astr WHERE tipo = {2} {3} GROUP BY {0}";
+            string query_final = string.Format(QUERY_GENERAL,
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(0)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(1)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(2)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(3)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(4)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(5)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(6)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(7)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(8)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(9)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(10)),
+                aliasColumna);
+            DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum] += (10 - cust.Rank);
+                dict[cust.ClaveNum] = cust.Rank;
             }
         }
 
@@ -680,14 +740,26 @@ namespace Presenter
         /// </summary>
         /// <param name="posicion">referencia la posición que se evalua dentro del registro (Pos_uno, Pos_dos...)</param>
         /// <param name="tipo">Referencia al tipo de registro que se evalua(Sol-Lun)</param>
-        private void PuntuarInformacion(string posicion, int tipo, int casoConsulta, Dictionary<string, int> dict, string aliasColumna)
+        private void PuntuarInformacion(string posicion, int tipo, Dictionary<string, int> dict, string aliasColumna)
         {
-            string query_base = "SELECT {0} AS {1}, DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank FROM astr WHERE tipo = {2} {3} GROUP BY {0}";
-            string query = string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(casoConsulta));
-            DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query);
+            string query_base = "SELECT {0} AS Clave, 12-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Total FROM astr WHERE tipo = {2} {3} GROUP BY {0}";
+            string query_final = string.Format(QUERY_GENERAL,
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(0)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(1)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(2)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(3)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(4)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(5)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(6)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(7)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(8)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(9)),
+                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(10)),
+                aliasColumna);
+            DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign] += (12 - cust.Rank);
+                dict[cust.ClaveSign] = cust.Rank;
             }
         }
 
@@ -696,85 +768,12 @@ namespace Presenter
         /// </summary>
         private void RealizarPuntuacion()
         {
-            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorUnoSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorUnoSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorUnoSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorUnoSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorUnoSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorUnoSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorUnoSol, "ClaveNum");
-
-            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorDosSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorDosSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorDosSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorDosSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorDosSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorDosSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorDosSol, "ClaveNum");
-
-            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorTresSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorTresSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorTresSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorTresSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorTresSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorTresSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorTresSol, "ClaveNum");
-
-            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorCuatroSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorCuatroSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorCuatroSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorCuatroSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorCuatroSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorCuatroSol, "ClaveNum");
-            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorCuatroSol, "ClaveNum");
-
-            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorSignSol, "ClaveSign");
-            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorSignSol, "ClaveSign");
-            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorSignSol, "ClaveSign");
-            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorSignSol, "ClaveSign");
-            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorSignSol, "ClaveSign");
-            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorSignSol, "ClaveSign");
-            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorSignSol, "ClaveSign");
-
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, 0, dictPuntuadorUnoLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, 1, dictPuntuadorUnoLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, 2, dictPuntuadorUnoLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, 3, dictPuntuadorUnoLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, 4, dictPuntuadorUnoLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, 5, dictPuntuadorUnoLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, 6, dictPuntuadorUnoLun, "ClaveNum");
-
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, 0, dictPuntuadorDosLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, 1, dictPuntuadorDosLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, 2, dictPuntuadorDosLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, 3, dictPuntuadorDosLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, 4, dictPuntuadorDosLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, 5, dictPuntuadorDosLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, 6, dictPuntuadorDosLun, "ClaveNum");
-
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, 0, dictPuntuadorTresLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, 1, dictPuntuadorTresLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, 2, dictPuntuadorTresLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, 3, dictPuntuadorTresLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, 4, dictPuntuadorTresLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, 5, dictPuntuadorTresLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, 6, dictPuntuadorTresLun, "ClaveNum");
-
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, 0, dictPuntuadorCuatroLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, 1, dictPuntuadorCuatroLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, 2, dictPuntuadorCuatroLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, 3, dictPuntuadorCuatroLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, 4, dictPuntuadorCuatroLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, 5, dictPuntuadorCuatroLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, 6, dictPuntuadorCuatroLun, "ClaveNum");
-
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, 0, dictPuntuadorSignLun, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, 1, dictPuntuadorSignLun, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, 2, dictPuntuadorSignLun, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, 3, dictPuntuadorSignLun, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, 4, dictPuntuadorSignLun, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, 5, dictPuntuadorSignLun, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, 6, dictPuntuadorSignLun, "ClaveSign");
+            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, dictPuntuadorUnoLun, "ClaveNum");
+            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, dictPuntuadorDosLun, "ClaveNum");
+            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, dictPuntuadorTresLun, "ClaveNum");
+            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, dictPuntuadorCuatroLun, "ClaveNum");
+            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, dictPuntuadorSignLun, "ClaveSign");
+            
         }
 
         /// <summary>
@@ -848,11 +847,11 @@ namespace Presenter
             Dictionary<int, List<int>> dicRachasPosTres = this.ContarRachasPositivasNegativas(dicPosTres);
             Dictionary<int, List<int>> dicRachasPosCuatro = this.ContarRachasPositivasNegativas(dicPosCuatro);
             Dictionary<string, List<int>> dicRachasSign = this.ContarRachasPositivasNegativasSign(dicSign);
-            this.EscribirDatosArchivo(dicRachasPosUno, sort + "Pos_uno_file");
-            this.EscribirDatosArchivo(dicRachasPosDos, sort + "Pos_dos_file");
-            this.EscribirDatosArchivo(dicRachasPosTres, sort + "Pos_tres_file");
-            this.EscribirDatosArchivo(dicRachasPosCuatro, sort + "Pos_cuatro_file");
-            this.EscribirDatosArchivoSign(dicRachasSign, sort + "Sign_file");
+            this.EscribirDatosArchivo(dicRachasPosUno, sort + "Pos_uno_file", varDicRachasPosUno);
+            this.EscribirDatosArchivo(dicRachasPosDos, sort + "Pos_dos_file", varDicRachasPosDos);
+            this.EscribirDatosArchivo(dicRachasPosTres, sort + "Pos_tres_file", varDicRachasPosTres);
+            this.EscribirDatosArchivo(dicRachasPosCuatro, sort + "Pos_cuatro_file", varDicRachasPosCuatro);
+            this.EscribirDatosArchivoSign(dicRachasSign, sort + "Sign_file", varDicRachasSign);
         }
     }
 }
