@@ -99,6 +99,42 @@ namespace Presenter
             }
             this.GetNumerosDespuesDelActual(listaDatosLun, _resultActualLun, "LUN");
             this.ValidarRachas(listaDatosLun, "LUN");
+            this.EscribirDatosPuntuacion();
+        }
+
+        private void EscribirDatosPuntuacion()
+        {
+            string fic = @"C:\temp\PuntuacionesLun.txt";
+            StreamWriter sw = new StreamWriter(fic);
+            this.EscribirPuntuaciones(sw, "Pos_uno", dictPuntuadorUnoLun);
+            this.EscribirPuntuaciones(sw, "Pos_dos", dictPuntuadorDosLun);
+            this.EscribirPuntuaciones(sw, "Pos_tres", dictPuntuadorTresLun);
+            this.EscribirPuntuaciones(sw, "Pos_cuatro", dictPuntuadorCuatroLun);
+            this.EscribirPuntuaciones(sw, "Pos_sign", dictPuntuadorSignLun);
+            sw.Close();
+        }
+
+        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<int,int> dicDatos)
+        {
+            sw.WriteLine(titulo);
+            sw.WriteLine();
+            var sortedDict = from entry in dicDatos orderby entry.Value descending select entry;
+            foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
+            {
+                sw.WriteLine(itemDic.Key + "=" + itemDic.Value);
+            }
+            sw.WriteLine();
+        }
+
+        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<string, int> dicDatos)
+        {
+            sw.WriteLine(titulo);
+            sw.WriteLine();
+            var sortedDict = from entry in dicDatos orderby entry.Value descending select entry;
+            foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
+            {
+                sw.WriteLine(itemDic.Key + "=" + itemDic.Value);
+            }
         }
 
         /// <summary>
@@ -491,7 +527,7 @@ namespace Presenter
             }
             else
             {
-                this.PuntuarNumerosDespuesActual(contadorPosUno, this.dictPuntuadorDosLun);
+                this.PuntuarNumerosDespuesActual(contadorPosUno, this.dictPuntuadorUnoLun);
                 this.PuntuarNumerosDespuesActual(contadorPosDos, this.dictPuntuadorDosLun);
                 this.PuntuarNumerosDespuesActual(contadorPosTres, this.dictPuntuadorTresLun);
                 this.PuntuarNumerosDespuesActual(contadorPosCuatro, this.dictPuntuadorCuatroLun);
@@ -596,16 +632,16 @@ namespace Presenter
                     return "AND TO_CHAR(fecha, 'D') = " + ((int)today.DayOfWeek + 1 -1);
                 ///Agrupa los contadores de acuerdo al día del mes
                 case 2:
-                    return "AND TO_CHAR(fecha, 'DD') = " + (today.Day - 1);
+                    return "AND TO_CHAR(fecha, 'DD') = " + today.Day;
                 ///Agrupa los contadores de acuerdo al día par o impar
                 case 3:
                     return "AND MOD(TO_CHAR(fecha, 'DD'),2) = " + ((today.Day-1) % 2);
                 ///Agrupa los contadores de acuerdo al mes
                 case 4:
-                    return "AND TO_CHAR(fecha, 'MM') = " + today.Month + "";
+                    return "AND TO_CHAR(fecha, 'MM') = " + today.Month;
                 ///Agrupa los contadores de acuerdo al día del año
                 case 5:
-                    return "AND TO_CHAR(fecha, 'DDD') = " + (today.DayOfYear-1) + "";
+                    return "AND TO_CHAR(fecha, 'DDD') = " + (today.DayOfYear-1);
                 ///Agrupa los contadores de acuerdo al día del año par o impar
                 case 6:
                     return "AND MOD(TO_CHAR(fecha, 'DDD'),2) = " + ((today.DayOfYear-1) % 2);
@@ -660,45 +696,45 @@ namespace Presenter
         /// </summary>
         private void RealizarPuntuacion()
         {
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorUnoSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorUnoSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorUnoSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorUnoSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorUnoSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorUnoSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorUnoSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorUnoSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorUnoSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorUnoSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorUnoSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorUnoSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorUnoSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorUnoSol, "ClaveNum");
 
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorDosSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorDosSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorDosSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorDosSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorDosSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorDosSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorDosSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorDosSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorDosSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorDosSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorDosSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorDosSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorDosSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorDosSol, "ClaveNum");
 
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorTresSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorTresSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorTresSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorTresSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorTresSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorTresSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorTresSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorTresSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorTresSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorTresSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorTresSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorTresSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorTresSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorTresSol, "ClaveNum");
 
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorCuatroSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorCuatroSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorCuatroSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorCuatroSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorCuatroSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorCuatroSol, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorCuatroSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorCuatroSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorCuatroSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorCuatroSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorCuatroSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorCuatroSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorCuatroSol, "ClaveNum");
+            //this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorCuatroSol, "ClaveNum");
 
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorSignSol, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorSignSol, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorSignSol, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorSignSol, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorSignSol, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorSignSol, "ClaveSign");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorSignSol, "ClaveSign");
+            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 0, dictPuntuadorSignSol, "ClaveSign");
+            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 1, dictPuntuadorSignSol, "ClaveSign");
+            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 2, dictPuntuadorSignSol, "ClaveSign");
+            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 3, dictPuntuadorSignSol, "ClaveSign");
+            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 4, dictPuntuadorSignSol, "ClaveSign");
+            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 5, dictPuntuadorSignSol, "ClaveSign");
+            //this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_SOL, 6, dictPuntuadorSignSol, "ClaveSign");
 
             this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, 0, dictPuntuadorUnoLun, "ClaveNum");
             this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, 1, dictPuntuadorUnoLun, "ClaveNum");
