@@ -47,6 +47,11 @@ namespace Presenter
         Dictionary<int, int> ultimosRachasPosTres = new Dictionary<int, int>();
         Dictionary<int, int> ultimosRachasPosCuatro = new Dictionary<int, int>();
         Dictionary<int, int> ultimosRachasSign = new Dictionary<int, int>();
+        Dictionary<int, ObjectInfoDTO> dictInfoPosUno;
+        Dictionary<int, ObjectInfoDTO> dictInfoPosDos;
+        Dictionary<int, ObjectInfoDTO> dictInfoPosTres;
+        Dictionary<int, ObjectInfoDTO> dictInfoPosCuatro;
+        Dictionary<string, ObjectInfoDTO> dictInfoSign;
 
 
         private string QUERY_GENERAL = "SELECT SUM(A.Total) AS Rank, A.Clave AS {11} FROM ( {0} UNION ALL {1} UNION ALL {2} UNION ALL {3} UNION ALL {4} UNION ALL {5} UNION ALL {6} UNION ALL {7} UNION ALL {8} UNION ALL {9} UNION ALL {10}) A GROUP BY A.Clave";
@@ -59,6 +64,11 @@ namespace Presenter
         {
             this._astEntities = new AstEntities();
             this._iAccesoDatos = iAccesoDatos;
+            this.dictInfoPosUno = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosDos = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosTres = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosCuatro = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoSign = (Dictionary<string, ObjectInfoDTO>)this.InicializarDiccionarioInformacion(1);
             this.dicSign = this.InicializarDiccionarioSignosEnteros();
             //this.dictPuntuadorCuatroSol = this.InicializarDiccionarioEnteros();
             //this.dictPuntuadorDosSol = this.InicializarDiccionarioEnteros();
@@ -70,6 +80,37 @@ namespace Presenter
             this.dictPuntuadorTresLun = this.InicializarDiccionarioEnteros();
             this.dictPuntuadorUnoLun = this.InicializarDiccionarioEnteros();
             this.dictPuntuadorSignLun = this.InicializarDiccionarioSignosEnteros();
+        }
+
+        private object InicializarDiccionarioInformacion(int caso = 0)
+        {
+            if(caso == 0)
+            {
+                Dictionary<int, ObjectInfoDTO> dict = new Dictionary<int, ObjectInfoDTO>();
+                for (int i = 0; i < 10; i++)
+                {
+                    dict.Add(i, new ObjectInfoDTO());
+                }
+                return dict;
+            }
+            else
+            {
+                Dictionary<string, ObjectInfoDTO> dict = new Dictionary<string, ObjectInfoDTO>();
+                dict.Add(ConstantesGenerales.ACUARIO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.ARIES, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.CANCER, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.CAPRICORNIO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.ESCORPION, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.GEMINIS, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.LEO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.LIBRA, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.PISCIS, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.SAGITARIO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.TAURO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.VIRGO, new ObjectInfoDTO());
+                return dict;
+            }
+            
         }
 
         /// <summary>
@@ -132,7 +173,7 @@ namespace Presenter
             sw.Close();
         }
 
-        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<int,int> dicDatos, Dictionary<int, int> dicRachas)
+        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<int, int> dicDatos, Dictionary<int, int> dicRachas)
         {
             sw.WriteLine(titulo);
             sw.WriteLine();
@@ -140,10 +181,10 @@ namespace Presenter
             var sortedDict2 = from entry in dicRachas orderby entry.Value descending select entry;
             foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
             {
-                sw.WriteLine(itemDic.Key + "=" + itemDic.Value+"\tUlt:"+ dicRachas[13]);
+                sw.WriteLine(itemDic.Key + "=" + itemDic.Value + "\tUlt:" + dicRachas[13]);
                 foreach (var item in sortedDict2.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
                 {
-                    sw.Write(item.Key+"="+item.Value + ",");
+                    sw.Write(item.Key + "=" + item.Value + ",");
                 }
             }
             sw.WriteLine();
@@ -352,7 +393,7 @@ namespace Presenter
         private void EscribirDatosArchivo(Dictionary<int, List<int>> dict, string cad, Dictionary<int, int> dictRachas)
         {
             string fic = @"C:\temp\" + cad + ".txt";
-            StreamWriter sw = new StreamWriter(fic);            
+            StreamWriter sw = new StreamWriter(fic);
             foreach (var item in dict)
             {
                 sw.WriteLine(item.Key + ":");
@@ -370,7 +411,7 @@ namespace Presenter
                 //this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
                 sw.WriteLine("U\tP\tA\tTA Racha Item");
                 int ultimo = item.Value.Last();
-                this.ultimosRachasPosUno.Add(item.)
+                //this.ultimosRachasPosUno.Add(item.)
                 sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 5)
                     + "\t" + item.Value.ElementAt(item.Value.Count - 7)
@@ -558,11 +599,11 @@ namespace Presenter
             //}
             //else
             //{
-                this.PuntuarNumerosDespuesActual(contadorPosUno, this.dictPuntuadorUnoLun);
-                this.PuntuarNumerosDespuesActual(contadorPosDos, this.dictPuntuadorDosLun);
-                this.PuntuarNumerosDespuesActual(contadorPosTres, this.dictPuntuadorTresLun);
-                this.PuntuarNumerosDespuesActual(contadorPosCuatro, this.dictPuntuadorCuatroLun);
-                this.PuntuarNumerosDespuesActual(clonedDictionary, this.dictPuntuadorSignLun);
+            this.PuntuarNumerosDespuesActual(contadorPosUno, this.dictPuntuadorUnoLun);
+            this.PuntuarNumerosDespuesActual(contadorPosDos, this.dictPuntuadorDosLun);
+            this.PuntuarNumerosDespuesActual(contadorPosTres, this.dictPuntuadorTresLun);
+            this.PuntuarNumerosDespuesActual(contadorPosCuatro, this.dictPuntuadorCuatroLun);
+            this.PuntuarNumerosDespuesActual(clonedDictionary, this.dictPuntuadorSignLun);
             //}
             //this.EscribirNumerosDespuesActual(contadorPosUno, cadSort + "PosUnoDespActual");
             //this.EscribirNumerosDespuesActual(contadorPosDos, cadSort + "PosDosDespActual");
@@ -570,7 +611,7 @@ namespace Presenter
             //this.EscribirNumerosDespuesActual(contadorPosCuatro, cadSort + "PosCuatroDespActual");
             //this.EscribirNumerosDespuesActualSign(clonedDictionary, cadSort + "SignDespActual");
         }
-        
+
         private void PuntuarNumerosDespuesActual(Dictionary<int, int> dicContador, Dictionary<int, int> dicAcumulador)
         {
             var sortedDict = from entry in dicContador orderby entry.Value descending select entry;
@@ -712,26 +753,140 @@ namespace Presenter
         /// </summary>
         /// <param name="posicion">referencia la posición que se evalua dentro del registro (Pos_uno, Pos_dos...)</param>
         /// <param name="tipo">Referencia al tipo de registro que se evalua(Sol-Lun)</param>
-        private void PuntuarInformacion(string posicion, int tipo, Dictionary<int, int> dict, string aliasColumna)
+        private void PuntuarInformacion(string posicion, int tipo, Dictionary<int, ObjectInfoDTO> dict)
         {
-            string query_base = "SELECT {0} AS Clave, 10-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Total FROM astr WHERE tipo = {2} {3} GROUP BY {0}";
-            string query_final = string.Format(QUERY_GENERAL,
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(0)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(1)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(2)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(3)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(4)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(5)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(6)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(7)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(8)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(9)),
-                string.Format(query_base, posicion, aliasColumna, tipo, this.ObtenerParametrosQuery(10)),
-                aliasColumna);
+            string query_base = "SELECT {0} AS ClaveNum, 10-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank FROM astr WHERE tipo = {1} {2} GROUP BY {0}";
+            string query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(0));
             DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContGeneral(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(1));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContDiaSemana(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(2));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContDiaMes(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(3));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContDiaModulo(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(4));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContMes(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(5));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContDiaAnio(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(6));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AdinionarInformacionContadorDiaAnioModulo(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(7));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContMesModulo(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(8));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContMesModuloDiaModulo(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(9));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContMesDia(dict, data);
+            query_final = string.Format(query_base, posicion, tipo, this.ObtenerParametrosQuery(10));
+            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            AddInfoContAnioModulo(dict, data);
+        }
+
+        private static void AddInfoContAnioModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum] = cust.Rank;
+                dict[cust.ClaveNum].ContadorAnioModulo = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AddInfoContMesDia(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorMesDia = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AddInfoContMesModuloDiaModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorMesModuloDiaModulo = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AddInfoContMesModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorMesModulo = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AdinionarInformacionContadorDiaAnioModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorDiaAnioModulo = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AddInfoContDiaAnio(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorDiaAnio = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AddInfoContMes(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorMes = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AddInfoContDiaModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorDiaModulo = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AddInfoContDiaMes(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorDiaMes = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AddInfoContDiaSemana(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorDiaSemana = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+            }
+        }
+
+        private static void AddInfoContGeneral(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorGeneral = cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
 
@@ -768,12 +923,8 @@ namespace Presenter
         /// </summary>
         private void RealizarPuntuacion()
         {
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, dictPuntuadorUnoLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, dictPuntuadorDosLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, dictPuntuadorTresLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, dictPuntuadorCuatroLun, "ClaveNum");
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, dictPuntuadorSignLun, "ClaveSign");
-            
+            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, dictInfoPosUno);
+
         }
 
         /// <summary>
