@@ -24,7 +24,7 @@ namespace Presenter
         Dictionary<string, ObjectInfoDTO> dictInfoSignLun;
         private List<ASTR> listaDatosGeneral;
         private List<ASTR> listaDatosLun;
-        
+
         /// <summary>
         /// Constructor de la clase
         /// </summary>
@@ -66,7 +66,7 @@ namespace Presenter
             //    this.ValidarRachas(listaDatosSol, "SOL");
             //}
             this.RecorrerElementosLista(listaDatosLun, _resultActualLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
-            this.ValidarRachas(ConstantesTipoSor.TIPO_LUN, listaDatosLun, "LUN");
+            this.ValidarRachas(listaDatosLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
             //this.EscribirDatosPuntuacion();
         }
 
@@ -636,30 +636,34 @@ namespace Presenter
         /// <summary>
         /// Método que obtiene las listas de las rachas para cada valor
         /// </summary>
-        /// <param name="listaValidar"></param>
-        private void ValidarRachas(int tipo, List<ASTR> listaValidar, string sort)
+        /// <param name="listaValidar">lista con elementos a validar</param>
+        /// <param name="dictPosUno">diccionario para validacion de posicion 1</param>
+        /// <param name="dictPosDos">diccionario para validacion de posicion 2</param>
+        /// <param name="dictPostres">diccionario para validacion de posicion 3</param>
+        /// <param name="dictPosCuatro">diccionario para validacion de posicion 4</param>
+        /// <param name="dictSign">diccionario para validacion de sign</param>
+        private void ValidarRachas(List<ASTR> listaValidar, Dictionary<int, ObjectInfoDTO> dictPosUno,
+            Dictionary<int, ObjectInfoDTO> dictPosDos, Dictionary<int, ObjectInfoDTO> dictPostres, Dictionary<int, ObjectInfoDTO> dictPosCuatro,
+            Dictionary<string, ObjectInfoDTO> dictSign)
         {
-            if (tipo.Equals(ConstantesTipoSor.TIPO_LUN))
+            foreach (var item in listaValidar)
             {
-                foreach (var item in listaValidar)
-                {
-                    this.AdicionarElementoDiccionarioRachas(dictInfoPosUnoLun, (int)item.POS_UNO);
-                    this.AdicionarElementoDiccionarioRachas(dictInfoPosDosLun, (int)item.POS_DOS);
-                    this.AdicionarElementoDiccionarioRachas(dictInfoPosTresLun, (int)item.POS_TRES);
-                    this.AdicionarElementoDiccionarioRachas(dictInfoPosCuatroLun, (int)item.POS_CUATRO);
-                    this.AdicionarElementoDiccionarioRachasSign(dictInfoSignLun, item.SIGN);
-                }
-                this.ContarRachasPositivasNegativas(dictInfoPosUnoLun);
-                this.ContarRachasPositivasNegativas(dictInfoPosDosLun);
-                this.ContarRachasPositivasNegativas(dictInfoPosTresLun);
-                this.ContarRachasPositivasNegativas(dictInfoPosCuatroLun);
-                this.ContarRachasPositivasNegativasSign(dictInfoSignLun);
-                this.AgruparRachas(dictInfoPosUnoLun);
-                this.AgruparRachas(dictInfoPosDosLun);
-                this.AgruparRachas(dictInfoPosTresLun);
-                this.AgruparRachas(dictInfoPosCuatroLun);
-                this.AgruparRachas(dictInfoSignLun);
+                this.AdicionarElementoDiccionarioRachas(dictPosUno, (int)item.POS_UNO);
+                this.AdicionarElementoDiccionarioRachas(dictPosDos, (int)item.POS_DOS);
+                this.AdicionarElementoDiccionarioRachas(dictPostres, (int)item.POS_TRES);
+                this.AdicionarElementoDiccionarioRachas(dictPosCuatro, (int)item.POS_CUATRO);
+                this.AdicionarElementoDiccionarioRachasSign(dictSign, item.SIGN);
             }
+            this.ContarRachasPositivasNegativas(dictPosUno);
+            this.ContarRachasPositivasNegativas(dictPosDos);
+            this.ContarRachasPositivasNegativas(dictPostres);
+            this.ContarRachasPositivasNegativas(dictPosCuatro);
+            this.ContarRachasPositivasNegativasSign(dictSign);
+            this.AgruparRachas(dictPosUno);
+            this.AgruparRachas(dictPosDos);
+            this.AgruparRachas(dictPostres);
+            this.AgruparRachas(dictPosCuatro);
+            this.AgruparRachas(dictSign);
         }
     }
 }
