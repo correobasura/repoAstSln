@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model.DataContextModel;
 
 namespace DTOs
 {
@@ -20,6 +21,7 @@ namespace DTOs
         private int _contadorMesModuloDiaModulo;
         private int _contadorMesDia;
         private int _contadorAnioModulo;
+        private int _contadorDespuesActual;
 
         /// <summary>
         /// Almacena el valor de todas las puntuaciones individuales
@@ -210,6 +212,22 @@ namespace DTOs
             set
             {
                 _contadorMesModulo = value;
+            }
+        }
+
+        /// <summary>
+        /// Variable que almacena el valor contador para las apariciones después del actual
+        /// </summary>
+        public int ContadorDespuesActual
+        {
+            get
+            {
+                return _contadorDespuesActual;
+            }
+
+            set
+            {
+                _contadorDespuesActual = value;
             }
         }
     }
