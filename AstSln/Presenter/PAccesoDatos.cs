@@ -17,42 +17,14 @@ namespace Presenter
         private AstEntities _astEntities;
         private IAccesoDatos _iAccesoDatos;
         private ASTR _resultActualLun;
-        //private ASTR _resultActualSol;
-        //Dictionary<string, int> dicSign;
-        //Dictionary<int, int> dictPuntuadorCuatroLun;
-        ////Dictionary<int, int> dictPuntuadorCuatroSol;
-        //Dictionary<int, int> dictPuntuadorDosLun;
-        ////Dictionary<int, int> dictPuntuadorDosSol;
-        //Dictionary<string, int> dictPuntuadorSignLun;
-        ////Dictionary<string, int> dictPuntuadorSignSol;
-        //Dictionary<int, int> dictPuntuadorTresLun;
-        ////Dictionary<int, int> dictPuntuadorTresSol;
-        //Dictionary<int, int> dictPuntuadorUnoLun;
-        ////Dictionary<int, int> dictPuntuadorUnoSol;
-        private List<ASTR> listaDatosGeneral;
-        private List<ASTR> listaDatosLun;
-        ////private List<ASTR> listaDatosSol;
-        //Dictionary<int, int> dicRachasPosUno = new Dictionary<int, int>();
-        //Dictionary<int, int> dicRachasPosDos = new Dictionary<int, int>();
-        //Dictionary<int, int> dicRachasPosTres = new Dictionary<int, int>();
-        //Dictionary<int, int> dicRachasPosCuatro = new Dictionary<int, int>();
-        //Dictionary<int, int> dicRachasSign = new Dictionary<int, int>();
-        //Dictionary<int, int> varDicRachasPosUno = new Dictionary<int, int>();
-        //Dictionary<int, int> varDicRachasPosDos = new Dictionary<int, int>();
-        //Dictionary<int, int> varDicRachasPosTres = new Dictionary<int, int>();
-        //Dictionary<int, int> varDicRachasPosCuatro = new Dictionary<int, int>();
-        //Dictionary<int, int> varDicRachasSign = new Dictionary<int, int>();
-        //Dictionary<int, int> ultimosRachasPosUno = new Dictionary<int, int>();
-        //Dictionary<int, int> ultimosRachasPosDos = new Dictionary<int, int>();
-        //Dictionary<int, int> ultimosRachasPosTres = new Dictionary<int, int>();
-        //Dictionary<int, int> ultimosRachasPosCuatro = new Dictionary<int, int>();
-        //Dictionary<int, int> ultimosRachasSign = new Dictionary<int, int>();
-        Dictionary<int, ObjectInfoDTO> dictInfoPosUnoLun;
+        Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroLun;
         Dictionary<int, ObjectInfoDTO> dictInfoPosDosLun;
         Dictionary<int, ObjectInfoDTO> dictInfoPosTresLun;
-        Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroLun;
+        Dictionary<int, ObjectInfoDTO> dictInfoPosUnoLun;
         Dictionary<string, ObjectInfoDTO> dictInfoSignLun;
-
+        private List<ASTR> listaDatosGeneral;
+        private List<ASTR> listaDatosLun;
+        
         /// <summary>
         /// Constructor de la clase
         /// </summary>
@@ -66,70 +38,6 @@ namespace Presenter
             this.dictInfoPosTresLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
             this.dictInfoPosCuatroLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
             this.dictInfoSignLun = (Dictionary<string, ObjectInfoDTO>)this.InicializarDiccionarioInformacion(1);
-            //this.dicSign = this.InicializarDiccionarioSignosEnteros();
-            //this.dictPuntuadorCuatroSol = this.InicializarDiccionarioEnteros();
-            //this.dictPuntuadorDosSol = this.InicializarDiccionarioEnteros();
-            //this.dictPuntuadorTresSol = this.InicializarDiccionarioEnteros();
-            //this.dictPuntuadorUnoSol = this.InicializarDiccionarioEnteros();
-            //this.dictPuntuadorSignSol = this.InicializarDiccionarioSignosEnteros();
-            //this.dictPuntuadorCuatroLun = this.InicializarDiccionarioEnteros();
-            //this.dictPuntuadorDosLun = this.InicializarDiccionarioEnteros();
-            //this.dictPuntuadorTresLun = this.InicializarDiccionarioEnteros();
-            //this.dictPuntuadorUnoLun = this.InicializarDiccionarioEnteros();
-            //this.dictPuntuadorSignLun = this.InicializarDiccionarioSignosEnteros();
-        }
-
-        private object InicializarDiccionarioInformacion(int caso = 0)
-        {
-            if(caso == 0)
-            {
-                Dictionary<int, ObjectInfoDTO> dict = new Dictionary<int, ObjectInfoDTO>();
-                for (int i = 0; i < 10; i++)
-                {
-                    dict.Add(i, new ObjectInfoDTO());
-                }
-                return dict;
-            }
-            else
-            {
-                Dictionary<string, ObjectInfoDTO> dict = new Dictionary<string, ObjectInfoDTO>();
-                dict.Add(ConstantesGenerales.ACUARIO, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.ARIES, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.CANCER, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.CAPRICORNIO, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.ESCORPION, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.GEMINIS, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.LEO, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.LIBRA, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.PISCIS, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.SAGITARIO, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.TAURO, new ObjectInfoDTO());
-                dict.Add(ConstantesGenerales.VIRGO, new ObjectInfoDTO());
-                return dict;
-            }
-            
-        }
-
-        /// <summary>
-        /// Método que inicializa la estructura requerida para los Contadores Sign
-        /// </summary>
-        /// <returns>Diccionario con datos requeridos</returns>
-        private Dictionary<string, int> InicializarDiccionarioSignosEnteros()
-        {
-            Dictionary<string, int> dict = new Dictionary<string, int>();
-            dict.Add(ConstantesGenerales.ACUARIO, 0);
-            dict.Add(ConstantesGenerales.ARIES, 0);
-            dict.Add(ConstantesGenerales.CANCER, 0);
-            dict.Add(ConstantesGenerales.CAPRICORNIO, 0);
-            dict.Add(ConstantesGenerales.ESCORPION, 0);
-            dict.Add(ConstantesGenerales.GEMINIS, 0);
-            dict.Add(ConstantesGenerales.LEO, 0);
-            dict.Add(ConstantesGenerales.LIBRA, 0);
-            dict.Add(ConstantesGenerales.PISCIS, 0);
-            dict.Add(ConstantesGenerales.SAGITARIO, 0);
-            dict.Add(ConstantesGenerales.TAURO, 0);
-            dict.Add(ConstantesGenerales.VIRGO, 0);
-            return dict;
         }
 
         /// <summary>
@@ -157,94 +65,49 @@ namespace Presenter
             //    this.GetNumerosDespuesDelActual(listaDatosSol, _resultActualSol, "SOL");
             //    this.ValidarRachas(listaDatosSol, "SOL");
             //}
-            this.GetNumerosDespuesDelActual(listaDatosLun, _resultActualLun, ConstantesTipoSor.TIPO_LUN);
+            this.RecorrerElementosLista(listaDatosLun, _resultActualLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
             this.ValidarRachas(ConstantesTipoSor.TIPO_LUN, listaDatosLun, "LUN");
             //this.EscribirDatosPuntuacion();
-        }
-
-        //private void EscribirDatosPuntuacion()
-        //{
-        //    string fic = @"C:\temp\PuntuacionesLun.txt";
-        //    StreamWriter sw = new StreamWriter(fic);
-        //    this.EscribirPuntuaciones(sw, "Pos_uno", dictPuntuadorUnoLun, varDicRachasPosUno);
-        //    this.EscribirPuntuaciones(sw, "Pos_dos", dictPuntuadorDosLun, varDicRachasPosDos);
-        //    this.EscribirPuntuaciones(sw, "Pos_tres", dictPuntuadorTresLun, varDicRachasPosTres);
-        //    this.EscribirPuntuaciones(sw, "Pos_cuatro", dictPuntuadorCuatroLun, varDicRachasPosCuatro);
-        //    this.EscribirPuntuaciones(sw, "Pos_sign", dictPuntuadorSignLun, varDicRachasSign);
-        //    sw.Close();
-        //}
-
-        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<int, int> dicDatos, Dictionary<int, int> dicRachas)
-        {
-            sw.WriteLine(titulo);
-            sw.WriteLine();
-            var sortedDict = from entry in dicDatos orderby entry.Value descending select entry;
-            var sortedDict2 = from entry in dicRachas orderby entry.Value descending select entry;
-            foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
-            {
-                sw.WriteLine(itemDic.Key + "=" + itemDic.Value + "\tUlt:" + dicRachas[13]);
-                foreach (var item in sortedDict2.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
-                {
-                    sw.Write(item.Key + "=" + item.Value + ",");
-                }
-            }
-            sw.WriteLine();
-        }
-
-        private void EscribirPuntuaciones(StreamWriter sw, string titulo, Dictionary<string, int> dicDatos, Dictionary<int, int> dicRachas)
-        {
-            sw.WriteLine(titulo);
-            sw.WriteLine();
-            var sortedDict = from entry in dicDatos orderby entry.Value descending select entry;
-            var sortedDict2 = from entry in dicRachas orderby entry.Value descending select entry;
-            foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
-            {
-                sw.WriteLine(itemDic.Key + "=" + itemDic.Value + "\tUlt:" + dicRachas[13]);
-                foreach (var item in sortedDict2.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
-                {
-                    sw.Write(item.Key + "=" + item.Value + ",");
-                }
-            }
-            sw.WriteLine();
         }
 
         /// <summary>
         /// Método que marca una posición, cero o uno, de acuerdo al valor recibido en el dato
         /// si coincide con la clave, marca la posición como uno, de lo contrario marca cero
         /// </summary>
-        /// <param name="dict">Diccionario con vlos valores de las posiciones</param>
-        /// <param name="dato">dato que se buscará en la clave del diccioanrio</param>
-        private void AdicionarElementoDiccionarioRachas(Dictionary<int, List<int>> dict, int dato)
+        /// <param name="dict">Diccionario con valos valores de las posiciones</param>
+        /// <param name="dato">dato que se buscará en la clave del diccionario</param>
+        private void AdicionarElementoDiccionarioRachas(Dictionary<int, ObjectInfoDTO> dict, int dato)
         {
             foreach (var item in dict)
             {
                 if (item.Key.Equals(dato))
                 {
-                    item.Value.Add(1);
+                    item.Value.RachasAparicion.Add(1);
                 }
                 else
                 {
-                    item.Value.Add(0);
+                    item.Value.RachasAparicion.Add(0);
                 }
             }
         }
 
         /// <summary>
-        /// Método que inicializa la estructura que lleva los diccionarios de rachas para los signos
+        /// Método que marca una posición, cero o uno, de acuerdo al valor recibido en el dato
+        /// si coincide con la clave, marca la posición como uno, de lo contrario marca cero
         /// </summary>
-        /// <param name="dict">diccionario para llenar información</param>
-        /// <param name="sign">cadena para asignar</param>
-        private void AdicionarElementoDiccionarioRachasSign(Dictionary<string, List<int>> dict, string sign)
+        /// <param name="dict">Diccionario con valos valores de las posiciones</param>
+        /// <param name="dato">dato que se buscará en la clave del diccionario</param>
+        private void AdicionarElementoDiccionarioRachasSign(Dictionary<string, ObjectInfoDTO> dict, string sign)
         {
             foreach (var item in dict)
             {
                 if (item.Key.Equals(sign))
                 {
-                    item.Value.Add(1);
+                    item.Value.RachasAparicion.Add(1);
                 }
                 else
                 {
-                    item.Value.Add(0);
+                    item.Value.RachasAparicion.Add(0);
                 }
             }
         }
@@ -252,45 +115,70 @@ namespace Presenter
         /// <summary>
         /// Método encargado de contar y agrupar las rachas para cada valor
         /// </summary>
-        /// <param name="listaRecorrer"></param>
-        /// <param name="diccionarioAgrupador">diccionario para agrupar los datos</param>
-        private void AgruparRachas(List<int> listaRecorrer, Dictionary<int, int> diccionarioAgrupador)
+        /// <param name="dict">diccionario con información a ser agrupada</param>
+        private void AgruparRachas(Dictionary<int, ObjectInfoDTO> dict)
         {
-            foreach (var item in listaRecorrer)
+            foreach (var item in dict)
             {
-                if (diccionarioAgrupador.ContainsKey(item))
+                foreach (var itemList in item.Value.RachasAcumuladas)
                 {
-                    diccionarioAgrupador[item]++;
+                    if (item.Value.DictRachasAgrupadasInt.ContainsKey(itemList))
+                    {
+                        item.Value.DictRachasAgrupadasInt[itemList]++;
+                    }
+                    else
+                    {
+                        item.Value.DictRachasAgrupadasInt.Add(itemList, 1);
+                    }
                 }
-                else
-                {
-                    diccionarioAgrupador.Add(item, 1);
-                }
+                var sortedDict = from entry in item.Value.DictRachasAgrupadasInt orderby entry.Value descending select entry;
+                item.Value.DictRachasAgrupadasInt = sortedDict.ToDictionary(x => x.Key, x => x.Value);
             }
         }
 
         /// <summary>
-        /// Método que retorna un diccionario para cada clave, indicando las veces seguidas que un valor está presente, mostrando un valor positivo, 
-        /// y un valor negativo, para indicar que deja de estar presente
+        /// Método encargado de contar y agrupar las rachas para cada valor
         /// </summary>
-        /// <param name="dict">diccionario que contiene la lista con valores 1 o 0 para cada coincidencia</param>
-        /// <returns>Diccionario con valores de que está presente</returns>
-        private Dictionary<int, List<int>> ContarRachasPositivasNegativas(Dictionary<int, List<int>> dict)
+        /// <param name="dict">diccionario con información a ser agrupada</param>
+        private void AgruparRachas(Dictionary<string, ObjectInfoDTO> dict)
         {
-            Dictionary<int, List<int>> dicRachas = this.InicializarDiccionarioListaEnteros();
+            foreach (var item in dict)
+            {
+                foreach (var itemList in item.Value.RachasAcumuladas)
+                {
+                    if (item.Value.DictRachasAgrupadasInt.ContainsKey(itemList))
+                    {
+                        item.Value.DictRachasAgrupadasInt[itemList]++;
+                    }
+                    else
+                    {
+                        item.Value.DictRachasAgrupadasInt.Add(itemList, 1);
+                    }
+                }
+                var sortedDict = from entry in item.Value.DictRachasAgrupadasInt orderby entry.Value descending select entry;
+                item.Value.DictRachasAgrupadasInt = sortedDict.ToDictionary(x => x.Key, x => x.Value);
+            }
+        }
+
+        /// <summary>
+        /// Método que realiza el conteo de los valores sucesivos que son iguales
+        /// </summary>
+        /// <param name="dict">diccionario que contiene la información</param>
+        private void ContarRachasPositivasNegativas(Dictionary<int, ObjectInfoDTO> dict)
+        {
             foreach (var item in dict)
             {
                 int? anterior = null;
                 int contNegativo = 0;
                 int contPositivo = 0;
-                foreach (var itemList in item.Value)
+                foreach (var itemList in item.Value.RachasAparicion)
                 {
                     ///Si el valor es cero, indica que no ha caido
                     if (itemList.Equals(0))
                     {
                         if (anterior.Equals(1))
                         {
-                            dicRachas[item.Key].Add(contPositivo);
+                            dict[item.Key].RachasAcumuladas.Add(contPositivo);
                             contPositivo = 0;
                             contNegativo = 0;
                         }
@@ -301,7 +189,7 @@ namespace Presenter
                         ///Si el valor es uno, indica que el valor cayó
                         if (anterior.Equals(0))
                         {
-                            dicRachas[item.Key].Add(contNegativo);
+                            dict[item.Key].RachasAcumuladas.Add(contNegativo);
                             contNegativo = 0;
                             contPositivo = 0;
                         }
@@ -311,38 +199,35 @@ namespace Presenter
                 }
                 if (contNegativo != 0)
                 {
-                    dicRachas[item.Key].Add(contNegativo);
+                    dict[item.Key].RachasAcumuladas.Add(contNegativo);
                 }
                 else if (contPositivo != 0)
                 {
-                    dicRachas[item.Key].Add(contPositivo);
+                    dict[item.Key].RachasAcumuladas.Add(contPositivo);
                 }
+                dict[item.Key].RachasAparicion.Clear();
             }
-            return dicRachas;
         }
 
         /// <summary>
-        /// Método que retorna un diccionario para cada clave, indicando las veces seguidas que un valor está presente, mostrando un valor positivo, 
-        /// y un valor negativo, para indicar que deja de estar presente
+        /// Método que realiza el conteo de los valores sucesivos que son iguales
         /// </summary>
-        /// <param name="dict">diccionario que contiene la lista con valores 1 o 0 para cada coincidencia</param>
-        /// <returns>Diccionario con valores de que está presente</returns>
-        private Dictionary<string, List<int>> ContarRachasPositivasNegativasSign(Dictionary<string, List<int>> dict)
+        /// <param name="dict">diccionario que contiene la información</param>
+        private void ContarRachasPositivasNegativasSign(Dictionary<string, ObjectInfoDTO> dict)
         {
-            Dictionary<string, List<int>> dicRachas = this.InicializarDiccionarioSignListEnteros();
             foreach (var item in dict)
             {
                 int? anterior = null;
                 int contNegativo = -1;
                 int contPositivo = 1;
-                foreach (var itemList in item.Value)
+                foreach (var itemList in item.Value.RachasAparicion)
                 {
                     ///Si el valor es cero, indica que no ha caido
                     if (itemList.Equals(0))
                     {
                         if (anterior.Equals(1))
                         {
-                            dicRachas[item.Key].Add(contPositivo);
+                            dict[item.Key].RachasAcumuladas.Add(contPositivo);
                             contPositivo = 0;
                             contNegativo = 0;
                         }
@@ -353,7 +238,7 @@ namespace Presenter
                         ///Si el valor es uno, indica que el valor cayó
                         if (anterior.Equals(0))
                         {
-                            dicRachas[item.Key].Add(contNegativo);
+                            dict[item.Key].RachasAcumuladas.Add(contNegativo);
                             contNegativo = 0;
                             contPositivo = 0;
                         }
@@ -363,329 +248,75 @@ namespace Presenter
                 }
                 if (contNegativo != 0)
                 {
-                    dicRachas[item.Key].Add(contNegativo);
+                    dict[item.Key].RachasAcumuladas.Add(contNegativo);
                 }
                 else if (contPositivo != 0)
                 {
-                    dicRachas[item.Key].Add(contPositivo);
+                    dict[item.Key].RachasAcumuladas.Add(contPositivo);
                 }
-            }
-            return dicRachas;
-        }
-
-        /// <summary>
-        /// Método que escribe los datos
-        /// </summary>
-        /// <param name="sw">Objeto usado para escribir</param>
-        /// <param name="dictContadorRachas">objeto con contador de rachas organizadas</param>
-        private void EscribirDataDiccionario(StreamWriter sw, Dictionary<int, int> dictContadorRachas)
-        {
-            foreach (var itemList in dictContadorRachas)
-            {
-                sw.Write(itemList.Key + "=" + itemList.Value + ",");
+                dict[item.Key].RachasAparicion.Clear();
             }
         }
 
         /// <summary>
-        /// Método que escribe los datos recibidos en el diccionario en los archivos
+        /// Método que retorna una estructura requerida para el caso recibido
         /// </summary>
-        /// <param name="dict">diccionario con datos</param>
-        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        private void EscribirDatosArchivo(Dictionary<int, List<int>> dict, string cad, Dictionary<int, int> dictRachas)
+        /// <param name="caso"></param>
+        /// <returns></returns>
+        private object InicializarDiccionarioInformacion(int caso = 0)
         {
-            string fic = @"C:\temp\" + cad + ".txt";
-            StreamWriter sw = new StreamWriter(fic);
-            foreach (var item in dict)
+            if (caso == 0)
             {
-                sw.WriteLine(item.Key + ":");
-                List<int> listTempNegativa = (from x in item.Value
-                                              where x < 0
-                                              select x).ToList();
-                List<int> listTempPositiva = (from x in item.Value
-                                              where x > 0
-                                              select x).ToList();
-                listTempNegativa.Sort();
-                listTempPositiva.Sort();
-                //Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
-                this.AgruparRachas(listTempNegativa, dictRachas);
-                //Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
-                //this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
-                sw.WriteLine("U\tP\tA\tTA Racha Item");
-                int ultimo = item.Value.Last();
-                //this.ultimosRachasPosUno.Add(item.)
-                sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
-                    + "\t" + item.Value.ElementAt(item.Value.Count - 5)
-                    + "\t" + item.Value.ElementAt(item.Value.Count - 7)
-                    + "\t" + item.Value.ElementAt(item.Value.Count - 9)
-                    + "\t" + item.Value.ElementAt(item.Value.Count - 11));
-                if (dictRachas.ContainsKey(ultimo))
+                Dictionary<int, ObjectInfoDTO> dict = new Dictionary<int, ObjectInfoDTO>();
+                for (int i = 0; i < 10; i++)
                 {
-                    sw.WriteLine("Ultimo dentro de histórico");
-                    sw.WriteLine(ultimo + "=" + dictRachas[ultimo]);
+                    dict.Add(i, new ObjectInfoDTO());
                 }
-                //sw.WriteLine("Positiva agrupada");
-                //this.EscribirDataDiccionario(sw, dictContRachaPositiva);
-                //sw.WriteLine("");
-                //sw.WriteLine("Negativa agrupada");
-                //this.EscribirDataDiccionario(sw, dictContRachaNegativa);
-                //sw.WriteLine("");
-                this.EscribirDiezMayores(sw, dictRachas);
-                sw.WriteLine("");
-            }
-            sw.Close();
-        }
-
-        /// <summary>
-        /// Método que escribe los datos recibidos en el diccionario en los archivos
-        /// </summary>
-        /// <param name="dict">diccionario con datos</param>
-        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        private void EscribirDatosArchivoSign(Dictionary<string, List<int>> dict, string cad, Dictionary<int, int> dictRachas)
-        {
-            string fic = @"C:\temp\" + cad + ".txt";
-            StreamWriter sw = new StreamWriter(fic);
-            foreach (var item in dict)
-            {
-                sw.WriteLine(item.Key + ":");
-                List<int> listTempNegativa = (from x in item.Value
-                                              where x < 0
-                                              select x).ToList();
-                List<int> listTempPositiva = (from x in item.Value
-                                              where x > 0
-                                              select x).ToList();
-                listTempNegativa.Sort();
-                listTempPositiva.Sort();
-                //Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
-                this.AgruparRachas(listTempNegativa, dictRachas);
-                //Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
-                //this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
-                sw.WriteLine("U\tP\tA\tTA, Racha Item");
-                int ultimo = item.Value.Last();
-                dictRachas.Add(13, ultimo);
-                sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
-                    + "\t" + item.Value.ElementAt(item.Value.Count - 5)
-                    + "\t" + item.Value.ElementAt(item.Value.Count - 7)
-                    + "\t" + item.Value.ElementAt(item.Value.Count - 9)
-                    + "\t" + item.Value.ElementAt(item.Value.Count - 11));
-                if (dictRachas.ContainsKey(ultimo))
-                {
-                    sw.WriteLine("Ultimo dentro de histórico");
-                    sw.WriteLine(ultimo + "=" + dictRachas[ultimo]);
-                }
-                //sw.WriteLine("Positiva agrupada");
-                //this.EscribirDataDiccionario(sw, dictContRachaPositiva);
-                //sw.WriteLine("");
-                //this.EscribirDataDiccionario(sw, dictContRachaNegativa);
-                this.EscribirDiezMayores(sw, dictRachas);
-                sw.WriteLine("");
-            }
-            sw.Close();
-        }
-
-        /// <summary>
-        /// Método que escribe los datos de los diez mayores contadores en el diccionario
-        /// para facilitar la revisión de datos
-        /// </summary>
-        /// <param name="sw">Objeto que escribe los datos</param>
-        /// <param name="dict">diccionario de numeros</param>
-        /// <param name="dictSign">diccionario de signos</param>
-        /// <param name="caso">caso que indica si se escribe el de numeros(1) o signos(2)</param>
-        private void EscribirDiezMayores(StreamWriter sw, Dictionary<int, int> dict)
-        {
-            sw.WriteLine("Rachas");
-            var sortedDict = from entry in dict orderby entry.Value descending select entry;
-            int i = 0;
-            foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
-            {
-                sw.Write(itemDic.Key + "=" + itemDic.Value + ",");
-                i++;
-                if (i == 15)
-                {
-                    break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Método que escribe los datos correspondientes a las coincidencias después de la actual
-        /// </summary>
-        /// <param name="dict">diccionario con datos obtenidos</param>
-        /// <param name="cad">nombre asignado al archivo</param>
-        private void EscribirNumerosDespuesActual(Dictionary<int, int> dict, string cad)
-        {
-            string fic = @"C:\temp\" + cad + ".txt";
-            StreamWriter sw = new StreamWriter(fic);
-            var sortedDict = from entry in dict orderby entry.Value descending select entry;
-            dict = sortedDict.ToDictionary(x => x.Key, x => x.Value);
-            foreach (var item in dict)
-            {
-                sw.WriteLine(item.Key + "=" + item.Value);
-            }
-            sw.Close();
-        }
-
-        /// <summary>
-        /// Método que escribe los datos correspondientes a las coincidencias después de la actual
-        /// </summary>
-        /// <param name="dict">diccionario con datos obtenidos</param>
-        /// <param name="cad">nombre asignado al archivo</param>
-        private void EscribirNumerosDespuesActualSign(Dictionary<string, int> dict, string cad)
-        {
-            string fic = @"C:\temp\" + cad + ".txt";
-            StreamWriter sw = new StreamWriter(fic);
-            var sortedDict = from entry in dict orderby entry.Value descending select entry;
-            dict = sortedDict.ToDictionary(x => x.Key, x => x.Value);
-            foreach (var item in dict)
-            {
-                sw.WriteLine(item.Key + "=" + item.Value);
-            }
-            sw.Close();
-        }
-
-        /// <summary>
-        /// Método que Analiza los numeros de la lista que mas aparecen después del actual, de acuerdo al comparador recibido
-        /// </summary>
-        /// <param name="listaValidar">Lista que contiene los datos a validar</param>
-        /// <param name="sorComparador">Objeto que sirve como comparador de datos</param>
-        private void GetNumerosDespuesDelActual(List<ASTR> listaValidar, ASTR sorComparador, int tipo)
-        {
-            bool flagPosUno = false;
-            bool flagPosDos = false;
-            bool flagPosTres = false;
-            bool flagPosCuatro = false;
-            bool flagSign = false;
-            if (tipo.Equals(ConstantesTipoSor.TIPO_SOL))
-            {
-                //foreach (var item in listaValidar)
-                //{
-                //    if (flagPosUno)
-                //    {
-                //        dictInfoPosUnoLun[(int)item.POS_UNO].ContadorDespuesActual++;
-                //    }
-                //    if (flagPosDos)
-                //    {
-                //        dictInfoPosDosLun[(int)item.POS_DOS].ContadorDespuesActual++;
-                //    }
-                //    if (flagPosTres)
-                //    {
-                //        dictInfoPosTresLun[(int)item.POS_TRES].ContadorDespuesActual++;
-                //    }
-                //    if (flagPosCuatro)
-                //    {
-                //        dictInfoPosCuatroLun[(int)item.POS_CUATRO].ContadorDespuesActual++;
-                //    }
-                //    if (flagSign)
-                //    {
-                //        dictInfoSignLun[item.SIGN].ContadorDespuesActual++;
-                //    }
-                //    flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
-                //    flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
-                //    flagPosTres = this.ValidarMismoDato(3, item, sorComparador);
-                //    flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
-                //    flagSign = this.ValidarMismoDato(5, item, sorComparador);
-                //}
+                return dict;
             }
             else
             {
-
-                foreach (var item in listaValidar)
-                {
-                    if (flagPosUno)
-                    {
-                        dictInfoPosUnoLun[(int)item.POS_UNO].ContadorDespuesActual++;
-                    }
-                    if (flagPosDos)
-                    {
-                        dictInfoPosDosLun[(int)item.POS_DOS].ContadorDespuesActual++;
-                    }
-                    if (flagPosTres)
-                    {
-                        dictInfoPosTresLun[(int)item.POS_TRES].ContadorDespuesActual++;
-                    }
-                    if (flagPosCuatro)
-                    {
-                        dictInfoPosCuatroLun[(int)item.POS_CUATRO].ContadorDespuesActual++;
-                    }
-                    if (flagSign)
-                    {
-                        dictInfoSignLun[item.SIGN].ContadorDespuesActual++;
-                    }
-                    flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
-                    flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
-                    flagPosTres = this.ValidarMismoDato(3, item, sorComparador);
-                    flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
-                    flagSign = this.ValidarMismoDato(5, item, sorComparador);
-                }
+                Dictionary<string, ObjectInfoDTO> dict = new Dictionary<string, ObjectInfoDTO>();
+                dict.Add(ConstantesGenerales.ACUARIO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.ARIES, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.CANCER, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.CAPRICORNIO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.ESCORPION, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.GEMINIS, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.LEO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.LIBRA, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.PISCIS, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.SAGITARIO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.TAURO, new ObjectInfoDTO());
+                dict.Add(ConstantesGenerales.VIRGO, new ObjectInfoDTO());
+                return dict;
             }
+
         }
 
-        private void PuntuarNumerosDespuesActual(Dictionary<int, int> dicContador, Dictionary<int, int> dicAcumulador)
-        {
-            var sortedDict = from entry in dicContador orderby entry.Value descending select entry;
-            int indexTemp = 1;
-            int? anterior = null;
-            foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
-            {
-                dicAcumulador[itemDic.Key] += (10 - indexTemp);
-                if (!anterior.Equals(itemDic.Value))
-                {
-                    indexTemp++;
-                }
-                anterior = itemDic.Value;
-            }
-        }
-
-        private void PuntuarNumerosDespuesActual(Dictionary<string, int> dicContador, Dictionary<string, int> dicAcumulador)
-        {
-            var sortedDict = from entry in dicContador orderby entry.Value descending select entry;
-            int indexTemp = 1;
-            int? anterior = null;
-            foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
-            {
-                dicAcumulador[itemDic.Key] += (10 - indexTemp);
-                if (!anterior.Equals(itemDic.Value))
-                {
-                    indexTemp++;
-                }
-                anterior = itemDic.Value;
-            }
-        }
-
-        /// <summary>
-        /// Método que inicializa la estructura que lleva los diccionarios de rachas
-        /// </summary>
-        private Dictionary<int, List<int>> InicializarDiccionarioListaEnteros()
-        {
-            Dictionary<int, List<int>> dict = new Dictionary<int, List<int>>();
-            for (int i = 0; i < 10; i++)
-            {
-                List<int> lista = new List<int>();
-                dict.Add(i, lista);
-            }
-            return dict;
-        }
-
-        /// <summary>
-        /// Método que inicializa la estructura que lleva los diccionarios de rachas para los signos
-        /// </summary>
-        private Dictionary<string, List<int>> InicializarDiccionarioSignListEnteros()
-        {
-            Dictionary<string, List<int>> dict = new Dictionary<string, List<int>>();
-            dict.Add(ConstantesGenerales.ACUARIO, new List<int>());
-            dict.Add(ConstantesGenerales.ARIES, new List<int>());
-            dict.Add(ConstantesGenerales.CANCER, new List<int>());
-            dict.Add(ConstantesGenerales.CAPRICORNIO, new List<int>());
-            dict.Add(ConstantesGenerales.ESCORPION, new List<int>());
-            dict.Add(ConstantesGenerales.GEMINIS, new List<int>());
-            dict.Add(ConstantesGenerales.LEO, new List<int>());
-            dict.Add(ConstantesGenerales.LIBRA, new List<int>());
-            dict.Add(ConstantesGenerales.PISCIS, new List<int>());
-            dict.Add(ConstantesGenerales.SAGITARIO, new List<int>());
-            dict.Add(ConstantesGenerales.TAURO, new List<int>());
-            dict.Add(ConstantesGenerales.VIRGO, new List<int>());
-            return dict;
-        }
-
+        ///// <summary>
+        ///// Método que escribe los datos de los diez mayores contadores en el diccionario
+        ///// para facilitar la revisión de datos
+        ///// </summary>
+        ///// <param name="sw">Objeto que escribe los datos</param>
+        ///// <param name="dict">diccionario de numeros</param>
+        ///// <param name="dictSign">diccionario de signos</param>
+        ///// <param name="caso">caso que indica si se escribe el de numeros(1) o signos(2)</param>
+        //private void EscribirDiezMayores(StreamWriter sw, Dictionary<int, int> dict)
+        //{
+        //    sw.WriteLine("Rachas");
+        //    var sortedDict = from entry in dict orderby entry.Value descending select entry;
+        //    int i = 0;
+        //    foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
+        //    {
+        //        sw.Write(itemDic.Key + "=" + itemDic.Value + ",");
+        //        i++;
+        //        if (i == 15)
+        //        {
+        //            break;
+        //        }
+        //    }
+        //}
         /// <summary>
         /// Método que obtiene la consulta que se realiza
         /// </summary>
@@ -731,6 +362,48 @@ namespace Presenter
             }
         }
 
+        ///// <summary>
+        ///// Método que escribe los datos recibidos en el diccionario en los archivos
+        ///// </summary>
+        ///// <param name="dict">diccionario con datos</param>
+        ///// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
+        //private void EscribirDatosArchivoSign(Dictionary<string, List<int>> dict, string cad, Dictionary<int, int> dictRachas)
+        //{
+        //    string fic = @"C:\temp\" + cad + ".txt";
+        //    StreamWriter sw = new StreamWriter(fic);
+        //    foreach (var item in dict)
+        //    {
+        //        sw.WriteLine(item.Key + ":");
+        //        List<int> listTempNegativa = (from x in item.Value
+        //                                      where x < 0
+        //                                      select x).ToList();
+        //        List<int> listTempPositiva = (from x in item.Value
+        //                                      where x > 0
+        //                                      select x).ToList();
+        //        listTempNegativa.Sort();
+        //        listTempPositiva.Sort();
+        //        //Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
+        //        //this.AgruparRachas(listTempNegativa, dictRachas);
+        //        //Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
+        //        //this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
+        //        sw.WriteLine("U\tP\tA\tTA, Racha Item");
+        //        int ultimo = item.Value.Last();
+        //        dictRachas.Add(13, ultimo);
+        //        sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
+        //            + "\t" + item.Value.ElementAt(item.Value.Count - 5)
+        //            + "\t" + item.Value.ElementAt(item.Value.Count - 7)
+        //            + "\t" + item.Value.ElementAt(item.Value.Count - 9)
+        //            + "\t" + item.Value.ElementAt(item.Value.Count - 11));
+        //        if (dictRachas.ContainsKey(ultimo))
+        //        {
+        //            sw.WriteLine("Ultimo dentro de histórico");
+        //            sw.WriteLine(ultimo + "=" + dictRachas[ultimo]);
+        //        }
+        //        this.EscribirDiezMayores(sw, dictRachas);
+        //        sw.WriteLine("");
+        //    }
+        //    sw.Close();
+        //}
         /// <summary>
         /// Método que obtiene y asigna los datos de los últimos resultados ingresados
         /// </summary>
@@ -740,6 +413,48 @@ namespace Presenter
             _resultActualLun = listaDatosLun.Last();
         }
 
+        ///// <summary>
+        ///// Método que escribe los datos recibidos en el diccionario en los archivos
+        ///// </summary>
+        ///// <param name="dict">diccionario con datos</param>
+        ///// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
+        //private void EscribirDatosArchivo(Dictionary<int, List<int>> dict, string cad, Dictionary<int, int> dictRachas)
+        //{
+        //    string fic = @"C:\temp\" + cad + ".txt";
+        //    StreamWriter sw = new StreamWriter(fic);
+        //    foreach (var item in dict)
+        //    {
+        //        sw.WriteLine(item.Key + ":");
+        //        List<int> listTempNegativa = (from x in item.Value
+        //                                      where x < 0
+        //                                      select x).ToList();
+        //        List<int> listTempPositiva = (from x in item.Value
+        //                                      where x > 0
+        //                                      select x).ToList();
+        //        listTempNegativa.Sort();
+        //        listTempPositiva.Sort();
+        //        //Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
+        //        //this.AgruparRachas(listTempNegativa, dictRachas);
+        //        //Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
+        //        //this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
+        //        sw.WriteLine("U\tP\tA\tTA Racha Item");
+        //        int ultimo = item.Value.Last();
+        //        //this.ultimosRachasPosUno.Add(item.)
+        //        sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
+        //            + "\t" + item.Value.ElementAt(item.Value.Count - 5)
+        //            + "\t" + item.Value.ElementAt(item.Value.Count - 7)
+        //            + "\t" + item.Value.ElementAt(item.Value.Count - 9)
+        //            + "\t" + item.Value.ElementAt(item.Value.Count - 11));
+        //        if (dictRachas.ContainsKey(ultimo))
+        //        {
+        //            sw.WriteLine("Ultimo dentro de histórico");
+        //            sw.WriteLine(ultimo + "=" + dictRachas[ultimo]);
+        //        }
+        //        this.EscribirDiezMayores(sw, dictRachas);
+        //        sw.WriteLine("");
+        //    }
+        //    sw.Close();
+        //}
         /// <summary>
         /// Método que realiza el llamado al método que suma los datos para puntuar la información
         /// </summary>
@@ -747,41 +462,53 @@ namespace Presenter
         /// <param name="tipo">Referencia al tipo de registro que se evalua(Sol-Lun)</param>
         private void PuntuarInformacion(string posicion, int tipo, Dictionary<int, ObjectInfoDTO> dict)
         {
-            string query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(0));
+            string query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(0), "ClaveNum");
             DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContGeneral(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(1));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(1), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaSemana(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(2));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(2), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(3));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(3), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(4));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(4), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(5));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(5), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaAnio(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(6));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(6), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AdinionarInformacionContadorDiaAnioModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(7));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(7), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMesModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(8));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(8), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMesModuloDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(9));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(9), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMesDia(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(10));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(10), "ClaveNum");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContAnioModulo(dict, data);
         }
 
+        ///// <summary>
+        ///// Método que escribe los datos
+        ///// </summary>
+        ///// <param name="sw">Objeto usado para escribir</param>
+        ///// <param name="dictContadorRachas">objeto con contador de rachas organizadas</param>
+        //private void EscribirDataDiccionario(StreamWriter sw, Dictionary<int, int> dictContadorRachas)
+        //{
+        //    foreach (var itemList in dictContadorRachas)
+        //    {
+        //        sw.Write(itemList.Key + "=" + itemList.Value + ",");
+        //    }
+        //}
         /// <summary>
         /// Método que realiza el llamado al método que suma los datos para puntuar la información
         /// </summary>
@@ -789,54 +516,89 @@ namespace Presenter
         /// <param name="tipo">Referencia al tipo de registro que se evalua(Sol-Lun)</param>
         private void PuntuarInformacion(string posicion, int tipo, Dictionary<string, ObjectInfoDTO> dict)
         {
-            string query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(0));
+            string query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(0), "ClaveSign");
             DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContGeneral(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(1));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(1), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaSemana(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(2));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(2), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(3));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(3), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(4));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(4), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(5));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(5), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaAnio(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(6));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(6), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AdinionarInformacionContadorDiaAnioModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(7));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(7), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMesModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(8));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(8), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMesModuloDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(9));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(9), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMesDia(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(10));
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(10), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContAnioModulo(dict, data);
         }
 
         /// <summary>
-        /// Método que realiza la suma de los valores puntuados para cada valor del diccionario
+        /// Método que recorre los elementos de la lista, y valida las apariciones siguientes
         /// </summary>
-        /// <param name="data">Información contenida en la consulta</param>
-        /// <param name="dict">Estructura con información que se puntuará</param>
-        private void SumarDatosDiccionario(DbRawSqlQuery<QueryInfo> data, Dictionary<string, int> dict)
+        /// <param name="listaValidar">lista que contiene los datos a validar</param>
+        /// <param name="sorComparador">Elemento que sirve como comparador</param>
+        /// <param name="dictPosUno">diccionario al que se realiza el incremento para la posición uno</param>
+        /// <param name="dictPosDos">diccionario al que se realiza el incremento para la posición dos</param>
+        /// <param name="dictPostres">diccionario al que se realiza el incremento para la posición tres</param>
+        /// <param name="dictPosCuatro">diccionario al que se realiza el incremento para la posición cuatro</param>
+        /// <param name="dictSign">diccionario al que se realiza el incremento para sign</param>
+        private void RecorrerElementosLista(List<ASTR> listaValidar, ASTR sorComparador, Dictionary<int, ObjectInfoDTO> dictPosUno,
+            Dictionary<int, ObjectInfoDTO> dictPosDos, Dictionary<int, ObjectInfoDTO> dictPostres, Dictionary<int, ObjectInfoDTO> dictPosCuatro,
+            Dictionary<string, ObjectInfoDTO> dictSign)
         {
-            foreach (var cust in data)
+            bool flagPosUno = false;
+            bool flagPosDos = false;
+            bool flagPosTres = false;
+            bool flagPosCuatro = false;
+            bool flagSign = false;
+            foreach (var item in listaValidar)
             {
-                dict[cust.ClaveSign] += (12 - cust.Rank);
+                if (flagPosUno)
+                {
+                    dictPosUno[(int)item.POS_UNO].ContadorDespuesActual++;
+                }
+                if (flagPosDos)
+                {
+                    dictPosDos[(int)item.POS_DOS].ContadorDespuesActual++;
+                }
+                if (flagPosTres)
+                {
+                    dictPostres[(int)item.POS_TRES].ContadorDespuesActual++;
+                }
+                if (flagPosCuatro)
+                {
+                    dictPosCuatro[(int)item.POS_CUATRO].ContadorDespuesActual++;
+                }
+                if (flagSign)
+                {
+                    dictSign[item.SIGN].ContadorDespuesActual++;
+                }
+                flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
+                flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
+                flagPosTres = this.ValidarMismoDato(3, item, sorComparador);
+                flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
+                flagSign = this.ValidarMismoDato(5, item, sorComparador);
             }
         }
-
         /// <summary>
         /// Método encargado de validar de acuerdo al caso, el resultado de comparar los dos resultados
         /// </summary>
@@ -877,29 +639,27 @@ namespace Presenter
         /// <param name="listaValidar"></param>
         private void ValidarRachas(int tipo, List<ASTR> listaValidar, string sort)
         {
-            Dictionary<int, List<int>> dicPosUno = this.InicializarDiccionarioListaEnteros();
-            Dictionary<int, List<int>> dicPosDos = this.InicializarDiccionarioListaEnteros();
-            Dictionary<int, List<int>> dicPosTres = this.InicializarDiccionarioListaEnteros();
-            Dictionary<int, List<int>> dicPosCuatro = this.InicializarDiccionarioListaEnteros();
-            Dictionary<string, List<int>> dicSign = this.InicializarDiccionarioSignListEnteros();
-            foreach (var item in listaValidar)
+            if (tipo.Equals(ConstantesTipoSor.TIPO_LUN))
             {
-                this.AdicionarElementoDiccionarioRachas(dicPosUno, (int)item.POS_UNO);
-                this.AdicionarElementoDiccionarioRachas(dicPosDos, (int)item.POS_DOS);
-                this.AdicionarElementoDiccionarioRachas(dicPosTres, (int)item.POS_TRES);
-                this.AdicionarElementoDiccionarioRachas(dicPosCuatro, (int)item.POS_CUATRO);
-                this.AdicionarElementoDiccionarioRachasSign(dicSign, item.SIGN);
+                foreach (var item in listaValidar)
+                {
+                    this.AdicionarElementoDiccionarioRachas(dictInfoPosUnoLun, (int)item.POS_UNO);
+                    this.AdicionarElementoDiccionarioRachas(dictInfoPosDosLun, (int)item.POS_DOS);
+                    this.AdicionarElementoDiccionarioRachas(dictInfoPosTresLun, (int)item.POS_TRES);
+                    this.AdicionarElementoDiccionarioRachas(dictInfoPosCuatroLun, (int)item.POS_CUATRO);
+                    this.AdicionarElementoDiccionarioRachasSign(dictInfoSignLun, item.SIGN);
+                }
+                this.ContarRachasPositivasNegativas(dictInfoPosUnoLun);
+                this.ContarRachasPositivasNegativas(dictInfoPosDosLun);
+                this.ContarRachasPositivasNegativas(dictInfoPosTresLun);
+                this.ContarRachasPositivasNegativas(dictInfoPosCuatroLun);
+                this.ContarRachasPositivasNegativasSign(dictInfoSignLun);
+                this.AgruparRachas(dictInfoPosUnoLun);
+                this.AgruparRachas(dictInfoPosDosLun);
+                this.AgruparRachas(dictInfoPosTresLun);
+                this.AgruparRachas(dictInfoPosCuatroLun);
+                this.AgruparRachas(dictInfoSignLun);
             }
-            Dictionary<int, List<int>> dicRachasPosUno = this.ContarRachasPositivasNegativas(dicPosUno);
-            Dictionary<int, List<int>> dicRachasPosDos = this.ContarRachasPositivasNegativas(dicPosDos);
-            Dictionary<int, List<int>> dicRachasPosTres = this.ContarRachasPositivasNegativas(dicPosTres);
-            Dictionary<int, List<int>> dicRachasPosCuatro = this.ContarRachasPositivasNegativas(dicPosCuatro);
-            Dictionary<string, List<int>> dicRachasSign = this.ContarRachasPositivasNegativasSign(dicSign);
-            this.EscribirDatosArchivo(dicRachasPosUno, sort + "Pos_uno_file", varDicRachasPosUno);
-            this.EscribirDatosArchivo(dicRachasPosDos, sort + "Pos_dos_file", varDicRachasPosDos);
-            this.EscribirDatosArchivo(dicRachasPosTres, sort + "Pos_tres_file", varDicRachasPosTres);
-            this.EscribirDatosArchivo(dicRachasPosCuatro, sort + "Pos_cuatro_file", varDicRachasPosCuatro);
-            this.EscribirDatosArchivoSign(dicRachasSign, sort + "Sign_file", varDicRachasSign);
         }
     }
 }

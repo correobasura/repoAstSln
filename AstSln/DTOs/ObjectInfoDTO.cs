@@ -22,6 +22,18 @@ namespace DTOs
         private int _contadorMesDia;
         private int _contadorAnioModulo;
         private int _contadorDespuesActual;
+        private List<int> _rachasAparicion;
+        private List<int> _rachasAcumuladas;
+        private Dictionary<int, int> _dictRachasAgrupadasInt;
+        private Dictionary<string, int> _dictRachasAgrupadasSign;
+
+        public ObjectInfoDTO()
+        {
+            this.RachasAparicion = new List<int>();
+            this.RachasAcumuladas = new List<int>();
+            this.DictRachasAgrupadasInt = new Dictionary<int, int>();
+            this.DictRachasAgrupadasSign = new Dictionary<string, int>();
+        }
 
         /// <summary>
         /// Almacena el valor de todas las puntuaciones individuales
@@ -228,6 +240,70 @@ namespace DTOs
             set
             {
                 _contadorDespuesActual = value;
+            }
+        }
+
+        /// <summary>
+        /// Contiene la lista de las rachas, apariciones del valor en los resultados
+        /// </summary>
+        public List<int> RachasAparicion
+        {
+            get
+            {
+                return _rachasAparicion;
+            }
+
+            set
+            {
+                _rachasAparicion = value;
+            }
+        }
+
+        /// <summary>
+        /// Contiene la lista de rachas agrupadas de acuerdo a las apariciones
+        /// </summary>
+        public List<int> RachasAcumuladas
+        {
+            get
+            {
+                return _rachasAcumuladas;
+            }
+
+            set
+            {
+                _rachasAcumuladas = value;
+            }
+        }
+
+        /// <summary>
+        /// Contiene la información de las rachas agrupadas para los números
+        /// </summary>
+        public Dictionary<int, int> DictRachasAgrupadasInt
+        {
+            get
+            {
+                return _dictRachasAgrupadasInt;
+            }
+
+            set
+            {
+                _dictRachasAgrupadasInt = value;
+            }
+        }
+
+        /// <summary>
+        /// Contiene la información de las rachas agrupadas para las cadenas
+        /// </summary>
+        public Dictionary<string, int> DictRachasAgrupadasSign
+        {
+            get
+            {
+                return _dictRachasAgrupadasSign;
+            }
+
+            set
+            {
+                _dictRachasAgrupadasSign = value;
             }
         }
     }
