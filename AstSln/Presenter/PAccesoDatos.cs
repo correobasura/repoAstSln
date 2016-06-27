@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTOs;
 
 namespace Presenter
@@ -17,13 +15,22 @@ namespace Presenter
         private AstEntities _astEntities;
         private IAccesoDatos _iAccesoDatos;
         private ASTR _resultActualLun;
+        private ASTR _resultActualSol;
         Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroLun;
         Dictionary<int, ObjectInfoDTO> dictInfoPosDosLun;
         Dictionary<int, ObjectInfoDTO> dictInfoPosTresLun;
         Dictionary<int, ObjectInfoDTO> dictInfoPosUnoLun;
         Dictionary<string, ObjectInfoDTO> dictInfoSignLun;
+        Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroSol;
+        Dictionary<int, ObjectInfoDTO> dictInfoPosDosSol;
+        Dictionary<int, ObjectInfoDTO> dictInfoPosTresSol;
+        Dictionary<int, ObjectInfoDTO> dictInfoPosUnoSol;
+        Dictionary<string, ObjectInfoDTO> dictInfoSignSol;
         private List<ASTR> listaDatosGeneral;
         private List<ASTR> listaDatosLun;
+        private List<ASTR> listaDatosSol;
+        private string path = "";
+        private DateTime fecha;
 
         /// <summary>
         /// Constructor de la clase
@@ -38,6 +45,17 @@ namespace Presenter
             this.dictInfoPosTresLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
             this.dictInfoPosCuatroLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
             this.dictInfoSignLun = (Dictionary<string, ObjectInfoDTO>)this.InicializarDiccionarioInformacion(1);
+            this.dictInfoPosUnoSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosDosSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosTresSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosCuatroSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoSignSol = (Dictionary<string, ObjectInfoDTO>)this.InicializarDiccionarioInformacion(1);
+            fecha = DateTime.Today;
+            path = @"C:\temp" + @"\" + fecha.Year + "" + fecha.Month + @"\" + fecha.Day + @"\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
 
         /// <summary>
@@ -50,24 +68,32 @@ namespace Presenter
                 var objectContex = ((IObjectContextAdapter)context).ObjectContext;
                 //Si no se pagina la lista, se obtienen todos los resultados, de lo contrario, se traen los resultados solicitados
                 listaDatosGeneral = objectContex.CreateObjectSet<ASTR>().OrderBy(x => x.FECHA).ToList();
-                //listaDatosSol = listaDatosGeneral.Where(x => x.TIPO == 1).ToList();
+                listaDatosSol = listaDatosGeneral.Where(x => x.TIPO == 1).ToList();
                 listaDatosLun = listaDatosGeneral.Where(x => x.TIPO == 2).ToList();
             }
             this.ObtenerUltimoResultado();
-            var date = DateTime.Today;
             this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, dictInfoPosUnoLun);
             this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, dictInfoPosDosLun);
             this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, dictInfoPosTresLun);
             this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, dictInfoPosCuatroLun);
             this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, dictInfoSignLun);
-            //if (date.DayOfWeek != DayOfWeek.Sunday)
-            //{
-            //    this.GetNumerosDespuesDelActual(listaDatosSol, _resultActualSol, "SOL");
-            //    this.ValidarRachas(listaDatosSol, "SOL");
-            //}
+            if (fecha.DayOfWeek != DayOfWeek.Sunday)
+            {
+                this.RecorrerElementosLista(listaDatosSol, _resultActualSol, dictInfoPosUnoSol, dictInfoPosDosSol, dictInfoPosTresSol, dictInfoPosCuatroSol, dictInfoSignSol);
+                this.ValidarRachas(listaDatosSol, dictInfoPosUnoSol, dictInfoPosDosSol, dictInfoPosTresSol, dictInfoPosCuatroSol, dictInfoSignSol);
+                this.EscribirDatosArchivo(dictInfoPosUnoSol, "PosUnoSol");
+                this.EscribirDatosArchivo(dictInfoPosDosSol, "PosDosSol");
+                this.EscribirDatosArchivo(dictInfoPosTresSol, "PosTresSol");
+                this.EscribirDatosArchivo(dictInfoPosCuatroSol, "PosCuatroSol");
+                this.EscribirDatosArchivo(dictInfoSignSol, "SignSol");
+            }
             this.RecorrerElementosLista(listaDatosLun, _resultActualLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
             this.ValidarRachas(listaDatosLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
-            //this.EscribirDatosPuntuacion();
+            this.EscribirDatosArchivo(dictInfoPosUnoLun, "PosUnoLun");
+            this.EscribirDatosArchivo(dictInfoPosDosLun, "PosDosLun");
+            this.EscribirDatosArchivo(dictInfoPosTresLun, "PosTresLun");
+            this.EscribirDatosArchivo(dictInfoPosCuatroLun, "PosCuatroLun");
+            this.EscribirDatosArchivo(dictInfoSignLun, "SignLun");
         }
 
         /// <summary>
@@ -294,29 +320,6 @@ namespace Presenter
 
         }
 
-        ///// <summary>
-        ///// Método que escribe los datos de los diez mayores contadores en el diccionario
-        ///// para facilitar la revisión de datos
-        ///// </summary>
-        ///// <param name="sw">Objeto que escribe los datos</param>
-        ///// <param name="dict">diccionario de numeros</param>
-        ///// <param name="dictSign">diccionario de signos</param>
-        ///// <param name="caso">caso que indica si se escribe el de numeros(1) o signos(2)</param>
-        //private void EscribirDiezMayores(StreamWriter sw, Dictionary<int, int> dict)
-        //{
-        //    sw.WriteLine("Rachas");
-        //    var sortedDict = from entry in dict orderby entry.Value descending select entry;
-        //    int i = 0;
-        //    foreach (var itemDic in sortedDict.ToDictionary(x => x.Key, x => x.Value).OrderByDescending(x => x.Value))
-        //    {
-        //        sw.Write(itemDic.Key + "=" + itemDic.Value + ",");
-        //        i++;
-        //        if (i == 15)
-        //        {
-        //            break;
-        //        }
-        //    }
-        //}
         /// <summary>
         /// Método que obtiene la consulta que se realiza
         /// </summary>
@@ -324,137 +327,88 @@ namespace Presenter
         /// <returns>Consulta generada</returns>
         private string ObtenerParametrosQuery(int caso)
         {
-            DateTime today = DateTime.Today.AddDays(-1);
             switch (caso)
             {
                 ///Agrupa los contadores de acuerdo al día de la semana
                 case 1:
-                    return "AND TO_CHAR(fecha, 'D') = " + ((int)today.DayOfWeek + 1);
+                    return "AND TO_CHAR(fecha, 'D') = " + ((int)fecha.DayOfWeek + 1);
                 ///Agrupa los contadores de acuerdo al día del mes
                 case 2:
-                    return "AND TO_CHAR(fecha, 'DD') = " + today.Day;
+                    return "AND TO_CHAR(fecha, 'DD') = " + fecha.Day;
                 ///Agrupa los contadores de acuerdo al día par o impar
                 case 3:
-                    return "AND MOD(TO_CHAR(fecha, 'DD'),2) = " + (today.Day % 2);
+                    return "AND MOD(TO_CHAR(fecha, 'DD'),2) = " + (fecha.Day % 2);
                 ///Agrupa los contadores de acuerdo al mes
                 case 4:
-                    return "AND TO_CHAR(fecha, 'MM') = " + today.Month;
+                    return "AND TO_CHAR(fecha, 'MM') = " + fecha.Month;
                 ///Agrupa los contadores de acuerdo al día del año
                 case 5:
-                    return "AND TO_CHAR(fecha, 'DDD') = " + (today.DayOfYear);
+                    return "AND TO_CHAR(fecha, 'DDD') = " + (fecha.DayOfYear);
                 ///Agrupa los contadores de acuerdo al día del año par o impar
                 case 6:
-                    return "AND MOD(TO_CHAR(fecha, 'DDD'),2) = " + (today.DayOfYear % 2);
+                    return "AND MOD(TO_CHAR(fecha, 'DDD'),2) = " + (fecha.DayOfYear % 2);
                 ///Agrupa los contadores de acuerdo al mes par o impar
                 case 7:
-                    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (today.Month % 2);
+                    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (fecha.Month % 2);
                 ///Agrupa los contadores de acuerdo al mes par o impar y el día par o impar
                 case 8:
-                    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (today.Month % 2) + " AND MOD(TO_CHAR(fecha, 'DD'),2) = " + (today.Day % 2);
+                    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (fecha.Month % 2) + " AND MOD(TO_CHAR(fecha, 'DD'),2) = " + (fecha.Day % 2);
                 ///Agrupa los contadores de acuerdo al mes y al día
                 case 9:
-                    return "AND TO_CHAR(fecha, 'MM') = " + today.Month + " AND TO_CHAR(fecha, 'DD') = " + today.Day;
+                    return "AND TO_CHAR(fecha, 'MM') = " + fecha.Month + " AND TO_CHAR(fecha, 'DD') = " + fecha.Day;
                 ///Agrupa los contadores de acuerdo al año par o impar
                 case 10:
-                    return "AND MOD(TO_CHAR(fecha, 'YYYY'),2) = " + (today.Year % 2);
+                    return "AND MOD(TO_CHAR(fecha, 'YYYY'),2) = " + (fecha.Year % 2);
                 default:
                     return "";
             }
         }
 
-        ///// <summary>
-        ///// Método que escribe los datos recibidos en el diccionario en los archivos
-        ///// </summary>
-        ///// <param name="dict">diccionario con datos</param>
-        ///// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        //private void EscribirDatosArchivoSign(Dictionary<string, List<int>> dict, string cad, Dictionary<int, int> dictRachas)
-        //{
-        //    string fic = @"C:\temp\" + cad + ".txt";
-        //    StreamWriter sw = new StreamWriter(fic);
-        //    foreach (var item in dict)
-        //    {
-        //        sw.WriteLine(item.Key + ":");
-        //        List<int> listTempNegativa = (from x in item.Value
-        //                                      where x < 0
-        //                                      select x).ToList();
-        //        List<int> listTempPositiva = (from x in item.Value
-        //                                      where x > 0
-        //                                      select x).ToList();
-        //        listTempNegativa.Sort();
-        //        listTempPositiva.Sort();
-        //        //Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
-        //        //this.AgruparRachas(listTempNegativa, dictRachas);
-        //        //Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
-        //        //this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
-        //        sw.WriteLine("U\tP\tA\tTA, Racha Item");
-        //        int ultimo = item.Value.Last();
-        //        dictRachas.Add(13, ultimo);
-        //        sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
-        //            + "\t" + item.Value.ElementAt(item.Value.Count - 5)
-        //            + "\t" + item.Value.ElementAt(item.Value.Count - 7)
-        //            + "\t" + item.Value.ElementAt(item.Value.Count - 9)
-        //            + "\t" + item.Value.ElementAt(item.Value.Count - 11));
-        //        if (dictRachas.ContainsKey(ultimo))
-        //        {
-        //            sw.WriteLine("Ultimo dentro de histórico");
-        //            sw.WriteLine(ultimo + "=" + dictRachas[ultimo]);
-        //        }
-        //        this.EscribirDiezMayores(sw, dictRachas);
-        //        sw.WriteLine("");
-        //    }
-        //    sw.Close();
-        //}
+        /// <summary>
+        /// Método que escribe los datos recibidos en el diccionario en los archivos
+        /// </summary>
+        /// <param name="dict">diccionario con datos</param>
+        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
+        private void EscribirDatosArchivo(Dictionary<int, ObjectInfoDTO> dict, string cad)
+        {
+            string fic = path + fecha.Day +cad + ".csv";
+            StreamWriter sw = new StreamWriter(fic);
+            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
+            foreach (var item in dict)
+            {
+                sw.Write(item.Key);
+                sw.WriteLine(item.Value.ToString());
+            }
+            sw.Close();
+        }
+
+        /// <summary>
+        /// Método que escribe los datos recibidos en el diccionario en los archivos
+        /// </summary>
+        /// <param name="dict">diccionario con datos</param>
+        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
+        private void EscribirDatosArchivo(Dictionary<string, ObjectInfoDTO> dict, string cad)
+        {
+            string fic = path + fecha.Day + cad + ".csv";
+            StreamWriter sw = new StreamWriter(fic);
+            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
+            foreach (var item in dict)
+            {
+                sw.Write(item.Key);
+                sw.WriteLine(item.Value.ToString());
+            }
+            sw.Close();
+        }
+
         /// <summary>
         /// Método que obtiene y asigna los datos de los últimos resultados ingresados
         /// </summary>
         private void ObtenerUltimoResultado()
         {
-            //_resultActualSol = listaDatosSol.Last();
+            _resultActualSol = listaDatosSol.Last();
             _resultActualLun = listaDatosLun.Last();
         }
 
-        ///// <summary>
-        ///// Método que escribe los datos recibidos en el diccionario en los archivos
-        ///// </summary>
-        ///// <param name="dict">diccionario con datos</param>
-        ///// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        //private void EscribirDatosArchivo(Dictionary<int, List<int>> dict, string cad, Dictionary<int, int> dictRachas)
-        //{
-        //    string fic = @"C:\temp\" + cad + ".txt";
-        //    StreamWriter sw = new StreamWriter(fic);
-        //    foreach (var item in dict)
-        //    {
-        //        sw.WriteLine(item.Key + ":");
-        //        List<int> listTempNegativa = (from x in item.Value
-        //                                      where x < 0
-        //                                      select x).ToList();
-        //        List<int> listTempPositiva = (from x in item.Value
-        //                                      where x > 0
-        //                                      select x).ToList();
-        //        listTempNegativa.Sort();
-        //        listTempPositiva.Sort();
-        //        //Dictionary<int, int> dictContRachaNegativa = new Dictionary<int, int>();
-        //        //this.AgruparRachas(listTempNegativa, dictRachas);
-        //        //Dictionary<int, int> dictContRachaPositiva = new Dictionary<int, int>();
-        //        //this.AgruparRachas(listTempPositiva, dictContRachaPositiva);
-        //        sw.WriteLine("U\tP\tA\tTA Racha Item");
-        //        int ultimo = item.Value.Last();
-        //        //this.ultimosRachasPosUno.Add(item.)
-        //        sw.WriteLine(ultimo + "\t" + item.Value.ElementAt(item.Value.Count - 3)
-        //            + "\t" + item.Value.ElementAt(item.Value.Count - 5)
-        //            + "\t" + item.Value.ElementAt(item.Value.Count - 7)
-        //            + "\t" + item.Value.ElementAt(item.Value.Count - 9)
-        //            + "\t" + item.Value.ElementAt(item.Value.Count - 11));
-        //        if (dictRachas.ContainsKey(ultimo))
-        //        {
-        //            sw.WriteLine("Ultimo dentro de histórico");
-        //            sw.WriteLine(ultimo + "=" + dictRachas[ultimo]);
-        //        }
-        //        this.EscribirDiezMayores(sw, dictRachas);
-        //        sw.WriteLine("");
-        //    }
-        //    sw.Close();
-        //}
         /// <summary>
         /// Método que realiza el llamado al método que suma los datos para puntuar la información
         /// </summary>
@@ -497,18 +451,6 @@ namespace Presenter
             ManejoContadores.AddInfoContAnioModulo(dict, data);
         }
 
-        ///// <summary>
-        ///// Método que escribe los datos
-        ///// </summary>
-        ///// <param name="sw">Objeto usado para escribir</param>
-        ///// <param name="dictContadorRachas">objeto con contador de rachas organizadas</param>
-        //private void EscribirDataDiccionario(StreamWriter sw, Dictionary<int, int> dictContadorRachas)
-        //{
-        //    foreach (var itemList in dictContadorRachas)
-        //    {
-        //        sw.Write(itemList.Key + "=" + itemList.Value + ",");
-        //    }
-        //}
         /// <summary>
         /// Método que realiza el llamado al método que suma los datos para puntuar la información
         /// </summary>
@@ -516,37 +458,37 @@ namespace Presenter
         /// <param name="tipo">Referencia al tipo de registro que se evalua(Sol-Lun)</param>
         private void PuntuarInformacion(string posicion, int tipo, Dictionary<string, ObjectInfoDTO> dict)
         {
-            string query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(0), "ClaveSign");
+            string query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(0), "ClaveSign");
             DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContGeneral(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(1), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(1), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaSemana(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(2), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(2), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(3), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(3), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(4), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(4), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(5), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(5), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaAnio(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(6), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(6), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AdinionarInformacionContadorDiaAnioModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(7), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(7), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMesModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(8), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(8), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMesModuloDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(9), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(9), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMesDia(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(10), "ClaveSign");
+            query_final = string.Format(ConstantesGenerales.QUERY_BASE_STRING, posicion, tipo, this.ObtenerParametrosQuery(10), "ClaveSign");
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContAnioModulo(dict, data);
         }
@@ -591,6 +533,10 @@ namespace Presenter
                 if (flagSign)
                 {
                     dictSign[item.SIGN].ContadorDespuesActual++;
+                    dictPosUno[(int)item.POS_UNO].ContadorDespuesSignActual++;
+                    dictPosDos[(int)item.POS_DOS].ContadorDespuesSignActual++;
+                    dictPostres[(int)item.POS_TRES].ContadorDespuesSignActual++;
+                    dictPosCuatro[(int)item.POS_CUATRO].ContadorDespuesSignActual++;
                 }
                 flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
                 flagPosDos = this.ValidarMismoDato(2, item, sorComparador);

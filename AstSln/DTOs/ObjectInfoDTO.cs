@@ -25,14 +25,13 @@ namespace DTOs
         private List<int> _rachasAparicion;
         private List<int> _rachasAcumuladas;
         private Dictionary<int, int> _dictRachasAgrupadasInt;
-        private Dictionary<string, int> _dictRachasAgrupadasSign;
+        private int _contadorDespuesSignActual;
 
         public ObjectInfoDTO()
         {
             this.RachasAparicion = new List<int>();
             this.RachasAcumuladas = new List<int>();
             this.DictRachasAgrupadasInt = new Dictionary<int, int>();
-            this.DictRachasAgrupadasSign = new Dictionary<string, int>();
         }
 
         /// <summary>
@@ -292,19 +291,71 @@ namespace DTOs
         }
 
         /// <summary>
-        /// Contiene la información de las rachas agrupadas para las cadenas
+        /// Referencia al contador de las apariciones después el último signo
         /// </summary>
-        public Dictionary<string, int> DictRachasAgrupadasSign
+        public int ContadorDespuesSignActual
         {
             get
             {
-                return _dictRachasAgrupadasSign;
+                return _contadorDespuesSignActual;
             }
 
             set
             {
-                _dictRachasAgrupadasSign = value;
+                _contadorDespuesSignActual = value;
             }
+        }
+
+        private string ObtenerCadenaDiccionario(Dictionary<int, int> dict)
+        {
+            string cad = "'";
+            for (int i = 1; i < dict.Count; i++)
+            {
+                var item = dict.ElementAt(i);
+                cad += item.Key + "=" + item.Value + ",";
+            }
+            cad += "'";
+            return cad;
+        }
+
+        private string ObtenerCadenaLista(List<int> lista)
+        {
+            string cad = "'";
+            int contador = 0;
+            for (int i = lista.Count - 1; i > 0 && contador < 10; i--)
+            {
+                cad += lista.ElementAt(i) + ",";
+                contador++;
+            }
+            cad += "'";
+            return cad;
+        }
+
+        /// <summary>
+        /// Método que genera la información en texto de la clase
+        /// </summary>
+        /// <returns>cadena con información</returns>
+        public override string ToString()
+        {
+            string cad =
+                ";" + this.PuntuacionTotal
+                + ";" + this.ContadorGeneral
+                + ";" + this.ContadorDiaSemana
+                + ";" + this.ContadorDiaMes
+                + ";" + this.ContadorDiaModulo
+                + ";" + this.ContadorMes
+                + ";" + this.ContadorDiaAnio
+                + ";" + this.ContadorDiaAnioModulo
+                + ";" + this.ContadorMesModuloDiaModulo
+                + ";" + this.ContadorMesDia
+                + ";" + this.ContadorAnioModulo
+                + ";" + this.ContadorMesModulo
+                + ";" + this.ContadorDespuesActual
+                + ";" + this.ObtenerCadenaLista(RachasAcumuladas)
+                + ";" + this.ObtenerCadenaDiccionario(this.DictRachasAgrupadasInt)
+                + ";" + this.ContadorDespuesSignActual
+                + ";" + this.DictRachasAgrupadasInt.Where(x=>x.Key == RachasAcumuladas.Last()).FirstOrDefault().Value;
+            return cad;
         }
     }
 }
