@@ -25,8 +25,8 @@ namespace Constantes
         public const string POS_TRES = "POS_TRES";
         public const string POS_CUATRO = "POS_CUATRO";
         public const string SIGN = "SIGN";
-        public const string QUERY_BASE = "SELECT {0} AS {3}, 10-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank FROM astr WHERE tipo = {1} {2} GROUP BY {0}";
-        public const string QUERY_BASE_STRING = "SELECT {0} AS {3}, 12-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank FROM astr WHERE tipo = {1} {2} GROUP BY {0}";
-        public const string ENCABEZADOS = ";PuntuacionTotal;ContadorGeneral;ContadorDiaSemana;ContadorDiaMes;ContadorDiaModulo;ContadorMes;ContadorDiaAnio;ContadorDiaAnioModulo;ContadorMesModuloDiaModulo;ContadorMesDia;ContadorAnioModulo;ContadorMesModulo;ContadorDespuesActual;UltimasRachas;DictRachasAgrupadasInt;ContadorDespuesSignActual;ContadorUltimoEnRachas";
+        public const string QUERY_BASE = "SELECT {0} AS {3}, 10-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank, COUNT(*) AS CountRank FROM astr WHERE tipo = {1} {2} GROUP BY {0}";
+        public const string QUERY_BASE_STRING = "SELECT {0} AS {3}, 12-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank, COUNT(*) AS CountRank FROM astr WHERE tipo = {1} {2} GROUP BY {0}";
+        public const string ENCABEZADOS = ";PuntuacionTotal;ContadorGeneral;;ContadorDiaSemana;;ContadorDiaMes;;ContadorDiaModulo;;ContadorMes;;ContadorDiaAnio;;ContadorDiaAnioModulo;;ContadorMesModuloDiaModulo;;ContadorMesDia;;ContadorAnioModulo;;ContadorMesModulo;;ContadorDespuesActual;UltimasRachas;DictRachasAgrupadasInt;ContadorDespuesSignActual;ContadorUltimoEnRachas";
     }
 }

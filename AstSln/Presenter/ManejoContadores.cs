@@ -14,7 +14,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorAnioModulo = cust.Rank;
+                dict[cust.ClaveNum].RankContadorAnioModulo = cust.Rank;
+                dict[cust.ClaveNum].ContadorAnioModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -23,7 +24,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorMesDia = cust.Rank;
+                dict[cust.ClaveNum].RankContadorMesDia = cust.Rank;
+                dict[cust.ClaveNum].ContadorMesDia = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -32,7 +34,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorMesModuloDiaModulo = cust.Rank;
+                dict[cust.ClaveNum].RankContadorMesModuloDiaModulo = cust.Rank;
+                dict[cust.ClaveNum].ContadorMesModuloDiaModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -41,7 +44,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorMesModulo = cust.Rank;
+                dict[cust.ClaveNum].RankContadorMesModulo = cust.Rank;
+                dict[cust.ClaveNum].ContadorMesModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -50,7 +54,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorDiaAnioModulo = cust.Rank;
+                dict[cust.ClaveNum].RankContadorDiaAnioModulo = cust.Rank;
+                dict[cust.ClaveNum].ContadorDiaAnioModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -59,7 +64,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorDiaAnio = cust.Rank;
+                dict[cust.ClaveNum].RankContadorDiaAnio = cust.Rank;
+                dict[cust.ClaveNum].ContadorDiaAnio = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -68,7 +74,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorMes = cust.Rank;
+                dict[cust.ClaveNum].RankContadorMes = cust.Rank;
+                dict[cust.ClaveNum].ContadorMes = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -77,7 +84,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorDiaModulo = cust.Rank;
+                dict[cust.ClaveNum].RankContadorDiaModulo = cust.Rank;
+                dict[cust.ClaveNum].ContadorDiaModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -86,7 +94,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorDiaMes = cust.Rank;
+                dict[cust.ClaveNum].RankContadorDiaMes = cust.Rank;
+                dict[cust.ClaveNum].ContadorDiaMes = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -95,7 +104,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorDiaSemana = cust.Rank;
+                dict[cust.ClaveNum].RankContadorDiaSemana = cust.Rank;
+                dict[cust.ClaveNum].ContadorDiaSemana = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -104,7 +114,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveNum].ContadorGeneral = cust.Rank;
+                dict[cust.ClaveNum].RankContadorGeneral = cust.Rank;
+                dict[cust.ClaveNum].ContadorGeneral = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
             }
         }
@@ -113,7 +124,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorAnioModulo = cust.Rank;
+                dict[cust.ClaveSign].RankContadorAnioModulo = cust.Rank;
+                dict[cust.ClaveSign].ContadorAnioModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -122,7 +134,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorMesDia = cust.Rank;
+                dict[cust.ClaveSign].RankContadorMesDia = cust.Rank;
+                dict[cust.ClaveSign].ContadorMesDia = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -131,7 +144,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorMesModuloDiaModulo = cust.Rank;
+                dict[cust.ClaveSign].RankContadorMesModuloDiaModulo = cust.Rank;
+                dict[cust.ClaveSign].ContadorMesModuloDiaModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -140,7 +154,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorMesModulo = cust.Rank;
+                dict[cust.ClaveSign].RankContadorMesModulo = cust.Rank;
+                dict[cust.ClaveSign].ContadorMesModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -149,7 +164,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorDiaAnioModulo = cust.Rank;
+                dict[cust.ClaveSign].RankContadorDiaAnioModulo = cust.Rank;
+                dict[cust.ClaveSign].ContadorDiaAnioModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -158,7 +174,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorDiaAnio = cust.Rank;
+                dict[cust.ClaveSign].RankContadorDiaAnio = cust.Rank;
+                dict[cust.ClaveSign].ContadorDiaAnio = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -167,7 +184,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorMes = cust.Rank;
+                dict[cust.ClaveSign].RankContadorMes = cust.Rank;
+                dict[cust.ClaveSign].ContadorMes = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -176,7 +194,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorDiaModulo = cust.Rank;
+                dict[cust.ClaveSign].RankContadorDiaModulo = cust.Rank;
+                dict[cust.ClaveSign].ContadorDiaModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -185,7 +204,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorDiaMes = cust.Rank;
+                dict[cust.ClaveSign].RankContadorDiaMes = cust.Rank;
+                dict[cust.ClaveSign].ContadorDiaMes = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -194,7 +214,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorDiaSemana = cust.Rank;
+                dict[cust.ClaveSign].RankContadorDiaSemana = cust.Rank;
+                dict[cust.ClaveSign].ContadorDiaSemana = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }
@@ -203,7 +224,8 @@ namespace Presenter
         {
             foreach (var cust in data)
             {
-                dict[cust.ClaveSign].ContadorGeneral = cust.Rank;
+                dict[cust.ClaveSign].RankContadorGeneral = cust.Rank;
+                dict[cust.ClaveSign].ContadorGeneral = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
             }
         }

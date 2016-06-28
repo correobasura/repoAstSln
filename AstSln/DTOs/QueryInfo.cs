@@ -25,5 +25,11 @@ namespace DTOs
             get;
             set;
         }
+
+        public int CountRank
+        {
+            get;
+            set;
+        }
     }
 }

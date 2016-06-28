@@ -26,6 +26,17 @@ namespace DTOs
         private List<int> _rachasAcumuladas;
         private Dictionary<int, int> _dictRachasAgrupadasInt;
         private int _contadorDespuesSignActual;
+        private int _rankContadorGeneral;
+        private int _rankContadorDiaSemana;
+        private int _rankContadorDiaMes;
+        private int _rankContadorDiaModulo;
+        private int _rankContadorMes;
+        private int _rankContadorDiaAnio;
+        private int _rankContadorDiaAnioModulo;
+        private int _rankContadorMesModulo;
+        private int _rankContadorMesModuloDiaModulo;
+        private int _rankContadorMesDia;
+        private int _rankContadorAnioModulo;
 
         public ObjectInfoDTO()
         {
@@ -306,6 +317,149 @@ namespace DTOs
             }
         }
 
+        public int RankContadorGeneral
+        {
+            get
+            {
+                return _rankContadorGeneral;
+            }
+
+            set
+            {
+                _rankContadorGeneral = value;
+            }
+        }
+
+        public int RankContadorDiaSemana
+        {
+            get
+            {
+                return _rankContadorDiaSemana;
+            }
+
+            set
+            {
+                _rankContadorDiaSemana = value;
+            }
+        }
+
+        public int RankContadorDiaMes
+        {
+            get
+            {
+                return _rankContadorDiaMes;
+            }
+
+            set
+            {
+                _rankContadorDiaMes = value;
+            }
+        }
+
+        public int RankContadorDiaModulo
+        {
+            get
+            {
+                return _rankContadorDiaModulo;
+            }
+
+            set
+            {
+                _rankContadorDiaModulo = value;
+            }
+        }
+
+        public int RankContadorMes
+        {
+            get
+            {
+                return _rankContadorMes;
+            }
+
+            set
+            {
+                _rankContadorMes = value;
+            }
+        }
+
+        public int RankContadorDiaAnio
+        {
+            get
+            {
+                return _rankContadorDiaAnio;
+            }
+
+            set
+            {
+                _rankContadorDiaAnio = value;
+            }
+        }
+
+        public int RankContadorDiaAnioModulo
+        {
+            get
+            {
+                return _rankContadorDiaAnioModulo;
+            }
+
+            set
+            {
+                _rankContadorDiaAnioModulo = value;
+            }
+        }
+
+        public int RankContadorMesModulo
+        {
+            get
+            {
+                return _rankContadorMesModulo;
+            }
+
+            set
+            {
+                _rankContadorMesModulo = value;
+            }
+        }
+
+        public int RankContadorMesModuloDiaModulo
+        {
+            get
+            {
+                return _rankContadorMesModuloDiaModulo;
+            }
+
+            set
+            {
+                _rankContadorMesModuloDiaModulo = value;
+            }
+        }
+
+        public int RankContadorMesDia
+        {
+            get
+            {
+                return _rankContadorMesDia;
+            }
+
+            set
+            {
+                _rankContadorMesDia = value;
+            }
+        }
+
+        public int RankContadorAnioModulo
+        {
+            get
+            {
+                return _rankContadorAnioModulo;
+            }
+
+            set
+            {
+                _rankContadorAnioModulo = value;
+            }
+        }
+
         private string ObtenerCadenaDiccionario(Dictionary<int, int> dict)
         {
             string cad = "'";
@@ -340,21 +494,32 @@ namespace DTOs
             string cad =
                 ";" + this.PuntuacionTotal
                 + ";" + this.ContadorGeneral
+                + ";" + this.RankContadorGeneral
                 + ";" + this.ContadorDiaSemana
+                + ";" + this.RankContadorDiaSemana
                 + ";" + this.ContadorDiaMes
+                + ";" + this.RankContadorDiaMes
                 + ";" + this.ContadorDiaModulo
+                + ";" + this.RankContadorDiaModulo
                 + ";" + this.ContadorMes
+                + ";" + this.RankContadorMes
                 + ";" + this.ContadorDiaAnio
+                + ";" + this.RankContadorDiaAnio
                 + ";" + this.ContadorDiaAnioModulo
+                + ";" + this.RankContadorDiaAnioModulo
                 + ";" + this.ContadorMesModuloDiaModulo
+                + ";" + this.RankContadorMesModuloDiaModulo
                 + ";" + this.ContadorMesDia
+                + ";" + this.RankContadorMesDia
                 + ";" + this.ContadorAnioModulo
+                + ";" + this.RankContadorAnioModulo
                 + ";" + this.ContadorMesModulo
+                + ";" + this.RankContadorMesModulo
                 + ";" + this.ContadorDespuesActual
                 + ";" + this.ObtenerCadenaLista(RachasAcumuladas)
                 + ";" + this.ObtenerCadenaDiccionario(this.DictRachasAgrupadasInt)
                 + ";" + this.ContadorDespuesSignActual
-                + ";" + this.DictRachasAgrupadasInt.Where(x=>x.Key == RachasAcumuladas.Last()).FirstOrDefault().Value;
+                + ";" + this.DictRachasAgrupadasInt.Where(x => x.Key == RachasAcumuladas.Last()).FirstOrDefault().Value;
             return cad;
         }
     }
