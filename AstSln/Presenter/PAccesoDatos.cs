@@ -71,6 +71,7 @@ namespace Presenter
                 listaDatosSol = listaDatosGeneral.Where(x => x.TIPO == 1).ToList();
                 listaDatosLun = listaDatosGeneral.Where(x => x.TIPO == 2).ToList();
             }
+            this.ValidarDatosRepetidos(listaDatosLun);
             this.ObtenerUltimoResultado();
             this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, dictInfoPosUnoLun);
             this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, dictInfoPosDosLun);
@@ -94,6 +95,52 @@ namespace Presenter
             this.EscribirDatosArchivo(dictInfoPosTresLun, "PosTresLun");
             this.EscribirDatosArchivo(dictInfoPosCuatroLun, "PosCuatroLun");
             this.EscribirDatosArchivo(dictInfoSignLun, "SignLun");
+        }
+
+        private void ValidarDatosRepetidos(List<ASTR> listica)
+        {
+            List<DateTime> listaIdentificadores = new List<DateTime>();
+            DateTime fechaInicial = (DateTime)listica.ElementAt(0).FECHA;
+            for (int i = 1; i < listica.Count; i++)
+            {
+                //ASTR astUno = listica.ElementAt(i);
+                //for (int j = i+1; j < listica.Count; j++)
+                //{
+                //    ASTR astTemp = listica.ElementAt(j);
+                //    //if (astTemp.POS_UNO == astUno.POS_UNO
+                //    //    && astTemp.POS_DOS == astUno.POS_DOS
+                //    //    && astTemp.POS_TRES == astUno.POS_TRES
+                //    //    && astTemp.POS_CUATRO == astUno.POS_CUATRO
+                //    //    && astTemp.SIGN == astUno.SIGN)
+                //    //{
+                //    //    if (!listaIdentificadores.Contains(astUno.ID)) listaIdentificadores.Add(astUno.ID);
+                //    //    if (!listaIdentificadores.Contains(astTemp.ID)) listaIdentificadores.Add(astTemp.ID);
+                //    //}
+                //    if (astUno.FECHA == astTemp.FECHA)
+                //    {
+                //        if (!listaIdentificadores.Contains(astUno.ID)) listaIdentificadores.Add(astUno.ID);
+                //        if (!listaIdentificadores.Contains(astTemp.ID)) listaIdentificadores.Add(astTemp.ID);
+                //    }
+                //}
+                DateTime fechaSor = (DateTime)listica.ElementAt(i).FECHA;
+                if (!fechaSor.AddDays(-1).Equals(fechaInicial))
+                {
+                    listaIdentificadores.Add(fechaInicial);
+                }
+                fechaInicial = fechaSor;
+            }
+            List<ASTR> listaTemp = new List<ASTR>();
+            //Si no se pagina la lista, se obtienen todos los resultados, de lo contrario, se traen los resultados solicitados
+            //listaTemp = (from ast in listica
+            //                    where listaIdentificadores.Contains(ast.ID)
+            //                    select ast).ToList();
+            string fic = path + "repetidos.txt";
+            StreamWriter sw = new StreamWriter(fic);
+            foreach (var item in listaIdentificadores)
+            {
+                sw.WriteLine(item.Year+"/"+item.Month+"/"+item.Day);
+            }
+            sw.Close();
         }
 
         /// <summary>

@@ -23,5 +23,17 @@ namespace Model.DataContextModel
         public string SIGN { get; set; }
         public Nullable<int> NUM_SOR { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
+
+        public override string ToString()
+        {
+            string cad = TIPO.ToString() + ",\t" +
+POS_UNO.ToString() + "," +
+POS_DOS.ToString() + "," +
+POS_TRES.ToString() + "," +
+POS_CUATRO.ToString() + "," +
+SIGN.ToString() + ",\t" +
+NUM_SOR.ToString();
+            return cad;
+        }
     }
 }
