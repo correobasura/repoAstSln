@@ -16,21 +16,21 @@ namespace Presenter
         private IAccesoDatos _iAccesoDatos;
         private ASTR _resultActualLun;
         private ASTR _resultActualSol;
-        Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroLun;
-        Dictionary<int, ObjectInfoDTO> dictInfoPosDosLun;
-        Dictionary<int, ObjectInfoDTO> dictInfoPosTresLun;
-        Dictionary<int, ObjectInfoDTO> dictInfoPosUnoLun;
-        Dictionary<string, ObjectInfoDTO> dictInfoSignLun;
-        Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroSol;
-        Dictionary<int, ObjectInfoDTO> dictInfoPosDosSol;
-        Dictionary<int, ObjectInfoDTO> dictInfoPosTresSol;
-        Dictionary<int, ObjectInfoDTO> dictInfoPosUnoSol;
-        Dictionary<string, ObjectInfoDTO> dictInfoSignSol;
+        private Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroLun;
+        private Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroSol;
+        private Dictionary<int, ObjectInfoDTO> dictInfoPosDosLun;
+        private Dictionary<int, ObjectInfoDTO> dictInfoPosDosSol;
+        private Dictionary<int, ObjectInfoDTO> dictInfoPosTresLun;
+        private Dictionary<int, ObjectInfoDTO> dictInfoPosTresSol;
+        private Dictionary<int, ObjectInfoDTO> dictInfoPosUnoLun;
+        private Dictionary<int, ObjectInfoDTO> dictInfoPosUnoSol;
+        private Dictionary<string, ObjectInfoDTO> dictInfoSignLun;
+        private Dictionary<string, ObjectInfoDTO> dictInfoSignSol;
+        private DateTime fecha;
         private List<ASTR> listaDatosGeneral;
         private List<ASTR> listaDatosLun;
         private List<ASTR> listaDatosSol;
         private string path = "";
-        private DateTime fecha;
 
         /// <summary>
         /// Constructor de la clase
@@ -40,15 +40,15 @@ namespace Presenter
         {
             this._astEntities = new AstEntities();
             this._iAccesoDatos = iAccesoDatos;
-            this.dictInfoPosUnoLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
-            this.dictInfoPosDosLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
-            this.dictInfoPosTresLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
             this.dictInfoPosCuatroLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
-            this.dictInfoSignLun = (Dictionary<string, ObjectInfoDTO>)this.InicializarDiccionarioInformacion(1);
-            this.dictInfoPosUnoSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
-            this.dictInfoPosDosSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
-            this.dictInfoPosTresSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
             this.dictInfoPosCuatroSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosDosLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosDosSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosTresLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosTresSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosUnoLun = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoPosUnoSol = (Dictionary<int, ObjectInfoDTO>)this.InicializarDiccionarioInformacion();
+            this.dictInfoSignLun = (Dictionary<string, ObjectInfoDTO>)this.InicializarDiccionarioInformacion(1);
             this.dictInfoSignSol = (Dictionary<string, ObjectInfoDTO>)this.InicializarDiccionarioInformacion(1);
             fecha = DateTime.Today;
             path = @"C:\temp" + @"\" + fecha.Year + "" + fecha.Month + @"\" + fecha.Day + @"\";
@@ -81,6 +81,7 @@ namespace Presenter
             if (fecha.DayOfWeek != DayOfWeek.Sunday)
             {
                 this.RecorrerElementosLista(listaDatosSol, _resultActualSol, dictInfoPosUnoSol, dictInfoPosDosSol, dictInfoPosTresSol, dictInfoPosCuatroSol, dictInfoSignSol);
+                this.RecorrerElementosLista(listaDatosSol, _resultActualLun, dictInfoPosUnoSol, dictInfoPosDosSol, dictInfoPosTresSol, dictInfoPosCuatroSol, dictInfoSignSol);
                 this.ValidarRachas(listaDatosSol, dictInfoPosUnoSol, dictInfoPosDosSol, dictInfoPosTresSol, dictInfoPosCuatroSol, dictInfoSignSol);
                 this.EscribirDatosArchivo(dictInfoPosUnoSol, "PosUnoSol");
                 this.EscribirDatosArchivo(dictInfoPosDosSol, "PosDosSol");
@@ -89,58 +90,13 @@ namespace Presenter
                 this.EscribirDatosArchivo(dictInfoSignSol, "SignSol");
             }
             this.RecorrerElementosLista(listaDatosLun, _resultActualLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
+            this.RecorrerElementosLista(listaDatosLun, _resultActualSol, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
             this.ValidarRachas(listaDatosLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
             this.EscribirDatosArchivo(dictInfoPosUnoLun, "PosUnoLun");
             this.EscribirDatosArchivo(dictInfoPosDosLun, "PosDosLun");
             this.EscribirDatosArchivo(dictInfoPosTresLun, "PosTresLun");
             this.EscribirDatosArchivo(dictInfoPosCuatroLun, "PosCuatroLun");
             this.EscribirDatosArchivo(dictInfoSignLun, "SignLun");
-        }
-
-        private void ValidarDatosRepetidos(List<ASTR> listica)
-        {
-            List<decimal> listaIdentificadores = new List<decimal>();
-            DateTime fechaInicial = (DateTime)listica.ElementAt(0).FECHA;
-            for (int i = 1; i < listica.Count; i++)
-            {
-                ASTR astUno = listica.ElementAt(i);
-                for (int j = i + 1; j < listica.Count; j++)
-                {
-                    ASTR astTemp = listica.ElementAt(j);
-                    //if (astTemp.POS_UNO == astUno.POS_UNO
-                    //    && astTemp.POS_DOS == astUno.POS_DOS
-                    //    && astTemp.POS_TRES == astUno.POS_TRES
-                    //    && astTemp.POS_CUATRO == astUno.POS_CUATRO
-                    //    && astTemp.SIGN == astUno.SIGN)
-                    //{
-                    //    if (!listaIdentificadores.Contains(astUno.ID)) listaIdentificadores.Add(astUno.ID);
-                    //    if (!listaIdentificadores.Contains(astTemp.ID)) listaIdentificadores.Add(astTemp.ID);
-                    //}
-                    if (astUno.FECHA == astTemp.FECHA)
-                    {
-                        if (!listaIdentificadores.Contains(astUno.ID)) listaIdentificadores.Add(astUno.ID);
-                        if (!listaIdentificadores.Contains(astTemp.ID)) listaIdentificadores.Add(astTemp.ID);
-                    }
-                }
-                //DateTime fechaSor = (DateTime)listica.ElementAt(i).FECHA;
-                //if (!fechaSor.AddDays(-1).Equals(fechaInicial))
-                //{
-                //    listaIdentificadores.Add(fechaInicial);
-                //}
-                //fechaInicial = fechaSor;
-            }
-            List<ASTR> listaTemp = new List<ASTR>();
-            //Si no se pagina la lista, se obtienen todos los resultados, de lo contrario, se traen los resultados solicitados
-            listaTemp = (from ast in listica
-                         where listaIdentificadores.Contains(ast.ID)
-                         select ast).ToList();
-            string fic = path + "repetidos.txt";
-            StreamWriter sw = new StreamWriter(fic);
-            foreach (var item in listaTemp)
-            {
-                sw.WriteLine(item.ToString());
-            }
-            sw.Close();
         }
 
         /// <summary>
@@ -332,6 +288,72 @@ namespace Presenter
         }
 
         /// <summary>
+        /// Método que escribe los datos recibidos en el diccionario en los archivos
+        /// </summary>
+        /// <param name="dict">diccionario con datos</param>
+        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
+        private void EscribirDatosArchivo(Dictionary<int, ObjectInfoDTO> dict, string cad)
+        {
+            string fic = path + fecha.Day + cad + ".csv";
+            StreamWriter sw = new StreamWriter(fic);
+            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
+            foreach (var item in dict)
+            {
+                sw.Write(item.Key);
+                sw.WriteLine(item.Value.ToString());
+            }
+            sw.Close();
+        }
+
+        /// <summary>
+        /// Método que escribe los datos recibidos en el diccionario en los archivos
+        /// </summary>
+        /// <param name="dict">diccionario con datos</param>
+        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
+        private void EscribirDatosArchivo(Dictionary<string, ObjectInfoDTO> dict, string cad)
+        {
+            string fic = path + fecha.Day + cad + ".csv";
+            StreamWriter sw = new StreamWriter(fic);
+            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
+            foreach (var item in dict)
+            {
+                sw.Write(item.Key);
+                sw.WriteLine(item.Value.ToString());
+            }
+            sw.Close();
+        }
+
+        /// <summary>
+        /// Método que realiza el incremento para el diccionario, si la bandera recibida es true;
+        /// </summary>
+        /// <param name="dictIncrementar">Diccionaro que contiene la información sobre la que se realizan los incrementos</param>
+        /// <param name="bandera">bandera que realiza la validación, y controla en incremento</param>
+        /// <param name="claveDict">clave del diccionario sobre la que se realiza el incremento</param>
+        private void IncrementarContador(Dictionary<int, ObjectInfoDTO> dictIncrementar, bool bandera, int claveDict, bool mismoTipo)
+        {
+            if (bandera)
+            {
+                if (mismoTipo)
+                {
+                    dictIncrementar[claveDict].ContadorDespuesActual++;
+                }
+                else
+                {
+                    dictIncrementar[claveDict].ContadorDespuesOtroTipo++;
+                }
+                dictIncrementar[claveDict].PuntuacionTotal++;
+                dictIncrementar[claveDict].RachasAparicionDespActual.Add(1);
+            }
+            else
+            {
+                if (mismoTipo)
+                {
+                    dictIncrementar[claveDict].RachasAparicionDespActual.Add(0);
+                }
+            }
+        }
+
+        /// <summary>
         /// Método que retorna una estructura requerida para el caso recibido
         /// </summary>
         /// <param name="caso"></param>
@@ -409,42 +431,6 @@ namespace Presenter
                 default:
                     return "";
             }
-        }
-
-        /// <summary>
-        /// Método que escribe los datos recibidos en el diccionario en los archivos
-        /// </summary>
-        /// <param name="dict">diccionario con datos</param>
-        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        private void EscribirDatosArchivo(Dictionary<int, ObjectInfoDTO> dict, string cad)
-        {
-            string fic = path + fecha.Day +cad + ".csv";
-            StreamWriter sw = new StreamWriter(fic);
-            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
-            foreach (var item in dict)
-            {
-                sw.Write(item.Key);
-                sw.WriteLine(item.Value.ToString());
-            }
-            sw.Close();
-        }
-
-        /// <summary>
-        /// Método que escribe los datos recibidos en el diccionario en los archivos
-        /// </summary>
-        /// <param name="dict">diccionario con datos</param>
-        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        private void EscribirDatosArchivo(Dictionary<string, ObjectInfoDTO> dict, string cad)
-        {
-            string fic = path + fecha.Day + cad + ".csv";
-            StreamWriter sw = new StreamWriter(fic);
-            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
-            foreach (var item in dict)
-            {
-                sw.Write(item.Key);
-                sw.WriteLine(item.Value.ToString());
-            }
-            sw.Close();
         }
 
         /// <summary>
@@ -559,38 +545,100 @@ namespace Presenter
             bool flagPosTres = false;
             bool flagPosCuatro = false;
             bool flagSign = false;
-            foreach (var item in listaValidar)
+            if (sorComparador.TIPO.Equals(listaValidar.ElementAt(0).TIPO))
             {
-                if (flagPosUno)
+                foreach (var item in listaValidar)
                 {
-                    dictPosUno[(int)item.POS_UNO].ContadorDespuesActual++;
+                    this.IncrementarContador(dictPosUno, flagPosUno, (int)item.POS_UNO, true);
+                    this.IncrementarContador(dictPosDos, flagPosDos, (int)item.POS_DOS, true);
+                    this.IncrementarContador(dictPostres, flagPosTres, (int)item.POS_TRES, true);
+                    this.IncrementarContador(dictPosCuatro, flagPosCuatro, (int)item.POS_CUATRO, true);
+                    if (flagSign)
+                    {
+                        dictSign[item.SIGN].ContadorDespuesActual++;
+                        dictSign[item.SIGN].PuntuacionTotal++;
+                        dictPosUno[(int)item.POS_UNO].ContadorDespuesSignActual++;
+                        dictPosUno[(int)item.POS_UNO].PuntuacionTotal++;
+                        dictPosDos[(int)item.POS_DOS].ContadorDespuesSignActual++;
+                        dictPosDos[(int)item.POS_DOS].PuntuacionTotal++;
+                        dictPostres[(int)item.POS_TRES].ContadorDespuesSignActual++;
+                        dictPostres[(int)item.POS_TRES].PuntuacionTotal++;
+                        dictPosCuatro[(int)item.POS_CUATRO].ContadorDespuesSignActual++;
+                        dictPosCuatro[(int)item.POS_CUATRO].PuntuacionTotal++;
+                    }
+                    flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
+                    flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
+                    flagPosTres = this.ValidarMismoDato(3, item, sorComparador);
+                    flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
+                    flagSign = this.ValidarMismoDato(5, item, sorComparador);
                 }
-                if (flagPosDos)
-                {
-                    dictPosDos[(int)item.POS_DOS].ContadorDespuesActual++;
-                }
-                if (flagPosTres)
-                {
-                    dictPostres[(int)item.POS_TRES].ContadorDespuesActual++;
-                }
-                if (flagPosCuatro)
-                {
-                    dictPosCuatro[(int)item.POS_CUATRO].ContadorDespuesActual++;
-                }
-                if (flagSign)
-                {
-                    dictSign[item.SIGN].ContadorDespuesActual++;
-                    dictPosUno[(int)item.POS_UNO].ContadorDespuesSignActual++;
-                    dictPosDos[(int)item.POS_DOS].ContadorDespuesSignActual++;
-                    dictPostres[(int)item.POS_TRES].ContadorDespuesSignActual++;
-                    dictPosCuatro[(int)item.POS_CUATRO].ContadorDespuesSignActual++;
-                }
-                flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
-                flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
-                flagPosTres = this.ValidarMismoDato(3, item, sorComparador);
-                flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
-                flagSign = this.ValidarMismoDato(5, item, sorComparador);
             }
+            else
+            {
+                foreach (var item in listaValidar)
+                {
+                    this.IncrementarContador(dictPosUno, flagPosUno, (int)item.POS_UNO, false);
+                    this.IncrementarContador(dictPosDos, flagPosDos, (int)item.POS_DOS, false);
+                    this.IncrementarContador(dictPostres, flagPosTres, (int)item.POS_TRES, false);
+                    this.IncrementarContador(dictPosCuatro, flagPosCuatro, (int)item.POS_CUATRO, false);
+                    if (flagSign)
+                    {
+                        dictSign[item.SIGN].ContadorDespuesOtroTipo++;
+                        dictSign[item.SIGN].PuntuacionTotal++;
+                    }
+                    flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
+                    flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
+                    flagPosTres = this.ValidarMismoDato(3, item, sorComparador);
+                    flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
+                    flagSign = this.ValidarMismoDato(5, item, sorComparador);
+                }
+            }
+        }
+
+        private void ValidarDatosRepetidos(List<ASTR> listica)
+        {
+            List<decimal> listaIdentificadores = new List<decimal>();
+            DateTime fechaInicial = (DateTime)listica.ElementAt(0).FECHA;
+            for (int i = 1; i < listica.Count; i++)
+            {
+                ASTR astUno = listica.ElementAt(i);
+                for (int j = i + 1; j < listica.Count; j++)
+                {
+                    ASTR astTemp = listica.ElementAt(j);
+                    //if (astTemp.POS_UNO == astUno.POS_UNO
+                    //    && astTemp.POS_DOS == astUno.POS_DOS
+                    //    && astTemp.POS_TRES == astUno.POS_TRES
+                    //    && astTemp.POS_CUATRO == astUno.POS_CUATRO
+                    //    && astTemp.SIGN == astUno.SIGN)
+                    //{
+                    //    if (!listaIdentificadores.Contains(astUno.ID)) listaIdentificadores.Add(astUno.ID);
+                    //    if (!listaIdentificadores.Contains(astTemp.ID)) listaIdentificadores.Add(astTemp.ID);
+                    //}
+                    if (astUno.FECHA == astTemp.FECHA)
+                    {
+                        if (!listaIdentificadores.Contains(astUno.ID)) listaIdentificadores.Add(astUno.ID);
+                        if (!listaIdentificadores.Contains(astTemp.ID)) listaIdentificadores.Add(astTemp.ID);
+                    }
+                }
+                //DateTime fechaSor = (DateTime)listica.ElementAt(i).FECHA;
+                //if (!fechaSor.AddDays(-1).Equals(fechaInicial))
+                //{
+                //    listaIdentificadores.Add(fechaInicial);
+                //}
+                //fechaInicial = fechaSor;
+            }
+            List<ASTR> listaTemp = new List<ASTR>();
+            //Si no se pagina la lista, se obtienen todos los resultados, de lo contrario, se traen los resultados solicitados
+            listaTemp = (from ast in listica
+                         where listaIdentificadores.Contains(ast.ID)
+                         select ast).ToList();
+            string fic = path + "repetidos.txt";
+            StreamWriter sw = new StreamWriter(fic);
+            foreach (var item in listaTemp)
+            {
+                sw.WriteLine(item.ToString());
+            }
+            sw.Close();
         }
         /// <summary>
         /// Método encargado de validar de acuerdo al caso, el resultado de comparar los dos resultados
@@ -657,6 +705,55 @@ namespace Presenter
             this.AgruparRachas(dictPostres);
             this.AgruparRachas(dictPosCuatro);
             this.AgruparRachas(dictSign);
+        }
+
+        /// <summary>
+        /// Método que realiza el conteo de los valores sucesivos que son iguales
+        /// </summary>
+        /// <param name="dict">diccionario que contiene la información</param>
+        private void ContarRachasPositivasNegativasDespActual(Dictionary<int, ObjectInfoDTO> dict, List<ASTR> listaValidar)
+        {
+            foreach (var item in dict)
+            {
+                int? anterior = null;
+                int contNegativo = 0;
+                int contPositivo = 0;
+                foreach (var itemList in item.Value.RachasAparicion)
+                {
+                    ///Si el valor es cero, indica que no ha caido
+                    if (itemList.Equals(0))
+                    {
+                        if (anterior.Equals(1))
+                        {
+                            dict[item.Key].RachasAcumuladas.Add(contPositivo);
+                            contPositivo = 0;
+                            contNegativo = 0;
+                        }
+                        contNegativo--;
+                    }
+                    else
+                    {
+                        ///Si el valor es uno, indica que el valor cayó
+                        if (anterior.Equals(0))
+                        {
+                            dict[item.Key].RachasAcumuladas.Add(contNegativo);
+                            contNegativo = 0;
+                            contPositivo = 0;
+                        }
+                        contPositivo++;
+                    }
+                    anterior = itemList;
+                }
+                if (contNegativo != 0)
+                {
+                    dict[item.Key].RachasAcumuladas.Add(contNegativo);
+                }
+                else if (contPositivo != 0)
+                {
+                    dict[item.Key].RachasAcumuladas.Add(contPositivo);
+                }
+                dict[item.Key].RachasAparicion.Clear();
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorAnioModulo = cust.Rank;
                 dict[cust.ClaveNum].ContadorAnioModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -27,6 +28,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorMesDia = cust.Rank;
                 dict[cust.ClaveNum].ContadorMesDia = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -37,6 +39,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorMesModuloDiaModulo = cust.Rank;
                 dict[cust.ClaveNum].ContadorMesModuloDiaModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -47,6 +50,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorMesModulo = cust.Rank;
                 dict[cust.ClaveNum].ContadorMesModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -57,6 +61,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorDiaAnioModulo = cust.Rank;
                 dict[cust.ClaveNum].ContadorDiaAnioModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -67,6 +72,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorDiaAnio = cust.Rank;
                 dict[cust.ClaveNum].ContadorDiaAnio = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -77,6 +83,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorMes = cust.Rank;
                 dict[cust.ClaveNum].ContadorMes = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -87,6 +94,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorDiaModulo = cust.Rank;
                 dict[cust.ClaveNum].ContadorDiaModulo = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -97,6 +105,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorDiaMes = cust.Rank;
                 dict[cust.ClaveNum].ContadorDiaMes = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -107,6 +116,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorDiaSemana = cust.Rank;
                 dict[cust.ClaveNum].ContadorDiaSemana = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -117,6 +127,7 @@ namespace Presenter
                 dict[cust.ClaveNum].RankContadorGeneral = cust.Rank;
                 dict[cust.ClaveNum].ContadorGeneral = cust.CountRank;
                 dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -127,6 +138,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorAnioModulo = cust.Rank;
                 dict[cust.ClaveSign].ContadorAnioModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -137,6 +149,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorMesDia = cust.Rank;
                 dict[cust.ClaveSign].ContadorMesDia = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -147,6 +160,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorMesModuloDiaModulo = cust.Rank;
                 dict[cust.ClaveSign].ContadorMesModuloDiaModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -157,6 +171,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorMesModulo = cust.Rank;
                 dict[cust.ClaveSign].ContadorMesModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -167,6 +182,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorDiaAnioModulo = cust.Rank;
                 dict[cust.ClaveSign].ContadorDiaAnioModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -177,6 +193,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorDiaAnio = cust.Rank;
                 dict[cust.ClaveSign].ContadorDiaAnio = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -187,6 +204,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorMes = cust.Rank;
                 dict[cust.ClaveSign].ContadorMes = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -197,6 +215,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorDiaModulo = cust.Rank;
                 dict[cust.ClaveSign].ContadorDiaModulo = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -207,6 +226,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorDiaMes = cust.Rank;
                 dict[cust.ClaveSign].ContadorDiaMes = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -217,6 +237,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorDiaSemana = cust.Rank;
                 dict[cust.ClaveSign].ContadorDiaSemana = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
 
@@ -227,6 +248,7 @@ namespace Presenter
                 dict[cust.ClaveSign].RankContadorGeneral = cust.Rank;
                 dict[cust.ClaveSign].ContadorGeneral = cust.CountRank;
                 dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
     }
