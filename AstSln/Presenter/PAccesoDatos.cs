@@ -162,6 +162,20 @@ namespace Presenter
                 }
                 var sortedDict = from entry in item.Value.DictRachasAgrupadasInt orderby entry.Value descending select entry;
                 item.Value.DictRachasAgrupadasInt = sortedDict.ToDictionary(x => x.Key, x => x.Value);
+
+                foreach (var itemList in item.Value.RachasAcumuladasDespActual)
+                {
+                    if (item.Value.DictRachasAgrupadasIntDespActual.ContainsKey(itemList))
+                    {
+                        item.Value.DictRachasAgrupadasIntDespActual[itemList]++;
+                    }
+                    else
+                    {
+                        item.Value.DictRachasAgrupadasIntDespActual.Add(itemList, 1);
+                    }
+                }
+                sortedDict = from entry in item.Value.DictRachasAgrupadasIntDespActual orderby entry.Value descending select entry;
+                item.Value.DictRachasAgrupadasIntDespActual = sortedDict.ToDictionary(x => x.Key, x => x.Value);
             }
         }
 
@@ -186,6 +200,20 @@ namespace Presenter
                 }
                 var sortedDict = from entry in item.Value.DictRachasAgrupadasInt orderby entry.Value descending select entry;
                 item.Value.DictRachasAgrupadasInt = sortedDict.ToDictionary(x => x.Key, x => x.Value);
+
+                foreach (var itemList in item.Value.RachasAcumuladasDespActual)
+                {
+                    if (item.Value.DictRachasAgrupadasIntDespActual.ContainsKey(itemList))
+                    {
+                        item.Value.DictRachasAgrupadasIntDespActual[itemList]++;
+                    }
+                    else
+                    {
+                        item.Value.DictRachasAgrupadasIntDespActual.Add(itemList, 1);
+                    }
+                }
+                sortedDict = from entry in item.Value.DictRachasAgrupadasIntDespActual orderby entry.Value descending select entry;
+                item.Value.DictRachasAgrupadasIntDespActual = sortedDict.ToDictionary(x => x.Key, x => x.Value);
             }
         }
 
@@ -197,35 +225,9 @@ namespace Presenter
         {
             foreach (var item in dict)
             {
-                int? anterior = null;
                 int contNegativo = 0;
                 int contPositivo = 0;
-                foreach (var itemList in item.Value.RachasAparicion)
-                {
-                    ///Si el valor es cero, indica que no ha caido
-                    if (itemList.Equals(0))
-                    {
-                        if (anterior.Equals(1))
-                        {
-                            dict[item.Key].RachasAcumuladas.Add(contPositivo);
-                            contPositivo = 0;
-                            contNegativo = 0;
-                        }
-                        contNegativo--;
-                    }
-                    else
-                    {
-                        ///Si el valor es uno, indica que el valor cayó
-                        if (anterior.Equals(0))
-                        {
-                            dict[item.Key].RachasAcumuladas.Add(contNegativo);
-                            contNegativo = 0;
-                            contPositivo = 0;
-                        }
-                        contPositivo++;
-                    }
-                    anterior = itemList;
-                }
+                this.RecorrerListaRachas(dict, item.Key, ref contNegativo, ref contPositivo, item.Value.RachasAparicion, 1);
                 if (contNegativo != 0)
                 {
                     dict[item.Key].RachasAcumuladas.Add(contNegativo);
@@ -236,45 +238,34 @@ namespace Presenter
                 }
                 dict[item.Key].RachasAparicion.Clear();
             }
+            foreach (var item in dict)
+            {
+                int contNegativo = 0;
+                int contPositivo = 0;
+                this.RecorrerListaRachas(dict, item.Key, ref contNegativo, ref contPositivo, item.Value.RachasAparicionDespActual, 2);
+                if (contNegativo != 0)
+                {
+                    dict[item.Key].RachasAcumuladasDespActual.Add(contNegativo);
+                }
+                else if (contPositivo != 0)
+                {
+                    dict[item.Key].RachasAcumuladasDespActual.Add(contPositivo);
+                }
+                dict[item.Key].RachasAparicionDespActual.Clear();
+            }
         }
 
         /// <summary>
         /// Método que realiza el conteo de los valores sucesivos que son iguales
         /// </summary>
         /// <param name="dict">diccionario que contiene la información</param>
-        private void ContarRachasPositivasNegativasSign(Dictionary<string, ObjectInfoDTO> dict)
+        private void ContarRachasPositivasNegativas(Dictionary<string, ObjectInfoDTO> dict)
         {
             foreach (var item in dict)
             {
-                int? anterior = null;
-                int contNegativo = -1;
-                int contPositivo = 1;
-                foreach (var itemList in item.Value.RachasAparicion)
-                {
-                    ///Si el valor es cero, indica que no ha caido
-                    if (itemList.Equals(0))
-                    {
-                        if (anterior.Equals(1))
-                        {
-                            dict[item.Key].RachasAcumuladas.Add(contPositivo);
-                            contPositivo = 0;
-                            contNegativo = 0;
-                        }
-                        contNegativo--;
-                    }
-                    else
-                    {
-                        ///Si el valor es uno, indica que el valor cayó
-                        if (anterior.Equals(0))
-                        {
-                            dict[item.Key].RachasAcumuladas.Add(contNegativo);
-                            contNegativo = 0;
-                            contPositivo = 0;
-                        }
-                        contPositivo++;
-                    }
-                    anterior = itemList;
-                }
+                int contNegativo = 0;
+                int contPositivo = 0;
+                this.RecorrerListaRachas(dict, item.Key, ref contNegativo, ref contPositivo, item.Value.RachasAparicion, 1);
                 if (contNegativo != 0)
                 {
                     dict[item.Key].RachasAcumuladas.Add(contNegativo);
@@ -284,6 +275,21 @@ namespace Presenter
                     dict[item.Key].RachasAcumuladas.Add(contPositivo);
                 }
                 dict[item.Key].RachasAparicion.Clear();
+            }
+            foreach (var item in dict)
+            {
+                int contNegativo = 0;
+                int contPositivo = 0;
+                this.RecorrerListaRachas(dict, item.Key, ref contNegativo, ref contPositivo, item.Value.RachasAparicionDespActual, 2);
+                if (contNegativo != 0)
+                {
+                    dict[item.Key].RachasAcumuladasDespActual.Add(contNegativo);
+                }
+                else if (contPositivo != 0)
+                {
+                    dict[item.Key].RachasAcumuladasDespActual.Add(contPositivo);
+                }
+                dict[item.Key].RachasAparicionDespActual.Clear();
             }
         }
 
@@ -336,20 +342,77 @@ namespace Presenter
                 if (mismoTipo)
                 {
                     dictIncrementar[claveDict].ContadorDespuesActual++;
+                    foreach (var item in dictIncrementar)
+                    {
+                        if (item.Key.Equals(claveDict))
+                        {
+                            dictIncrementar[item.Key].RachasAparicionDespActual.Add(1);
+                        }
+                        else
+                        {
+                            dictIncrementar[item.Key].RachasAparicionDespActual.Add(0);
+                        }
+                    }
                 }
                 else
                 {
                     dictIncrementar[claveDict].ContadorDespuesOtroTipo++;
                 }
                 dictIncrementar[claveDict].PuntuacionTotal++;
-                dictIncrementar[claveDict].RachasAparicionDespActual.Add(1);
             }
-            else
+        }
+
+        /// <summary>
+        /// Método que valida las condiciones para ingreso de elementos a la lista
+        /// </summary>
+        /// <param name="dict">diccionario que contiene la información a donde se ingresan los datos</param>
+        /// <param name="claveDict">clave que sirve para ingresar los datos al diccionario</param>
+        /// <param name="contNegativo">Elemento que referencia al contador negativo</param>
+        /// <param name="contPositivo">Elemento que referencia al contador positivo</param>
+        /// <param name="caso">caso que indica a la lista a la que se agregan los elementos contados</param>
+        /// <param name="anterior">Referencia al valor anterior asignado</param>
+        /// <param name="comparador">Referencia al dato con el cual se compara</param>
+        /// <param name="elementoAdicionar">elemento que se adicionará a la lista</param>
+        private void IngresarElementoListaRachas(Dictionary<int, ObjectInfoDTO> dict, int claveDict, ref int contNegativo, ref int contPositivo, int caso, int? anterior, int comparador, int elementoAdicionar)
+        {
+            if (anterior.Equals(comparador) && caso == 1)
             {
-                if (mismoTipo)
-                {
-                    dictIncrementar[claveDict].RachasAparicionDespActual.Add(0);
-                }
+                dict[claveDict].RachasAcumuladas.Add(elementoAdicionar);
+                contPositivo = 0;
+                contNegativo = 0;
+            }
+            else if (anterior.Equals(comparador) && caso == 2)
+            {
+                dict[claveDict].RachasAcumuladasDespActual.Add(elementoAdicionar);
+                contPositivo = 0;
+                contNegativo = 0;
+            }
+        }
+
+        /// <summary>
+        /// Método que valida las condiciones para ingreso de elementos a la lista
+        /// </summary>
+        /// <param name="dict">diccionario que contiene la información a donde se ingresan los datos</param>
+        /// <param name="claveDict">clave que sirve para ingresar los datos al diccionario</param>
+        /// <param name="contNegativo">Elemento que referencia al contador negativo</param>
+        /// <param name="contPositivo">Elemento que referencia al contador positivo</param>
+        /// <param name="caso">caso que indica a la lista a la que se agregan los elementos contados</param>
+        /// <param name="anterior">Referencia al valor anterior asignado</param>
+        /// <param name="comparador">Referencia al dato con el cual se compara</param>
+        /// <param name="elementoAdicionar">elemento que se adicionará a la lista</param>
+        private void IngresarElementoListaRachas(Dictionary<string, ObjectInfoDTO> dict, string claveDict, ref int contNegativo, ref int contPositivo, int caso, int? anterior, int comparador, int elementoAdicionar)
+        {
+            if (anterior.Equals(comparador) && caso == 1)
+            {
+                dict[claveDict].RachasAcumuladas.Add(elementoAdicionar);
+                contPositivo = 0;
+                contNegativo = 0;
+            }
+            else if (anterior.Equals(comparador) && caso == 2)
+            {
+                dict[claveDict].RachasAcumuladasDespActual.Add(elementoAdicionar);
+                contPositivo = 0;
+                contNegativo = 0;
             }
         }
 
@@ -565,6 +628,17 @@ namespace Presenter
                         dictPostres[(int)item.POS_TRES].PuntuacionTotal++;
                         dictPosCuatro[(int)item.POS_CUATRO].ContadorDespuesSignActual++;
                         dictPosCuatro[(int)item.POS_CUATRO].PuntuacionTotal++;
+                        foreach (var itemDict in dictSign)
+                        {
+                            if (itemDict.Key.Equals(item.SIGN))
+                            {
+                                dictSign[itemDict.Key].RachasAparicionDespActual.Add(1);
+                            }
+                            else
+                            {
+                                dictSign[itemDict.Key].RachasAparicionDespActual.Add(0);
+                            }
+                        }
                     }
                     flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
                     flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
@@ -592,6 +666,72 @@ namespace Presenter
                     flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
                     flagSign = this.ValidarMismoDato(5, item, sorComparador);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Método que realiza el recorrido de los elementos de la lista para realizar el conteo de apariciones acumuladas
+        /// </summary>
+        /// <param name="dict">diccionario al que se realiza el ingreso de datos</param>
+        /// <param name="claveDict">Clave a la que se ingresara los datos</param>
+        /// <param name="contNegativo">Referencia al contador negativo</param>
+        /// <param name="contPositivo">Referencia al contador positivo</param>
+        /// <param name="listaRecorrer">lista de elementos a recorrer</param>
+        /// <param name="caso">caso que permite identificar a cual lista se ingresan los datos 1 lista de apariciones, 2 lista de apariciones después del actual.</param>
+        private void RecorrerListaRachas(Dictionary<int, ObjectInfoDTO> dict, int claveDict, ref int contNegativo, ref int contPositivo, List<int> listaRecorrer, int caso)
+        {
+            int? anterior = null;
+            int comparador;
+            foreach (var itemList in listaRecorrer)
+            {
+                ///Si el valor es cero, indica que no ha caido
+                if (itemList.Equals(0))
+                {
+                    comparador = 1;
+                    this.IngresarElementoListaRachas(dict, claveDict, ref contNegativo, ref contPositivo, caso, anterior, comparador, contPositivo);
+                    contNegativo--;
+                }
+                else
+                {
+                    comparador = 0;
+                    ///Si el valor es uno, indica que el valor cayó
+                    this.IngresarElementoListaRachas(dict, claveDict, ref contNegativo, ref contPositivo, caso, anterior, comparador, contNegativo);
+                    contPositivo++;
+                }
+                anterior = itemList;
+            }
+        }
+
+        /// <summary>
+        /// Método que realiza el recorrido de los elementos de la lista para realizar el conteo de apariciones acumuladas
+        /// </summary>
+        /// <param name="dict">diccionario al que se realiza el ingreso de datos</param>
+        /// <param name="claveDict">Clave a la que se ingresara los datos</param>
+        /// <param name="contNegativo">Referencia al contador negativo</param>
+        /// <param name="contPositivo">Referencia al contador positivo</param>
+        /// <param name="listaRecorrer">lista de elementos a recorrer</param>
+        /// <param name="caso">caso que permite identificar a cual lista se ingresan los datos 1 lista de apariciones, 2 lista de apariciones después del actual.</param>
+        private void RecorrerListaRachas(Dictionary<string, ObjectInfoDTO> dict, string claveDict, ref int contNegativo, ref int contPositivo, List<int> listaRecorrer, int caso)
+        {
+            int? anterior = null;
+            int comparador;
+            foreach (var itemList in listaRecorrer)
+            {
+                ///Si el valor es cero, indica que no ha caido
+                if (itemList.Equals(0))
+                {
+                    comparador = 1;
+                    this.IngresarElementoListaRachas(dict, claveDict, ref contNegativo, ref contPositivo, caso, anterior, comparador, contPositivo);
+                    contNegativo--;
+                }
+                else
+                {
+                    comparador = 0;
+                    ///Si el valor es uno, indica que el valor cayó
+                    this.IngresarElementoListaRachas(dict, claveDict, ref contNegativo, ref contPositivo, caso, anterior, comparador, contNegativo);
+                    contPositivo++;
+                }
+                anterior = itemList;
             }
         }
 
@@ -694,66 +834,17 @@ namespace Presenter
                 this.AdicionarElementoDiccionarioRachas(dictPostres, (int)item.POS_TRES);
                 this.AdicionarElementoDiccionarioRachas(dictPosCuatro, (int)item.POS_CUATRO);
                 this.AdicionarElementoDiccionarioRachasSign(dictSign, item.SIGN);
-            }
+            }   
             this.ContarRachasPositivasNegativas(dictPosUno);
             this.ContarRachasPositivasNegativas(dictPosDos);
             this.ContarRachasPositivasNegativas(dictPostres);
             this.ContarRachasPositivasNegativas(dictPosCuatro);
-            this.ContarRachasPositivasNegativasSign(dictSign);
+            this.ContarRachasPositivasNegativas(dictSign);
             this.AgruparRachas(dictPosUno);
             this.AgruparRachas(dictPosDos);
             this.AgruparRachas(dictPostres);
             this.AgruparRachas(dictPosCuatro);
             this.AgruparRachas(dictSign);
-        }
-
-        /// <summary>
-        /// Método que realiza el conteo de los valores sucesivos que son iguales
-        /// </summary>
-        /// <param name="dict">diccionario que contiene la información</param>
-        private void ContarRachasPositivasNegativasDespActual(Dictionary<int, ObjectInfoDTO> dict, List<ASTR> listaValidar)
-        {
-            foreach (var item in dict)
-            {
-                int? anterior = null;
-                int contNegativo = 0;
-                int contPositivo = 0;
-                foreach (var itemList in item.Value.RachasAparicion)
-                {
-                    ///Si el valor es cero, indica que no ha caido
-                    if (itemList.Equals(0))
-                    {
-                        if (anterior.Equals(1))
-                        {
-                            dict[item.Key].RachasAcumuladas.Add(contPositivo);
-                            contPositivo = 0;
-                            contNegativo = 0;
-                        }
-                        contNegativo--;
-                    }
-                    else
-                    {
-                        ///Si el valor es uno, indica que el valor cayó
-                        if (anterior.Equals(0))
-                        {
-                            dict[item.Key].RachasAcumuladas.Add(contNegativo);
-                            contNegativo = 0;
-                            contPositivo = 0;
-                        }
-                        contPositivo++;
-                    }
-                    anterior = itemList;
-                }
-                if (contNegativo != 0)
-                {
-                    dict[item.Key].RachasAcumuladas.Add(contNegativo);
-                }
-                else if (contPositivo != 0)
-                {
-                    dict[item.Key].RachasAcumuladas.Add(contPositivo);
-                }
-                dict[item.Key].RachasAparicion.Clear();
-            }
         }
     }
 }
