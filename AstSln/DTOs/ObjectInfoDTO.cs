@@ -151,7 +151,7 @@ namespace DTOs
         {
             string cad = "'";
             int contador = 0;
-            for (int i = lista.Count - 1; i > 0 && contador < 10; i--)
+            for (int i = lista.Count - 1; i > 0 && contador < 20; i--)
             {
                 cad += lista.ElementAt(i) + ",";
                 contador++;
@@ -168,6 +168,12 @@ namespace DTOs
         {
             string cad =
                 ";" + this.PuntuacionTotal
+                + ";" + this.ObtenerCadenaLista(RachasAcumuladas)
+                + ";" + this.ObtenerCadenaDiccionario(this.DictRachasAgrupadasInt)
+                + ";" + this.DictRachasAgrupadasInt.Where(x => x.Key == RachasAcumuladas.Last()).FirstOrDefault().Value
+                + ";" + this.ObtenerCadenaLista(RachasAcumuladasDespActual)
+                + ";" + this.ObtenerCadenaDiccionario(this.DictRachasAgrupadasIntDespActual)
+                + ";" + this.DictRachasAgrupadasIntDespActual.Where(x => x.Key == RachasAcumuladasDespActual.Last()).FirstOrDefault().Value
                 + ";" + this.ContadorGeneral
                 + ";" + this.RankContadorGeneral
                 + ";" + this.ContadorDiaSemana
@@ -192,10 +198,7 @@ namespace DTOs
                 + ";" + this.RankContadorMesModulo
                 + ";" + this.ContadorDespuesActual
                 + ";" + this.ContadorDespuesOtroTipo
-                + ";" + this.ObtenerCadenaLista(RachasAcumuladas)
-                + ";" + this.ObtenerCadenaDiccionario(this.DictRachasAgrupadasInt)
-                + ";" + this.ContadorDespuesSignActual
-                + ";" + this.DictRachasAgrupadasInt.Where(x => x.Key == RachasAcumuladas.Last()).FirstOrDefault().Value;
+                + ";" + this.ContadorDespuesSignActual;
             return cad;
         }
     }

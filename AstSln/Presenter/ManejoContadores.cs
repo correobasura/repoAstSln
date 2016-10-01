@@ -251,5 +251,21 @@ namespace Presenter
                 dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
             }
         }
+
+        public static void AddInfoContDespActual(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveSign].ContadorDespuesActual = cust.Rank;
+            }
+        }
+
+        public static void AddInfoContDespActual(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        {
+            foreach (var cust in data)
+            {
+                dict[cust.ClaveNum].ContadorDespuesActual = cust.Rank;
+            }
+        }
     }
 }

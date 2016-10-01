@@ -59,6 +59,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContextModel\AN_DAT_POS_CUATRO.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\AN_DAT_POS_DOS.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\AN_DAT_POS_TRES.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\AN_DAT_POS_UNO.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\AN_DAT_SIGN.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataContextModel\AstModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +90,24 @@
       <DependentUpon>AstModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataContextModel\ASTR.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\DATOS_TEMP.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\POS_CUATRO_DATOS.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\POS_DOS_DATOS.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\POS_TRES_DATOS.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\POS_UNO_DATOS.cs">
+      <DependentUpon>AstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextModel\SIGN_DATOS.cs">
       <DependentUpon>AstModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

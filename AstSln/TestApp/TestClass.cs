@@ -14,7 +14,19 @@ namespace TestApp
 
         public TestClass()
         {
-            _pAccesoDatos = new PAccesoDatos(this);
+            //for (int i = -10; i <= 0; i++)
+            //{
+
+            //    _pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(i));
+            //    _pAccesoDatos.ObtenerResultados();
+            //}
+            //_pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(-10));
+            //_pAccesoDatos.ObtenerResultados();
+            //_pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(-6));
+            ////_pAccesoDatos.ObtenerResultados();
+            //_pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(-1));
+            //_pAccesoDatos.ObtenerResultados();
+            _pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(-1));
             _pAccesoDatos.ObtenerResultados();
         }
     }

@@ -4,26 +4,284 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AstModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AstModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AN_DAT_POS_CUATRO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="AN_DAT_POS_DOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="AN_DAT_POS_TRES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="AN_DAT_POS_UNO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="AN_DAT_SIGN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
         <EntityType Name="ASTR">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="TIPO" Type="number" Precision="2" Scale="0" />
-          <Property Name="POS_UNO" Type="number" Precision="2" Scale="0" />
-          <Property Name="POS_DOS" Type="number" Precision="2" Scale="0" />
-          <Property Name="POS_TRES" Type="number" Precision="2" Scale="0" />
-          <Property Name="POS_CUATRO" Type="number" Precision="2" Scale="0" />
+          <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="POS_UNO" Type="number" Precision="38" Scale="0" />
+          <Property Name="POS_DOS" Type="number" Precision="38" Scale="0" />
+          <Property Name="POS_TRES" Type="number" Precision="38" Scale="0" />
+          <Property Name="POS_CUATRO" Type="number" Precision="38" Scale="0" />
           <Property Name="SIGN" Type="varchar2" MaxLength="15" />
-          <Property Name="NUM_SOR" Type="number" Precision="6" Scale="0" />
+          <Property Name="NUM_SOR" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="DATOS_TEMP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="POSICION" Type="number" Precision="38" Scale="0" />
+          <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CLAVE" Type="number" Precision="38" Scale="0" />
+          <Property Name="CLAVESIGN" Type="varchar2" MaxLength="15" />
+          <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESDIA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="POS_CUATRO_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESDIA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="POS_DOS_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESDIA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="POS_TRES_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESDIA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="POS_UNO_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESDIA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="SIGN_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESDIA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORANIOMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="date" />
         </EntityType>
         <EntityContainer Name="AstModelStoreContainer">
+          <EntitySet Name="AN_DAT_POS_CUATRO" EntityType="Self.AN_DAT_POS_CUATRO" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="AN_DAT_POS_DOS" EntityType="Self.AN_DAT_POS_DOS" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="AN_DAT_POS_TRES" EntityType="Self.AN_DAT_POS_TRES" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="AN_DAT_POS_UNO" EntityType="Self.AN_DAT_POS_UNO" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="AN_DAT_SIGN" EntityType="Self.AN_DAT_SIGN" Schema="USERSORT" store:Type="Tables" />
           <EntitySet Name="ASTR" EntityType="Self.ASTR" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="DATOS_TEMP" EntityType="Self.DATOS_TEMP" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="POS_CUATRO_DATOS" EntityType="Self.POS_CUATRO_DATOS" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="POS_DOS_DATOS" EntityType="Self.POS_DOS_DATOS" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="POS_TRES_DATOS" EntityType="Self.POS_TRES_DATOS" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="POS_UNO_DATOS" EntityType="Self.POS_UNO_DATOS" Schema="USERSORT" store:Type="Tables" />
+          <EntitySet Name="SIGN_DATOS" EntityType="Self.SIGN_DATOS" Schema="USERSORT" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AstModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -32,7 +290,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="TIPO" Type="Byte" />
+          <Property Name="TIPO" Type="Int32" />
           <Property Name="POS_UNO" Type="Byte" />
           <Property Name="POS_DOS" Type="Byte" />
           <Property Name="POS_TRES" Type="Byte" />
@@ -43,7 +301,266 @@
         </EntityType>
         <EntityContainer Name="AstEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ASTR" EntityType="Self.ASTR" />
+          <EntitySet Name="POS_CUATRO_DATOS" EntityType="AstModel.POS_CUATRO_DATOS" />
+          <EntitySet Name="POS_DOS_DATOS" EntityType="AstModel.POS_DOS_DATOS" />
+          <EntitySet Name="POS_TRES_DATOS" EntityType="AstModel.POS_TRES_DATOS" />
+          <EntitySet Name="POS_UNO_DATOS" EntityType="AstModel.POS_UNO_DATOS" />
+          <EntitySet Name="SIGN_DATOS" EntityType="AstModel.SIGN_DATOS" />
+          <EntitySet Name="DATOS_TEMP" EntityType="AstModel.DATOS_TEMP" />
+          <EntitySet Name="AN_DAT_POS_CUATRO" EntityType="AstModel.AN_DAT_POS_CUATRO" />
+          <EntitySet Name="AN_DAT_POS_DOS" EntityType="AstModel.AN_DAT_POS_DOS" />
+          <EntitySet Name="AN_DAT_POS_TRES" EntityType="AstModel.AN_DAT_POS_TRES" />
+          <EntitySet Name="AN_DAT_POS_UNO" EntityType="AstModel.AN_DAT_POS_UNO" />
+          <EntitySet Name="AN_DAT_SIGN" EntityType="AstModel.AN_DAT_SIGN" />
         </EntityContainer>
+        <EntityType Name="POS_CUATRO_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TIPO" Type="Int32" />
+          <Property Name="PUNTUACIONTOTAL" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="Int32" />
+          <Property Name="CONTADORGENERAL" Type="Int32" />
+          <Property Name="CONTADORDIASEMANA" Type="Int32" />
+          <Property Name="CONTADORDIAMES" Type="Int32" />
+          <Property Name="CONTADORDIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMES" Type="Int32" />
+          <Property Name="CONTADORDIAANIO" Type="Int32" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMESDIA" Type="Int32" />
+          <Property Name="CONTADORANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULO" Type="Int32" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="Int32" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="Int32" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Int32" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="POS_DOS_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TIPO" Type="Int32" />
+          <Property Name="PUNTUACIONTOTAL" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="Int32" />
+          <Property Name="CONTADORGENERAL" Type="Int32" />
+          <Property Name="CONTADORDIASEMANA" Type="Int32" />
+          <Property Name="CONTADORDIAMES" Type="Int32" />
+          <Property Name="CONTADORDIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMES" Type="Int32" />
+          <Property Name="CONTADORDIAANIO" Type="Int32" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMESDIA" Type="Int32" />
+          <Property Name="CONTADORANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULO" Type="Int32" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="Int32" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="Int32" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Int32" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="POS_TRES_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TIPO" Type="Int32" />
+          <Property Name="PUNTUACIONTOTAL" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="Int32" />
+          <Property Name="CONTADORGENERAL" Type="Int32" />
+          <Property Name="CONTADORDIASEMANA" Type="Int32" />
+          <Property Name="CONTADORDIAMES" Type="Int32" />
+          <Property Name="CONTADORDIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMES" Type="Int32" />
+          <Property Name="CONTADORDIAANIO" Type="Int32" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMESDIA" Type="Int32" />
+          <Property Name="CONTADORANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULO" Type="Int32" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="Int32" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="Int32" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Int32" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="POS_UNO_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TIPO" Type="Int32" />
+          <Property Name="PUNTUACIONTOTAL" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="Int32" />
+          <Property Name="CONTADORGENERAL" Type="Int32" />
+          <Property Name="CONTADORDIASEMANA" Type="Int32" />
+          <Property Name="CONTADORDIAMES" Type="Int32" />
+          <Property Name="CONTADORDIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMES" Type="Int32" />
+          <Property Name="CONTADORDIAANIO" Type="Int32" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMESDIA" Type="Int32" />
+          <Property Name="CONTADORANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULO" Type="Int32" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="Int32" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="Int32" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Int32" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="SIGN_DATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TIPO" Type="Int32" />
+          <Property Name="PUNTUACIONTOTAL" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="Int32" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="Int32" />
+          <Property Name="CONTADORGENERAL" Type="Int32" />
+          <Property Name="CONTADORDIASEMANA" Type="Int32" />
+          <Property Name="CONTADORDIAMES" Type="Int32" />
+          <Property Name="CONTADORDIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMES" Type="Int32" />
+          <Property Name="CONTADORDIAANIO" Type="Int32" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="Int32" />
+          <Property Name="CONTADORMESDIA" Type="Int32" />
+          <Property Name="CONTADORANIOMODULO" Type="Int32" />
+          <Property Name="CONTADORMESMODULO" Type="Int32" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="Int32" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="Int32" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Int32" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="DATOS_TEMP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="POSICION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TIPO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CLAVE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CLAVESIGN" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PUNTUACIONTOTAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORGENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIASEMANA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAMODULO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORMES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORDIAANIOMODULO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULODIAMODULO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESDIA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORANIOMODULO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORMESMODULO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESACTUAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESOTROTIPO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="AN_DAT_POS_CUATRO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="AN_DAT_POS_DOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="AN_DAT_POS_TRES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="AN_DAT_POS_UNO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="AN_DAT_SIGN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -62,6 +579,265 @@
                 <ScalarProperty Name="SIGN" ColumnName="SIGN" />
                 <ScalarProperty Name="NUM_SOR" ColumnName="NUM_SOR" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_CUATRO_DATOS">
+            <EntityTypeMapping TypeName="AstModel.POS_CUATRO_DATOS">
+              <MappingFragment StoreEntitySet="POS_CUATRO_DATOS">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
+                <ScalarProperty Name="CONTADORDESPUESOTROTIPO" ColumnName="CONTADORDESPUESOTROTIPO" />
+                <ScalarProperty Name="CONTADORDESPUESACTUAL" ColumnName="CONTADORDESPUESACTUAL" />
+                <ScalarProperty Name="CONTADORMESMODULO" ColumnName="CONTADORMESMODULO" />
+                <ScalarProperty Name="CONTADORANIOMODULO" ColumnName="CONTADORANIOMODULO" />
+                <ScalarProperty Name="CONTADORMESDIA" ColumnName="CONTADORMESDIA" />
+                <ScalarProperty Name="CONTADORMESMODULODIAMODULO" ColumnName="CONTADORMESMODULODIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIOMODULO" ColumnName="CONTADORDIAANIOMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIO" ColumnName="CONTADORDIAANIO" />
+                <ScalarProperty Name="CONTADORMES" ColumnName="CONTADORMES" />
+                <ScalarProperty Name="CONTADORDIAMODULO" ColumnName="CONTADORDIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAMES" ColumnName="CONTADORDIAMES" />
+                <ScalarProperty Name="CONTADORDIASEMANA" ColumnName="CONTADORDIASEMANA" />
+                <ScalarProperty Name="CONTADORGENERAL" ColumnName="CONTADORGENERAL" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHASDESACTUA" ColumnName="CONTADORULTIMOENRACHASDESACTUA" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHAS" ColumnName="CONTADORULTIMOENRACHAS" />
+                <ScalarProperty Name="PUNTUACIONTOTAL" ColumnName="PUNTUACIONTOTAL" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_DOS_DATOS">
+            <EntityTypeMapping TypeName="AstModel.POS_DOS_DATOS">
+              <MappingFragment StoreEntitySet="POS_DOS_DATOS">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
+                <ScalarProperty Name="CONTADORDESPUESOTROTIPO" ColumnName="CONTADORDESPUESOTROTIPO" />
+                <ScalarProperty Name="CONTADORDESPUESACTUAL" ColumnName="CONTADORDESPUESACTUAL" />
+                <ScalarProperty Name="CONTADORMESMODULO" ColumnName="CONTADORMESMODULO" />
+                <ScalarProperty Name="CONTADORANIOMODULO" ColumnName="CONTADORANIOMODULO" />
+                <ScalarProperty Name="CONTADORMESDIA" ColumnName="CONTADORMESDIA" />
+                <ScalarProperty Name="CONTADORMESMODULODIAMODULO" ColumnName="CONTADORMESMODULODIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIOMODULO" ColumnName="CONTADORDIAANIOMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIO" ColumnName="CONTADORDIAANIO" />
+                <ScalarProperty Name="CONTADORMES" ColumnName="CONTADORMES" />
+                <ScalarProperty Name="CONTADORDIAMODULO" ColumnName="CONTADORDIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAMES" ColumnName="CONTADORDIAMES" />
+                <ScalarProperty Name="CONTADORDIASEMANA" ColumnName="CONTADORDIASEMANA" />
+                <ScalarProperty Name="CONTADORGENERAL" ColumnName="CONTADORGENERAL" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHASDESACTUA" ColumnName="CONTADORULTIMOENRACHASDESACTUA" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHAS" ColumnName="CONTADORULTIMOENRACHAS" />
+                <ScalarProperty Name="PUNTUACIONTOTAL" ColumnName="PUNTUACIONTOTAL" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_TRES_DATOS">
+            <EntityTypeMapping TypeName="AstModel.POS_TRES_DATOS">
+              <MappingFragment StoreEntitySet="POS_TRES_DATOS">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
+                <ScalarProperty Name="CONTADORDESPUESOTROTIPO" ColumnName="CONTADORDESPUESOTROTIPO" />
+                <ScalarProperty Name="CONTADORDESPUESACTUAL" ColumnName="CONTADORDESPUESACTUAL" />
+                <ScalarProperty Name="CONTADORMESMODULO" ColumnName="CONTADORMESMODULO" />
+                <ScalarProperty Name="CONTADORANIOMODULO" ColumnName="CONTADORANIOMODULO" />
+                <ScalarProperty Name="CONTADORMESDIA" ColumnName="CONTADORMESDIA" />
+                <ScalarProperty Name="CONTADORMESMODULODIAMODULO" ColumnName="CONTADORMESMODULODIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIOMODULO" ColumnName="CONTADORDIAANIOMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIO" ColumnName="CONTADORDIAANIO" />
+                <ScalarProperty Name="CONTADORMES" ColumnName="CONTADORMES" />
+                <ScalarProperty Name="CONTADORDIAMODULO" ColumnName="CONTADORDIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAMES" ColumnName="CONTADORDIAMES" />
+                <ScalarProperty Name="CONTADORDIASEMANA" ColumnName="CONTADORDIASEMANA" />
+                <ScalarProperty Name="CONTADORGENERAL" ColumnName="CONTADORGENERAL" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHASDESACTUA" ColumnName="CONTADORULTIMOENRACHASDESACTUA" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHAS" ColumnName="CONTADORULTIMOENRACHAS" />
+                <ScalarProperty Name="PUNTUACIONTOTAL" ColumnName="PUNTUACIONTOTAL" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_UNO_DATOS">
+            <EntityTypeMapping TypeName="AstModel.POS_UNO_DATOS">
+              <MappingFragment StoreEntitySet="POS_UNO_DATOS">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
+                <ScalarProperty Name="CONTADORDESPUESOTROTIPO" ColumnName="CONTADORDESPUESOTROTIPO" />
+                <ScalarProperty Name="CONTADORDESPUESACTUAL" ColumnName="CONTADORDESPUESACTUAL" />
+                <ScalarProperty Name="CONTADORMESMODULO" ColumnName="CONTADORMESMODULO" />
+                <ScalarProperty Name="CONTADORANIOMODULO" ColumnName="CONTADORANIOMODULO" />
+                <ScalarProperty Name="CONTADORMESDIA" ColumnName="CONTADORMESDIA" />
+                <ScalarProperty Name="CONTADORMESMODULODIAMODULO" ColumnName="CONTADORMESMODULODIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIOMODULO" ColumnName="CONTADORDIAANIOMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIO" ColumnName="CONTADORDIAANIO" />
+                <ScalarProperty Name="CONTADORMES" ColumnName="CONTADORMES" />
+                <ScalarProperty Name="CONTADORDIAMODULO" ColumnName="CONTADORDIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAMES" ColumnName="CONTADORDIAMES" />
+                <ScalarProperty Name="CONTADORDIASEMANA" ColumnName="CONTADORDIASEMANA" />
+                <ScalarProperty Name="CONTADORGENERAL" ColumnName="CONTADORGENERAL" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHASDESACTUA" ColumnName="CONTADORULTIMOENRACHASDESACTUA" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHAS" ColumnName="CONTADORULTIMOENRACHAS" />
+                <ScalarProperty Name="PUNTUACIONTOTAL" ColumnName="PUNTUACIONTOTAL" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SIGN_DATOS">
+            <EntityTypeMapping TypeName="AstModel.SIGN_DATOS">
+              <MappingFragment StoreEntitySet="SIGN_DATOS">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
+                <ScalarProperty Name="CONTADORDESPUESOTROTIPO" ColumnName="CONTADORDESPUESOTROTIPO" />
+                <ScalarProperty Name="CONTADORDESPUESACTUAL" ColumnName="CONTADORDESPUESACTUAL" />
+                <ScalarProperty Name="CONTADORMESMODULO" ColumnName="CONTADORMESMODULO" />
+                <ScalarProperty Name="CONTADORANIOMODULO" ColumnName="CONTADORANIOMODULO" />
+                <ScalarProperty Name="CONTADORMESDIA" ColumnName="CONTADORMESDIA" />
+                <ScalarProperty Name="CONTADORMESMODULODIAMODULO" ColumnName="CONTADORMESMODULODIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIOMODULO" ColumnName="CONTADORDIAANIOMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIO" ColumnName="CONTADORDIAANIO" />
+                <ScalarProperty Name="CONTADORMES" ColumnName="CONTADORMES" />
+                <ScalarProperty Name="CONTADORDIAMODULO" ColumnName="CONTADORDIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAMES" ColumnName="CONTADORDIAMES" />
+                <ScalarProperty Name="CONTADORDIASEMANA" ColumnName="CONTADORDIASEMANA" />
+                <ScalarProperty Name="CONTADORGENERAL" ColumnName="CONTADORGENERAL" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHASDESACTUA" ColumnName="CONTADORULTIMOENRACHASDESACTUA" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHAS" ColumnName="CONTADORULTIMOENRACHAS" />
+                <ScalarProperty Name="PUNTUACIONTOTAL" ColumnName="PUNTUACIONTOTAL" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATOS_TEMP">
+            <EntityTypeMapping TypeName="AstModel.DATOS_TEMP">
+              <MappingFragment StoreEntitySet="DATOS_TEMP">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
+                <ScalarProperty Name="CONTADORDESPUESOTROTIPO" ColumnName="CONTADORDESPUESOTROTIPO" />
+                <ScalarProperty Name="CONTADORDESPUESACTUAL" ColumnName="CONTADORDESPUESACTUAL" />
+                <ScalarProperty Name="CONTADORMESMODULO" ColumnName="CONTADORMESMODULO" />
+                <ScalarProperty Name="CONTADORANIOMODULO" ColumnName="CONTADORANIOMODULO" />
+                <ScalarProperty Name="CONTADORMESDIA" ColumnName="CONTADORMESDIA" />
+                <ScalarProperty Name="CONTADORMESMODULODIAMODULO" ColumnName="CONTADORMESMODULODIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIOMODULO" ColumnName="CONTADORDIAANIOMODULO" />
+                <ScalarProperty Name="CONTADORDIAANIO" ColumnName="CONTADORDIAANIO" />
+                <ScalarProperty Name="CONTADORMES" ColumnName="CONTADORMES" />
+                <ScalarProperty Name="CONTADORDIAMODULO" ColumnName="CONTADORDIAMODULO" />
+                <ScalarProperty Name="CONTADORDIAMES" ColumnName="CONTADORDIAMES" />
+                <ScalarProperty Name="CONTADORDIASEMANA" ColumnName="CONTADORDIASEMANA" />
+                <ScalarProperty Name="CONTADORGENERAL" ColumnName="CONTADORGENERAL" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHASDESACTUA" ColumnName="CONTADORULTIMOENRACHASDESACTUA" />
+                <ScalarProperty Name="CONTADORULTIMOENRACHAS" ColumnName="CONTADORULTIMOENRACHAS" />
+                <ScalarProperty Name="PUNTUACIONTOTAL" ColumnName="PUNTUACIONTOTAL" />
+                <ScalarProperty Name="CLAVESIGN" ColumnName="CLAVESIGN" />
+                <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="POSICION" ColumnName="POSICION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AN_DAT_POS_CUATRO">
+            <EntityTypeMapping TypeName="AstModel.AN_DAT_POS_CUATRO">
+              <MappingFragment StoreEntitySet="AN_DAT_POS_CUATRO">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
+                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
+                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
+                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
+                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AN_DAT_POS_DOS">
+            <EntityTypeMapping TypeName="AstModel.AN_DAT_POS_DOS">
+              <MappingFragment StoreEntitySet="AN_DAT_POS_DOS">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
+                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
+                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
+                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
+                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AN_DAT_POS_TRES">
+            <EntityTypeMapping TypeName="AstModel.AN_DAT_POS_TRES">
+              <MappingFragment StoreEntitySet="AN_DAT_POS_TRES">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
+                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
+                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
+                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
+                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AN_DAT_POS_UNO">
+            <EntityTypeMapping TypeName="AstModel.AN_DAT_POS_UNO">
+              <MappingFragment StoreEntitySet="AN_DAT_POS_UNO">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
+                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
+                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
+                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
+                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AN_DAT_SIGN">
+            <EntityTypeMapping TypeName="AstModel.AN_DAT_SIGN">
+              <MappingFragment StoreEntitySet="AN_DAT_SIGN">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
+                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
+                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
+                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
+                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
+                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
+                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

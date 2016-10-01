@@ -15,7 +15,7 @@ namespace Model.DataContextModel
     public partial class ASTR
     {
         public decimal ID { get; set; }
-        public Nullable<byte> TIPO { get; set; }
+        public Nullable<int> TIPO { get; set; }
         public Nullable<byte> POS_UNO { get; set; }
         public Nullable<byte> POS_DOS { get; set; }
         public Nullable<byte> POS_TRES { get; set; }
@@ -23,17 +23,5 @@ namespace Model.DataContextModel
         public string SIGN { get; set; }
         public Nullable<int> NUM_SOR { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
-
-        public override string ToString()
-        {
-            string cad = TIPO.ToString() + ",\t" +
-POS_UNO.ToString() + "," +
-POS_DOS.ToString() + "," +
-POS_TRES.ToString() + "," +
-POS_CUATRO.ToString() + "," +
-SIGN.ToString() + ",\t" +
-NUM_SOR.ToString();
-            return cad;
-        }
     }
 }
