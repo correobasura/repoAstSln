@@ -1,20 +1,303 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="AstModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AN_DAT_POS_CUATRO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="AN_DAT_POS_DOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="AN_DAT_POS_TRES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="AN_DAT_POS_UNO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="AN_DAT_SIGN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
   <EntityType Name="ASTR">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="TIPO" Type="number" Precision="2" Scale="0" />
-    <Property Name="POS_UNO" Type="number" Precision="2" Scale="0" />
-    <Property Name="POS_DOS" Type="number" Precision="2" Scale="0" />
-    <Property Name="POS_TRES" Type="number" Precision="2" Scale="0" />
-    <Property Name="POS_CUATRO" Type="number" Precision="2" Scale="0" />
+    <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+    <Property Name="POS_UNO" Type="number" Precision="38" Scale="0" />
+    <Property Name="POS_DOS" Type="number" Precision="38" Scale="0" />
+    <Property Name="POS_TRES" Type="number" Precision="38" Scale="0" />
+    <Property Name="POS_CUATRO" Type="number" Precision="38" Scale="0" />
     <Property Name="SIGN" Type="varchar2" MaxLength="15" />
-    <Property Name="NUM_SOR" Type="number" Precision="6" Scale="0" />
+    <Property Name="NUM_SOR" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="DATOS_TEMP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="POSICION" Type="number" Precision="38" Scale="0" />
+    <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+    <Property Name="CLAVE" Type="number" Precision="38" Scale="0" />
+    <Property Name="CLAVESIGN" Type="varchar2" MaxLength="15" />
+    <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SINAPARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="DATOS_TEMP_DEPUR">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="POSICION" Type="number" Precision="38" Scale="0" />
+    <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+    <Property Name="CLAVE" Type="number" Precision="38" Scale="0" />
+    <Property Name="CLAVESIGN" Type="varchar2" MaxLength="15" />
+    <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SINAPARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="POS_CUATRO_DATOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+    <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SINAPARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="POS_DOS_DATOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+    <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SINAPARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="POS_TRES_DATOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+    <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SINAPARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="POS_UNO_DATOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+    <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SINAPARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="SIGN_DATOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPO" Type="number" Precision="38" Scale="0" />
+    <Property Name="PUNTUACIONTOTAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SINAPARECER" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORULTIMOENRACHASDESACTUA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORGENERAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIASEMANA" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDIAMODULO" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORMES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESACTUAL" Type="number" Precision="38" Scale="0" />
+    <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
+    <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
     <Property Name="FECHA" Type="date" />
   </EntityType>
   <EntityContainer Name="AstModelStoreContainer">
+    <EntitySet Name="AN_DAT_POS_CUATRO" EntityType="Self.AN_DAT_POS_CUATRO" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="AN_DAT_POS_DOS" EntityType="Self.AN_DAT_POS_DOS" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="AN_DAT_POS_TRES" EntityType="Self.AN_DAT_POS_TRES" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="AN_DAT_POS_UNO" EntityType="Self.AN_DAT_POS_UNO" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="AN_DAT_SIGN" EntityType="Self.AN_DAT_SIGN" Schema="USERSORT" store:Type="Tables" />
     <EntitySet Name="ASTR" EntityType="Self.ASTR" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="DATOS_TEMP" EntityType="Self.DATOS_TEMP" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="DATOS_TEMP_DEPUR" EntityType="Self.DATOS_TEMP_DEPUR" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="POS_CUATRO_DATOS" EntityType="Self.POS_CUATRO_DATOS" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="POS_DOS_DATOS" EntityType="Self.POS_DOS_DATOS" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="POS_TRES_DATOS" EntityType="Self.POS_TRES_DATOS" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="POS_UNO_DATOS" EntityType="Self.POS_UNO_DATOS" Schema="USERSORT" store:Type="Tables" />
+    <EntitySet Name="SIGN_DATOS" EntityType="Self.SIGN_DATOS" Schema="USERSORT" store:Type="Tables" />
   </EntityContainer>
 </Schema>

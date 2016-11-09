@@ -20,6 +20,7 @@ namespace Model.DataContextModel
         public Nullable<decimal> CLAVE { get; set; }
         public string CLAVESIGN { get; set; }
         public Nullable<decimal> PUNTUACIONTOTAL { get; set; }
+        public Nullable<decimal> SINAPARECER { get; set; }
         public Nullable<decimal> CONTADORULTIMOENRACHAS { get; set; }
         public Nullable<decimal> CONTADORULTIMOENRACHASDESACTUA { get; set; }
         public Nullable<decimal> CONTADORGENERAL { get; set; }
@@ -27,14 +28,8 @@ namespace Model.DataContextModel
         public Nullable<decimal> CONTADORDIAMES { get; set; }
         public Nullable<decimal> CONTADORDIAMODULO { get; set; }
         public Nullable<decimal> CONTADORMES { get; set; }
-        public Nullable<decimal> CONTADORDIAANIO { get; set; }
-        public Nullable<decimal> CONTADORDIAANIOMODULO { get; set; }
-        public Nullable<decimal> CONTADORMESMODULODIAMODULO { get; set; }
-        public Nullable<decimal> CONTADORMESDIA { get; set; }
-        public Nullable<decimal> CONTADORANIOMODULO { get; set; }
-        public Nullable<decimal> CONTADORMESMODULO { get; set; }
         public Nullable<decimal> CONTADORDESPUESACTUAL { get; set; }
-        public Nullable<decimal> CONTADORDESPUESOTROTIPO { get; set; }
+        public Nullable<decimal> SUMATORIAVALORES { get; set; }
         public Nullable<decimal> CONTADORDESPUESSIGNACTUAL { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
     }

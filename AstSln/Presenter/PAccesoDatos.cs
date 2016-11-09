@@ -16,19 +16,21 @@ namespace Presenter
         private IAccesoDatos _iAccesoDatos;
         private ASTR _resultActualLun;
         private Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroLun;
-        private Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroSol;
+        //private Dictionary<int, ObjectInfoDTO> dictInfoPosCuatroSol;
         private Dictionary<int, ObjectInfoDTO> dictInfoPosDosLun;
-        private Dictionary<int, ObjectInfoDTO> dictInfoPosDosSol;
+        //private Dictionary<int, ObjectInfoDTO> dictInfoPosDosSol;
         private Dictionary<int, ObjectInfoDTO> dictInfoPosTresLun;
-        private Dictionary<int, ObjectInfoDTO> dictInfoPosTresSol;
+        //private Dictionary<int, ObjectInfoDTO> dictInfoPosTresSol;
         private Dictionary<int, ObjectInfoDTO> dictInfoPosUnoLun;
-        private Dictionary<int, ObjectInfoDTO> dictInfoPosUnoSol;
+        //private Dictionary<int, ObjectInfoDTO> dictInfoPosUnoSol;
         private Dictionary<string, ObjectInfoDTO> dictInfoSignLun;
-        private Dictionary<string, ObjectInfoDTO> dictInfoSignSol;
+        //private Dictionary<string, ObjectInfoDTO> dictInfoSignSol;
         private DateTime fecha;
         private List<ASTR> listaDatosGeneral;
         private List<ASTR> listaDatosLun;
         private string path = "";
+        private string fechaFormat;
+        private List<string> listaConsultas;
 
         /// <summary>
         /// Constructor de la clase
@@ -49,11 +51,13 @@ namespace Presenter
             this.dictInfoSignLun = (Dictionary<string, ObjectInfoDTO>)this.InicializarDiccionarioInformacion(1);
             //this.dictInfoSignSol = (Dictionary<string, ObjectInfoDTO>)this.InicializarDiccionarioInformacion(1);
             this.fecha = fecha;
-            path = @"C:\temp" + @"\" + fecha.Year + "" + fecha.Month + @"\" + fecha.Day + @"\";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+            this.fechaFormat = fecha.Day + "/" + fecha.Month + "/" + fecha.Year;
+            //path = @"C:\temp" + @"\" + fecha.Year + "" + fecha.Month + @"\" + fecha.Day + @"\";
+            //if (!Directory.Exists(path))
+            //{
+            //    Directory.CreateDirectory(path);
+            //}
+            listaConsultas = new List<string>();
         }
 
         /// <summary>
@@ -71,11 +75,11 @@ namespace Presenter
             }
             //this.ValidarDatosRepetidos(listaDatosSol);
             this.ObtenerUltimoResultado();
-            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, ConstantesTipoSor.TIPO_LUN, dictInfoPosUnoLun, (int)_resultActualLun.POS_UNO);
-            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, ConstantesTipoSor.TIPO_LUN, dictInfoPosDosLun, (int)_resultActualLun.POS_DOS);
-            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, ConstantesTipoSor.TIPO_LUN, dictInfoPosTresLun, (int)_resultActualLun.POS_TRES);
-            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, ConstantesTipoSor.TIPO_LUN, dictInfoPosCuatroLun, (int)_resultActualLun.POS_CUATRO);
-            this.PuntuarInformacion(ConstantesGenerales.SIGN, ConstantesTipoSor.TIPO_LUN, dictInfoSignLun, _resultActualLun.SIGN);
+            this.PuntuarInformacion(ConstantesGenerales.POS_UNO, dictInfoPosUnoLun, (int)_resultActualLun.POS_UNO);
+            this.PuntuarInformacion(ConstantesGenerales.POS_DOS, dictInfoPosDosLun, (int)_resultActualLun.POS_DOS);
+            this.PuntuarInformacion(ConstantesGenerales.POS_TRES, dictInfoPosTresLun, (int)_resultActualLun.POS_TRES);
+            this.PuntuarInformacion(ConstantesGenerales.POS_CUATRO, dictInfoPosCuatroLun, (int)_resultActualLun.POS_CUATRO);
+            this.PuntuarInformacion(ConstantesGenerales.SIGN, dictInfoSignLun, _resultActualLun.SIGN);
             //if (fecha.DayOfWeek != DayOfWeek.Sunday)
             //{
             //    this.RecorrerElementosLista(listaDatosSol, _resultActualSol, dictInfoPosUnoSol, dictInfoPosDosSol, dictInfoPosTresSol, dictInfoPosCuatroSol, dictInfoSignSol);
@@ -92,17 +96,36 @@ namespace Presenter
             this.ValidarRachas(listaDatosLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
 
 
-            //this.GuardarDatosTemporales();
+            this.GuardarDatosTemporales();
+
+            var dict1 = this.ValidarSinAparecer(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
+            var dict2 = this.ValidarSinAparecer(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
+            var dict3 = this.ValidarSinAparecer(dictInfoPosTresLun, ConstantesGenerales.POS_TRES_DATOS);
+            var dict4 = this.ValidarSinAparecer(dictInfoPosCuatroLun, ConstantesGenerales.POS_CUATRO_DATOS);
+            var dictSign = this.ValidarSinAparecer(dictInfoSignLun, ConstantesGenerales.SIGN_DATOS);
+
+            //var dict1 = this.ValidarMaximosMinimosPuntuacionTotal(dictInfoPosUnoLun, ConstantesGenerales.AN_DAT_POS_UNO, 3, 12);
+            //var dict2 = this.ValidarMaximosMinimosPuntuacionTotal(dictInfoPosDosLun, ConstantesGenerales.AN_DAT_POS_DOS, 3, 12);
+            //var dict3 = this.ValidarMaximosMinimosPuntuacionTotal(dictInfoPosTresLun, ConstantesGenerales.AN_DAT_POS_TRES, 3, 12);
+            //var dict4 = this.ValidarMaximosMinimosPuntuacionTotal(dictInfoPosCuatroLun, ConstantesGenerales.AN_DAT_POS_CUATRO, 3, 12);
+            //var dictSign = this.ValidarMaximosMinimosPuntuacionTotal(dictInfoSignLun, ConstantesGenerales.AN_DAT_SIGN, 3, 12);
+
+            //dict1 = this.ValidarIndicadores(dict1, ConstantesGenerales.AN_DAT_POS_UNO);
+            //dict2 = this.ValidarIndicadores(dict2, ConstantesGenerales.AN_DAT_POS_DOS);
+            //dict3 = this.ValidarIndicadores(dict3, ConstantesGenerales.AN_DAT_POS_TRES);
+            //dict4 = this.ValidarIndicadores(dict4, ConstantesGenerales.AN_DAT_POS_CUATRO);
+            //dictSign = this.ValidarIndicadores(dictSign, ConstantesGenerales.AN_DAT_SIGN);            
+
+            //var dict1 = this.EliminarValoresMinimos(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
+            //var dict2 = this.EliminarValoresMinimos(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
+            //var dict3 = this.EliminarValoresMinimos(dictInfoPosTresLun, ConstantesGenerales.POS_TRES_DATOS);
+            //var dict4 = this.EliminarValoresMinimos(dictInfoPosCuatroLun, ConstantesGenerales.POS_CUATRO_DATOS);
+            //var dictSign = this.EliminarValoresMinimos(dictInfoSignLun, ConstantesGenerales.SIGN_DATOS);
 
 
-            //this.EscribirDatosArchivo(dictInfoPosUnoLun, "PosUnoLun");
-            //this.EscribirDatosArchivo(dictInfoPosDosLun, "PosDosLun");
-            //this.EscribirDatosArchivo(dictInfoPosTresLun, "PosTresLun");
-            //this.EscribirDatosArchivo(dictInfoPosCuatroLun, "PosCuatroLun");
-            //this.EscribirDatosArchivo(dictInfoSignLun, "SignLun");
             //this.RevisarValoresMinimos(dictInfoPosUnoLun, "PosUnoLunDep", ConstantesGenerales.AN_DAT_POS_UNO, ConstantesTipoSor.POSICION_UNO, ConstantesGenerales.POS_UNO_DATOS);
             //this.RevisarValoresMinimos(dictInfoPosDosLun, "PosDosLunDep", ConstantesGenerales.AN_DAT_POS_DOS, ConstantesTipoSor.POSICION_DOS, ConstantesGenerales.POS_DOS_DATOS);
-            //this.RevisarValoresMinimos(dictInfoPosTresLun, "PosTresLunDep", ConstantesGenerales.AN_DAT_POS_TRES, ConstantesTipoSor.POSICION_TRES, ConstantesGenerales.POS_TRES_DATOS);
+            //this.RevisarValoresMinimos(, "PosTresLunDep", ConstantesGenerales.AN_DAT_POS_TRES, ConstantesTipoSor.POSICION_TRES, ConstantesGenerales.POS_TRES_DATOS);
             //this.RevisarValoresMinimos(dictInfoPosCuatroLun, "PosCuatroLunDep", ConstantesGenerales.AN_DAT_POS_CUATRO, ConstantesTipoSor.POSICION_CUATRO, ConstantesGenerales.POS_CUATRO_DATOS);
             //this.RevisarValoresMinimos(dictInfoSignLun, "PosSignDep", ConstantesGenerales.AN_DAT_SIGN, ConstantesTipoSor.POSICION_CINCO, ConstantesGenerales.SIGN_DATOS);
             //this.ObtenerUltimosRachasPosicion();
@@ -115,339 +138,33 @@ namespace Presenter
             //this.EliminarDatoSumatoria(dictInfoPosDosLun, "PosDosLunDep6",2);
             //this.EliminarDatoSumatoria(dictInfoPosTresLun, "PosTresLunDep6",3);
             //this.EliminarDatoSumatoria(dictInfoPosCuatroLun, "PosCuatroLunDep6",4);
-            //this.EliminarDatoSumatoria(dictInfoSignLun, "PosSignDep6",5);
-            var dict1 = this.ValidarSumatoriaDatos(dictInfoPosUnoLun, "APosUnoLunMenores", ConstantesGenerales.POS_UNO_DATOS, "ASC");
-            var dict2 = this.ValidarSumatoriaDatos(dictInfoPosDosLun, "BPosDosLunMenores", ConstantesGenerales.POS_DOS_DATOS, "ASC");
-            var dict3 = this.ValidarSumatoriaDatos(dictInfoPosTresLun, "CPosTresLunMenores", ConstantesGenerales.POS_TRES_DATOS, "ASC");
-            var dict4 = this.ValidarSumatoriaDatos(dictInfoPosCuatroLun, "DPosCuatroLunMenores", ConstantesGenerales.POS_CUATRO_DATOS, "ASC");
-            var dict5 = this.ValidarSumatoriaDatos(dictInfoSignLun, "EPosSignMenores", ConstantesGenerales.SIGN_DATOS, "ASC");
-            this.RevisarValoresMinimos(dict1, "PosUnoLunDep", ConstantesGenerales.AN_DAT_POS_UNO, ConstantesTipoSor.POSICION_UNO, ConstantesGenerales.POS_UNO_DATOS);
-            this.RevisarValoresMinimos(dict2, "PosDosLunDep", ConstantesGenerales.AN_DAT_POS_DOS, ConstantesTipoSor.POSICION_DOS, ConstantesGenerales.POS_DOS_DATOS);
-            this.RevisarValoresMinimos(dict3, "PosTresLunDep", ConstantesGenerales.AN_DAT_POS_TRES, ConstantesTipoSor.POSICION_TRES, ConstantesGenerales.POS_TRES_DATOS);
-            this.RevisarValoresMinimos(dict4, "PosCuatroLunDep", ConstantesGenerales.AN_DAT_POS_CUATRO, ConstantesTipoSor.POSICION_CUATRO, ConstantesGenerales.POS_CUATRO_DATOS);
-            this.RevisarValoresMinimos(dict5, "PosSignDep", ConstantesGenerales.AN_DAT_SIGN, ConstantesTipoSor.POSICION_CINCO, ConstantesGenerales.SIGN_DATOS);
-        }
-
-        private void GuardarDatosTemporales()
-        {
-            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_UNO, dictInfoPosUnoLun);
-            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_DOS, dictInfoPosDosLun);
-            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_TRES, dictInfoPosTresLun);
-            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_CUATRO, dictInfoPosCuatroLun);
-            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_CINCO, dictInfoSignLun);
-            this.EscribirDatosAnterior(this._resultActualLun);
-        }
-
-        private void EliminarMismoDato(Dictionary<int,ObjectInfoDTO> dict, string nombreArchivo, string tabla, int casoObjetoAnalisis)
-        {
-            List<QueryInfoMismoDato> listCOMPARA_CONT_GENERAL = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_GENERAL);
-            List<QueryInfoMismoDato> listCOMPARA_CONT_DIA_SEM = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_DIA_SEM);
-            List<QueryInfoMismoDato> listCOMPARA_CONT_DIA_MES = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_DIA_MES);
-            List<QueryInfoMismoDato> listCOMPARA_CONT_DIA_MOD = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_DIA_MOD);
-            List<QueryInfoMismoDato> listCOMPARA_CONT_MES = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_MES);
-            var dictRevisar = dict.ToDictionary(x => x.Key, x => x.Value);
-            int mes = this.fecha.Month;
-            bool comparaConGene = this.ObtenerIndexElemento(listCOMPARA_CONT_GENERAL, mes);
-            bool comparaContDiaSem= this.ObtenerIndexElemento(listCOMPARA_CONT_DIA_SEM, mes);
-            bool comparaContDiaMes = this.ObtenerIndexElemento(listCOMPARA_CONT_DIA_MES, mes);
-            bool comparaContDiaMod = this.ObtenerIndexElemento(listCOMPARA_CONT_DIA_MOD, mes);
-            bool comparaConMes = this.ObtenerIndexElemento(listCOMPARA_CONT_MES, mes);
-            int conGeneral = 0;
-            int conDiaSemana = 0;
-            int conDiaMes = 0;
-            int conDiaMod = 0;
-            int conMes = 0;
-
-            switch (casoObjetoAnalisis)
-            {
-                case 1:
-                    POS_UNO_DATOS p1 = (POS_UNO_DATOS)this.ObtenerUltimoObjetoPosicion(casoObjetoAnalisis);
-                    conGeneral = (int)p1.CONTADORGENERAL;
-                    conDiaSemana = (int)p1.CONTADORDIASEMANA;
-                    conDiaMes = (int)p1.CONTADORDIAMES;
-                    conDiaMod = (int)p1.CONTADORDIAMODULO;
-                    conMes = (int)p1.CONTADORMES;
-                    break;
-                case 2:
-                    POS_DOS_DATOS p2 = (POS_DOS_DATOS)this.ObtenerUltimoObjetoPosicion(casoObjetoAnalisis);
-                    conGeneral = (int)p2.CONTADORGENERAL;
-                    conDiaSemana = (int)p2.CONTADORDIASEMANA;
-                    conDiaMes = (int)p2.CONTADORDIAMES;
-                    conDiaMod = (int)p2.CONTADORDIAMODULO;
-                    conMes = (int)p2.CONTADORMES;
-                    break;
-                case 3:
-                    POS_TRES_DATOS p3 = (POS_TRES_DATOS)this.ObtenerUltimoObjetoPosicion(casoObjetoAnalisis);
-                    conGeneral = (int)p3.CONTADORGENERAL;
-                    conDiaSemana = (int)p3.CONTADORDIASEMANA;
-                    conDiaMes = (int)p3.CONTADORDIAMES;
-                    conDiaMod = (int)p3.CONTADORDIAMODULO;
-                    conMes = (int)p3.CONTADORMES;
-                    break;
-                case 4:
-                    POS_CUATRO_DATOS p4 = (POS_CUATRO_DATOS)this.ObtenerUltimoObjetoPosicion(casoObjetoAnalisis);
-                    conGeneral = (int)p4.CONTADORGENERAL;
-                    conDiaSemana = (int)p4.CONTADORDIASEMANA;
-                    conDiaMes = (int)p4.CONTADORDIAMES;
-                    conDiaMod = (int)p4.CONTADORDIAMODULO;
-                    conMes = (int)p4.CONTADORMES;
-                    break;
-                default:
-                    break;
-            }
-            foreach (var item in dict)
-            {
-                if (comparaConGene && item.Value.RankContadorGeneral.Equals(conGeneral)) {
-                    dictRevisar.Remove(item.Key);
-                }
-                if (comparaContDiaSem && item.Value.RankContadorDiaSemana.Equals(conDiaSemana)) {
-                    dictRevisar.Remove(item.Key);
-                }
-                if (comparaContDiaMes && item.Value.RankContadorDiaMes.Equals(conDiaMes))
-                {
-                    dictRevisar.Remove(item.Key);
-                }
-                if (comparaContDiaMod && item.Value.RankContadorDiaModulo.Equals(conDiaMod)) {
-                    dictRevisar.Remove(item.Key);
-                }
-                if (comparaConMes && item.Value.RankContadorMes.Equals(conMes)) {
-                    dictRevisar.Remove(item.Key);
-                }
-            }
-            this.EscribirDatosArchivo(dictRevisar, nombreArchivo);
-            this.EliminarDatoSumatoria(dict, nombreArchivo + "11", casoObjetoAnalisis);
-        }
-
-        private void EliminarDatoSumatoria(Dictionary<int, ObjectInfoDTO> dict, string nombreArchivo, int tablaPosicion)
-        {
-            var dictRevisar = dict.ToDictionary(x => x.Key, x => x.Value);
-            int mes = this.fecha.Month;
-            int total = 0;
-            int comparadorMinimo = this.ObtenerDatoComparar(tablaPosicion, false);
-            int comparadorMaximo = this.ObtenerDatoComparar(tablaPosicion, true);
-            foreach (var item in dict)
-            {
-                total = item.Value.RankContadorGeneral + item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes 
-                    + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.RankContadorDiaAnio 
-                    + item.Value.RankContadorMesModuloDiaModulo
-                    + item.Value.RankContadorAnioModulo + item.Value.RankContadorMesModulo;
-                
-                if (total> comparadorMaximo || total< comparadorMinimo)
-                {
-                    dictRevisar.Remove(item.Key);
-                }
-            }
-            this.EscribirDatosArchivo(dictRevisar, nombreArchivo);
-        }
-
-        private Dictionary<int, ObjectInfoDTO> ValidarSumatoriaDatos(Dictionary<int, ObjectInfoDTO> dict, string nombreArchivo, string nombreTabla, string orden)
-        {
-            var dictRevisar = dict.ToDictionary(x => x.Key, x => x.Value);
-            int total = 0;
-            List<SumatoriaDatosDTO> lista = this.ConsultarSumatoriaDatos(nombreTabla, orden);
-            List<int> enterosLista = (from x in lista select x.Valor).ToList();
-            if (orden.Equals("ASC"))
-            {
-                foreach (var item in dict)
-                {
-                    total = item.Value.RankContadorGeneral + item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes
-                        + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual;
-
-                    if (enterosLista.IndexOf(total) != -1)
-                    {
-                        dictRevisar.Remove(item.Key);
-                    }
-                }
-            }
-            else
-            {
-                foreach (var item in dict)
-                {
-                    total = item.Value.RankContadorGeneral + item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes
-                        + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual;
-
-                    if (enterosLista.IndexOf(total) == -1)
-                    {
-                        dictRevisar.Remove(item.Key);
-                    }
-                }
-            }
-            this.EscribirDatosArchivo(dictRevisar, nombreArchivo);
-            //this.ValidarSumatoriaDatos(dictRevisar, nombreArchivo + "Mayores", ConstantesGenerales.SIGN_DATOS, "DESC",12);
-            return dictRevisar;
-        }
-
-        private Dictionary<string, ObjectInfoDTO> ValidarSumatoriaDatos(Dictionary<string, ObjectInfoDTO> dict, string nombreArchivo, string nombreTabla, string orden)
-        {
-            var dictRevisar = dict.ToDictionary(x => x.Key, x => x.Value);
-            int total = 0;
-            List<SumatoriaDatosDTO> lista = this.ConsultarSumatoriaDatos(nombreTabla, orden);
-            List<int> enterosLista = (from x in lista select x.Valor).ToList();
-            if (orden.Equals("ASC"))
-            {
-                foreach (var item in dict)
-                {
-                    total = item.Value.RankContadorGeneral + item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes
-                        + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual;
-
-                    if (enterosLista.IndexOf(total) != -1)
-                    {
-                        dictRevisar.Remove(item.Key);
-                    }
-                }
-            }
-            else
-            {
-                foreach (var item in dict)
-                {
-                    total = item.Value.RankContadorGeneral + item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes
-                        + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual;
-
-                    if (enterosLista.IndexOf(total) == -1)
-                    {
-                        dictRevisar.Remove(item.Key);
-                    }
-                }
-            }
-            this.EscribirDatosArchivo(dictRevisar, nombreArchivo);
-            //this.ValidarSumatoriaDatos(dictRevisar, nombreArchivo + "Mayores", ConstantesGenerales.SIGN_DATOS, "DESC", 12);
-            return dictRevisar;
-        }
-
-        private int ObtenerDatoComparar(int tablaPosicion, bool maximo)
-        {
-            if (maximo)
-            {
-                switch (tablaPosicion)
-                {
-                    case 1:
-                        return ConstantesMaxMin.MAX_MEDIDOR_POS_UNO;
-                    case 2:
-                        return ConstantesMaxMin.MAX_MEDIDOR_POS_DOS;
-                    case 3:
-                        return ConstantesMaxMin.MAX_MEDIDOR_POS_TRES;
-                    case 4:
-                        return ConstantesMaxMin.MAX_MEDIDOR_POS_CUATRO;
-                    case 5:
-                        return ConstantesMaxMin.MAX_MEDIDOR_SIGN;
-                }
-            }else
-            {
-                switch (tablaPosicion)
-                {
-                    case 1:
-                        return ConstantesMaxMin.MIN_MEDIDOR_POS_UNO;
-                    case 2:
-                        return ConstantesMaxMin.MIN_MEDIDOR_POS_DOS;
-                    case 3:
-                        return ConstantesMaxMin.MIN_MEDIDOR_POS_TRES;
-                    case 4:
-                        return ConstantesMaxMin.MIN_MEDIDOR_POS_CUATRO;
-                    case 5:
-                        return ConstantesMaxMin.MIN_MEDIDOR_SIGN;
-                }
-
-            }
-            return 0;
-        }
-
-        private void EliminarDatoSumatoria(Dictionary<string, ObjectInfoDTO> dict, string nombreArchivo, int tablaPosicion)
-        {
-            var dictRevisar = dict.ToDictionary(x => x.Key, x => x.Value);
-            int mes = this.fecha.Month;
-            int total = 0;
-            int comparadorMinimo = this.ObtenerDatoComparar(tablaPosicion, false);
-            int comparadorMaximo = this.ObtenerDatoComparar(tablaPosicion, true);
-            foreach (var item in dict)
-            {
-                total = item.Value.RankContadorGeneral + item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes
-                    + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.RankContadorDiaAnio
-                    + item.Value.RankContadorMesModuloDiaModulo
-                    + item.Value.RankContadorAnioModulo + item.Value.RankContadorMesModulo;
-
-                if (total > comparadorMaximo || total < comparadorMinimo)
-                {
-                    dictRevisar.Remove(item.Key);
-                }
-            }
-            this.EscribirDatosArchivo(dictRevisar, nombreArchivo);
-        }
-
-        private void EliminarMismoDato(Dictionary<string, ObjectInfoDTO> dict, string nombreArchivo, string tabla, int casoObjetoAnalisis)
-        {
-            List<QueryInfoMismoDato> listCOMPARA_CONT_GENERAL = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_GENERAL);
-            List<QueryInfoMismoDato> listCOMPARA_CONT_DIA_SEM = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_DIA_SEM);
-            List<QueryInfoMismoDato> listCOMPARA_CONT_DIA_MES = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_DIA_MES);
-            List<QueryInfoMismoDato> listCOMPARA_CONT_DIA_MOD = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_DIA_MOD);
-            List<QueryInfoMismoDato> listCOMPARA_CONT_MES = this.ConsultarDatosAgrupados(tabla, ConstantesGenerales.COMPARA_CONT_MES);
-            var dictRevisar = dict.ToDictionary(x => x.Key, x => x.Value);
-            int mes = this.fecha.Month;
-            bool comparaConGene = this.ObtenerIndexElemento(listCOMPARA_CONT_GENERAL, mes);
-            bool comparaContDiaSem = this.ObtenerIndexElemento(listCOMPARA_CONT_DIA_SEM, mes);
-            bool comparaContDiaMes = this.ObtenerIndexElemento(listCOMPARA_CONT_DIA_MES, mes);
-            bool comparaContDiaMod = this.ObtenerIndexElemento(listCOMPARA_CONT_DIA_MOD, mes);
-            bool comparaConMes = this.ObtenerIndexElemento(listCOMPARA_CONT_MES, mes);
-            SIGN_DATOS p4 = (SIGN_DATOS)this.ObtenerUltimoObjetoPosicion(casoObjetoAnalisis);
-            int conGeneral = (int)p4.CONTADORGENERAL;
-            int conDiaSemana = (int)p4.CONTADORDIASEMANA;
-            int conDiaMes = (int)p4.CONTADORDIAMES;
-            int conDiaMod = (int)p4.CONTADORDIAMODULO;
-            int conMes = (int)p4.CONTADORMES;
-
-            foreach (var item in dict)
-            {
-                if (comparaConGene && item.Value.RankContadorGeneral.Equals(conGeneral))
-                {
-                    dictRevisar.Remove(item.Key);
-                }
-                if (comparaContDiaSem && item.Value.RankContadorDiaSemana.Equals(conDiaSemana))
-                {
-                    dictRevisar.Remove(item.Key);
-                }
-                if (comparaContDiaMes && item.Value.RankContadorDiaMes.Equals(conDiaMes))
-                {
-                    dictRevisar.Remove(item.Key);
-                }
-                if (comparaContDiaMod && item.Value.RankContadorDiaModulo.Equals(conDiaMod))
-                {
-                    dictRevisar.Remove(item.Key);
-                }
-                if (comparaConMes && item.Value.RankContadorMes.Equals(conMes))
-                {
-                    dictRevisar.Remove(item.Key);
-                }
-            }
-            this.EscribirDatosArchivo(dictRevisar, nombreArchivo);
-            this.EliminarDatoSumatoria(dict, nombreArchivo + "11", casoObjetoAnalisis);
-        }
-
-        private bool ObtenerIndexElemento(List<QueryInfoMismoDato> lista, int datoComparar)
-        {
-            for (var i=0; i<lista.Count(); i++)
-            {
-                int elMes = Convert.ToInt32(lista.ElementAt(i).Mes);
-                if (elMes.Equals(datoComparar))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private List<SumatoriaDatosDTO> ConsultarSumatoriaDatos(string tabla, string orden)
-        {
-            string fechaFormat = fecha.Day + "/" + fecha.Month + "/" + fecha.Year;
-            string consulta = string.Format(ConstantesGenerales.QUERY_SUMATORIA_DATOS, tabla, orden, fechaFormat);
-            DbRawSqlQuery<SumatoriaDatosDTO> data = _astEntities.Database.SqlQuery<SumatoriaDatosDTO>(consulta);
-            int totalDatos = (data.AsEnumerable().Count()*40) / 100;
-            return data.AsEnumerable().Take(totalDatos).ToList();
-        }
-
-        private List<QueryInfoMismoDato> ConsultarDatosAgrupados(string tabla, string columna)
-        {
-            string consulta = string.Format(ConstantesGenerales.QUERY_MISMO_DATO_ANDATOS, tabla, columna);
-            DbRawSqlQuery<QueryInfoMismoDato> data = _astEntities.Database.SqlQuery<QueryInfoMismoDato>(consulta);
-            return data.AsEnumerable().Take(3).ToList();
+            ////this.EliminarDatoSumatoria(dictInfoSignLun, "PosSignDep6",5);
+            //var dict1 = this.EliminarMenorAparicionDespuesActual(dictInfoPosUnoLun, 1);
+            //var dict2 = this.EliminarMenorAparicionDespuesActual(dictInfoPosDosLun, 2);
+            //var dict3 = this.EliminarMenorAparicionDespuesActual(dictInfoPosTresLun, 3);
+            //var dict4 = this.EliminarMenorAparicionDespuesActual(dictInfoPosCuatroLun, 4);
+            //var dict5 = this.EliminarMenorAparicionDespuesActual(dictInfoSignLun, 5);
+            //dict1 = this.ValidarSumatoriaDatos(dict1, "APosUnoLunMenores", ConstantesGenerales.POS_UNO_DATOS, "ASC");
+            //dict2 = this.ValidarSumatoriaDatos(dict2, "BPosDosLunMenores", ConstantesGenerales.POS_DOS_DATOS, "ASC");
+            //dict3 = this.ValidarSumatoriaDatos(dict3, "CPosTresLunMenores", ConstantesGenerales.POS_TRES_DATOS, "ASC");
+            //dict4 = this.ValidarSumatoriaDatos(dict4, "DPosCuatroLunMenores", ConstantesGenerales.POS_CUATRO_DATOS, "ASC");
+            //dict5 = this.ValidarSumatoriaDatos(dict5, "EPosSignMenores", ConstantesGenerales.SIGN_DATOS, "ASC");
+            //this.RevisarValoresMinimos(dict1, "PosUnoLunDep", ConstantesGenerales.AN_DAT_POS_UNO, ConstantesTipoSor.POSICION_UNO, ConstantesGenerales.POS_UNO_DATOS);
+            //this.RevisarValoresMinimos(dict2, "PosDosLunDep", ConstantesGenerales.AN_DAT_POS_DOS, ConstantesTipoSor.POSICION_DOS, ConstantesGenerales.POS_DOS_DATOS);
+            //this.RevisarValoresMinimos(dict3, "PosTresLunDep", ConstantesGenerales.AN_DAT_POS_TRES, ConstantesTipoSor.POSICION_TRES, ConstantesGenerales.POS_TRES_DATOS);
+            //this.RevisarValoresMinimos(dict4, "PosCuatroLunDep", ConstantesGenerales.AN_DAT_POS_CUATRO, ConstantesTipoSor.POSICION_CUATRO, ConstantesGenerales.POS_CUATRO_DATOS);
+            //this.RevisarValoresMinimos(dict5, "PosSignDep", ConstantesGenerales.AN_DAT_SIGN, ConstantesTipoSor.POSICION_CINCO, ConstantesGenerales.SIGN_DATOS);
+            //this.GuardarDatosTemporalesDepurados(dict1, 1);
+            //this.GuardarDatosTemporalesDepurados(dict2, 2);
+            //this.GuardarDatosTemporalesDepurados(dict3, 3);
+            //this.GuardarDatosTemporalesDepurados(dict4, 4);
+            //this.GuardarDatosTemporalesDepurados(dictSign, 5);
+            //this.EscribirDatosArchivo(dictInfoPosUnoLun, "APosUnoLun");
+            //this.EscribirDatosArchivo(dictInfoPosDosLun, "BPosDosLun");
+            //this.EscribirDatosArchivo(dictInfoPosTresLun, "CPosTresLun");
+            //this.EscribirDatosArchivo(dictInfoPosCuatroLun, "DPosCuatroLun");
+            //this.EscribirDatosArchivo(dictInfoSignLun, "ESignLun");
+            //this.EscribirConsultas();
         }
 
         /// <summary>
@@ -490,21 +207,6 @@ namespace Presenter
                     item.Value.RachasAparicion.Add(0);
                 }
             }
-        }
-
-        /// <summary>
-        /// Método que realiza la consulta de los valores agrupados para las coincidencias de un valor siguiente
-        /// </summary>
-        /// <param name="columna">Columna de la tabla sobre la que se realiza la consulta</param>
-        /// <param name="tablaValidar">Tabla para validar los datos</param>
-        /// <param name="valorComparar">Valor sobre el que se realiza la comparacion</param>
-        /// <returns></returns>
-        private List<QueryInfo> AgruparContadoresDespuesActual(string columna, string tablaValidar, int valorComparar)
-        {
-            string fechaFormat = fecha.Day + "/" + fecha.Month + "/" + fecha.Year;
-            string consulta = string.Format(ConstantesGenerales.QUERY_AGRUPAR_APARICIONES_DESP_ACTUAL, columna, tablaValidar, valorComparar, fechaFormat);
-            DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(consulta);
-            return data.AsEnumerable().ToList();
         }
 
         /// <summary>
@@ -581,17 +283,6 @@ namespace Presenter
                 sortedDict = from entry in item.Value.DictRachasAgrupadasIntDespActual orderby entry.Value descending select entry;
                 item.Value.DictRachasAgrupadasIntDespActual = sortedDict.ToDictionary(x => x.Key, x => x.Value);
             }
-        }
-
-        /// <summary>
-        /// Método que realiza el conteo en la lista de datos recibidos, de las coincidencias encontradas
-        /// </summary>
-        /// <param name="valorComparar"></param>
-        /// <param name="listaDatos"></param>
-        /// <returns></returns>
-        private int ContadorValoresUltimasApariciones(int valorComparar, List<int> listaDatos)
-        {
-            return listaDatos.Where(x=>x == valorComparar).ToList().Count;
         }
 
         /// <summary>
@@ -676,33 +367,35 @@ namespace Presenter
         /// <param name="ultimoResultado">Valor que sirve para comparar y obtener los datos guardados</param>
         private void EscribirDatosAnterior(ASTR ultimoResultado)
         {
-            DATOS_TEMP dtPosUno = this._astEntities.DATOS_TEMP.Where(x => x.POSICION == 1 && x.TIPO == ultimoResultado.TIPO && x.FECHA < this.fecha && x.CLAVE == ultimoResultado.POS_UNO).OrderByDescending(x => x.FECHA).ToList().FirstOrDefault();
-            DATOS_TEMP dtPosDos = this._astEntities.DATOS_TEMP.Where(x => x.POSICION == 2 && x.TIPO == ultimoResultado.TIPO && x.FECHA < this.fecha && x.CLAVE == ultimoResultado.POS_DOS).OrderByDescending(x => x.FECHA).ToList().FirstOrDefault();
-            DATOS_TEMP dtPosTres = this._astEntities.DATOS_TEMP.Where(x => x.POSICION == 3 && x.TIPO == ultimoResultado.TIPO && x.FECHA < this.fecha && x.CLAVE == ultimoResultado.POS_TRES).OrderByDescending(x => x.FECHA).ToList().FirstOrDefault();
-            DATOS_TEMP dtPosCuatro = this._astEntities.DATOS_TEMP.Where(x => x.POSICION == 4 && x.TIPO == ultimoResultado.TIPO && x.FECHA < this.fecha && x.CLAVE == ultimoResultado.POS_CUATRO).OrderByDescending(x => x.FECHA).ToList().FirstOrDefault();
-            DATOS_TEMP dtPosSign = this._astEntities.DATOS_TEMP.Where(x => x.POSICION == 5 && x.TIPO == ultimoResultado.TIPO && x.FECHA < this.fecha && x.CLAVESIGN == ultimoResultado.SIGN).OrderByDescending(x => x.FECHA).ToList().FirstOrDefault();
+            DATOS_TEMP dtPosUno = this.ObtenerResultadoAnalizado(1, (int)ultimoResultado.POS_UNO);
+            DATOS_TEMP dtPosDos = this.ObtenerResultadoAnalizado(2, (int)ultimoResultado.POS_DOS);
+            DATOS_TEMP dtPosTres = this.ObtenerResultadoAnalizado(3, (int)ultimoResultado.POS_TRES);
+            DATOS_TEMP dtPosCuatro = this.ObtenerResultadoAnalizado(4, (int)ultimoResultado.POS_CUATRO);
+            DATOS_TEMP dtPosSign = this.ObtenerResultadoAnalizado(5, ultimoResultado.SIGN);
             if (dtPosUno != null)
             {
                 POS_UNO_DATOS p = new POS_UNO_DATOS();
                 p.TIPO = ultimoResultado.TIPO;
                 p.ID = this.ObtenerValorSecuencia(p);
-                p.PUNTUACIONTOTAL = (int)dtPosUno.PUNTUACIONTOTAL;
-                p.CONTADORULTIMOENRACHAS = (int)dtPosUno.CONTADORULTIMOENRACHAS;
-                p.CONTADORULTIMOENRACHASDESACTUA = (int)dtPosUno.CONTADORULTIMOENRACHASDESACTUA;
-                p.CONTADORGENERAL = (int)dtPosUno.CONTADORGENERAL;
-                p.CONTADORDIASEMANA = (int)dtPosUno.CONTADORDIASEMANA;
-                p.CONTADORDIAMES = (int)dtPosUno.CONTADORDIAMES;
-                p.CONTADORDIAMODULO = (int)dtPosUno.CONTADORDIAMODULO;
-                p.CONTADORMES = (int)dtPosUno.CONTADORMES;
-                p.CONTADORDIAANIO = (int)dtPosUno.CONTADORDIAANIO;
-                p.CONTADORDIAANIOMODULO = (int)dtPosUno.CONTADORDIAANIOMODULO;
-                p.CONTADORMESMODULODIAMODULO = (int)dtPosUno.CONTADORMESMODULODIAMODULO;
-                p.CONTADORMESDIA = (int)dtPosUno.CONTADORMESDIA;
-                p.CONTADORANIOMODULO = (int)dtPosUno.CONTADORANIOMODULO;
-                p.CONTADORMESMODULO = (int)dtPosUno.CONTADORMESMODULO;
-                p.CONTADORDESPUESACTUAL = (int)dtPosUno.CONTADORDESPUESACTUAL;
-                p.CONTADORDESPUESOTROTIPO = (int)dtPosUno.CONTADORDESPUESOTROTIPO;
-                p.CONTADORDESPUESSIGNACTUAL = (int)dtPosUno.CONTADORDESPUESSIGNACTUAL;
+                p.PUNTUACIONTOTAL = dtPosUno.PUNTUACIONTOTAL;
+                p.SINAPARECER = dtPosUno.SINAPARECER;
+                p.CONTADORULTIMOENRACHAS = dtPosUno.CONTADORULTIMOENRACHAS;
+                p.CONTADORULTIMOENRACHASDESACTUA = dtPosUno.CONTADORULTIMOENRACHASDESACTUA;
+                p.CONTADORGENERAL = dtPosUno.CONTADORGENERAL;
+                p.CONTADORDIASEMANA = dtPosUno.CONTADORDIASEMANA;
+                p.CONTADORDIAMES = dtPosUno.CONTADORDIAMES;
+                p.CONTADORDIAMODULO = dtPosUno.CONTADORDIAMODULO;
+                p.CONTADORMES = dtPosUno.CONTADORMES;
+                //p.CONTADORDIAANIO = dtPosUno.CONTADORDIAANIO;
+                //p.CONTADORDIAANIOMODULO = dtPosUno.CONTADORDIAANIOMODULO;
+                //p.CONTADORMESMODULODIAMODULO = dtPosUno.CONTADORMESMODULODIAMODULO;
+                //p.CONTADORMESDIA = dtPosUno.CONTADORMESDIA;
+                //p.CONTADORANIOMODULO = dtPosUno.CONTADORANIOMODULO;
+                //p.CONTADORMESMODULO = dtPosUno.CONTADORMESMODULO;
+                p.CONTADORDESPUESACTUAL = dtPosUno.CONTADORDESPUESACTUAL;
+                //p.CONTADORDESPUESACTUALTOTAL = (dtPosUno.CONTADORGENERAL + dtPosUno.CONTADORDIASEMANA + dtPosUno.CONTADORDIAMES + dtPosUno.CONTADORDIAMODULO + dtPosUno.CONTADORMES + dtPosUno.CONTADORDESPUESACTUAL);
+                p.SUMATORIAVALORES = dtPosUno.SUMATORIAVALORES;
+                p.CONTADORDESPUESSIGNACTUAL = dtPosUno.CONTADORDESPUESSIGNACTUAL;
                 p.FECHA = dtPosUno.FECHA;
                 this._astEntities.POS_UNO_DATOS.Add(p);
             }
@@ -711,23 +404,25 @@ namespace Presenter
                 POS_DOS_DATOS p = new POS_DOS_DATOS();
                 p.TIPO = ultimoResultado.TIPO;
                 p.ID = this.ObtenerValorSecuencia(p);
-                p.PUNTUACIONTOTAL = (int)dtPosDos.PUNTUACIONTOTAL;
-                p.CONTADORULTIMOENRACHAS = (int)dtPosDos.CONTADORULTIMOENRACHAS;
-                p.CONTADORULTIMOENRACHASDESACTUA = (int)dtPosDos.CONTADORULTIMOENRACHASDESACTUA;
-                p.CONTADORGENERAL = (int)dtPosDos.CONTADORGENERAL;
-                p.CONTADORDIASEMANA = (int)dtPosDos.CONTADORDIASEMANA;
-                p.CONTADORDIAMES = (int)dtPosDos.CONTADORDIAMES;
-                p.CONTADORDIAMODULO = (int)dtPosDos.CONTADORDIAMODULO;
-                p.CONTADORMES = (int)dtPosDos.CONTADORMES;
-                p.CONTADORDIAANIO = (int)dtPosDos.CONTADORDIAANIO;
-                p.CONTADORDIAANIOMODULO = (int)dtPosDos.CONTADORDIAANIOMODULO;
-                p.CONTADORMESMODULODIAMODULO = (int)dtPosDos.CONTADORMESMODULODIAMODULO;
-                p.CONTADORMESDIA = (int)dtPosDos.CONTADORMESDIA;
-                p.CONTADORANIOMODULO = (int)dtPosDos.CONTADORANIOMODULO;
-                p.CONTADORMESMODULO = (int)dtPosDos.CONTADORMESMODULO;
-                p.CONTADORDESPUESACTUAL = (int)dtPosDos.CONTADORDESPUESACTUAL;
-                p.CONTADORDESPUESOTROTIPO = (int)dtPosDos.CONTADORDESPUESOTROTIPO;
-                p.CONTADORDESPUESSIGNACTUAL = (int)dtPosDos.CONTADORDESPUESSIGNACTUAL;
+                p.PUNTUACIONTOTAL = dtPosDos.PUNTUACIONTOTAL;
+                p.SINAPARECER = dtPosDos.SINAPARECER;
+                p.CONTADORULTIMOENRACHAS = dtPosDos.CONTADORULTIMOENRACHAS;
+                p.CONTADORULTIMOENRACHASDESACTUA = dtPosDos.CONTADORULTIMOENRACHASDESACTUA;
+                p.CONTADORGENERAL = dtPosDos.CONTADORGENERAL;
+                p.CONTADORDIASEMANA = dtPosDos.CONTADORDIASEMANA;
+                p.CONTADORDIAMES = dtPosDos.CONTADORDIAMES;
+                p.CONTADORDIAMODULO = dtPosDos.CONTADORDIAMODULO;
+                p.CONTADORMES = dtPosDos.CONTADORMES;
+                //p.CONTADORDIAANIO = dtPosDos.CONTADORDIAANIO;
+                //p.CONTADORDIAANIOMODULO = dtPosDos.CONTADORDIAANIOMODULO;
+                //p.CONTADORMESMODULODIAMODULO = dtPosDos.CONTADORMESMODULODIAMODULO;
+                //p.CONTADORMESDIA = dtPosDos.CONTADORMESDIA;
+                //p.CONTADORANIOMODULO = dtPosDos.CONTADORANIOMODULO;
+                //p.CONTADORMESMODULO = dtPosDos.CONTADORMESMODULO;
+                p.CONTADORDESPUESACTUAL = dtPosDos.CONTADORDESPUESACTUAL;
+                //p.CONTADORDESPUESACTUALTOTAL = (dtPosUno.CONTADORGENERAL + dtPosUno.CONTADORDIASEMANA + dtPosUno.CONTADORDIAMES + dtPosUno.CONTADORDIAMODULO + dtPosUno.CONTADORMES + dtPosUno.CONTADORDESPUESACTUAL);
+                p.SUMATORIAVALORES = dtPosDos.SUMATORIAVALORES;
+                p.CONTADORDESPUESSIGNACTUAL = dtPosDos.CONTADORDESPUESSIGNACTUAL;
                 p.FECHA = dtPosDos.FECHA;
                 this._astEntities.POS_DOS_DATOS.Add(p);
             }
@@ -736,23 +431,25 @@ namespace Presenter
                 POS_TRES_DATOS p = new POS_TRES_DATOS();
                 p.TIPO = ultimoResultado.TIPO;
                 p.ID = this.ObtenerValorSecuencia(p);
-                p.PUNTUACIONTOTAL = (int)dtPosTres.PUNTUACIONTOTAL;
-                p.CONTADORULTIMOENRACHAS = (int)dtPosTres.CONTADORULTIMOENRACHAS;
-                p.CONTADORULTIMOENRACHASDESACTUA = (int)dtPosTres.CONTADORULTIMOENRACHASDESACTUA;
-                p.CONTADORGENERAL = (int)dtPosTres.CONTADORGENERAL;
-                p.CONTADORDIASEMANA = (int)dtPosTres.CONTADORDIASEMANA;
-                p.CONTADORDIAMES = (int)dtPosTres.CONTADORDIAMES;
-                p.CONTADORDIAMODULO = (int)dtPosTres.CONTADORDIAMODULO;
-                p.CONTADORMES = (int)dtPosTres.CONTADORMES;
-                p.CONTADORDIAANIO = (int)dtPosTres.CONTADORDIAANIO;
-                p.CONTADORDIAANIOMODULO = (int)dtPosTres.CONTADORDIAANIOMODULO;
-                p.CONTADORMESMODULODIAMODULO = (int)dtPosTres.CONTADORMESMODULODIAMODULO;
-                p.CONTADORMESDIA = (int)dtPosTres.CONTADORMESDIA;
-                p.CONTADORANIOMODULO = (int)dtPosTres.CONTADORANIOMODULO;
-                p.CONTADORMESMODULO = (int)dtPosTres.CONTADORMESMODULO;
-                p.CONTADORDESPUESACTUAL = (int)dtPosTres.CONTADORDESPUESACTUAL;
-                p.CONTADORDESPUESOTROTIPO = (int)dtPosTres.CONTADORDESPUESOTROTIPO;
-                p.CONTADORDESPUESSIGNACTUAL = (int)dtPosTres.CONTADORDESPUESSIGNACTUAL;
+                p.PUNTUACIONTOTAL = dtPosTres.PUNTUACIONTOTAL;
+                p.SINAPARECER = dtPosTres.SINAPARECER;
+                p.CONTADORULTIMOENRACHAS = dtPosTres.CONTADORULTIMOENRACHAS;
+                p.CONTADORULTIMOENRACHASDESACTUA = dtPosTres.CONTADORULTIMOENRACHASDESACTUA;
+                p.CONTADORGENERAL = dtPosTres.CONTADORGENERAL;
+                p.CONTADORDIASEMANA = dtPosTres.CONTADORDIASEMANA;
+                p.CONTADORDIAMES = dtPosTres.CONTADORDIAMES;
+                p.CONTADORDIAMODULO = dtPosTres.CONTADORDIAMODULO;
+                p.CONTADORMES = dtPosTres.CONTADORMES;
+                //p.CONTADORDIAANIO = dtPosTres.CONTADORDIAANIO;
+                //p.CONTADORDIAANIOMODULO = dtPosTres.CONTADORDIAANIOMODULO;
+                //p.CONTADORMESMODULODIAMODULO = dtPosTres.CONTADORMESMODULODIAMODULO;
+                //p.CONTADORMESDIA = dtPosTres.CONTADORMESDIA;
+                //p.CONTADORANIOMODULO = dtPosTres.CONTADORANIOMODULO;
+                //p.CONTADORMESMODULO = dtPosTres.CONTADORMESMODULO;
+                p.CONTADORDESPUESACTUAL = dtPosTres.CONTADORDESPUESACTUAL;
+                //p.CONTADORDESPUESACTUALTOTAL = (dtPosTres.CONTADORGENERAL + dtPosTres.CONTADORDIASEMANA + dtPosTres.CONTADORDIAMES + dtPosTres.CONTADORDIAMODULO + dtPosTres.CONTADORMES + dtPosTres.CONTADORDESPUESACTUAL);
+                p.SUMATORIAVALORES = dtPosTres.SUMATORIAVALORES;
+                p.CONTADORDESPUESSIGNACTUAL = dtPosTres.CONTADORDESPUESSIGNACTUAL;
                 p.FECHA = dtPosTres.FECHA;
                 this._astEntities.POS_TRES_DATOS.Add(p);
             }
@@ -761,23 +458,25 @@ namespace Presenter
                 POS_CUATRO_DATOS p = new POS_CUATRO_DATOS();
                 p.TIPO = ultimoResultado.TIPO;
                 p.ID = this.ObtenerValorSecuencia(p);
-                p.PUNTUACIONTOTAL = (int)dtPosCuatro.PUNTUACIONTOTAL;
-                p.CONTADORULTIMOENRACHAS = (int)dtPosCuatro.CONTADORULTIMOENRACHAS;
-                p.CONTADORULTIMOENRACHASDESACTUA = (int)dtPosCuatro.CONTADORULTIMOENRACHASDESACTUA;
-                p.CONTADORGENERAL = (int)dtPosCuatro.CONTADORGENERAL;
-                p.CONTADORDIASEMANA = (int)dtPosCuatro.CONTADORDIASEMANA;
-                p.CONTADORDIAMES = (int)dtPosCuatro.CONTADORDIAMES;
-                p.CONTADORDIAMODULO = (int)dtPosCuatro.CONTADORDIAMODULO;
-                p.CONTADORMES = (int)dtPosCuatro.CONTADORMES;
-                p.CONTADORDIAANIO = (int)dtPosCuatro.CONTADORDIAANIO;
-                p.CONTADORDIAANIOMODULO = (int)dtPosCuatro.CONTADORDIAANIOMODULO;
-                p.CONTADORMESMODULODIAMODULO = (int)dtPosCuatro.CONTADORMESMODULODIAMODULO;
-                p.CONTADORMESDIA = (int)dtPosCuatro.CONTADORMESDIA;
-                p.CONTADORANIOMODULO = (int)dtPosCuatro.CONTADORANIOMODULO;
-                p.CONTADORMESMODULO = (int)dtPosCuatro.CONTADORMESMODULO;
-                p.CONTADORDESPUESACTUAL = (int)dtPosCuatro.CONTADORDESPUESACTUAL;
-                p.CONTADORDESPUESOTROTIPO = (int)dtPosCuatro.CONTADORDESPUESOTROTIPO;
-                p.CONTADORDESPUESSIGNACTUAL = (int)dtPosCuatro.CONTADORDESPUESSIGNACTUAL;
+                p.PUNTUACIONTOTAL = dtPosCuatro.PUNTUACIONTOTAL;
+                p.SINAPARECER = dtPosCuatro.SINAPARECER;
+                p.CONTADORULTIMOENRACHAS = dtPosCuatro.CONTADORULTIMOENRACHAS;
+                p.CONTADORULTIMOENRACHASDESACTUA = dtPosCuatro.CONTADORULTIMOENRACHASDESACTUA;
+                p.CONTADORGENERAL = dtPosCuatro.CONTADORGENERAL;
+                p.CONTADORDIASEMANA = dtPosCuatro.CONTADORDIASEMANA;
+                p.CONTADORDIAMES = dtPosCuatro.CONTADORDIAMES;
+                p.CONTADORDIAMODULO = dtPosCuatro.CONTADORDIAMODULO;
+                p.CONTADORMES = dtPosCuatro.CONTADORMES;
+                //p.CONTADORDIAANIO = dtPosCuatro.CONTADORDIAANIO;
+                //p.CONTADORDIAANIOMODULO = dtPosCuatro.CONTADORDIAANIOMODULO;
+                //p.CONTADORMESMODULODIAMODULO = dtPosCuatro.CONTADORMESMODULODIAMODULO;
+                //p.CONTADORMESDIA = dtPosCuatro.CONTADORMESDIA;
+                //p.CONTADORANIOMODULO = dtPosCuatro.CONTADORANIOMODULO;
+                //p.CONTADORMESMODULO = dtPosCuatro.CONTADORMESMODULO;
+                p.CONTADORDESPUESACTUAL = dtPosCuatro.CONTADORDESPUESACTUAL;
+                //p.CONTADORDESPUESACTUALTOTAL = (dtPosCuatro.CONTADORGENERAL + dtPosCuatro.CONTADORDIASEMANA + dtPosCuatro.CONTADORDIAMES + dtPosCuatro.CONTADORDIAMODULO + dtPosCuatro.CONTADORMES + dtPosCuatro.CONTADORDESPUESACTUAL);
+                p.SUMATORIAVALORES = dtPosCuatro.SUMATORIAVALORES;
+                p.CONTADORDESPUESSIGNACTUAL = dtPosCuatro.CONTADORDESPUESSIGNACTUAL;
                 p.FECHA = dtPosCuatro.FECHA;
                 this._astEntities.POS_CUATRO_DATOS.Add(p);
             }
@@ -786,63 +485,60 @@ namespace Presenter
                 SIGN_DATOS p = new SIGN_DATOS();
                 p.TIPO = ultimoResultado.TIPO;
                 p.ID = this.ObtenerValorSecuencia(p);
-                p.PUNTUACIONTOTAL = (int)dtPosSign.PUNTUACIONTOTAL;
-                p.CONTADORULTIMOENRACHAS = (int)dtPosSign.CONTADORULTIMOENRACHAS;
-                p.CONTADORULTIMOENRACHASDESACTUA = (int)dtPosSign.CONTADORULTIMOENRACHASDESACTUA;
-                p.CONTADORGENERAL = (int)dtPosSign.CONTADORGENERAL;
-                p.CONTADORDIASEMANA = (int)dtPosSign.CONTADORDIASEMANA;
-                p.CONTADORDIAMES = (int)dtPosSign.CONTADORDIAMES;
-                p.CONTADORDIAMODULO = (int)dtPosSign.CONTADORDIAMODULO;
-                p.CONTADORMES = (int)dtPosSign.CONTADORMES;
-                p.CONTADORDIAANIO = (int)dtPosSign.CONTADORDIAANIO;
-                p.CONTADORDIAANIOMODULO = (int)dtPosSign.CONTADORDIAANIOMODULO;
-                p.CONTADORMESMODULODIAMODULO = (int)dtPosSign.CONTADORMESMODULODIAMODULO;
-                p.CONTADORMESDIA = (int)dtPosSign.CONTADORMESDIA;
-                p.CONTADORANIOMODULO = (int)dtPosSign.CONTADORANIOMODULO;
-                p.CONTADORMESMODULO = (int)dtPosSign.CONTADORMESMODULO;
-                p.CONTADORDESPUESACTUAL = (int)dtPosSign.CONTADORDESPUESACTUAL;
-                p.CONTADORDESPUESOTROTIPO = (int)dtPosSign.CONTADORDESPUESOTROTIPO;
-                p.CONTADORDESPUESSIGNACTUAL = (int)dtPosSign.CONTADORDESPUESSIGNACTUAL;
+                p.PUNTUACIONTOTAL = dtPosSign.PUNTUACIONTOTAL;
+                p.SINAPARECER = dtPosSign.SINAPARECER;
+                p.CONTADORULTIMOENRACHAS = dtPosSign.CONTADORULTIMOENRACHAS;
+                p.CONTADORULTIMOENRACHASDESACTUA = dtPosSign.CONTADORULTIMOENRACHASDESACTUA;
+                p.CONTADORGENERAL = dtPosSign.CONTADORGENERAL;
+                p.CONTADORDIASEMANA = dtPosSign.CONTADORDIASEMANA;
+                p.CONTADORDIAMES = dtPosSign.CONTADORDIAMES;
+                p.CONTADORDIAMODULO = dtPosSign.CONTADORDIAMODULO;
+                p.CONTADORMES = dtPosSign.CONTADORMES;
+                //p.CONTADORDIAANIO = dtPosSign.CONTADORDIAANIO;
+                //p.CONTADORDIAANIOMODULO = dtPosSign.CONTADORDIAANIOMODULO;
+                //p.CONTADORMESMODULODIAMODULO = dtPosSign.CONTADORMESMODULODIAMODULO;
+                //p.CONTADORMESDIA = dtPosSign.CONTADORMESDIA;
+                //p.CONTADORANIOMODULO = dtPosSign.CONTADORANIOMODULO;
+                //p.CONTADORMESMODULO = dtPosSign.CONTADORMESMODULO;
+                p.CONTADORDESPUESACTUAL = dtPosSign.CONTADORDESPUESACTUAL;
+                //p.CONTADORDESPUESACTUALTOTAL = (dtPosSign.CONTADORGENERAL + dtPosSign.CONTADORDIASEMANA + dtPosSign.CONTADORDIAMES + dtPosSign.CONTADORDIAMODULO + dtPosSign.CONTADORMES + dtPosSign.CONTADORDESPUESACTUAL);
+                p.SUMATORIAVALORES = dtPosSign.SUMATORIAVALORES;
+                p.CONTADORDESPUESSIGNACTUAL = dtPosSign.CONTADORDESPUESSIGNACTUAL;
                 p.FECHA = dtPosSign.FECHA;
                 this._astEntities.SIGN_DATOS.Add(p);
             }
             this._astEntities.SaveChanges();
         }
 
-        /// <summary>
-        /// Método que escribe los datos recibidos en el diccionario en los archivos
-        /// </summary>
-        /// <param name="dict">diccionario con datos</param>
-        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        private void EscribirDatosArchivo(Dictionary<int, ObjectInfoDTO> dict, string cad)
+        private bool FechaActualEnMenoresApariciones(string tabla, string columna)
         {
-            string fic = path + fecha.Day + cad + ".csv";
-            StreamWriter sw = new StreamWriter(fic);
-            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
-            foreach (var item in dict)
-            {
-                sw.Write(item.Key);
-                sw.WriteLine(item.Value.ToString());
-            }
-            sw.Close();
+            string query = string.Format(ConstantesConsultas.QUERY_AN_DATOS_COUNT_COLUMN, tabla, columna, fechaFormat);
+            DbRawSqlQuery<ContadorValorDTO> data = _astEntities.Database.SqlQuery<ContadorValorDTO>(query);
+            //var result = (from x in data select x.Contador).ToList().GroupBy(test => test)
+            //       .Select(grp => grp.First())
+            //       .ToList();
+            List<int> listaP = (from x in data where x.Contador == data.ElementAt(0).Contador select x.Valor).ToList();
+            //List<int> listaS = (from x in data where x.Contador == result.ElementAt(1) select x.Valor).ToList();
+            //List<int> listaT = (from x in data where x.Contador == result.ElementAt(2) select x.Valor).ToList();
+            bool indexP = listaP.IndexOf(this.fecha.Day) != -1;
+            //bool indexS = listaS.IndexOf(this.fecha.Day) != -1;
+            //bool indexT = listaT.IndexOf(this.fecha.Day) != -1;
+            //return indexP || indexS || indexT;
+            //return indexP || indexS;
+            return indexP;
         }
 
         /// <summary>
-        /// Método que escribe los datos recibidos en el diccionario en los archivos
+        /// Método que realiza el guardado de los datos temporales
         /// </summary>
-        /// <param name="dict">diccionario con datos</param>
-        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
-        private void EscribirDatosArchivo(Dictionary<string, ObjectInfoDTO> dict, string cad)
+        private void GuardarDatosTemporales()
         {
-            string fic = path + fecha.Day + cad + ".csv";
-            StreamWriter sw = new StreamWriter(fic);
-            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
-            foreach (var item in dict)
-            {
-                sw.Write(item.Key);
-                sw.WriteLine(item.Value.ToString());
-            }
-            sw.Close();
+            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_UNO, dictInfoPosUnoLun);
+            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_DOS, dictInfoPosDosLun);
+            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_TRES, dictInfoPosTresLun);
+            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_CUATRO, dictInfoPosCuatroLun);
+            this.GuardarDatosTemporales(ConstantesTipoSor.TIPO_LUN, ConstantesTipoSor.POSICION_CINCO, dictInfoSignLun);
+            this.EscribirDatosAnterior(this._resultActualLun);
         }
 
         /// <summary>
@@ -888,32 +584,101 @@ namespace Presenter
         }
 
         /// <summary>
+        /// Método que realiza el guardado de los datos depurados
+        /// </summary>
+        /// <param name="dict">estructura que contiene los datos depurados</param>
+        /// <param name="posicion">posicion que referencia en donde se guardan los datos</param>
+        private void GuardarDatosTemporalesDepurados(Dictionary<int, ObjectInfoDTO> dict, int posicion)
+        {
+            foreach (var item in dict)
+            {
+                DATOS_TEMP_DEPUR dt = new DATOS_TEMP_DEPUR();
+                dt.ID = this.ObtenerValorSecuencia(dt);
+                dt.PUNTUACIONTOTAL = item.Value.PuntuacionTotal;
+                dt.CONTADORULTIMOENRACHAS = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
+                dt.CONTADORULTIMOENRACHASDESACTUA = item.Value.DictRachasAgrupadasIntDespActual.Where(x => x.Key == item.Value.RachasAcumuladasDespActual.Last()).FirstOrDefault().Value;
+                dt.CONTADORGENERAL = item.Value.RankContadorGeneral;
+                dt.CONTADORDIASEMANA = item.Value.RankContadorDiaSemana;
+                dt.CONTADORDIAMES = item.Value.RankContadorDiaMes;
+                dt.CONTADORDIAMODULO = item.Value.RankContadorDiaModulo;
+                dt.CONTADORMES = item.Value.RankContadorMes;
+                //dt.CONTADORDIAANIO = item.Value.RankContadorDiaAnio;
+                //dt.CONTADORDIAANIOMODULO = item.Value.RankContadorDiaAnioModulo;
+                //dt.CONTADORMESMODULODIAMODULO = item.Value.RankContadorMesModuloDiaModulo;
+                //dt.CONTADORMESDIA = item.Value.RankContadorMesDia;
+                //dt.CONTADORANIOMODULO = item.Value.RankContadorAnioModulo;
+                //dt.CONTADORMESMODULO = item.Value.RankContadorMesModulo;
+                dt.CONTADORDESPUESACTUAL = item.Value.ContadorDespuesActual;
+                //dt.CONTADORDESPUESACTUALTOTAL = (item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual);
+                dt.SUMATORIAVALORES = (item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual);
+                dt.CONTADORDESPUESSIGNACTUAL = item.Value.ContadorDespuesSignActual;
+                dt.CLAVE = item.Key;
+                dt.TIPO = 2;
+                dt.POSICION = posicion;
+                dt.FECHA = this.fecha;
+                this._astEntities.DATOS_TEMP_DEPUR.Add(dt);
+            }
+            this._astEntities.SaveChanges();
+        }
+
+        /// <summary>
+        /// Método que realiza el guardado de los datos depurados
+        /// </summary>
+        /// <param name="dict">estructura que contiene los datos depurados</param>
+        /// <param name="posicion">posicion que referencia en donde se guardan los datos</param>
+        private void GuardarDatosTemporalesDepurados(Dictionary<string, ObjectInfoDTO> dict, int posicion)
+        {
+            foreach (var item in dict)
+            {
+                DATOS_TEMP_DEPUR dt = new DATOS_TEMP_DEPUR();
+                dt.ID = this.ObtenerValorSecuencia(dt);
+                dt.PUNTUACIONTOTAL = item.Value.PuntuacionTotal;
+                dt.CONTADORULTIMOENRACHAS = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
+                dt.CONTADORULTIMOENRACHASDESACTUA = item.Value.DictRachasAgrupadasIntDespActual.Where(x => x.Key == item.Value.RachasAcumuladasDespActual.Last()).FirstOrDefault().Value;
+                dt.CONTADORGENERAL = item.Value.RankContadorGeneral;
+                dt.CONTADORDIASEMANA = item.Value.RankContadorDiaSemana;
+                dt.CONTADORDIAMES = item.Value.RankContadorDiaMes;
+                dt.CONTADORDIAMODULO = item.Value.RankContadorDiaModulo;
+                dt.CONTADORMES = item.Value.RankContadorMes;
+                //dt.CONTADORDIAANIO = item.Value.RankContadorDiaAnio;
+                //dt.CONTADORDIAANIOMODULO = item.Value.RankContadorDiaAnioModulo;
+                //dt.CONTADORMESMODULODIAMODULO = item.Value.RankContadorMesModuloDiaModulo;
+                //dt.CONTADORMESDIA = item.Value.RankContadorMesDia;
+                //dt.CONTADORANIOMODULO = item.Value.RankContadorAnioModulo;
+                //dt.CONTADORMESMODULO = item.Value.RankContadorMesModulo;
+                dt.CONTADORDESPUESACTUAL = item.Value.ContadorDespuesActual;
+                //dt.CONTADORDESPUESACTUALTOTAL = (item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual);
+                dt.SUMATORIAVALORES = (item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual);
+                dt.CONTADORDESPUESSIGNACTUAL = item.Value.ContadorDespuesSignActual;
+                dt.CLAVESIGN = item.Key;
+                dt.TIPO = 2;
+                dt.POSICION = posicion;
+                dt.FECHA = this.fecha;
+                this._astEntities.DATOS_TEMP_DEPUR.Add(dt);
+            }
+            this._astEntities.SaveChanges();
+        }
+
+        /// <summary>
         /// Método que realiza el incremento para el diccionario, si la bandera recibida es true;
         /// </summary>
         /// <param name="dictIncrementar">Diccionaro que contiene la información sobre la que se realizan los incrementos</param>
         /// <param name="bandera">bandera que realiza la validación, y controla en incremento</param>
         /// <param name="claveDict">clave del diccionario sobre la que se realiza el incremento</param>
-        private void IncrementarContador(Dictionary<int, ObjectInfoDTO> dictIncrementar, bool bandera, int claveDict, bool mismoTipo)
+        private void IncrementarContador(Dictionary<int, ObjectInfoDTO> dictIncrementar, bool bandera, int claveDict)
         {
             if (bandera)
             {
-                if (mismoTipo)
+                foreach (var item in dictIncrementar)
                 {
-                    foreach (var item in dictIncrementar)
+                    if (item.Key.Equals(claveDict))
                     {
-                        if (item.Key.Equals(claveDict))
-                        {
-                            dictIncrementar[item.Key].RachasAparicionDespActual.Add(1);
-                        }
-                        else
-                        {
-                            dictIncrementar[item.Key].RachasAparicionDespActual.Add(0);
-                        }
+                        dictIncrementar[item.Key].RachasAparicionDespActual.Add(1);
                     }
-                }
-                else
-                {
-                    dictIncrementar[claveDict].ContadorDespuesOtroTipo++;
+                    else
+                    {
+                        dictIncrementar[item.Key].RachasAparicionDespActual.Add(0);
+                    }
                 }
                 dictIncrementar[claveDict].PuntuacionTotal++;
             }
@@ -1006,7 +771,6 @@ namespace Presenter
                 dict.Add(ConstantesGenerales.VIRGO, new ObjectInfoDTO());
                 return dict;
             }
-
         }
 
         /// <summary>
@@ -1018,6 +782,7 @@ namespace Presenter
         {
             DATOS_TEMP dt = new DATOS_TEMP();
             dt.PUNTUACIONTOTAL = objeto.PuntuacionTotal;
+            dt.SINAPARECER = objeto.RachasAcumuladas.Last();
             dt.CONTADORULTIMOENRACHAS = objeto.DictRachasAgrupadasInt.Where(x => x.Key == objeto.RachasAcumuladas.Last()).FirstOrDefault().Value;
             dt.CONTADORULTIMOENRACHASDESACTUA = objeto.DictRachasAgrupadasIntDespActual.Where(x => x.Key == objeto.RachasAcumuladasDespActual.Last()).FirstOrDefault().Value;
             dt.CONTADORGENERAL = objeto.RankContadorGeneral;
@@ -1025,14 +790,15 @@ namespace Presenter
             dt.CONTADORDIAMES = objeto.RankContadorDiaMes;
             dt.CONTADORDIAMODULO = objeto.RankContadorDiaModulo;
             dt.CONTADORMES = objeto.RankContadorMes;
-            dt.CONTADORDIAANIO = objeto.RankContadorDiaAnio;
-            dt.CONTADORDIAANIOMODULO = objeto.RankContadorDiaAnioModulo;
-            dt.CONTADORMESMODULODIAMODULO = objeto.RankContadorMesModuloDiaModulo;
-            dt.CONTADORMESDIA = objeto.RankContadorMesDia;
-            dt.CONTADORANIOMODULO = objeto.RankContadorAnioModulo;
-            dt.CONTADORMESMODULO = objeto.RankContadorMesModulo;
+            //dt.CONTADORDIAANIO = objeto.RankContadorDiaAnio;
+            //dt.CONTADORDIAANIOMODULO = objeto.RankContadorDiaAnioModulo;
+            //dt.CONTADORMESMODULODIAMODULO = objeto.RankContadorMesModuloDiaModulo;
+            //dt.CONTADORMESDIA = objeto.RankContadorMesDia;
+            //dt.CONTADORANIOMODULO = objeto.RankContadorAnioModulo;
+            //dt.CONTADORMESMODULO = objeto.RankContadorMesModulo;
             dt.CONTADORDESPUESACTUAL = objeto.ContadorDespuesActual;
-            dt.CONTADORDESPUESOTROTIPO = objeto.ContadorDespuesOtroTipo;
+            //dt.CONTADORDESPUESACTUALTOTAL = (objeto.RankContadorGeneral + objeto.RankContadorDiaSemana + objeto.RankContadorDiaMes + objeto.RankContadorDiaModulo + objeto.RankContadorMes + objeto.ContadorDespuesActual);
+            dt.SUMATORIAVALORES = (objeto.RankContadorGeneral + objeto.RankContadorDiaSemana + objeto.RankContadorDiaMes + objeto.RankContadorDiaModulo + objeto.RankContadorMes + objeto.ContadorDespuesActual + dt.SINAPARECER);
             dt.CONTADORDESPUESSIGNACTUAL = objeto.ContadorDespuesSignActual;
             return dt;
 
@@ -1049,7 +815,8 @@ namespace Presenter
             {
                 ///Agrupa los contadores de acuerdo al día de la semana
                 case 1:
-                    return "AND TO_CHAR(fecha, 'D') = " + ((int)fecha.DayOfWeek + 1);
+                    int valueDia = (int)fecha.DayOfWeek == 0 ? 7 : (int)fecha.DayOfWeek;
+                    return "AND TO_CHAR(fecha, 'D') = " + valueDia;
                 ///Agrupa los contadores de acuerdo al día del mes
                 case 2:
                     return "AND TO_CHAR(fecha, 'DD') = " + fecha.Day;
@@ -1059,94 +826,61 @@ namespace Presenter
                 ///Agrupa los contadores de acuerdo al mes
                 case 4:
                     return "AND TO_CHAR(fecha, 'MM') = " + fecha.Month;
-                ///Agrupa los contadores de acuerdo al día del año
-                case 5:
-                    return "AND TO_CHAR(fecha, 'DDD') = " + (fecha.DayOfYear);
-                ///Agrupa los contadores de acuerdo al día del año par o impar
-                case 6:
-                    return "AND MOD(TO_CHAR(fecha, 'DDD'),2) = " + (fecha.DayOfYear % 2);
-                ///Agrupa los contadores de acuerdo al mes par o impar
-                case 7:
-                    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (fecha.Month % 2);
-                ///Agrupa los contadores de acuerdo al mes par o impar y el día par o impar
-                case 8:
-                    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (fecha.Month % 2) + " AND MOD(TO_CHAR(fecha, 'DD'),2) = " + (fecha.Day % 2);
-                ///Agrupa los contadores de acuerdo al mes y al día
-                case 9:
-                    return "AND TO_CHAR(fecha, 'MM') = " + fecha.Month + " AND TO_CHAR(fecha, 'DD') = " + fecha.Day;
-                ///Agrupa los contadores de acuerdo al año par o impar
-                case 10:
-                    return "AND MOD(TO_CHAR(fecha, 'YYYY'),2) = " + (fecha.Year % 2);
+                /////Agrupa los contadores de acuerdo al día del año
+                //case 5:
+                //    return "AND TO_CHAR(fecha, 'DDD') = " + (fecha.DayOfYear);
+                /////Agrupa los contadores de acuerdo al día del año par o impar
+                //case 6:
+                //    return "AND MOD(TO_CHAR(fecha, 'DDD'),2) = " + (fecha.DayOfYear % 2);
+                /////Agrupa los contadores de acuerdo al mes par o impar
+                //case 7:
+                //    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (fecha.Month % 2);
+                /////Agrupa los contadores de acuerdo al mes par o impar y el día par o impar
+                //case 8:
+                //    return "AND MOD(TO_CHAR(fecha, 'MM'),2) = " + (fecha.Month % 2) + " AND MOD(TO_CHAR(fecha, 'DD'),2) = " + (fecha.Day % 2);
+                /////Agrupa los contadores de acuerdo al mes y al día
+                //case 9:
+                //    return "AND TO_CHAR(fecha, 'MM') = " + fecha.Month + " AND TO_CHAR(fecha, 'DD') = " + fecha.Day;
+                /////Agrupa los contadores de acuerdo al año par o impar
+                //case 10:
+                //    return "AND MOD(TO_CHAR(fecha, 'YYYY'),2) = " + (fecha.Year % 2);
                 default:
                     return "";
             }
         }
 
         /// <summary>
-        /// Método que permite 
+        /// Método que obtiene el ultimo resultado de acuerdo a los parámetros recibidos
         /// </summary>
-        /// <param name="caso">variable que controla el tipo de objeto que debe devolverse</param>
+        /// <param name="ultimoResultado"></param>
+        /// <param name="posicion"></param>
+        /// <param name="clave"></param>
         /// <returns></returns>
-        private object ObtenerUltimoObjetoPosicion(int caso)
+        private DATOS_TEMP ObtenerResultadoAnalizado(int posicion, int clave)
         {
-            DateTime fechaAnterior = this.fecha.AddDays(-1);
-            switch (caso)
-            {
-                case 1:
-                    POS_UNO_DATOS pud = this._astEntities.POS_UNO_DATOS.Where(x => x.FECHA == fechaAnterior).ToList().FirstOrDefault();
-                    return pud;
-                case 2:
-                    POS_DOS_DATOS pdd = this._astEntities.POS_DOS_DATOS.Where(x => x.FECHA == fechaAnterior).ToList().FirstOrDefault();
-                    return pdd;
-                case 3:
-                    POS_TRES_DATOS ptd = this._astEntities.POS_TRES_DATOS.Where(x => x.FECHA == fechaAnterior).ToList().FirstOrDefault();
-                    return ptd;
-                case 4:
-                    POS_CUATRO_DATOS pcd = this._astEntities.POS_CUATRO_DATOS.Where(x => x.FECHA == fechaAnterior).ToList().FirstOrDefault();
-                    return pcd;
-                case 5:
-                    SIGN_DATOS sd = this._astEntities.SIGN_DATOS.Where(x => x.FECHA == fechaAnterior).ToList().FirstOrDefault();
-                    return sd;
-            }
-            return null;
+            var fechaTemp = this.fecha.AddDays(-1);
+            return this._astEntities.DATOS_TEMP.Where(x => x.POSICION == posicion && x.FECHA == fechaTemp && x.CLAVE == clave).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Método que obtiene el ultimo resultado de acuerdo a los parámetros recibidos
+        /// </summary>
+        /// <param name="ultimoResultado"></param>
+        /// <param name="posicion"></param>
+        /// <param name="clave"></param>
+        /// <returns></returns>
+        private DATOS_TEMP ObtenerResultadoAnalizado(int posicion, string clave)
+        {
+            var fechaTemp = this.fecha.AddDays(-1);
+            return this._astEntities.DATOS_TEMP.Where(x => x.POSICION == posicion && x.FECHA == fechaTemp && x.CLAVESIGN == clave).FirstOrDefault();
+        }
         /// <summary>
         /// Método que obtiene y asigna los datos de los últimos resultados ingresados
         /// </summary>
         private void ObtenerUltimoResultado()
         {
-           //_resultActualSol = listaDatosSol.Last();
+            //_resultActualSol = listaDatosSol.Last();
             _resultActualLun = listaDatosLun.Last();
-        }
-
-        /// <summary>
-        /// Método que retornar la lista de las últimas aapariciones de una columna y una tabla
-        /// </summary>
-        /// <param name="columna">columna de la que se requieren los datos</param>
-        /// <param name="tablaValidar">tabla a la que se consulta</param>
-        /// <returns>Lista de datos encontrados</returns>
-        private List<int> ObtenerValoresActuales(string columna, string tablaValidar)
-        {
-            string fechaqFormato = fecha.Day + "/" + fecha.Month + "/" + fecha.Year;
-            string consulta = string.Format(ConstantesGenerales.QUERY_VER_APARICIONES_ACTUAL, columna, tablaValidar, fechaqFormato);
-            DbRawSqlQuery<int> data = _astEntities.Database.SqlQuery<int>(consulta);
-            return data.AsEnumerable().Take(20).ToList();
-        }
-
-        /// <summary>
-        /// Método que permite obtener el valor minimo de un conjunto de datos validado, para indicar si es el menor del grupo
-        /// </summary>
-        /// <param name="tablaValidar">Tabla sobre la que se realiza la validación</param>
-        /// <param name="columna">columna sobre la que se realiza la validación</param>
-        /// <param name="posicion">variable que indica la posición que se va a validar</param>
-        /// <returns>Valor consultado para los datos ingresados</returns>
-        private int ObtenerValorMinimo(string tablaValidar, string columna, int posicion)
-        {
-            string fechaFormat = fecha.Day + "/" + fecha.Month + "/" + fecha.Year;
-            string consulta = string.Format(ConstantesGenerales.QUERY_MIN_DATO_DATA_TEMP, columna, tablaValidar, fechaFormat, ConstantesTipoSor.TIPO_LUN, posicion);
-            DbRawSqlQuery<int> data = _astEntities.Database.SqlQuery<int>(consulta);
-            return data.AsEnumerable().FirstOrDefault();
         }
 
         /// <summary>
@@ -1154,9 +888,9 @@ namespace Presenter
         /// </summary>
         /// <param name="entidad">objeto que referencia a la secuencia</param>
         /// <returns>Valor obtenido para la secuencia</returns>
-        private int ObtenerValorSecuencia(object entidad)
+        private decimal ObtenerValorSecuencia(object entidad)
         {
-            int valSecuencia = 0;
+            decimal valSecuencia = 0;
             string consultaSecuencia = "SELECT {0} FROM dual";
             string varSecuencia = string.Empty;
             if (entidad is DATOS_TEMP)
@@ -1183,8 +917,12 @@ namespace Presenter
             {
                 varSecuencia = "SQ_SIGN_DATOS.NEXTVAL";
             }
+            else if (entidad is DATOS_TEMP_DEPUR)
+            {
+                varSecuencia = "SQ_DATOS_TEMP_DEP.NEXTVAL";
+            }
             consultaSecuencia = string.Format(consultaSecuencia, varSecuencia);
-            valSecuencia = (int)this._astEntities.Database.SqlQuery<decimal>(consultaSecuencia).ToList().Single();
+            valSecuencia = this._astEntities.Database.SqlQuery<decimal>(consultaSecuencia).ToList().Single();
             return valSecuencia;
         }
 
@@ -1193,43 +931,53 @@ namespace Presenter
         /// </summary>
         /// <param name="posicion">referencia la posición que se evalua dentro del registro (Pos_uno, Pos_dos...)</param>
         /// <param name="tipo">Referencia al tipo de registro que se evalua(Sol-Lun)</param>
-        private void PuntuarInformacion(string posicion, int tipo, Dictionary<int, ObjectInfoDTO> dict, int datoActualPosicion)
+        private void PuntuarInformacion(string posicion, Dictionary<int, ObjectInfoDTO> dict, int datoActualPosicion)
         {
-            string paramDate = " AND fecha < to_date('" + this.fecha.Day + "/" + this.fecha.Month + "/" + this.fecha.Year + "','dd/MM/yyyy') ";
-            string query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(0), "ClaveNum", paramDate, 10);
+            string query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(0), "ClaveNum", fechaFormat, 10);
+            this.listaConsultas.Add(query_final);
             DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContGeneral(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(1), "ClaveNum", paramDate, 10);
+            query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(1), "ClaveNum", fechaFormat, 10);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaSemana(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(2), "ClaveNum", paramDate, 10);
+            query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(2), "ClaveNum", fechaFormat, 10);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(3), "ClaveNum", paramDate, 10);
+            //Dias pares o impares del mes
+            query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(3), "ClaveNum", fechaFormat, 10);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(4), "ClaveNum", paramDate, 10);
+            query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(4), "ClaveNum", fechaFormat, 10);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(5), "ClaveNum", paramDate, 10);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContDiaAnio(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(6), "ClaveNum", paramDate, 10);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AdinionarInformacionContadorDiaAnioModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(7), "ClaveNum", paramDate, 10);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContMesModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(8), "ClaveNum", paramDate, 10);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContMesModuloDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(9), "ClaveNum", paramDate, 10);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContMesDia(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(10), "ClaveNum", paramDate, 10);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContAnioModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_COUNT_DATOS_DESP_ACTUAL, posicion, "ClaveNum", 10, datoActualPosicion, paramDate);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(5), "ClaveNum", fechaFormat, 10);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContDiaAnio(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(6), "ClaveNum", fechaFormat, 10);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AdinionarInformacionContadorDiaAnioModulo(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(7), "ClaveNum", fechaFormat, 10);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContMesModulo(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(8), "ClaveNum", fechaFormat, 10);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContMesModuloDiaModulo(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(9), "ClaveNum", fechaFormat, 10);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContMesDia(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion,this.ObtenerParametrosQuery(10), "ClaveNum", fechaFormat, 10);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContAnioModulo(dict, data);
+            query_final = string.Format(ConstantesConsultas.QUERY_COUNT_DATOS_DESP_ACTUAL, posicion, "ClaveNum", 10, datoActualPosicion, fechaFormat);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDespActual(dict, data);
         }
@@ -1239,43 +987,55 @@ namespace Presenter
         /// </summary>
         /// <param name="posicion">referencia la posición que se evalua dentro del registro (Pos_uno, Pos_dos...)</param>
         /// <param name="tipo">Referencia al tipo de registro que se evalua(Sol-Lun)</param>
-        private void PuntuarInformacion(string posicion, int tipo, Dictionary<string, ObjectInfoDTO> dict, string datoActualPosicion)
+        private void PuntuarInformacion(string posicion, Dictionary<string, ObjectInfoDTO> dict, string datoActualPosicion)
         {
-            string paramDate = " AND fecha < to_date('" + this.fecha.Day + "/" + this.fecha.Month + "/" + this.fecha.Year + "','dd/MM/yyyy') ";
-            string query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(0), "ClaveSign", paramDate, 12);
+            string query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(0), "ClaveSign", fechaFormat, 12);
+            this.listaConsultas.Add(query_final);
             DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContGeneral(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(1), "ClaveSign", paramDate, 12);
+            query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(1), "ClaveSign", fechaFormat, 12);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaSemana(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(2), "ClaveSign", paramDate, 12);
+            query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(2), "ClaveSign", fechaFormat, 12);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(3), "ClaveSign", paramDate, 12);
+            //Dias pares o impares del mes
+            query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(3), "ClaveSign", fechaFormat, 12);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(4), "ClaveSign", paramDate, 12);
+            query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(4), "ClaveSign", fechaFormat, 12);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContMes(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(5), "ClaveSign", paramDate, 12);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContDiaAnio(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(6), "ClaveSign", paramDate, 12);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AdinionarInformacionContadorDiaAnioModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(7), "ClaveSign", paramDate, 12);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContMesModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(8), "ClaveSign", paramDate, 12);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContMesModuloDiaModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(9), "ClaveSign", paramDate, 12);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContMesDia(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_BASE, posicion, tipo, this.ObtenerParametrosQuery(10), "ClaveSign", paramDate, 12);
-            data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
-            ManejoContadores.AddInfoContAnioModulo(dict, data);
-            query_final = string.Format(ConstantesGenerales.QUERY_COUNT_DATOS_DESP_ACTUAL_STRING, posicion, "ClaveSign", 12, datoActualPosicion, paramDate);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(5), "ClaveSign", fechaFormat, 12);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContDiaAnio(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(6), "ClaveSign", fechaFormat, 12);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AdinionarInformacionContadorDiaAnioModulo(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(7), "ClaveSign", fechaFormat, 12);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContMesModulo(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(15), "ClaveSign", fechaFormat, 12);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContMesModuloDiaModulo(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(9), "ClaveSign", fechaFormat, 12);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContMesDia(dict, data);
+            //query_final = string.Format(ConstantesConsultas.QUERY_BASE, posicion, this.ObtenerParametrosQuery(10), "ClaveSign", fechaFormat, 12);
+            //this.listaConsultas.Add(query_final);
+            //data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
+            //ManejoContadores.AddInfoContAnioModulo(dict, data);
+            query_final = string.Format(ConstantesConsultas.QUERY_COUNT_DATOS_DESP_ACTUAL_STRING, posicion, "ClaveSign", 12, datoActualPosicion, fechaFormat);
+            this.listaConsultas.Add(query_final);
             data = _astEntities.Database.SqlQuery<QueryInfo>(query_final);
             ManejoContadores.AddInfoContDespActual(dict, data);
         }
@@ -1299,63 +1059,40 @@ namespace Presenter
             bool flagPosTres = false;
             bool flagPosCuatro = false;
             bool flagSign = false;
-            if (sorComparador.TIPO.Equals(listaValidar.ElementAt(0).TIPO))
+            foreach (var item in listaValidar)
             {
-                foreach (var item in listaValidar)
+                this.IncrementarContador(dictPosUno, flagPosUno, (int)item.POS_UNO);
+                this.IncrementarContador(dictPosDos, flagPosDos, (int)item.POS_DOS);
+                this.IncrementarContador(dictPostres, flagPosTres, (int)item.POS_TRES);
+                this.IncrementarContador(dictPosCuatro, flagPosCuatro, (int)item.POS_CUATRO);
+                if (flagSign)
                 {
-                    this.IncrementarContador(dictPosUno, flagPosUno, (int)item.POS_UNO, true);
-                    this.IncrementarContador(dictPosDos, flagPosDos, (int)item.POS_DOS, true);
-                    this.IncrementarContador(dictPostres, flagPosTres, (int)item.POS_TRES, true);
-                    this.IncrementarContador(dictPosCuatro, flagPosCuatro, (int)item.POS_CUATRO, true);
-                    if (flagSign)
+                    dictSign[item.SIGN].PuntuacionTotal++;
+                    dictPosUno[(int)item.POS_UNO].ContadorDespuesSignActual++;
+                    dictPosUno[(int)item.POS_UNO].PuntuacionTotal++;
+                    dictPosDos[(int)item.POS_DOS].ContadorDespuesSignActual++;
+                    dictPosDos[(int)item.POS_DOS].PuntuacionTotal++;
+                    dictPostres[(int)item.POS_TRES].ContadorDespuesSignActual++;
+                    dictPostres[(int)item.POS_TRES].PuntuacionTotal++;
+                    dictPosCuatro[(int)item.POS_CUATRO].ContadorDespuesSignActual++;
+                    dictPosCuatro[(int)item.POS_CUATRO].PuntuacionTotal++;
+                    foreach (var itemDict in dictSign)
                     {
-                        dictSign[item.SIGN].PuntuacionTotal++;
-                        dictPosUno[(int)item.POS_UNO].ContadorDespuesSignActual++;
-                        dictPosUno[(int)item.POS_UNO].PuntuacionTotal++;
-                        dictPosDos[(int)item.POS_DOS].ContadorDespuesSignActual++;
-                        dictPosDos[(int)item.POS_DOS].PuntuacionTotal++;
-                        dictPostres[(int)item.POS_TRES].ContadorDespuesSignActual++;
-                        dictPostres[(int)item.POS_TRES].PuntuacionTotal++;
-                        dictPosCuatro[(int)item.POS_CUATRO].ContadorDespuesSignActual++;
-                        dictPosCuatro[(int)item.POS_CUATRO].PuntuacionTotal++;
-                        foreach (var itemDict in dictSign)
+                        if (itemDict.Key.Equals(item.SIGN))
                         {
-                            if (itemDict.Key.Equals(item.SIGN))
-                            {
-                                dictSign[itemDict.Key].RachasAparicionDespActual.Add(1);
-                            }
-                            else
-                            {
-                                dictSign[itemDict.Key].RachasAparicionDespActual.Add(0);
-                            }
+                            dictSign[itemDict.Key].RachasAparicionDespActual.Add(1);
+                        }
+                        else
+                        {
+                            dictSign[itemDict.Key].RachasAparicionDespActual.Add(0);
                         }
                     }
-                    flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
-                    flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
-                    flagPosTres = this.ValidarMismoDato(3, item, sorComparador);
-                    flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
-                    flagSign = this.ValidarMismoDato(5, item, sorComparador);
                 }
-            }
-            else
-            {
-                foreach (var item in listaValidar)
-                {
-                    this.IncrementarContador(dictPosUno, flagPosUno, (int)item.POS_UNO, false);
-                    this.IncrementarContador(dictPosDos, flagPosDos, (int)item.POS_DOS, false);
-                    this.IncrementarContador(dictPostres, flagPosTres, (int)item.POS_TRES, false);
-                    this.IncrementarContador(dictPosCuatro, flagPosCuatro, (int)item.POS_CUATRO, false);
-                    if (flagSign)
-                    {
-                        dictSign[item.SIGN].ContadorDespuesOtroTipo++;
-                        dictSign[item.SIGN].PuntuacionTotal++;
-                    }
-                    flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
-                    flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
-                    flagPosTres = this.ValidarMismoDato(3, item, sorComparador);
-                    flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
-                    flagSign = this.ValidarMismoDato(5, item, sorComparador);
-                }
+                flagPosUno = this.ValidarMismoDato(1, item, sorComparador);
+                flagPosDos = this.ValidarMismoDato(2, item, sorComparador);
+                flagPosTres = this.ValidarMismoDato(3, item, sorComparador);
+                flagPosCuatro = this.ValidarMismoDato(4, item, sorComparador);
+                flagSign = this.ValidarMismoDato(5, item, sorComparador);
             }
         }
 
@@ -1426,480 +1163,101 @@ namespace Presenter
         }
 
         /// <summary>
-        /// Método que realiza la revisión de los valores mínimos y su verificación para limpiarlos del diccionario recibido
+        /// Método que realiza la validación de la cantidad de registros en una columna
         /// </summary>
-        /// <param name="dict">diccionario en el que se revisan los valores minimos</param>
-        /// <param name="nombreArchivo">nombre del archivo de salida para la escritura de los datos</param>
-        /// <param name="nombreTablaAnalisis">Nombre de la tabla donde se realiza el análisis de los datos</param>
-        /// <param name="posicion">posición para la carga de datos</param>
-        /// <param name="nombreTablaDatos">nombre de la tabla que contiene los datos a validar</param>
-        private void RevisarValoresMinimos(Dictionary<string, ObjectInfoDTO> dict, string nombreArchivo, string nombreTablaAnalisis, int posicion, string nombreTablaDatos)
+        /// <param name="tabla">tabla de analisis de datos</param>
+        /// <param name="columna">columna en la que se analizan los datos</param>
+        /// <param name="cantidadValidar">cantidad de registros a validar en el rango de tiempo</param>
+        /// <param name="cantidadTomar">cantidad de dias a validar</param>
+        /// <returns>bandera que indica si el total de apariciones es mayor a la cantidad a validar</returns>
+        private bool ValidarCantidadRegistrosColumna(string tabla, string columna, int cantidadValidar, int cantidadTomar)
         {
-            var temDict2 = dict.ToDictionary(x => x.Key, x => x.Value);
-            int valorMinimoConUltimoRachas = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORULTIMOENRACHAS, posicion);
-            bool espacioUltimoRachasMayor = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_ULT_RACH);
-            int valorMinimoConGeneral = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORGENERAL, posicion);
-            bool espacioGeneral = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_GENERAL);
-            int valorMinimoConDiaSemana = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORDIASEMANA, posicion);
-            bool espacioDiaSemana = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM);
-            int valorMinimoConDiaMes = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORDIAMES, posicion);
-            bool espacioDiaMes = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES);
-            int valorMinimoConDiaMod = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORDIAMODULO, posicion);
-            bool espacioDiaMod = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD);
-            int valorMinimoConMes = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORMES, posicion);
-            bool espacioMes = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_MES);
-            foreach (var item in dict)
-            {
-                int valorUltimoRachas = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
-                int valorContadorGeneral = item.Value.RankContadorGeneral;
-                int valorContadorDiaSem = item.Value.RankContadorDiaSemana;
-                int valorContadorDiaMes = item.Value.RankContadorDiaMes;
-                int valorContadorDiaMod = item.Value.RankContadorDiaModulo;
-                int valorContadorMes = item.Value.RankContadorMes;
-                if ((espacioUltimoRachasMayor && valorUltimoRachas.Equals(valorMinimoConUltimoRachas)) || valorUltimoRachas.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioGeneral && valorContadorGeneral.Equals(valorMinimoConGeneral)) || valorContadorGeneral.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioDiaSemana && valorContadorDiaSem.Equals(valorMinimoConDiaSemana)) || valorContadorDiaSem.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioDiaMes && valorContadorDiaMes.Equals(valorMinimoConDiaMes)) || valorContadorDiaMes.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioDiaMod && valorContadorDiaMod.Equals(valorMinimoConDiaMod)) || valorContadorDiaMod.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioMes && valorContadorMes.Equals(valorMinimoConMes)) || valorContadorMes.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-            }
-            this.EscribirDatosArchivo(temDict2, nombreArchivo);
-            //this.ValidarDatosDespActual(dict, nombreArchivo + "lvl2", posicion, nombreTablaDatos);
-            //this.ValidarDatosDespActual(temDict2, nombreArchivo + "lvl3", posicion, nombreTablaDatos);
+            string query = string.Format(ConstantesConsultas.QUERY_CONSULTA_AN_DATOS, columna, tabla, fechaFormat);
+            DbRawSqlQuery<int> data = _astEntities.Database.SqlQuery<int>(query);
+            List<int> listaDatos = data.AsEnumerable().Take(cantidadTomar).ToList();
+            int totalApariciones = (from x in listaDatos where x == 1 select x).Count();
+            return totalApariciones >= cantidadValidar;
         }
 
         /// <summary>
-        /// Método que realiza la revisión de los valores mínimos y su verificación para limpiarlos del diccionario recibido
+        /// Método que valida para la puntuación total, la aparicion excesiva de valores (1), dentro de la columna
+        /// en la tabla de análisis de datos recibida
         /// </summary>
-        /// <param name="dict">diccionario en el que se revisan los valores minimos</param>
-        /// <param name="nombreArchivo">nombre del archivo de salida para la escritura de los datos</param>
-        /// <param name="nombreTablaAnalisis">Nombre de la tabla donde se realiza el análisis de los datos</param>
-        /// <param name="posicion">posición para la carga de datos</param>
-        /// <param name="nombreTablaDatos">nombre de la tabla que contiene los datos a validar</param>
-        private void RevisarValoresMinimos(Dictionary<int, ObjectInfoDTO> dict, string nombreArchivo, string nombreTablaAnalisis, int posicion, string nombreTablaDatos)
+        /// <param name="dict">estructura que contiene la información a depurar</param>
+        /// <param name="tabla">tabla en la que se analizan los datos</param>
+        /// <param name="cantidadValidar">cantidad de valores que se va a validar</param>
+        /// <param name="cantidadTomar">rango de tiempo en el que se valida la cantidad validar</param>
+        /// <returns>estructura que contiene el resultado de los datos depurados</returns>
+        private Dictionary<int, ObjectInfoDTO> ValidarMaximosMinimosPuntuacionTotal(Dictionary<int, ObjectInfoDTO> dict, string tabla, int cantidadValidar, int cantidadTomar)
         {
-            var temDict2 = dict.ToDictionary(x => x.Key, x => x.Value);
-            int valorMinimoConUltimoRachas = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORULTIMOENRACHAS, posicion);
-            bool espacioUltimoRachasMayor = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_ULT_RACH);
-            int valorMinimoConGeneral = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORGENERAL, posicion);
-            bool espacioGeneral = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_GENERAL);
-            int valorMinimoConDiaSemana = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORDIASEMANA, posicion);
-            bool espacioDiaSemana = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM);
-            int valorMinimoConDiaMes = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORDIAMES, posicion);
-            bool espacioDiaMes = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES);
-            int valorMinimoConDiaMod = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORDIAMODULO, posicion);
-            bool espacioDiaMod = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD);
-            int valorMinimoConMes = this.ObtenerValorMinimo(ConstantesGenerales.DATOS_TEMP, ConstantesGenerales.CONTADORMES, posicion);
-            bool espacioMes = this.ValidarEspacioTiempo(15, nombreTablaAnalisis, ConstantesGenerales.INDICA_MIN_CONT_MES);
-            foreach (var item in dict)
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            int minimo = tempDic[0].PuntuacionTotal;
+            int keyMinimo = -1;
+            int maximo = tempDic[0].PuntuacionTotal;
+            int keyMaximo = -1;
+            bool excesoDatoMax = ValidarCantidadRegistrosColumna(tabla, ConstantesGenerales.INDICA_MAX_PUNTUA_TOTAL, cantidadValidar, cantidadTomar);
+            bool excesoDatoMin = ValidarCantidadRegistrosColumna(tabla, ConstantesGenerales.INDICA_MIN_PUNTUA_TOTAL, cantidadValidar, cantidadTomar);
+            bool fechaEnMenoresMax = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MAX_PUNTUA_TOTAL);
+            bool fechaEnMenoresMin = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_PUNTUA_TOTAL);
+            if (excesoDatoMin || excesoDatoMax || fechaEnMenoresMax || fechaEnMenoresMin)
             {
-                int valorUltimoRachas = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
-                int valorContadorGeneral = item.Value.RankContadorGeneral;
-                int valorContadorDiaSem = item.Value.RankContadorDiaSemana;
-                int valorContadorDiaMes = item.Value.RankContadorDiaMes;
-                int valorContadorDiaMod = item.Value.RankContadorDiaModulo;
-                int valorContadorMes = item.Value.RankContadorMes;
-                if ((espacioUltimoRachasMayor && valorUltimoRachas.Equals(valorMinimoConUltimoRachas)) || valorUltimoRachas.Equals(0))
+                foreach (var item in dict)
                 {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioGeneral && valorContadorGeneral.Equals(valorMinimoConGeneral)) || valorContadorGeneral.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioDiaSemana && valorContadorDiaSem.Equals(valorMinimoConDiaSemana)) || valorContadorDiaSem.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioDiaMes && valorContadorDiaMes.Equals(valorMinimoConDiaMes)) || valorContadorDiaMes.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioDiaMod && valorContadorDiaMod.Equals(valorMinimoConDiaMod)) || valorContadorDiaMod.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
-                }
-                if ((espacioMes && valorContadorMes.Equals(valorMinimoConMes)) || valorContadorMes.Equals(0))
-                {
-                    temDict2.Remove(item.Key);
+                    if ((excesoDatoMin && item.Value.PuntuacionTotal < minimo) || fechaEnMenoresMin)
+                    {
+                        minimo = item.Value.PuntuacionTotal;
+                        keyMinimo = item.Key;
+                    }
+                    if ((excesoDatoMax && item.Value.PuntuacionTotal > maximo) || fechaEnMenoresMax)
+                    {
+                        maximo = item.Value.PuntuacionTotal;
+                        keyMaximo = item.Key;
+                    }
                 }
             }
-            this.EscribirDatosArchivo(temDict2, nombreArchivo);
-            //this.ValidarDatosDespActual(dict, nombreArchivo+"lvl2", posicion, nombreTablaDatos);
-            //this.ValidarDatosDespActual(temDict2, nombreArchivo + "lvl3", posicion, nombreTablaDatos);
+            tempDic.Remove(keyMinimo);
+            tempDic.Remove(keyMaximo);
+            return tempDic;
         }
 
         /// <summary>
-        /// Método que realiza la validación de los datos que están despues del actual en el analisis de datos
+        /// Método que valida para la puntuación total, la aparicion excesiva de valores (1), dentro de la columna
+        /// en la tabla de análisis de datos recibida
         /// </summary>
-        /// <param name="dict">diccionario del que se validan los datos</param>
-        /// <param name="nombreArchivo">nombre del archivo donde se guardarán los datos de salida</param>
-        /// <param name="posicion">posición para consultar los datos</param>
-        /// <param name="nombreTablaDatos">nombre de la tabla que contiene los datos a consutar</param>
-        private void ValidarDatosDespActual(Dictionary<string, ObjectInfoDTO> dict, string nombreArchivo, int posicion, string nombreTablaDatos)
+        /// <param name="dict">estructura que contiene la información a depurar</param>
+        /// <param name="tabla">tabla en la que se analizan los datos</param>
+        /// <param name="cantidadValidar">cantidad de valores que se va a validar</param>
+        /// <param name="cantidadTomar">rango de tiempo en el que se valida la cantidad validar</param>
+        /// <returns>estructura que contiene el resultado de los datos depurados</returns>
+        private Dictionary<string, ObjectInfoDTO> ValidarMaximosMinimosPuntuacionTotal(Dictionary<string, ObjectInfoDTO> dict, string tabla, int cantidadValidar, int cantidadTomar)
         {
-            var temDict2 = dict.ToDictionary(x => x.Key, x => x.Value);
-            object objInfo = this.ObtenerUltimoObjetoPosicion(posicion);
-            List<QueryInfo> lstContadoresAgrupadosGeneral = new List<QueryInfo>();
-            List<QueryInfo> lstContadoresAgrupadosDiaSemana = new List<QueryInfo>();
-            List<QueryInfo> lstContadoresAgrupadosDiaMes = new List<QueryInfo>();
-            List<QueryInfo> lstContadoresAgrupadosDiaModulo = new List<QueryInfo>();
-            List<QueryInfo> lstContadoresAgrupadosMes = new List<QueryInfo>();
-            List<int> lstDatosDespActualGeneral = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORGENERAL, nombreTablaDatos);
-            List<int> lstDatosDespActualDiaSemana = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORDIASEMANA, nombreTablaDatos);
-            List<int> lstDatosDespActualDiaMes = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORDIAMES, nombreTablaDatos);
-            List<int> lstDatosDespActualDiaModulo = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORDIAMODULO, nombreTablaDatos);
-            List<int> lstDatosDespActualMes = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORMES, nombreTablaDatos);
-            SIGN_DATOS p = (SIGN_DATOS)objInfo;
-            lstContadoresAgrupadosGeneral = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORGENERAL, nombreTablaDatos, (int)p.CONTADORGENERAL);
-            lstContadoresAgrupadosDiaSemana = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIASEMANA, nombreTablaDatos, (int)p.CONTADORDIASEMANA);
-            lstContadoresAgrupadosDiaMes = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIAMES, nombreTablaDatos, (int)p.CONTADORDIAMES);
-            lstContadoresAgrupadosDiaModulo = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIAMODULO, nombreTablaDatos, (int)p.CONTADORDIAMODULO);
-            lstContadoresAgrupadosMes = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORMES, nombreTablaDatos, (int)p.CONTADORMES);
-            foreach (var item in dict)
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            int minimo = tempDic.ElementAt(0).Value.PuntuacionTotal;
+            string keyMinimo = ""; int maximo = tempDic.ElementAt(0).Value.PuntuacionTotal;
+            string keyMaximo = "";
+            bool excesoDatoMax = ValidarCantidadRegistrosColumna(tabla, ConstantesGenerales.INDICA_MAX_PUNTUA_TOTAL, cantidadValidar, cantidadTomar);
+            bool excesoDatoMin = ValidarCantidadRegistrosColumna(tabla, ConstantesGenerales.INDICA_MIN_PUNTUA_TOTAL, cantidadValidar, cantidadTomar);
+            bool fechaEnMenoresMax = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MAX_PUNTUA_TOTAL);
+            bool fechaEnMenoresMin = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_PUNTUA_TOTAL);
+            if (excesoDatoMin || excesoDatoMax || fechaEnMenoresMax || fechaEnMenoresMin)
             {
-                KeyValuePair<string, ObjectInfoDTO> itemRef = item;
-                if (this.ValidarBorradoDato(lstContadoresAgrupadosGeneral, lstContadoresAgrupadosDiaSemana, lstContadoresAgrupadosDiaMes, 
-                    lstContadoresAgrupadosDiaModulo, lstContadoresAgrupadosMes, lstDatosDespActualGeneral, 
-                    lstDatosDespActualDiaSemana, lstDatosDespActualDiaMes, lstDatosDespActualDiaModulo, lstDatosDespActualMes, itemRef, p))
+                foreach (var item in dict)
                 {
-                    temDict2.Remove(item.Key);
+                    if ((excesoDatoMin && item.Value.PuntuacionTotal < minimo) || fechaEnMenoresMin)
+                    {
+                        minimo = item.Value.PuntuacionTotal;
+                        keyMinimo = item.Key;
+                    }
+                    if ((excesoDatoMax && item.Value.PuntuacionTotal > maximo) || fechaEnMenoresMax)
+                    {
+                        maximo = item.Value.PuntuacionTotal;
+                        keyMaximo = item.Key;
+                    }
                 }
             }
-
-            this.EscribirDatosArchivo(temDict2, nombreArchivo);
-        }
-
-        private bool EstaEntreTresMayores(List<QueryInfo> datosValidar, int datoComparar)
-        {
-            bool esMayores = false;
-            List<QueryInfo> datosValidarTemp = datosValidar.GetRange(datosValidar.Count-2, 2);
-            for (int i = 0; i < datosValidarTemp.Count; i++)
-            {
-                if (datosValidarTemp.ElementAt(i).ClaveNum.Equals(datoComparar))
-                {
-                    esMayores = true;
-                    break;
-                }
-            }
-            return esMayores;
-        }
-
-        private bool ValidarBorradoDato(List<QueryInfo> lstContadoresAgrupadosGeneral, List<QueryInfo> lstContadoresAgrupadosDiaSemana, 
-            List<QueryInfo> lstContadoresAgrupadosDiaMes, List<QueryInfo> lstContadoresAgrupadosDiaModulo, 
-            List<QueryInfo> lstContadoresAgrupadosMes, List<int> lstDatosDespActualGeneral, 
-            List<int> lstDatosDespActualDiaSemana, List<int> lstDatosDespActualDiaMes, List<int> lstDatosDespActualDiaModulo, 
-            List<int> lstDatosDespActualMes, KeyValuePair<string, ObjectInfoDTO> item, object datoComparador)
-        {
-            bool eliminarDato = false;
-            int contadorGeneral;
-            int contadorDiaSemana;
-            int contadorDiaMes;
-            int contadorDiaModulo;
-            int contadorMes;
-            if (datoComparador is SIGN_DATOS)
-            {
-                SIGN_DATOS p = (SIGN_DATOS)datoComparador;
-                contadorGeneral = (int)p.CONTADORGENERAL;
-                contadorDiaSemana = (int)p.CONTADORDIASEMANA;
-                contadorDiaMes = (int)p.CONTADORDIAMES;
-                contadorDiaModulo = (int)p.CONTADORDIAMODULO;
-                contadorMes = (int)p.CONTADORMES;
-                eliminarDato = (this.EstaEntreTresMayores(lstContadoresAgrupadosGeneral, item.Value.RankContadorGeneral) && lstDatosDespActualGeneral.Where(x=>x == contadorGeneral).ToList().Count>5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaSemana, item.Value.RankContadorDiaSemana) && lstDatosDespActualDiaSemana.Where(x => x == contadorDiaSemana).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaMes, item.Value.RankContadorDiaMes) && lstDatosDespActualDiaMes.Where(x => x == contadorDiaMes).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaModulo, item.Value.RankContadorDiaModulo) && lstDatosDespActualDiaModulo.Where(x => x == contadorDiaModulo).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosMes, item.Value.RankContadorMes) && lstDatosDespActualMes.Where(x => x == contadorMes).ToList().Count > 5);
-            }
-            return eliminarDato || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorGeneral, lstDatosDespActualGeneral), item.Value.RankContadorGeneral, lstContadoresAgrupadosGeneral, 4)
-                                || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorDiaSemana, lstDatosDespActualDiaSemana), item.Value.RankContadorDiaSemana, lstContadoresAgrupadosDiaSemana, 4)
-                                || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorDiaMes, lstDatosDespActualDiaMes), item.Value.RankContadorDiaMes, lstContadoresAgrupadosDiaMes, 4)
-                                || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorDiaModulo, lstDatosDespActualDiaModulo), item.Value.RankContadorDiaModulo, lstContadoresAgrupadosDiaModulo, 4)
-                                || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorMes, lstDatosDespActualMes), item.Value.RankContadorMes, lstContadoresAgrupadosMes, 4);
-        }
-
-        private bool ValidarBorradoDato(List<QueryInfo> lstContadoresAgrupadosGeneral, List<QueryInfo> lstContadoresAgrupadosDiaSemana,
-            List<QueryInfo> lstContadoresAgrupadosDiaMes, List<QueryInfo> lstContadoresAgrupadosDiaModulo,
-            List<QueryInfo> lstContadoresAgrupadosMes, List<int> lstDatosDespActualGeneral,
-            List<int> lstDatosDespActualDiaSemana, List<int> lstDatosDespActualDiaMes, List<int> lstDatosDespActualDiaModulo,
-            List<int> lstDatosDespActualMes, KeyValuePair<int, ObjectInfoDTO> item, object datoComparador)
-        {
-            bool eliminarDato = false;
-            int contadorGeneral;
-            int contadorDiaSemana;
-            int contadorDiaMes;
-            int contadorDiaModulo;
-            int contadorMes;
-            if (datoComparador is POS_UNO_DATOS)
-            {
-                POS_UNO_DATOS p = (POS_UNO_DATOS)datoComparador;
-                contadorGeneral = (int)p.CONTADORGENERAL;
-                contadorDiaSemana = (int)p.CONTADORDIASEMANA;
-                contadorDiaMes = (int)p.CONTADORDIAMES;
-                contadorDiaModulo = (int)p.CONTADORDIAMODULO;
-                contadorMes = (int)p.CONTADORMES;
-                eliminarDato = (this.EstaEntreTresMayores(lstContadoresAgrupadosGeneral, item.Value.RankContadorGeneral) && lstDatosDespActualGeneral.Where(x => x == contadorGeneral).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaSemana, item.Value.RankContadorDiaSemana) && lstDatosDespActualDiaSemana.Where(x => x == contadorDiaSemana).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaMes, item.Value.RankContadorDiaMes) && lstDatosDespActualDiaMes.Where(x => x == contadorDiaMes).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaModulo, item.Value.RankContadorDiaModulo) && lstDatosDespActualDiaModulo.Where(x => x == contadorDiaModulo).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosMes, item.Value.RankContadorMes) && lstDatosDespActualMes.Where(x => x == contadorMes).ToList().Count > 5);
-            }
-            else if (datoComparador is POS_DOS_DATOS)
-            {
-                POS_DOS_DATOS p = (POS_DOS_DATOS)datoComparador;
-                contadorGeneral = (int)p.CONTADORGENERAL;
-                contadorDiaSemana = (int)p.CONTADORDIASEMANA;
-                contadorDiaMes = (int)p.CONTADORDIAMES;
-                contadorDiaModulo = (int)p.CONTADORDIAMODULO;
-                contadorMes = (int)p.CONTADORMES;
-                eliminarDato = (this.EstaEntreTresMayores(lstContadoresAgrupadosGeneral, item.Value.RankContadorGeneral) && lstDatosDespActualGeneral.Where(x => x == contadorGeneral).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaSemana, item.Value.RankContadorDiaSemana) && lstDatosDespActualDiaSemana.Where(x => x == contadorDiaSemana).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaMes, item.Value.RankContadorDiaMes) && lstDatosDespActualDiaMes.Where(x => x == contadorDiaMes).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaModulo, item.Value.RankContadorDiaModulo) && lstDatosDespActualDiaModulo.Where(x => x == contadorDiaModulo).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosMes, item.Value.RankContadorMes) && lstDatosDespActualMes.Where(x => x == contadorMes).ToList().Count > 5);
-            }
-            else if (datoComparador is POS_TRES_DATOS)
-            {
-                POS_TRES_DATOS p = (POS_TRES_DATOS)datoComparador;
-                contadorGeneral = (int)p.CONTADORGENERAL;
-                contadorDiaSemana = (int)p.CONTADORDIASEMANA;
-                contadorDiaMes = (int)p.CONTADORDIAMES;
-                contadorDiaModulo = (int)p.CONTADORDIAMODULO;
-                contadorMes = (int)p.CONTADORMES;
-                eliminarDato = (this.EstaEntreTresMayores(lstContadoresAgrupadosGeneral, item.Value.RankContadorGeneral) && lstDatosDespActualGeneral.Where(x => x == contadorGeneral).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaSemana, item.Value.RankContadorDiaSemana) && lstDatosDespActualDiaSemana.Where(x => x == contadorDiaSemana).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaMes, item.Value.RankContadorDiaMes) && lstDatosDespActualDiaMes.Where(x => x == contadorDiaMes).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaModulo, item.Value.RankContadorDiaModulo) && lstDatosDespActualDiaModulo.Where(x => x == contadorDiaModulo).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosMes, item.Value.RankContadorMes) && lstDatosDespActualMes.Where(x => x == contadorMes).ToList().Count > 5);
-            }
-            else
-            {
-                POS_CUATRO_DATOS p = (POS_CUATRO_DATOS)datoComparador;
-                contadorGeneral = (int)p.CONTADORGENERAL;
-                contadorDiaSemana = (int)p.CONTADORDIASEMANA;
-                contadorDiaMes = (int)p.CONTADORDIAMES;
-                contadorDiaModulo = (int)p.CONTADORDIAMODULO;
-                contadorMes = (int)p.CONTADORMES;
-                eliminarDato = (this.EstaEntreTresMayores(lstContadoresAgrupadosGeneral, item.Value.RankContadorGeneral) && lstDatosDespActualGeneral.Where(x => x == contadorGeneral).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaSemana, item.Value.RankContadorDiaSemana) && lstDatosDespActualDiaSemana.Where(x => x == contadorDiaSemana).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaMes, item.Value.RankContadorDiaMes) && lstDatosDespActualDiaMes.Where(x => x == contadorDiaMes).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosDiaModulo, item.Value.RankContadorDiaModulo) && lstDatosDespActualDiaModulo.Where(x => x == contadorDiaModulo).ToList().Count > 5)
-                    || (this.EstaEntreTresMayores(lstContadoresAgrupadosMes, item.Value.RankContadorMes) && lstDatosDespActualMes.Where(x => x == contadorMes).ToList().Count > 5);
-            }
-            return eliminarDato || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorGeneral, lstDatosDespActualGeneral), item.Value.RankContadorGeneral, lstContadoresAgrupadosGeneral, 4)
-                                || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorDiaSemana, lstDatosDespActualDiaSemana), item.Value.RankContadorDiaSemana, lstContadoresAgrupadosDiaSemana, 4)
-                                || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorDiaMes, lstDatosDespActualDiaMes), item.Value.RankContadorDiaMes, lstContadoresAgrupadosDiaMes, 4)
-                                || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorDiaModulo, lstDatosDespActualDiaModulo), item.Value.RankContadorDiaModulo, lstContadoresAgrupadosDiaModulo, 4)
-                                || this.ValidarExcesoFrecuencia(this.ContadorValoresUltimasApariciones(item.Value.RankContadorMes, lstDatosDespActualMes), item.Value.RankContadorMes, lstContadoresAgrupadosMes, 4);
-        }
-
-        /// <summary>
-        /// Método que realiza la validación de los datos que están despues del actual en el analisis de datos
-        /// </summary>
-        /// <param name="dict">diccionario del que se validan los datos</param>
-        /// <param name="nombreArchivo">nombre del archivo donde se guardarán los datos de salida</param>
-        /// <param name="posicion">posición para consultar los datos</param>
-        /// <param name="nombreTablaDatos">nombre de la tabla que contiene los datos a consutar</param>
-        private void ValidarDatosDespActual(Dictionary<int, ObjectInfoDTO> dict, string nombreArchivo, int posicion, string nombreTablaDatos)
-        {
-            var temDict2 = dict.ToDictionary(x => x.Key, x => x.Value);
-            object objInfo = this.ObtenerUltimoObjetoPosicion(posicion);
-            List<QueryInfo> lstContadoresAgrupadosGeneral = new List<QueryInfo>();
-            List<QueryInfo> lstContadoresAgrupadosDiaSemana = new List<QueryInfo>();
-            List<QueryInfo> lstContadoresAgrupadosDiaMes = new List<QueryInfo>();
-            List<QueryInfo> lstContadoresAgrupadosDiaModulo = new List<QueryInfo>();
-            List<QueryInfo> lstContadoresAgrupadosMes = new List<QueryInfo>();
-            List<int> lstDatosDespActualGeneral = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORGENERAL, nombreTablaDatos);
-            List<int> lstDatosDespActualDiaSemana = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORDIASEMANA, nombreTablaDatos);
-            List<int> lstDatosDespActualDiaMes = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORDIAMES, nombreTablaDatos);
-            List<int> lstDatosDespActualDiaModulo = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORDIAMODULO, nombreTablaDatos);
-            List<int> lstDatosDespActualMes = this.ObtenerValoresActuales(ConstantesGenerales.CONTADORMES, nombreTablaDatos);
-            int contadorGeneral = 0;
-            int contadorDiaSemana = 0;
-            int contadorDiaMes = 0;
-            int contadorDiaModulo = 0;
-            int contadorMes = 0;
-            if (posicion == 1)
-            {
-                POS_UNO_DATOS p = (POS_UNO_DATOS)objInfo;
-                contadorGeneral = (int)p.CONTADORGENERAL;
-                contadorDiaSemana = (int)p.CONTADORDIASEMANA;
-                contadorDiaMes = (int)p.CONTADORDIAMES;
-                contadorDiaModulo = (int)p.CONTADORDIAMODULO;
-                contadorMes = (int)p.CONTADORMES;
-
-            }
-            else if (posicion == 2)
-            {
-                POS_DOS_DATOS p = (POS_DOS_DATOS)objInfo;
-                contadorGeneral = (int)p.CONTADORGENERAL;
-                contadorDiaSemana = (int)p.CONTADORDIASEMANA;
-                contadorDiaMes = (int)p.CONTADORDIAMES;
-                contadorDiaModulo = (int)p.CONTADORDIAMODULO;
-                contadorMes = (int)p.CONTADORMES;
-
-            }
-            else if (posicion == 3)
-            {
-                POS_TRES_DATOS p = (POS_TRES_DATOS)objInfo;
-                contadorGeneral = (int)p.CONTADORGENERAL;
-                contadorDiaSemana = (int)p.CONTADORDIASEMANA;
-                contadorDiaMes = (int)p.CONTADORDIAMES;
-                contadorDiaModulo = (int)p.CONTADORDIAMODULO;
-                contadorMes = (int)p.CONTADORMES;
-
-            }
-            else
-            {
-                POS_CUATRO_DATOS p = (POS_CUATRO_DATOS)objInfo;
-                contadorGeneral = (int)p.CONTADORGENERAL;
-                contadorDiaSemana = (int)p.CONTADORDIASEMANA;
-                contadorDiaMes = (int)p.CONTADORDIAMES;
-                contadorDiaModulo = (int)p.CONTADORDIAMODULO;
-                contadorMes = (int)p.CONTADORMES;
-
-            }
-
-            lstContadoresAgrupadosGeneral = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORGENERAL, nombreTablaDatos, contadorGeneral);
-            lstContadoresAgrupadosDiaSemana = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIASEMANA, nombreTablaDatos, contadorDiaSemana);
-            lstContadoresAgrupadosDiaMes = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIAMES, nombreTablaDatos, contadorDiaMes);
-            lstContadoresAgrupadosDiaModulo = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIAMODULO, nombreTablaDatos, contadorDiaModulo);
-            lstContadoresAgrupadosMes = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORMES, nombreTablaDatos, contadorMes);
-            foreach (var item in dict)
-            {
-                KeyValuePair<int, ObjectInfoDTO> itemRef = item;
-                if (this.ValidarBorradoDato(lstContadoresAgrupadosGeneral, lstContadoresAgrupadosDiaSemana, lstContadoresAgrupadosDiaMes,
-                    lstContadoresAgrupadosDiaModulo, lstContadoresAgrupadosMes, lstDatosDespActualGeneral,
-                    lstDatosDespActualDiaSemana, lstDatosDespActualDiaMes, lstDatosDespActualDiaModulo, lstDatosDespActualMes, itemRef, objInfo))
-                {
-                    temDict2.Remove(item.Key);
-                }
-            }
-
-            this.EscribirDatosArchivo(temDict2, nombreArchivo);
-
-        }
-
-        /// <summary>
-        /// Método que realiza la validación de datos existentes
-        /// </summary>
-        /// <param name="listica">lista de datos a validar</param>
-        private void ValidarDatosRepetidos(List<ASTR> listica)
-        {
-            var fecha = ((DateTime)listica.ElementAt(0).FECHA).AddDays(1);
-            List<DateTime> fechasNo = new List<DateTime>();
-            for (int i = 1; i < listica.Count; i++)
-            {
-                var fecha2 = ((DateTime)listica.ElementAt(i).FECHA);
-                if(fecha != fecha2)
-                {
-                    fechasNo.Add(fecha);
-                }
-                fecha = fecha2.AddDays(1);
-            }
-            //List<decimal> listaIdentificadores = new List<decimal>();
-            //DateTime fechaInicial = (DateTime)listica.ElementAt(0).FECHA;
-            //for (int i = 1; i < listica.Count; i++)
-            //{
-            //    ASTR astUno = listica.ElementAt(i);
-            //    for (int j = i + 1; j < listica.Count; j++)
-            //    {
-            //        ASTR astTemp = listica.ElementAt(j);
-            //        if (astTemp.POS_UNO == astUno.POS_UNO
-            //            && astTemp.POS_DOS == astUno.POS_DOS
-            //            && astTemp.POS_TRES == astUno.POS_TRES
-            //            && astTemp.POS_CUATRO == astUno.POS_CUATRO
-            //            && astTemp.SIGN == astUno.SIGN)
-            //        {
-            //            if (!listaIdentificadores.Contains(astUno.ID)) listaIdentificadores.Add(astUno.ID);
-            //            if (!listaIdentificadores.Contains(astTemp.ID)) listaIdentificadores.Add(astTemp.ID);
-            //        }
-            //        if (astUno.FECHA == astTemp.FECHA)
-            //        {
-            //            if (!listaIdentificadores.Contains(astUno.ID)) listaIdentificadores.Add(astUno.ID);
-            //            if (!listaIdentificadores.Contains(astTemp.ID)) listaIdentificadores.Add(astTemp.ID);
-            //        }
-            //    }
-            //    DateTime fechaSor = (DateTime)listica.ElementAt(i).FECHA;
-            //    if (!fechaSor.AddDays(-1).Equals(fechaInicial))
-            //    {
-            //        listaIdentificadores.Add(fechaInicial);
-            //    }
-            //    fechaInicial = fechaSor;
-            //}
-            //List<ASTR> listaTemp = new List<ASTR>();
-            ////Si no se pagina la lista, se obtienen todos los resultados, de lo contrario, se traen los resultados solicitados
-            //listaTemp = (from ast in listica
-            //             where listaIdentificadores.Contains(ast.ID)
-            //             select ast).ToList();
-            //string fic = path + "repetidos.txt";
-            //StreamWriter sw = new StreamWriter(fic);
-            //foreach (var item in listaTemp)
-            //{
-            //    sw.WriteLine(item.ToString());
-            //}
-            //sw.Close();
-            string fic = path + "repetidos.txt";
-            StreamWriter sw = new StreamWriter(fic);
-            foreach (var item in fechasNo)
-            {
-                sw.WriteLine(item.ToString());
-            }
-            sw.Close();
-        }
-
-        /// <summary>
-        /// Método que permite validar si el espacio de tiempo recibido, para una columna a validar en una tabla, es mayor
-        /// </summary>
-        /// <param name="espacio">valor en cantidad que permite verificar si un valor se encuentra dentro del tiempo</param>
-        /// <param name="tablaValidar">Tabla sobre la que se realiza la validación</param>
-        /// <param name="columna">columna para la consulta de los datos</param>
-        /// <returns></returns>
-        private bool ValidarEspacioTiempo(int espacio, string tablaValidar, string columna)
-        {
-            string consulta = string.Format(ConstantesGenerales.QUERY_MAX_FECHA_CAMPO, tablaValidar, columna);
-            DbRawSqlQuery<DateTime> data = _astEntities.Database.SqlQuery<DateTime>(consulta);
-            DateTime fechaUltima = data.AsEnumerable().FirstOrDefault();
-            TimeSpan ts = this.fecha - fechaUltima;
-            return ts.Days < espacio;
-        }
-
-        /// <summary>
-        /// Método que permite verificar si el valor tiene una frecuencia mayor a la que se admite
-        /// </summary>
-        /// <param name="contadorApariciones"></param>
-        /// <param name="datoValidar"></param>
-        /// <param name="datosAgrupados"></param>
-        /// <param name="contadorCiclo"></param>
-        /// <returns></returns>
-        private bool ValidarExcesoFrecuencia(int contadorApariciones, int datoValidar, List<QueryInfo> datosAgrupados, int contadorCiclo)
-        {
-            for (int i = 0; i < contadorCiclo && i < datosAgrupados.Count; i++)
-            {
-                if (datoValidar.Equals(datosAgrupados.ElementAt(i).ClaveNum))
-                {
-                    return (i == 0 && contadorApariciones > 1) || (contadorApariciones > 2);
-                }
-            }
-            return false;
+            tempDic.Remove(keyMinimo);
+            tempDic.Remove(keyMaximo);
+            return tempDic;
         }
 
         /// <summary>
@@ -1969,18 +1327,325 @@ namespace Presenter
             this.AgruparRachas(dictSign);
         }
 
-        private void EliminarUltimoRachaRepetido()
+        private Dictionary<int, ObjectInfoDTO> ValidarIndicadores(Dictionary<int, ObjectInfoDTO> dict, string tabla)
         {
-
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            bool fechaEnMinUltULT_RACH = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_ULT_RACH);
+            bool fechaEnMinCon_GENERAL = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_GENERAL);
+            bool fechaEnMinCon_DIA_SEM = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM);
+            bool fechaEnMinCon_DIA_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES);
+            bool fechaEnMinCon_DIA_MOD = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD);
+            bool fechaEnMinConCONT_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_MES);
+            int indexEnMinUltULT_RACH = 10000;
+            int indexEnMinCon_GENERAL = 10000;
+            int indexEnMinCon_DIA_SEM = 10000;
+            int indexEnMinCon_DIA_MES = 10000;
+            int indexEnMinCon_DIA_MOD = 10000;
+            int indexEnMinConCONT_MES = 10000;
+            int keyEnMinUltULT_RACH = -1;
+            int keyEnMinCon_GENERAL = -1;
+            int keyEnMinCon_DIA_SEM = -1;
+            int keyEnMinCon_DIA_MES = -1;
+            int keyEnMinCon_DIA_MOD = -1;
+            int keyEnMinConCONT_MES = -1;
+            foreach (var item in dict)
+            {
+                if (fechaEnMinUltULT_RACH && indexEnMinUltULT_RACH > item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value)
+                {
+                    indexEnMinUltULT_RACH = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
+                    keyEnMinUltULT_RACH = item.Key;
+                }
+                if (fechaEnMinCon_GENERAL && indexEnMinCon_GENERAL > item.Value.ContadorGeneral)
+                {
+                    indexEnMinCon_GENERAL = item.Value.ContadorGeneral;
+                    keyEnMinCon_GENERAL = item.Key;
+                }
+                if (fechaEnMinCon_DIA_SEM && indexEnMinCon_DIA_SEM > item.Value.ContadorDiaSemana)
+                {
+                    indexEnMinCon_DIA_SEM = item.Value.ContadorDiaSemana;
+                    keyEnMinCon_DIA_SEM = item.Key;
+                }
+                if (fechaEnMinCon_DIA_MES && indexEnMinCon_DIA_MES > item.Value.ContadorDiaMes)
+                {
+                    indexEnMinCon_DIA_MES = item.Value.ContadorDiaMes;
+                    keyEnMinCon_DIA_MES = item.Key;
+                }
+                if (fechaEnMinCon_DIA_MOD && indexEnMinCon_DIA_MOD > item.Value.ContadorDiaModulo)
+                {
+                    indexEnMinCon_DIA_MOD = item.Value.ContadorDiaModulo;
+                    keyEnMinCon_DIA_MOD = item.Key;
+                }
+                if (fechaEnMinConCONT_MES && indexEnMinConCONT_MES > item.Value.ContadorMes)
+                {
+                    indexEnMinConCONT_MES = item.Value.ContadorMes;
+                    keyEnMinConCONT_MES = item.Key;
+                }
+            }
+            tempDic.Remove(keyEnMinUltULT_RACH);
+            tempDic.Remove(keyEnMinCon_GENERAL);
+            tempDic.Remove(keyEnMinCon_DIA_SEM);
+            tempDic.Remove(keyEnMinCon_DIA_MES);
+            tempDic.Remove(keyEnMinCon_DIA_MOD);
+            tempDic.Remove(keyEnMinConCONT_MES);
+            return tempDic;
         }
 
-        private void ObtenerUltimosRachasPosicion()
+        private Dictionary<string, ObjectInfoDTO> ValidarIndicadores(Dictionary<string, ObjectInfoDTO> dict, string tabla)
         {
-            DateTime fecha = this.fecha.AddDays(-1);
-            string fechaFormat = fecha.Day + "/" + fecha.Month + "/" + fecha.Year;
-            string consulta = string.Format(ConstantesGenerales.QUERY_VALIDAR_ULTIMOS_RACHAS, fechaFormat);
-            DbRawSqlQuery<UltimosRachasDTO> data = _astEntities.Database.SqlQuery<UltimosRachasDTO>(consulta);
-            List<UltimosRachasDTO> listDatos = data.AsEnumerable().ToList();
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            bool fechaEnMinUltULT_RACH = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_ULT_RACH);
+            bool fechaEnMinCon_GENERAL = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_GENERAL);
+            bool fechaEnMinCon_DIA_SEM = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM);
+            bool fechaEnMinCon_DIA_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES);
+            bool fechaEnMinCon_DIA_MOD = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD);
+            bool fechaEnMinConCONT_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_MES);
+            int indexEnMinUltULT_RACH = 10000;
+            int indexEnMinCon_GENERAL = 10000;
+            int indexEnMinCon_DIA_SEM = 10000;
+            int indexEnMinCon_DIA_MES = 10000;
+            int indexEnMinCon_DIA_MOD = 10000;
+            int indexEnMinConCONT_MES = 10000;
+            string keyEnMinUltULT_RACH = "";
+            string keyEnMinCon_GENERAL = "";
+            string keyEnMinCon_DIA_SEM = "";
+            string keyEnMinCon_DIA_MES = "";
+            string keyEnMinCon_DIA_MOD = "";
+            string keyEnMinConCONT_MES = "";
+            string keyEnMinConP_ACTUAL = "";
+            foreach (var item in dict)
+            {
+                if (fechaEnMinUltULT_RACH && indexEnMinUltULT_RACH > item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value)
+                {
+                    indexEnMinUltULT_RACH = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
+                    keyEnMinUltULT_RACH = item.Key;
+                }
+                if (fechaEnMinCon_GENERAL && indexEnMinCon_GENERAL > item.Value.ContadorGeneral)
+                {
+                    indexEnMinCon_GENERAL = item.Value.ContadorGeneral;
+                    keyEnMinCon_GENERAL = item.Key;
+                }
+                if (fechaEnMinCon_DIA_SEM && indexEnMinCon_DIA_SEM > item.Value.ContadorDiaSemana)
+                {
+                    indexEnMinCon_DIA_SEM = item.Value.ContadorDiaSemana;
+                    keyEnMinCon_DIA_SEM = item.Key;
+                }
+                if (fechaEnMinCon_DIA_MES && indexEnMinCon_DIA_MES > item.Value.ContadorDiaMes)
+                {
+                    indexEnMinCon_DIA_MES = item.Value.ContadorDiaMes;
+                    keyEnMinCon_DIA_MES = item.Key;
+                }
+                if (fechaEnMinCon_DIA_MOD && indexEnMinCon_DIA_MOD > item.Value.ContadorDiaModulo)
+                {
+                    indexEnMinCon_DIA_MOD = item.Value.ContadorDiaModulo;
+                    keyEnMinCon_DIA_MOD = item.Key;
+                }
+                if (fechaEnMinConCONT_MES && indexEnMinConCONT_MES > item.Value.ContadorMes)
+                {
+                    indexEnMinConCONT_MES = item.Value.ContadorMes;
+                    keyEnMinConCONT_MES = item.Key;
+                }
+            }
+            tempDic.Remove(keyEnMinUltULT_RACH);
+            tempDic.Remove(keyEnMinCon_GENERAL);
+            tempDic.Remove(keyEnMinCon_DIA_SEM);
+            tempDic.Remove(keyEnMinCon_DIA_MES);
+            tempDic.Remove(keyEnMinCon_DIA_MOD);
+            tempDic.Remove(keyEnMinConCONT_MES);
+            tempDic.Remove(keyEnMinConP_ACTUAL);
+            return tempDic;
+        }
+
+        /// <summary>
+        /// Método que escribe los datos recibidos en el diccionario en los archivos
+        /// </summary>
+        /// <param name="dict">diccionario con datos</param>
+        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
+        private void EscribirDatosArchivo(Dictionary<int, ObjectInfoDTO> dict, string cad)
+        {
+            string fic = path + fecha.Day + cad + ".csv";
+            StreamWriter sw = new StreamWriter(fic);
+            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
+            foreach (var item in dict)
+            {
+                sw.Write(item.Key);
+                sw.WriteLine(item.Value.ToString());
+            }
+            sw.Close();
+        }
+        /// <summary>
+        /// Método que escribe los datos recibidos en el diccionario en los archivos
+        /// </summary>
+        /// <param name="dict">diccionario con datos</param>
+        /// <param name="cad">cadena que hace parte del nombre del archivo a escribir</param>
+        private void EscribirDatosArchivo(Dictionary<string, ObjectInfoDTO> dict, string cad)
+        {
+            string fic = path + fecha.Day + cad + ".csv";
+            StreamWriter sw = new StreamWriter(fic);
+            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
+            foreach (var item in dict)
+            {
+                sw.Write(item.Key);
+                sw.WriteLine(item.Value.ToString());
+            }
+            sw.Close();
+        }
+
+        private Dictionary<string, ObjectInfoDTO> EliminarValoresMinimos(Dictionary<string, ObjectInfoDTO> dict, string tablaPosicion)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            InfoPosicionDTO infoPosicion = this.ObtenerUltimoObjetoPosicion(tablaPosicion);
+            List<ContadorValorDTO> listContDiaSemana = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORDIASEMANA, infoPosicion.CONTADORDIASEMANA+"");
+            List<ContadorValorDTO> listContDiaMes = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORDIAMES, infoPosicion.CONTADORDIAMES + "");
+            List<ContadorValorDTO> listContDiaModulo = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORDIAMODULO, infoPosicion.CONTADORDIAMODULO + "");
+            List<ContadorValorDTO> listContMes = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORMES, infoPosicion.CONTADORMES + "");
+            List<ContadorValorDTO> listContDespActual = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORDESPUESACTUAL, infoPosicion.CONTADORDESPUESACTUAL + "");
+            foreach (var item in dict)
+            {
+                if (!KeyEntreMenores(listContDiaSemana, item.Value.RankContadorDiaSemana))
+                {
+                    tempDic.Remove(item.Key);
+                    continue;
+                }
+                //if (!KeyEntreMenores(listContDiaMes, item.Value.RankContadorDiaMes))
+                //{
+                //    tempDic.Remove(item.Key);
+                //    continue;
+                //}
+                //if (!KeyEntreMenores(listContDiaModulo, item.Value.RankContadorDiaModulo))
+                //{
+                //    tempDic.Remove(item.Key);
+                //    continue;
+                //}
+                //if (!KeyEntreMenores(listContMes, item.Value.RankContadorMes))
+                //{
+                //    tempDic.Remove(item.Key);
+                //    continue;
+                //}
+                if (!KeyEntreMenores(listContDespActual, item.Value.ContadorDespuesActual))
+                {
+                    tempDic.Remove(item.Key);
+                    continue;
+                }
+            }
+            return tempDic;
+        }
+
+        private bool KeyEntreMenores(List<ContadorValorDTO> lista, int valorComparar)
+        {
+            int index = 0;
+            foreach (var item in lista)
+            {
+                if(item.Valor == valorComparar)
+                {
+                    return index < 6;
+                }
+                index++;
+            }
+            return index < 6;
+        }
+
+        private Dictionary<int, ObjectInfoDTO> EliminarValoresMinimos(Dictionary<int, ObjectInfoDTO> dict, string tablaPosicion)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            InfoPosicionDTO infoPosicion = this.ObtenerUltimoObjetoPosicion(tablaPosicion);
+            List<ContadorValorDTO> listContDiaSemana = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORDIASEMANA, infoPosicion.CONTADORDIASEMANA + "");
+            List<ContadorValorDTO> listContDiaMes = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORDIAMES, infoPosicion.CONTADORDIAMES + "");
+            List<ContadorValorDTO> listContDiaModulo = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORDIAMODULO, infoPosicion.CONTADORDIAMODULO + "");
+            List<ContadorValorDTO> listContMes = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORMES, infoPosicion.CONTADORMES + "");
+            List<ContadorValorDTO> listContDespActual = this.ObtenerListaContadorDespActualAgrupada(tablaPosicion, ConstantesGenerales.CONTADORDESPUESACTUAL, infoPosicion.CONTADORDESPUESACTUAL + "");
+            foreach (var item in dict)
+            {
+                if (!KeyEntreMenores(listContDiaSemana, item.Value.RankContadorDiaSemana))
+                {
+                    tempDic.Remove(item.Key);
+                    continue;
+                }
+                //if (!KeyEntreMenores(listContDiaMes, item.Value.RankContadorDiaMes))
+                //{
+                //    tempDic.Remove(item.Key);
+                //    continue;
+                //}
+                //if (!KeyEntreMenores(listContDiaModulo, item.Value.RankContadorDiaModulo))
+                //{
+                //    tempDic.Remove(item.Key);
+                //    continue;
+                //}
+                //if (!KeyEntreMenores(listContMes, item.Value.RankContadorMes))
+                //{
+                //    tempDic.Remove(item.Key);
+                //    continue;
+                //}
+                if (!KeyEntreMenores(listContDespActual, item.Value.ContadorDespuesActual))
+                {
+                    tempDic.Remove(item.Key);
+                    continue;
+                }
+            }
+            return tempDic;
+        }
+
+        private List<ContadorValorDTO> ObtenerListaContadorDespActualAgrupada(string tabla, string columna, string datoActual)
+        {
+            string query = string.Format(ConstantesConsultas.QUERY_COUNT_DATOS_DESP_ACTUAL_COLUMNA, columna, tabla, datoActual, this.fechaFormat);
+            DbRawSqlQuery<ContadorValorDTO> data = _astEntities.Database.SqlQuery<ContadorValorDTO>(query);
+            return data.AsEnumerable().ToList();
+        }
+        
+        private InfoPosicionDTO ObtenerUltimoObjetoPosicion(string tablaPosicion)
+        {
+            DateTime fechaAnterior = this.fecha.AddDays(-1);
+            string fechaAntFormat = fechaAnterior.Day + "/" + fechaAnterior.Month + "/" + fechaAnterior.Year;
+            string query = string.Format(ConstantesConsultas.QUERY_DATOS_ANTERIOR_POSICION, tablaPosicion, fechaAntFormat);
+            DbRawSqlQuery<InfoPosicionDTO> data = _astEntities.Database.SqlQuery<InfoPosicionDTO>(query);
+            return data.AsEnumerable().ToList().ElementAt(0);
+        }
+
+        private void EscribirConsultas()
+        {
+            string fic = path + fecha.Day+".txt";
+            StreamWriter sw = new StreamWriter(fic);
+            sw.WriteLine(ConstantesGenerales.ENCABEZADOS);
+            foreach (var item in this.listaConsultas)
+            {
+                sw.WriteLine(item);
+            }
+            sw.Close();
+        }
+
+        private List<int> ObtenerValoresSinAparecer(string tablaPosicion)
+        {
+            string fechaAntFormat = this.fecha.Day + "/" + this.fecha.Month + "/" + this.fecha.Year;
+            string query = string.Format(ConstantesConsultas.QUERY_DATOS_SIN_APARECER, tablaPosicion, fechaAntFormat);
+            DbRawSqlQuery<ContadorValorDTO> data = _astEntities.Database.SqlQuery<ContadorValorDTO>(query);
+            return (from x in data.AsEnumerable() select x.Valor).Take(15).ToList();
+        }
+
+        private Dictionary<int, ObjectInfoDTO> ValidarSinAparecer(Dictionary<int, ObjectInfoDTO> dict, string tablaPosicion)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            List<int> lista = this.ObtenerValoresSinAparecer(tablaPosicion);
+            foreach (var item in dict)
+            {
+                if (lista.IndexOf(item.Value.RachasAcumuladas.Last()) == -1)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
+
+        private Dictionary<string, ObjectInfoDTO> ValidarSinAparecer(Dictionary<string, ObjectInfoDTO> dict, string tablaPosicion)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            List<int> lista = this.ObtenerValoresSinAparecer(tablaPosicion);
+            foreach (var item in dict)
+            {
+                if (lista.IndexOf(item.Value.RachasAcumuladas.Last()) == -1)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
         }
     }
 }

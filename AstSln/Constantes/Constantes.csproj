@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstantesConsultas.cs" />
     <Compile Include="ConstantesGenerales.cs" />
     <Compile Include="ConstantesMaxMin.cs" />
+    <Compile Include="ConstantesPosicionesEspacio.cs" />
     <Compile Include="ConstantesTipoAst.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

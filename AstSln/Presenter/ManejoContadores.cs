@@ -10,71 +10,71 @@ namespace Presenter
 {
     public class ManejoContadores
     {
-        public static void AddInfoContAnioModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveNum].RankContadorAnioModulo = cust.Rank;
-                dict[cust.ClaveNum].ContadorAnioModulo = cust.CountRank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContAnioModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveNum].RankContadorAnioModulo = cust.Rank;
+        //        dict[cust.ClaveNum].ContadorAnioModulo = cust.CountRank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AddInfoContMesDia(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveNum].RankContadorMesDia = cust.Rank;
-                dict[cust.ClaveNum].ContadorMesDia = cust.CountRank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContMesDia(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveNum].RankContadorMesDia = cust.Rank;
+        //        dict[cust.ClaveNum].ContadorMesDia = cust.CountRank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AddInfoContMesModuloDiaModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveNum].RankContadorMesModuloDiaModulo = cust.Rank;
-                dict[cust.ClaveNum].ContadorMesModuloDiaModulo = cust.CountRank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContMesModuloDiaModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveNum].RankContadorMesModuloDiaModulo = cust.Rank;
+        //        dict[cust.ClaveNum].ContadorMesModuloDiaModulo = cust.CountRank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AddInfoContMesModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveNum].RankContadorMesModulo = cust.Rank;
-                dict[cust.ClaveNum].ContadorMesModulo = cust.CountRank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContMesModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveNum].RankContadorMesModulo = cust.Rank;
+        //        dict[cust.ClaveNum].ContadorMesModulo = cust.CountRank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AdinionarInformacionContadorDiaAnioModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveNum].RankContadorDiaAnioModulo = cust.Rank;
-                dict[cust.ClaveNum].ContadorDiaAnioModulo = cust.CountRank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AdinionarInformacionContadorDiaAnioModulo(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveNum].RankContadorDiaAnioModulo = cust.Rank;
+        //        dict[cust.ClaveNum].ContadorDiaAnioModulo = cust.CountRank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AddInfoContDiaAnio(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveNum].RankContadorDiaAnio = cust.Rank;
-                dict[cust.ClaveNum].ContadorDiaAnio = cust.CountRank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContDiaAnio(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveNum].RankContadorDiaAnio = cust.Rank;
+        //        dict[cust.ClaveNum].ContadorDiaAnio = cust.CountRank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveNum].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
         public static void AddInfoContMes(Dictionary<int, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
         {
@@ -131,71 +131,71 @@ namespace Presenter
             }
         }
 
-        public static void AddInfoContAnioModulo(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveSign].RankContadorAnioModulo = cust.Rank;
-                dict[cust.ClaveSign].ContadorAnioModulo = cust.CountRank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContAnioModulo(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveSign].RankContadorAnioModulo = cust.Rank;
+        //        dict[cust.ClaveSign].ContadorAnioModulo = cust.CountRank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AddInfoContMesDia(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveSign].RankContadorMesDia = cust.Rank;
-                dict[cust.ClaveSign].ContadorMesDia = cust.CountRank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContMesDia(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveSign].RankContadorMesDia = cust.Rank;
+        //        dict[cust.ClaveSign].ContadorMesDia = cust.CountRank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AddInfoContMesModuloDiaModulo(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveSign].RankContadorMesModuloDiaModulo = cust.Rank;
-                dict[cust.ClaveSign].ContadorMesModuloDiaModulo = cust.CountRank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContMesModuloDiaModulo(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveSign].RankContadorMesModuloDiaModulo = cust.Rank;
+        //        dict[cust.ClaveSign].ContadorMesModuloDiaModulo = cust.CountRank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AddInfoContMesModulo(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveSign].RankContadorMesModulo = cust.Rank;
-                dict[cust.ClaveSign].ContadorMesModulo = cust.CountRank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContMesModulo(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveSign].RankContadorMesModulo = cust.Rank;
+        //        dict[cust.ClaveSign].ContadorMesModulo = cust.CountRank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AdinionarInformacionContadorDiaAnioModulo(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveSign].RankContadorDiaAnioModulo = cust.Rank;
-                dict[cust.ClaveSign].ContadorDiaAnioModulo = cust.CountRank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AdinionarInformacionContadorDiaAnioModulo(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveSign].RankContadorDiaAnioModulo = cust.Rank;
+        //        dict[cust.ClaveSign].ContadorDiaAnioModulo = cust.CountRank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
-        public static void AddInfoContDiaAnio(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
-        {
-            foreach (var cust in data)
-            {
-                dict[cust.ClaveSign].RankContadorDiaAnio = cust.Rank;
-                dict[cust.ClaveSign].ContadorDiaAnio = cust.CountRank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
-                dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
-            }
-        }
+        //public static void AddInfoContDiaAnio(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
+        //{
+        //    foreach (var cust in data)
+        //    {
+        //        dict[cust.ClaveSign].RankContadorDiaAnio = cust.Rank;
+        //        dict[cust.ClaveSign].ContadorDiaAnio = cust.CountRank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.Rank;
+        //        dict[cust.ClaveSign].PuntuacionTotal += cust.CountRank;
+        //    }
+        //}
 
         public static void AddInfoContMes(Dictionary<string, ObjectInfoDTO> dict, DbRawSqlQuery<QueryInfo> data)
         {

@@ -14,25 +14,20 @@ namespace Model.DataContextModel
     
     public partial class SIGN_DATOS
     {
-        public int ID { get; set; }
-        public Nullable<int> TIPO { get; set; }
-        public Nullable<int> PUNTUACIONTOTAL { get; set; }
-        public Nullable<int> CONTADORULTIMOENRACHAS { get; set; }
-        public Nullable<int> CONTADORULTIMOENRACHASDESACTUA { get; set; }
-        public Nullable<int> CONTADORGENERAL { get; set; }
-        public Nullable<int> CONTADORDIASEMANA { get; set; }
-        public Nullable<int> CONTADORDIAMES { get; set; }
-        public Nullable<int> CONTADORDIAMODULO { get; set; }
-        public Nullable<int> CONTADORMES { get; set; }
-        public Nullable<int> CONTADORDIAANIO { get; set; }
-        public Nullable<int> CONTADORDIAANIOMODULO { get; set; }
-        public Nullable<int> CONTADORMESMODULODIAMODULO { get; set; }
-        public Nullable<int> CONTADORMESDIA { get; set; }
-        public Nullable<int> CONTADORANIOMODULO { get; set; }
-        public Nullable<int> CONTADORMESMODULO { get; set; }
-        public Nullable<int> CONTADORDESPUESACTUAL { get; set; }
-        public Nullable<int> CONTADORDESPUESOTROTIPO { get; set; }
-        public Nullable<int> CONTADORDESPUESSIGNACTUAL { get; set; }
+        public decimal ID { get; set; }
+        public Nullable<decimal> TIPO { get; set; }
+        public Nullable<decimal> PUNTUACIONTOTAL { get; set; }
+        public Nullable<decimal> SINAPARECER { get; set; }
+        public Nullable<decimal> CONTADORULTIMOENRACHAS { get; set; }
+        public Nullable<decimal> CONTADORULTIMOENRACHASDESACTUA { get; set; }
+        public Nullable<decimal> CONTADORGENERAL { get; set; }
+        public Nullable<decimal> CONTADORDIASEMANA { get; set; }
+        public Nullable<decimal> CONTADORDIAMES { get; set; }
+        public Nullable<decimal> CONTADORDIAMODULO { get; set; }
+        public Nullable<decimal> CONTADORMES { get; set; }
+        public Nullable<decimal> CONTADORDESPUESACTUAL { get; set; }
+        public Nullable<decimal> SUMATORIAVALORES { get; set; }
+        public Nullable<decimal> CONTADORDESPUESSIGNACTUAL { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
     }
 }

@@ -25,7 +25,6 @@ namespace Constantes
         public const string POS_TRES = "POS_TRES";
         public const string POS_CUATRO = "POS_CUATRO";
         public const string SIGN = "SIGN";
-        public const string QUERY_BASE = "SELECT {0} AS {3}, {5}-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank, COUNT(*) AS CountRank FROM astr WHERE tipo = {1} {2} {4} GROUP BY {0}";
         public const string ENCABEZADOS = ";PuntuacionTotal;UltimasRachas;UltimasRachasDespActual;ContadorUltimoEnRachas;DictRachasAgrupadasIntDespActual;DictRachasAgrupadasInt;ContadorUltimoEnRachasDesActual;ContadorGeneral;;ContadorDiaSemana;;ContadorDiaMes;;ContadorDiaModulo;;ContadorMes;;ContadorDiaAnio;;ContadorDiaAnioModulo;;ContadorMesModuloDiaModulo;;ContadorMesDia;;ContadorAnioModulo;;ContadorMesModulo;;ContadorDespuesActual;ContadorDespuesOtroTipo;ContadorDespuesSignActual";
         public const string INDICA_MIN_ULT_RACH = "INDICA_MIN_ULT_RACH";
         public const string COMPARA_ULT_RACH = "COMPARA_ULT_RACH";
@@ -39,6 +38,10 @@ namespace Constantes
         public const string COMPARA_CONT_DIA_MOD = "COMPARA_CONT_DIA_MOD";
         public const string INDICA_MIN_CONT_MES = "INDICA_MIN_CONT_MES";
         public const string COMPARA_CONT_MES = "COMPARA_CONT_MES";
+        public const string COMPARA_CONT_DESP_ACTUAL = "COMPARA_CONT_DESP_ACTUAL";
+        public const string INDICA_MIN_CONT_DESP_ACTUAL = "INDICA_MIN_CONT_DESP_ACTUAL";
+        public const string INDICA_MIN_PUNTUA_TOTAL = "INDICA_MIN_PUNTUA_TOTAL";
+        public const string INDICA_MAX_PUNTUA_TOTAL = "INDICA_MAX_PUNTUA_TOTAL";
         public const string DATOS_TEMP = "DATOS_TEMP";
         public const string AN_DAT_SIGN = "AN_DAT_SIGN";
         public const string AN_DAT_POS_CUATRO = "AN_DAT_POS_CUATRO";
@@ -57,26 +60,14 @@ namespace Constantes
         public const string CONTADORDIAMES = "CONTADORDIAMES";
         public const string CONTADORDIAMODULO = "CONTADORDIAMODULO";
         public const string CONTADORMES = "CONTADORMES";
+        public const string CONTADORDESPUESACTUAL = "CONTADORDESPUESACTUAL";
         public const string CONTADORDIAANIO = "CONTADORDIAANIO";
         public const string CONTADORDIAANIOMODULO = "CONTADORDIAANIOMODULO";
         public const string CONTADORMESMODULODIAMODULO = "CONTADORMESMODULODIAMODULO";
         public const string CONTADORMESDIA = "CONTADORMESDIA";
         public const string CONTADORANIOMODULO = "CONTADORANIOMODULO";
         public const string CONTADORMESMODULO = "CONTADORMESMODULO";
-        public const string CONTADORDESPUESACTUAL = "CONTADORDESPUESACTUAL";
         public const string CONTADORDESPUESOTROTIPO = "CONTADORDESPUESOTROTIPO";
         public const string CONTADORDESPUESSIGNACTUAL = "CONTADORDESPUESSIGNACTUAL";
-        public const string QUERY_MAX_FECHA_CAMPO = "SELECT MAX(fecha) FROM {0} WHERE {1} = 1";
-        public const string QUERY_MIN_DATO_DATA_TEMP = "SELECT MIN({0}) FROM DATOS_TEMP WHERE fecha = to_date('{2}','dd/MM/yyyy') AND tipo = {3} AND posicion = {4}";
-        public const string QUERY_VER_APARICIONES_ACTUAL = "SELECT {0} FROM {1} WHERE fecha < to_date('{2}','dd/MM/yyyy') ORDER BY fecha DESC";
-        public const string QUERY_VER_APARICIONES_DESP_ACTUAL = "SELECT {0} FROM {1} WHERE fecha-1 IN (SELECT fecha FROM {1} WHERE {0} = {2}) ORDER BY fecha DESC";
-        public const string QUERY_AGRUPAR_APARICIONES_DESP_ACTUAL = "SELECT count(*) AS CountRank, {0} AS ClaveNum FROM {1} WHERE fecha-1 IN (SELECT fecha FROM {1} WHERE {0} = {2} AND fecha < to_date('{3}','dd/MM/yyyy')) GROUP BY {0} ORDER BY 1";
-        public const string QUERY_CONSULTAR_MAX_DATA = "SELECT {0} FROM {1} WHERE fecha = (SELECT MAX(fecha) FROM {1})";
-        public const string QUERY_TOTAL_DATOS_DESP_ACTUAL = "SELECT COUNT(*) FROM {0} WHERE fecha-1 IN (SELECT fecha FROM {0} WHERE CONTADORGENERAL = {1})";
-        public const string QUERY_VALIDAR_ULTIMOS_RACHAS = "SELECT ContadorUltimoEnRachas AS DatoConsulta, 1 AS posicion FROM pos_uno_datos WHERE fecha = TO_DATE('{0}','dd/MM/yyyy') UNION ALL SELECT ContadorUltimoEnRachas AS DatoConsulta, 2 AS posicion FROM pos_dos_datos WHERE fecha = TO_DATE('{0}','dd/MM/yyyy') UNION ALL SELECT ContadorUltimoEnRachas AS DatoConsulta, 3 AS posicion FROM pos_tres_datos WHERE fecha = TO_DATE('{0}','dd/MM/yyyy') UNION ALL SELECT ContadorUltimoEnRachas AS DatoConsulta, 4 AS posicion FROM pos_cuatro_datos WHERE fecha = TO_DATE('{0}','dd/MM/yyyy') UNION ALL SELECT ContadorUltimoEnRachas AS DatoConsulta, 5 AS posicion FROM sign_datos WHERE fecha = TO_DATE('{0}','dd/MM/yyyy')";
-        public const string QUERY_MISMO_DATO_ANDATOS = "SELECT COUNT(*) AS Contador, TO_CHAR(fecha,'MM') AS Mes FROM {0} WHERE {1} = 0 GROUP BY TO_CHAR(fecha,'MM') ORDER BY 1";
-        public const string QUERY_SUMATORIA_DATOS = "SELECT COUNT(*) AS Contador, a.total AS Valor FROM (SELECT contadorgeneral + contadordiasemana +  contadordiames + contadordiamodulo + contadormes + contadorDespuesActual AS total FROM {0} WHERE fecha < to_date('{2}','dd/MM/yyyy')) a GROUP BY a.total ORDER BY 1 {1}";
-        public const string QUERY_COUNT_DATOS_DESP_ACTUAL = "SELECT {0} AS {1}, {2}-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank, COUNT(*) FROM astr WHERE fecha IN (SELECT fecha+1 FROM astr WHERE {0} = {3}) {4} GROUP BY {0}";
-        public const string QUERY_COUNT_DATOS_DESP_ACTUAL_STRING = "SELECT {0} AS {1}, {2}-DENSE_RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank FROM astr WHERE fecha IN (SELECT fecha+1 FROM astr WHERE {0} LIKE '{3}') {4} GROUP BY {0}";
     }
 }

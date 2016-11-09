@@ -25,17 +25,18 @@ namespace Model.DataContextModel
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ASTR> ASTR { get; set; }
-        public virtual DbSet<POS_CUATRO_DATOS> POS_CUATRO_DATOS { get; set; }
-        public virtual DbSet<POS_DOS_DATOS> POS_DOS_DATOS { get; set; }
-        public virtual DbSet<POS_TRES_DATOS> POS_TRES_DATOS { get; set; }
-        public virtual DbSet<POS_UNO_DATOS> POS_UNO_DATOS { get; set; }
-        public virtual DbSet<SIGN_DATOS> SIGN_DATOS { get; set; }
-        public virtual DbSet<DATOS_TEMP> DATOS_TEMP { get; set; }
         public virtual DbSet<AN_DAT_POS_CUATRO> AN_DAT_POS_CUATRO { get; set; }
         public virtual DbSet<AN_DAT_POS_DOS> AN_DAT_POS_DOS { get; set; }
         public virtual DbSet<AN_DAT_POS_TRES> AN_DAT_POS_TRES { get; set; }
         public virtual DbSet<AN_DAT_POS_UNO> AN_DAT_POS_UNO { get; set; }
         public virtual DbSet<AN_DAT_SIGN> AN_DAT_SIGN { get; set; }
+        public virtual DbSet<ASTR> ASTR { get; set; }
+        public virtual DbSet<DATOS_TEMP> DATOS_TEMP { get; set; }
+        public virtual DbSet<DATOS_TEMP_DEPUR> DATOS_TEMP_DEPUR { get; set; }
+        public virtual DbSet<POS_CUATRO_DATOS> POS_CUATRO_DATOS { get; set; }
+        public virtual DbSet<POS_DOS_DATOS> POS_DOS_DATOS { get; set; }
+        public virtual DbSet<POS_TRES_DATOS> POS_TRES_DATOS { get; set; }
+        public virtual DbSet<POS_UNO_DATOS> POS_UNO_DATOS { get; set; }
+        public virtual DbSet<SIGN_DATOS> SIGN_DATOS { get; set; }
     }
 }

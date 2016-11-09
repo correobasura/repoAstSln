@@ -15,13 +15,13 @@ namespace Model.DataContextModel
     public partial class ASTR
     {
         public decimal ID { get; set; }
-        public Nullable<int> TIPO { get; set; }
-        public Nullable<byte> POS_UNO { get; set; }
-        public Nullable<byte> POS_DOS { get; set; }
-        public Nullable<byte> POS_TRES { get; set; }
-        public Nullable<byte> POS_CUATRO { get; set; }
+        public Nullable<decimal> TIPO { get; set; }
+        public Nullable<decimal> POS_UNO { get; set; }
+        public Nullable<decimal> POS_DOS { get; set; }
+        public Nullable<decimal> POS_TRES { get; set; }
+        public Nullable<decimal> POS_CUATRO { get; set; }
         public string SIGN { get; set; }
-        public Nullable<int> NUM_SOR { get; set; }
+        public Nullable<decimal> NUM_SOR { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
     }
 }
