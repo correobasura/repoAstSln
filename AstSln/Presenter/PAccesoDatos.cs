@@ -96,7 +96,7 @@ namespace Presenter
             this.ValidarRachas(listaDatosLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
 
 
-            this.GuardarDatosTemporales();
+            //this.GuardarDatosTemporales();
 
             var dict1 = this.ValidarSinAparecer(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
             var dict2 = this.ValidarSinAparecer(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
@@ -154,11 +154,11 @@ namespace Presenter
             //this.RevisarValoresMinimos(dict3, "PosTresLunDep", ConstantesGenerales.AN_DAT_POS_TRES, ConstantesTipoSor.POSICION_TRES, ConstantesGenerales.POS_TRES_DATOS);
             //this.RevisarValoresMinimos(dict4, "PosCuatroLunDep", ConstantesGenerales.AN_DAT_POS_CUATRO, ConstantesTipoSor.POSICION_CUATRO, ConstantesGenerales.POS_CUATRO_DATOS);
             //this.RevisarValoresMinimos(dict5, "PosSignDep", ConstantesGenerales.AN_DAT_SIGN, ConstantesTipoSor.POSICION_CINCO, ConstantesGenerales.SIGN_DATOS);
-            //this.GuardarDatosTemporalesDepurados(dict1, 1);
-            //this.GuardarDatosTemporalesDepurados(dict2, 2);
-            //this.GuardarDatosTemporalesDepurados(dict3, 3);
-            //this.GuardarDatosTemporalesDepurados(dict4, 4);
-            //this.GuardarDatosTemporalesDepurados(dictSign, 5);
+            this.GuardarDatosTemporalesDepurados(dict1, 1);
+            this.GuardarDatosTemporalesDepurados(dict2, 2);
+            this.GuardarDatosTemporalesDepurados(dict3, 3);
+            this.GuardarDatosTemporalesDepurados(dict4, 4);
+            this.GuardarDatosTemporalesDepurados(dictSign, 5);
             //this.EscribirDatosArchivo(dictInfoPosUnoLun, "APosUnoLun");
             //this.EscribirDatosArchivo(dictInfoPosDosLun, "BPosDosLun");
             //this.EscribirDatosArchivo(dictInfoPosTresLun, "CPosTresLun");
@@ -1617,7 +1617,7 @@ namespace Presenter
             string fechaAntFormat = this.fecha.Day + "/" + this.fecha.Month + "/" + this.fecha.Year;
             string query = string.Format(ConstantesConsultas.QUERY_DATOS_SIN_APARECER, tablaPosicion, fechaAntFormat);
             DbRawSqlQuery<ContadorValorDTO> data = _astEntities.Database.SqlQuery<ContadorValorDTO>(query);
-            return (from x in data.AsEnumerable() select x.Valor).Take(15).ToList();
+            return (from x in data.AsEnumerable() select x.Valor).Take(20).ToList();
         }
 
         private Dictionary<int, ObjectInfoDTO> ValidarSinAparecer(Dictionary<int, ObjectInfoDTO> dict, string tablaPosicion)

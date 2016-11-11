@@ -14,7 +14,7 @@ namespace TestApp
 
         public TestClass()
         {
-            for (int i = -1000; i < 0; i++)
+            for (int i = -20; i < 0; i++)
             {
 
                 _pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(i));
