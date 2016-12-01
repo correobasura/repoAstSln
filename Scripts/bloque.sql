@@ -1,3 +1,4 @@
+delete from datos_temp where fecha not in(select fecha from astr);commit;
 declare
 cursor curposuno is SELECT * from pos_uno_datos order by fecha asc;
 cursor curposdos is SELECT * from pos_dos_datos order by fecha asc;

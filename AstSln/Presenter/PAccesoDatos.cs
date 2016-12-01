@@ -98,11 +98,17 @@ namespace Presenter
 
             //this.GuardarDatosTemporales();
 
-            var dict1 = this.ValidarSinAparecer(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
-            var dict2 = this.ValidarSinAparecer(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
-            var dict3 = this.ValidarSinAparecer(dictInfoPosTresLun, ConstantesGenerales.POS_TRES_DATOS);
-            var dict4 = this.ValidarSinAparecer(dictInfoPosCuatroLun, ConstantesGenerales.POS_CUATRO_DATOS);
-            var dictSign = this.ValidarSinAparecer(dictInfoSignLun, ConstantesGenerales.SIGN_DATOS);
+            var dict1 = this.ValidarAparicionesDespActual(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
+            var dict2 = this.ValidarAparicionesDespActual(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
+            var dict3 = this.ValidarAparicionesDespActual(dictInfoPosTresLun, ConstantesGenerales.POS_TRES_DATOS);
+            var dict4 = this.ValidarAparicionesDespActual(dictInfoPosCuatroLun, ConstantesGenerales.POS_CUATRO_DATOS);
+            var dictSign = this.ValidarAparicionesDespActual(dictInfoSignLun, ConstantesGenerales.SIGN_DATOS);
+
+            dict1 = this.ValidarSinAparecer(dict1, ConstantesGenerales.POS_UNO_DATOS);
+            dict2 = this.ValidarSinAparecer(dict2, ConstantesGenerales.POS_DOS_DATOS);
+            dict3 = this.ValidarSinAparecer(dict3, ConstantesGenerales.POS_TRES_DATOS);
+            dict4 = this.ValidarSinAparecer(dict4, ConstantesGenerales.POS_CUATRO_DATOS);
+            dictSign = this.ValidarSinAparecer(dictSign, ConstantesGenerales.SIGN_DATOS);
 
             //var dict1 = this.ValidarMaximosMinimosPuntuacionTotal(dictInfoPosUnoLun, ConstantesGenerales.AN_DAT_POS_UNO, 3, 12);
             //var dict2 = this.ValidarMaximosMinimosPuntuacionTotal(dictInfoPosDosLun, ConstantesGenerales.AN_DAT_POS_DOS, 3, 12);
@@ -798,7 +804,7 @@ namespace Presenter
             //dt.CONTADORMESMODULO = objeto.RankContadorMesModulo;
             dt.CONTADORDESPUESACTUAL = objeto.ContadorDespuesActual;
             //dt.CONTADORDESPUESACTUALTOTAL = (objeto.RankContadorGeneral + objeto.RankContadorDiaSemana + objeto.RankContadorDiaMes + objeto.RankContadorDiaModulo + objeto.RankContadorMes + objeto.ContadorDespuesActual);
-            dt.SUMATORIAVALORES = (objeto.RankContadorGeneral + objeto.RankContadorDiaSemana + objeto.RankContadorDiaMes + objeto.RankContadorDiaModulo + objeto.RankContadorMes + objeto.ContadorDespuesActual + dt.SINAPARECER);
+            dt.SUMATORIAVALORES = (objeto.RankContadorGeneral + objeto.RankContadorDiaSemana + objeto.RankContadorDiaMes + objeto.RankContadorDiaModulo + objeto.RankContadorMes + objeto.ContadorDespuesActual);
             dt.CONTADORDESPUESSIGNACTUAL = objeto.ContadorDespuesSignActual;
             return dt;
 
@@ -1617,7 +1623,7 @@ namespace Presenter
             string fechaAntFormat = this.fecha.Day + "/" + this.fecha.Month + "/" + this.fecha.Year;
             string query = string.Format(ConstantesConsultas.QUERY_DATOS_SIN_APARECER, tablaPosicion, fechaAntFormat);
             DbRawSqlQuery<ContadorValorDTO> data = _astEntities.Database.SqlQuery<ContadorValorDTO>(query);
-            return (from x in data.AsEnumerable() select x.Valor).Take(20).ToList();
+            return (from x in data.AsEnumerable() select x.Valor).Take(25).ToList();
         }
 
         private Dictionary<int, ObjectInfoDTO> ValidarSinAparecer(Dictionary<int, ObjectInfoDTO> dict, string tablaPosicion)
@@ -1647,5 +1653,101 @@ namespace Presenter
             }
             return tempDic;
         }
+
+        private Dictionary<int, ObjectInfoDTO> ValidarAparicionesDespActual(Dictionary<int, ObjectInfoDTO> dict, string tablaPosicion)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            InfoPosicionDTO infoPosicion = this.ObtenerUltimoObjetoPosicion(tablaPosicion);
+            List<QueryInfo> listContadorDiaSemana = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIASEMANA, tablaPosicion, infoPosicion.CONTADORDIASEMANA);
+            List<QueryInfo> listContadorDiaMes = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIAMES, tablaPosicion, infoPosicion.CONTADORDIAMES);
+            List<QueryInfo> listContadorDiaModulo = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIAMODULO, tablaPosicion, infoPosicion.CONTADORDIAMODULO);
+            List<QueryInfo> listContadorMes = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORMES, tablaPosicion, infoPosicion.CONTADORMES);
+            List<QueryInfo> listContadorDespActual = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDESPUESACTUAL, tablaPosicion, infoPosicion.CONTADORDESPUESACTUAL);
+            List<QueryInfo> listSumatoriaDatos = this.ConsultarSumatoriaDatos(tablaPosicion);
+            
+            foreach (var item in dict)
+            {
+                int total = item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual;
+                if (!this.ValidarIndex(listContadorDiaSemana, item.Value.RankContadorDiaSemana) ||
+                    !this.ValidarIndex(listContadorDiaMes, item.Value.RankContadorDiaMes) ||
+                    !this.ValidarIndex(listContadorDiaModulo, item.Value.RankContadorDiaModulo) ||
+                    !this.ValidarIndex(listContadorMes, item.Value.RankContadorMes) ||
+                    !this.ValidarIndex(listContadorDespActual, item.Value.ContadorDespuesActual) //||
+                    //!this.ValidarIndex(listSumatoriaDatos, total)
+                    )
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
+
+        private bool ValidarIndex(List<QueryInfo> lista, int valueComparar)
+        {
+            int index = -1;
+            for (var i=0; i<lista.Count();i++)
+            {
+                if(lista.ElementAt(i).ClaveNum == valueComparar)
+                {
+                    index = i;
+                    break;
+                }
+            }
+                return index != -1;
+        }
+
+        private Dictionary<string, ObjectInfoDTO> ValidarAparicionesDespActual(Dictionary<string, ObjectInfoDTO> dict, string tablaPosicion)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            InfoPosicionDTO infoPosicion = this.ObtenerUltimoObjetoPosicion(tablaPosicion);
+            List<QueryInfo> listContadorDiaSemana = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIASEMANA, tablaPosicion, infoPosicion.CONTADORDIASEMANA);
+            List<QueryInfo> listContadorDiaMes = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIAMES, tablaPosicion, infoPosicion.CONTADORDIAMES);
+            List<QueryInfo> listContadorDiaModulo = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDIAMODULO, tablaPosicion, infoPosicion.CONTADORDIAMODULO);
+            List<QueryInfo> listContadorMes = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORMES, tablaPosicion, infoPosicion.CONTADORMES);
+            List<QueryInfo> listContadorDespActual = this.AgruparContadoresDespuesActual(ConstantesGenerales.CONTADORDESPUESACTUAL, tablaPosicion, infoPosicion.CONTADORDESPUESACTUAL);
+            List<QueryInfo> listSumatoriaDatos = this.ConsultarSumatoriaDatos(tablaPosicion);
+            foreach (var item in dict)
+            {
+                int total = item.Value.RankContadorDiaSemana + item.Value.RankContadorDiaMes + item.Value.RankContadorDiaModulo + item.Value.RankContadorMes + item.Value.ContadorDespuesActual;
+                if (!this.ValidarIndex(listContadorDiaSemana, item.Value.RankContadorDiaSemana) ||
+                    !this.ValidarIndex(listContadorDiaMes, item.Value.RankContadorDiaMes) ||
+                    !this.ValidarIndex(listContadorDiaModulo, item.Value.RankContadorDiaModulo) ||
+                    !this.ValidarIndex(listContadorMes, item.Value.RankContadorMes) ||
+                    !this.ValidarIndex(listContadorDespActual, item.Value.ContadorDespuesActual) //||
+                    //!this.ValidarIndex(listSumatoriaDatos, total)
+                    )
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
+
+        /// <summary>
+        /// Método que realiza la consulta de los valores agrupados para las coincidencias de un valor siguiente
+        /// </summary>
+        /// <param name="columna">Columna de la tabla sobre la que se realiza la consulta</param>
+        /// <param name="tablaValidar">Tabla para validar los datos</param>
+        /// <param name="valorComparar">Valor sobre el que se realiza la comparacion</param>
+        /// <returns></returns>
+        private List<QueryInfo> AgruparContadoresDespuesActual(string columna, string tablaValidar, int valorComparar)
+        {
+            string fechaFormat = this.fecha.Day + "/" + this.fecha.Month + "/" + this.fecha.Year;
+            string consulta = string.Format(ConstantesConsultas.QUERY_AGRUPAR_APARICIONES_DESP_ACTUAL, columna, tablaValidar, valorComparar, fechaFormat);
+            DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(consulta);
+            List<QueryInfo> lista = data.AsEnumerable().ToList();
+            return data.AsEnumerable().Take(7).ToList();
+        }
+
+        private List<QueryInfo> ConsultarSumatoriaDatos(string tabla)
+        {
+            string fechaFormat = fecha.Day + "/" + fecha.Month + "/" + fecha.Year;
+            string consulta = string.Format(ConstantesConsultas.QUERY_SUMATORIA_DATOS, tabla, fechaFormat);
+            DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(consulta);
+            int totalDatos = (data.AsEnumerable().Count() * 90) / 100;
+            return data.AsEnumerable().Take(totalDatos).ToList();
+        }
+
+        
     }
 }

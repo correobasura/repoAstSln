@@ -69,5 +69,7 @@ namespace Constantes
         public const string CONTADORMESMODULO = "CONTADORMESMODULO";
         public const string CONTADORDESPUESOTROTIPO = "CONTADORDESPUESOTROTIPO";
         public const string CONTADORDESPUESSIGNACTUAL = "CONTADORDESPUESSIGNACTUAL";
+        public const string SUMATORIAVALORES = "SUMATORIAVALORES";
+        
     }
 }

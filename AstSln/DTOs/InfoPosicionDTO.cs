@@ -37,5 +37,11 @@ namespace DTOs
             get;
             set;
         }
+
+        public int SUMATORIAVALORES
+        {
+            get;
+            set;
+        }
     }
 }
