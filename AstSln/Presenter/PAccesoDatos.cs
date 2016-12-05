@@ -98,17 +98,23 @@ namespace Presenter
 
             //this.GuardarDatosTemporales();
 
-            var dict1 = this.ValidarAparicionesDespActual(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
-            var dict2 = this.ValidarAparicionesDespActual(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
-            var dict3 = this.ValidarAparicionesDespActual(dictInfoPosTresLun, ConstantesGenerales.POS_TRES_DATOS);
-            var dict4 = this.ValidarAparicionesDespActual(dictInfoPosCuatroLun, ConstantesGenerales.POS_CUATRO_DATOS);
-            var dictSign = this.ValidarAparicionesDespActual(dictInfoSignLun, ConstantesGenerales.SIGN_DATOS);
+            //var dict1 = this.ValidarAparicionesDespActual(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
+            //var dict2 = this.ValidarAparicionesDespActual(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
+            //var dict3 = this.ValidarAparicionesDespActual(dictInfoPosTresLun, ConstantesGenerales.POS_TRES_DATOS);
+            //var dict4 = this.ValidarAparicionesDespActual(dictInfoPosCuatroLun, ConstantesGenerales.POS_CUATRO_DATOS);
+            var dictSign = this.ValidarInfoPorAnalisisAtributos(dictInfoSignLun);
 
-            dict1 = this.ValidarSinAparecer(dict1, ConstantesGenerales.POS_UNO_DATOS);
-            dict2 = this.ValidarSinAparecer(dict2, ConstantesGenerales.POS_DOS_DATOS);
-            dict3 = this.ValidarSinAparecer(dict3, ConstantesGenerales.POS_TRES_DATOS);
-            dict4 = this.ValidarSinAparecer(dict4, ConstantesGenerales.POS_CUATRO_DATOS);
-            dictSign = this.ValidarSinAparecer(dictSign, ConstantesGenerales.SIGN_DATOS);
+            //var dict1 = this.ValidarAparicionesDespActual(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
+            //var dict2 = this.ValidarAparicionesDespActual(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
+            //var dict3 = this.ValidarAparicionesDespActual(dictInfoPosTresLun, ConstantesGenerales.POS_TRES_DATOS);
+            //var dict4 = this.ValidarAparicionesDespActual(dictInfoPosCuatroLun, ConstantesGenerales.POS_CUATRO_DATOS);
+            //var dictSign = this.ValidarAparicionesDespActual(dictInfoSignLun, ConstantesGenerales.SIGN_DATOS);
+
+            //dict1 = this.ValidarSinAparecer(dict1, ConstantesGenerales.POS_UNO_DATOS);
+            //dict2 = this.ValidarSinAparecer(dict2, ConstantesGenerales.POS_DOS_DATOS);
+            //dict3 = this.ValidarSinAparecer(dict3, ConstantesGenerales.POS_TRES_DATOS);
+            //dict4 = this.ValidarSinAparecer(dict4, ConstantesGenerales.POS_CUATRO_DATOS);
+            //dictSign = this.ValidarSinAparecer(dictSign, ConstantesGenerales.SIGN_DATOS);
 
             //var dict1 = this.ValidarMaximosMinimosPuntuacionTotal(dictInfoPosUnoLun, ConstantesGenerales.AN_DAT_POS_UNO, 3, 12);
             //var dict2 = this.ValidarMaximosMinimosPuntuacionTotal(dictInfoPosDosLun, ConstantesGenerales.AN_DAT_POS_DOS, 3, 12);
@@ -160,10 +166,10 @@ namespace Presenter
             //this.RevisarValoresMinimos(dict3, "PosTresLunDep", ConstantesGenerales.AN_DAT_POS_TRES, ConstantesTipoSor.POSICION_TRES, ConstantesGenerales.POS_TRES_DATOS);
             //this.RevisarValoresMinimos(dict4, "PosCuatroLunDep", ConstantesGenerales.AN_DAT_POS_CUATRO, ConstantesTipoSor.POSICION_CUATRO, ConstantesGenerales.POS_CUATRO_DATOS);
             //this.RevisarValoresMinimos(dict5, "PosSignDep", ConstantesGenerales.AN_DAT_SIGN, ConstantesTipoSor.POSICION_CINCO, ConstantesGenerales.SIGN_DATOS);
-            this.GuardarDatosTemporalesDepurados(dict1, 1);
-            this.GuardarDatosTemporalesDepurados(dict2, 2);
-            this.GuardarDatosTemporalesDepurados(dict3, 3);
-            this.GuardarDatosTemporalesDepurados(dict4, 4);
+            //this.GuardarDatosTemporalesDepurados(dict1, 1);
+            //this.GuardarDatosTemporalesDepurados(dict2, 2);
+            //this.GuardarDatosTemporalesDepurados(dict3, 3);
+            //this.GuardarDatosTemporalesDepurados(dict4, 4);
             this.GuardarDatosTemporalesDepurados(dictSign, 5);
             //this.EscribirDatosArchivo(dictInfoPosUnoLun, "APosUnoLun");
             //this.EscribirDatosArchivo(dictInfoPosDosLun, "BPosDosLun");
@@ -1748,6 +1754,22 @@ namespace Presenter
             return data.AsEnumerable().Take(totalDatos).ToList();
         }
 
-        
+        private Dictionary<string, ObjectInfoDTO> ValidarInfoPorAnalisisAtributos(Dictionary<string, ObjectInfoDTO> dict)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            foreach (var item in dict)
+            {
+                bool cumpleCondiciones = true;
+                cumpleCondiciones &= item.Value.RankContadorDiaSemana >= 7;
+                cumpleCondiciones &= 5 <= item.Value.RankContadorDiaMes && item.Value.RankContadorDiaMes <= 10;
+                cumpleCondiciones &= item.Value.RankContadorMes >= 6;
+                cumpleCondiciones &= item.Value.ContadorDespuesActual >= 5;
+                if (!cumpleCondiciones)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
     }
 }
