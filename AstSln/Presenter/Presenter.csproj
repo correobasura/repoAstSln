@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalisisDatosPorPosicion.cs" />
     <Compile Include="ManejoContadores.cs" />
     <Compile Include="PAccesoDatos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -98,11 +98,11 @@ namespace Presenter
 
             //this.GuardarDatosTemporales();
 
-            //var dict1 = this.ValidarAparicionesDespActual(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
-            //var dict2 = this.ValidarAparicionesDespActual(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
-            //var dict3 = this.ValidarAparicionesDespActual(dictInfoPosTresLun, ConstantesGenerales.POS_TRES_DATOS);
-            //var dict4 = this.ValidarAparicionesDespActual(dictInfoPosCuatroLun, ConstantesGenerales.POS_CUATRO_DATOS);
-            var dictSign = this.ValidarInfoPorAnalisisAtributos(dictInfoSignLun);
+            //var dict1 = AnalisisDatosPorPosicion.ValidarInfoPorAnalisisAtributos(dictInfoPosUnoLun, _astEntities, ConstantesGenerales.POS_UNO_DATOS, fechaFormat);
+            //var dict2 = AnalisisDatosPorPosicion.ValidarInfoPorAnalisisAtributos(dictInfoPosDosLun, _astEntities, ConstantesGenerales.POS_DOS_DATOS, fechaFormat);
+            //var dict3 = AnalisisDatosPorPosicion.ValidarInfoPorAnalisisAtributos(dictInfoPosTresLun, _astEntities, ConstantesGenerales.POS_TRES_DATOS, fechaFormat);
+            //var dict4 = AnalisisDatosPorPosicion.ValidarInfoPorAnalisisAtributos(dictInfoPosCuatroLun, _astEntities, ConstantesGenerales.POS_CUATRO_DATOS, fechaFormat);
+            //var dictSign = AnalisisDatosPorPosicion.ValidarInfoPorAnalisisAtributos(dictInfoSignLun, _astEntities, fechaFormat);
 
             //var dict1 = this.ValidarAparicionesDespActual(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
             //var dict2 = this.ValidarAparicionesDespActual(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
@@ -126,7 +126,8 @@ namespace Presenter
             //dict2 = this.ValidarIndicadores(dict2, ConstantesGenerales.AN_DAT_POS_DOS);
             //dict3 = this.ValidarIndicadores(dict3, ConstantesGenerales.AN_DAT_POS_TRES);
             //dict4 = this.ValidarIndicadores(dict4, ConstantesGenerales.AN_DAT_POS_CUATRO);
-            //dictSign = this.ValidarIndicadores(dictSign, ConstantesGenerales.AN_DAT_SIGN);            
+            //dictSign = this.ValidarIndicadoresPosicion(dictSign, ConstantesGenerales.AN_DAT_SIGN);            
+            var dictSign = this.ValidarIndicadoresPosicion(dictInfoSignLun, ConstantesGenerales.AN_DAT_SIGN);
 
             //var dict1 = this.EliminarValoresMinimos(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
             //var dict2 = this.EliminarValoresMinimos(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
@@ -1339,133 +1340,133 @@ namespace Presenter
             this.AgruparRachas(dictSign);
         }
 
-        private Dictionary<int, ObjectInfoDTO> ValidarIndicadores(Dictionary<int, ObjectInfoDTO> dict, string tabla)
-        {
-            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
-            bool fechaEnMinUltULT_RACH = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_ULT_RACH);
-            bool fechaEnMinCon_GENERAL = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_GENERAL);
-            bool fechaEnMinCon_DIA_SEM = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM);
-            bool fechaEnMinCon_DIA_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES);
-            bool fechaEnMinCon_DIA_MOD = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD);
-            bool fechaEnMinConCONT_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_MES);
-            int indexEnMinUltULT_RACH = 10000;
-            int indexEnMinCon_GENERAL = 10000;
-            int indexEnMinCon_DIA_SEM = 10000;
-            int indexEnMinCon_DIA_MES = 10000;
-            int indexEnMinCon_DIA_MOD = 10000;
-            int indexEnMinConCONT_MES = 10000;
-            int keyEnMinUltULT_RACH = -1;
-            int keyEnMinCon_GENERAL = -1;
-            int keyEnMinCon_DIA_SEM = -1;
-            int keyEnMinCon_DIA_MES = -1;
-            int keyEnMinCon_DIA_MOD = -1;
-            int keyEnMinConCONT_MES = -1;
-            foreach (var item in dict)
-            {
-                if (fechaEnMinUltULT_RACH && indexEnMinUltULT_RACH > item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value)
-                {
-                    indexEnMinUltULT_RACH = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
-                    keyEnMinUltULT_RACH = item.Key;
-                }
-                if (fechaEnMinCon_GENERAL && indexEnMinCon_GENERAL > item.Value.ContadorGeneral)
-                {
-                    indexEnMinCon_GENERAL = item.Value.ContadorGeneral;
-                    keyEnMinCon_GENERAL = item.Key;
-                }
-                if (fechaEnMinCon_DIA_SEM && indexEnMinCon_DIA_SEM > item.Value.ContadorDiaSemana)
-                {
-                    indexEnMinCon_DIA_SEM = item.Value.ContadorDiaSemana;
-                    keyEnMinCon_DIA_SEM = item.Key;
-                }
-                if (fechaEnMinCon_DIA_MES && indexEnMinCon_DIA_MES > item.Value.ContadorDiaMes)
-                {
-                    indexEnMinCon_DIA_MES = item.Value.ContadorDiaMes;
-                    keyEnMinCon_DIA_MES = item.Key;
-                }
-                if (fechaEnMinCon_DIA_MOD && indexEnMinCon_DIA_MOD > item.Value.ContadorDiaModulo)
-                {
-                    indexEnMinCon_DIA_MOD = item.Value.ContadorDiaModulo;
-                    keyEnMinCon_DIA_MOD = item.Key;
-                }
-                if (fechaEnMinConCONT_MES && indexEnMinConCONT_MES > item.Value.ContadorMes)
-                {
-                    indexEnMinConCONT_MES = item.Value.ContadorMes;
-                    keyEnMinConCONT_MES = item.Key;
-                }
-            }
-            tempDic.Remove(keyEnMinUltULT_RACH);
-            tempDic.Remove(keyEnMinCon_GENERAL);
-            tempDic.Remove(keyEnMinCon_DIA_SEM);
-            tempDic.Remove(keyEnMinCon_DIA_MES);
-            tempDic.Remove(keyEnMinCon_DIA_MOD);
-            tempDic.Remove(keyEnMinConCONT_MES);
-            return tempDic;
-        }
+        //private Dictionary<int, ObjectInfoDTO> ValidarIndicadores(Dictionary<int, ObjectInfoDTO> dict, string tabla)
+        //{
+        //    var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+        //    bool fechaEnMinUltULT_RACH = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_ULT_RACH);
+        //    bool fechaEnMinCon_GENERAL = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_GENERAL);
+        //    bool fechaEnMinCon_DIA_SEM = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM);
+        //    bool fechaEnMinCon_DIA_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES);
+        //    bool fechaEnMinCon_DIA_MOD = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD);
+        //    bool fechaEnMinConCONT_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_MES);
+        //    int indexEnMinUltULT_RACH = 10000;
+        //    int indexEnMinCon_GENERAL = 10000;
+        //    int indexEnMinCon_DIA_SEM = 10000;
+        //    int indexEnMinCon_DIA_MES = 10000;
+        //    int indexEnMinCon_DIA_MOD = 10000;
+        //    int indexEnMinConCONT_MES = 10000;
+        //    int keyEnMinUltULT_RACH = -1;
+        //    int keyEnMinCon_GENERAL = -1;
+        //    int keyEnMinCon_DIA_SEM = -1;
+        //    int keyEnMinCon_DIA_MES = -1;
+        //    int keyEnMinCon_DIA_MOD = -1;
+        //    int keyEnMinConCONT_MES = -1;
+        //    foreach (var item in dict)
+        //    {
+        //        if (fechaEnMinUltULT_RACH && indexEnMinUltULT_RACH > item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value)
+        //        {
+        //            indexEnMinUltULT_RACH = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
+        //            keyEnMinUltULT_RACH = item.Key;
+        //        }
+        //        if (fechaEnMinCon_GENERAL && indexEnMinCon_GENERAL > item.Value.ContadorGeneral)
+        //        {
+        //            indexEnMinCon_GENERAL = item.Value.ContadorGeneral;
+        //            keyEnMinCon_GENERAL = item.Key;
+        //        }
+        //        if (fechaEnMinCon_DIA_SEM && indexEnMinCon_DIA_SEM > item.Value.ContadorDiaSemana)
+        //        {
+        //            indexEnMinCon_DIA_SEM = item.Value.ContadorDiaSemana;
+        //            keyEnMinCon_DIA_SEM = item.Key;
+        //        }
+        //        if (fechaEnMinCon_DIA_MES && indexEnMinCon_DIA_MES > item.Value.ContadorDiaMes)
+        //        {
+        //            indexEnMinCon_DIA_MES = item.Value.ContadorDiaMes;
+        //            keyEnMinCon_DIA_MES = item.Key;
+        //        }
+        //        if (fechaEnMinCon_DIA_MOD && indexEnMinCon_DIA_MOD > item.Value.ContadorDiaModulo)
+        //        {
+        //            indexEnMinCon_DIA_MOD = item.Value.ContadorDiaModulo;
+        //            keyEnMinCon_DIA_MOD = item.Key;
+        //        }
+        //        if (fechaEnMinConCONT_MES && indexEnMinConCONT_MES > item.Value.ContadorMes)
+        //        {
+        //            indexEnMinConCONT_MES = item.Value.ContadorMes;
+        //            keyEnMinConCONT_MES = item.Key;
+        //        }
+        //    }
+        //    tempDic.Remove(keyEnMinUltULT_RACH);
+        //    tempDic.Remove(keyEnMinCon_GENERAL);
+        //    tempDic.Remove(keyEnMinCon_DIA_SEM);
+        //    tempDic.Remove(keyEnMinCon_DIA_MES);
+        //    tempDic.Remove(keyEnMinCon_DIA_MOD);
+        //    tempDic.Remove(keyEnMinConCONT_MES);
+        //    return tempDic;
+        //}
 
-        private Dictionary<string, ObjectInfoDTO> ValidarIndicadores(Dictionary<string, ObjectInfoDTO> dict, string tabla)
-        {
-            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
-            bool fechaEnMinUltULT_RACH = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_ULT_RACH);
-            bool fechaEnMinCon_GENERAL = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_GENERAL);
-            bool fechaEnMinCon_DIA_SEM = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM);
-            bool fechaEnMinCon_DIA_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES);
-            bool fechaEnMinCon_DIA_MOD = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD);
-            bool fechaEnMinConCONT_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_MES);
-            int indexEnMinUltULT_RACH = 10000;
-            int indexEnMinCon_GENERAL = 10000;
-            int indexEnMinCon_DIA_SEM = 10000;
-            int indexEnMinCon_DIA_MES = 10000;
-            int indexEnMinCon_DIA_MOD = 10000;
-            int indexEnMinConCONT_MES = 10000;
-            string keyEnMinUltULT_RACH = "";
-            string keyEnMinCon_GENERAL = "";
-            string keyEnMinCon_DIA_SEM = "";
-            string keyEnMinCon_DIA_MES = "";
-            string keyEnMinCon_DIA_MOD = "";
-            string keyEnMinConCONT_MES = "";
-            string keyEnMinConP_ACTUAL = "";
-            foreach (var item in dict)
-            {
-                if (fechaEnMinUltULT_RACH && indexEnMinUltULT_RACH > item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value)
-                {
-                    indexEnMinUltULT_RACH = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
-                    keyEnMinUltULT_RACH = item.Key;
-                }
-                if (fechaEnMinCon_GENERAL && indexEnMinCon_GENERAL > item.Value.ContadorGeneral)
-                {
-                    indexEnMinCon_GENERAL = item.Value.ContadorGeneral;
-                    keyEnMinCon_GENERAL = item.Key;
-                }
-                if (fechaEnMinCon_DIA_SEM && indexEnMinCon_DIA_SEM > item.Value.ContadorDiaSemana)
-                {
-                    indexEnMinCon_DIA_SEM = item.Value.ContadorDiaSemana;
-                    keyEnMinCon_DIA_SEM = item.Key;
-                }
-                if (fechaEnMinCon_DIA_MES && indexEnMinCon_DIA_MES > item.Value.ContadorDiaMes)
-                {
-                    indexEnMinCon_DIA_MES = item.Value.ContadorDiaMes;
-                    keyEnMinCon_DIA_MES = item.Key;
-                }
-                if (fechaEnMinCon_DIA_MOD && indexEnMinCon_DIA_MOD > item.Value.ContadorDiaModulo)
-                {
-                    indexEnMinCon_DIA_MOD = item.Value.ContadorDiaModulo;
-                    keyEnMinCon_DIA_MOD = item.Key;
-                }
-                if (fechaEnMinConCONT_MES && indexEnMinConCONT_MES > item.Value.ContadorMes)
-                {
-                    indexEnMinConCONT_MES = item.Value.ContadorMes;
-                    keyEnMinConCONT_MES = item.Key;
-                }
-            }
-            tempDic.Remove(keyEnMinUltULT_RACH);
-            tempDic.Remove(keyEnMinCon_GENERAL);
-            tempDic.Remove(keyEnMinCon_DIA_SEM);
-            tempDic.Remove(keyEnMinCon_DIA_MES);
-            tempDic.Remove(keyEnMinCon_DIA_MOD);
-            tempDic.Remove(keyEnMinConCONT_MES);
-            tempDic.Remove(keyEnMinConP_ACTUAL);
-            return tempDic;
-        }
+        //private Dictionary<string, ObjectInfoDTO> ValidarIndicadores(Dictionary<string, ObjectInfoDTO> dict, string tabla)
+        //{
+        //    var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+        //    bool fechaEnMinUltULT_RACH = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_ULT_RACH);
+        //    bool fechaEnMinCon_GENERAL = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_GENERAL);
+        //    bool fechaEnMinCon_DIA_SEM = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM);
+        //    bool fechaEnMinCon_DIA_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES);
+        //    bool fechaEnMinCon_DIA_MOD = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD);
+        //    bool fechaEnMinConCONT_MES = FechaActualEnMenoresApariciones(tabla, ConstantesGenerales.INDICA_MIN_CONT_MES);
+        //    int indexEnMinUltULT_RACH = 10000;
+        //    int indexEnMinCon_GENERAL = 10000;
+        //    int indexEnMinCon_DIA_SEM = 10000;
+        //    int indexEnMinCon_DIA_MES = 10000;
+        //    int indexEnMinCon_DIA_MOD = 10000;
+        //    int indexEnMinConCONT_MES = 10000;
+        //    string keyEnMinUltULT_RACH = "";
+        //    string keyEnMinCon_GENERAL = "";
+        //    string keyEnMinCon_DIA_SEM = "";
+        //    string keyEnMinCon_DIA_MES = "";
+        //    string keyEnMinCon_DIA_MOD = "";
+        //    string keyEnMinConCONT_MES = "";
+        //    string keyEnMinConP_ACTUAL = "";
+        //    foreach (var item in dict)
+        //    {
+        //        if (fechaEnMinUltULT_RACH && indexEnMinUltULT_RACH > item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value)
+        //        {
+        //            indexEnMinUltULT_RACH = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
+        //            keyEnMinUltULT_RACH = item.Key;
+        //        }
+        //        if (fechaEnMinCon_GENERAL && indexEnMinCon_GENERAL > item.Value.ContadorGeneral)
+        //        {
+        //            indexEnMinCon_GENERAL = item.Value.ContadorGeneral;
+        //            keyEnMinCon_GENERAL = item.Key;
+        //        }
+        //        if (fechaEnMinCon_DIA_SEM && indexEnMinCon_DIA_SEM > item.Value.ContadorDiaSemana)
+        //        {
+        //            indexEnMinCon_DIA_SEM = item.Value.ContadorDiaSemana;
+        //            keyEnMinCon_DIA_SEM = item.Key;
+        //        }
+        //        if (fechaEnMinCon_DIA_MES && indexEnMinCon_DIA_MES > item.Value.ContadorDiaMes)
+        //        {
+        //            indexEnMinCon_DIA_MES = item.Value.ContadorDiaMes;
+        //            keyEnMinCon_DIA_MES = item.Key;
+        //        }
+        //        if (fechaEnMinCon_DIA_MOD && indexEnMinCon_DIA_MOD > item.Value.ContadorDiaModulo)
+        //        {
+        //            indexEnMinCon_DIA_MOD = item.Value.ContadorDiaModulo;
+        //            keyEnMinCon_DIA_MOD = item.Key;
+        //        }
+        //        if (fechaEnMinConCONT_MES && indexEnMinConCONT_MES > item.Value.ContadorMes)
+        //        {
+        //            indexEnMinConCONT_MES = item.Value.ContadorMes;
+        //            keyEnMinConCONT_MES = item.Key;
+        //        }
+        //    }
+        //    tempDic.Remove(keyEnMinUltULT_RACH);
+        //    tempDic.Remove(keyEnMinCon_GENERAL);
+        //    tempDic.Remove(keyEnMinCon_DIA_SEM);
+        //    tempDic.Remove(keyEnMinCon_DIA_MES);
+        //    tempDic.Remove(keyEnMinCon_DIA_MOD);
+        //    tempDic.Remove(keyEnMinConCONT_MES);
+        //    tempDic.Remove(keyEnMinConP_ACTUAL);
+        //    return tempDic;
+        //}
 
         /// <summary>
         /// Método que escribe los datos recibidos en el diccionario en los archivos
@@ -1754,22 +1755,68 @@ namespace Presenter
             return data.AsEnumerable().Take(totalDatos).ToList();
         }
 
-        private Dictionary<string, ObjectInfoDTO> ValidarInfoPorAnalisisAtributos(Dictionary<string, ObjectInfoDTO> dict)
+        private Dictionary<string, ObjectInfoDTO> ValidarIndicadoresPosicion(Dictionary<string, ObjectInfoDTO> dict, string tabla)
         {
             var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
-            foreach (var item in dict)
-            {
-                bool cumpleCondiciones = true;
-                cumpleCondiciones &= item.Value.RankContadorDiaSemana >= 7;
-                cumpleCondiciones &= 5 <= item.Value.RankContadorDiaMes && item.Value.RankContadorDiaMes <= 10;
-                cumpleCondiciones &= item.Value.RankContadorMes >= 6;
-                cumpleCondiciones &= item.Value.ContadorDespuesActual >= 5;
-                if (!cumpleCondiciones)
+            string fechaFormat = fecha.Day + "/" + fecha.Month + "/" + fecha.Year;
+            InfoPosicionDTO infoPosicion = this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.SIGN_DATOS);
+            var listIndicadorSinAparecer = AnalisisDatosPorPosicion.ValidarIndicadorPosicion(_astEntities, ConstantesGenerales.INDICA_MIN_SIN_APARECER, tabla, fechaFormat, 1);
+            //var listIndComparaUltRachas = AnalisisDatosPorPosicion.ValidarIndicadorPosicion(_astEntities, ConstantesGenerales.COMPARA_ULT_RACH, tabla, fechaFormat, 0);
+            bool fechaNoSinAparecer = listIndicadorSinAparecer.IndexOf(this.fecha.Day) == -1;
+            //bool fechaNoComparaUltRach = listIndComparaUltRachas.IndexOf(this.fecha.Day) == -1;
+            var listIndicadorMinContGeneral = AnalisisDatosPorPosicion.ValidarIndicadorPosicion(_astEntities, ConstantesGenerales.INDICA_MIN_CONT_GENERAL, tabla, fechaFormat, 1);
+            bool fechaNoIndMinContadorGeneral = listIndicadorMinContGeneral.IndexOf(this.fecha.Day) == -1;
+            //if (fechaNoSinAparecer || fechaNoComparaUltRach)
+            var listIndicadorMinContDiaSemana = AnalisisDatosPorPosicion.ValidarIndicadorPosicion(_astEntities, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM, tabla, fechaFormat, 1);
+            bool fechaNoIndMinContadorDiaSem = listIndicadorMinContDiaSemana.IndexOf(this.fecha.Day) == -1;
+            if (fechaNoSinAparecer|| fechaNoIndMinContadorGeneral || fechaNoIndMinContadorDiaSem)
                 {
-                    tempDic.Remove(item.Key);
+                var indica_sin_aparecer = dict.First().Key;
+                var menorSinAparecer = dict.First().Value.RachasAcumuladas.Last();
+                var indica_sin_cont_general = dict.First().Key;
+                var menorContadorGeneral = dict.First().Value.RankContadorGeneral;
+                var indica_sin_cont_dia_sem = dict.First().Key;
+                var menorContadorDiaSem = dict.First().Value.RankContadorDiaSemana;
+                //var indica_compara_ult_rach = "";
+                //var valorComparaUltRach = dict.First().Value.DictRachasAgrupadasInt.Where(x => x.Key == dict.First().Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
+                foreach (var item in dict)
+                {
+                    if (fechaNoSinAparecer && item.Value.RachasAcumuladas.Last() < menorSinAparecer)
+                    {
+                        menorSinAparecer = item.Value.RachasAcumuladas.Last();
+                        indica_sin_aparecer = item.Key;
+                    }
+                    if (fechaNoIndMinContadorGeneral && item.Value.RankContadorGeneral < menorContadorGeneral)
+                    {
+                        menorSinAparecer = item.Value.RankContadorGeneral;
+                        indica_sin_cont_general = item.Key;
+                    }
+                    if (fechaNoIndMinContadorDiaSem && item.Value.RankContadorDiaSemana < menorContadorDiaSem)
+                    {
+                        menorContadorDiaSem = item.Value.RankContadorDiaSemana;
+                        indica_sin_cont_dia_sem = item.Key;
+                    }
+                    //if (fechaNoComparaUltRach && item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value < infoPosicion.CONTADORDESPUESACTUAL)
+                    //{
+                    //    valorComparaUltRach = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
+                    //    indica_compara_ult_rach = item.Key;
+                    //}
                 }
-            }
+                if (fechaNoSinAparecer)
+                {
+                    tempDic.Remove(indica_sin_aparecer);
+                }
+                //tempDic.Remove(indica_compara_ult_rach);
+                tempDic.Remove(indica_sin_cont_general);
+                tempDic.Remove(indica_sin_cont_dia_sem);
+
+            }            
+            //string consulta = string.Format(ConstantesConsultas.QUERY_SUMATORIA_DATOS, tabla, fechaFormat);
+            //DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(consulta);
+            //int totalDatos = (data.AsEnumerable().Count() * 90) / 100;
+            //return data.AsEnumerable().Take(totalDatos).ToList();
             return tempDic;
         }
+
     }
 }

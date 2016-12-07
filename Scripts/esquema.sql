@@ -19,6 +19,13 @@ CREATE TABLE ASTR(
 	FECHA DATE
 	);
 
+create or replace trigger TR_INSERT_ASTR
+before insert on ASTR
+for each row
+begin
+  select SQ_ASTR.nextval into :new.Id from dual;
+end;
+
 drop TABLE Datos_Temp;
 drop TABLE POS_UNO_DATOS;
 drop TABLE POS_DOS_DATOS;
@@ -305,13 +312,6 @@ CREATE TABLE Datos_Temp_Depur(
 	ContadorDespuesSignActual NUMBER,
 	Fecha DATE
 );
-
-create or replace trigger TR_INSERT_ASTR
-before insert on ASTR
-for each row
-begin
-  select SQ_ASTR.nextval into :new.Id from dual;
-end;
 
 create or replace trigger TR_INSERT_POS_UNO_DATOS_AFT
 before insert on POS_UNO_DATOS
@@ -1167,13 +1167,6 @@ begin
 	 	var_comparador_mes, var_ind_min_cont_desp_actual, var_comparador_desp_actual, var_indica_min_puntua_total, 
 	 	var_indica_max_puntua_total, EXTRACT(DAY FROM :new.fecha), :new.FECHA);
 end;
-
-delete from Datos_Temp where fecha not in (SELECT fecha from astr);
-delete from POS_UNO_DATOS where fecha not in (SELECT fecha from astr);
-delete from POS_DOS_DATOS where fecha not in (SELECT fecha from astr);
-delete from POS_TRES_DATOS where fecha not in (SELECT fecha from astr);
-delete from POS_CUATRO_DATOS where fecha not in (SELECT fecha from astr);
-delete from SIGN_DATOS where fecha not in (SELECT fecha from astr);
 
 
 select * from POS_UNO_DATOS order by fecha desc;

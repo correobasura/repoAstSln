@@ -27,6 +27,7 @@ namespace Constantes
         public const string SIGN = "SIGN";
         public const string ENCABEZADOS = ";PuntuacionTotal;UltimasRachas;UltimasRachasDespActual;ContadorUltimoEnRachas;DictRachasAgrupadasIntDespActual;DictRachasAgrupadasInt;ContadorUltimoEnRachasDesActual;ContadorGeneral;;ContadorDiaSemana;;ContadorDiaMes;;ContadorDiaModulo;;ContadorMes;;ContadorDiaAnio;;ContadorDiaAnioModulo;;ContadorMesModuloDiaModulo;;ContadorMesDia;;ContadorAnioModulo;;ContadorMesModulo;;ContadorDespuesActual;ContadorDespuesOtroTipo;ContadorDespuesSignActual";
         public const string INDICA_MIN_ULT_RACH = "INDICA_MIN_ULT_RACH";
+        public const string INDICA_MIN_SIN_APARECER = "INDICA_MIN_SIN_APARECER";
         public const string COMPARA_ULT_RACH = "COMPARA_ULT_RACH";
         public const string INDICA_MIN_CONT_GENERAL = "INDICA_MIN_CONT_GENERAL";
         public const string COMPARA_CONT_GENERAL = "COMPARA_CONT_GENERAL";

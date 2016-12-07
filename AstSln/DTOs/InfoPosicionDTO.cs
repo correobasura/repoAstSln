@@ -43,5 +43,11 @@ namespace DTOs
             get;
             set;
         }
+
+        public int CONTADORULTIMOENRACHAS
+        {
+            get;
+            set;
+        }
     }
 }

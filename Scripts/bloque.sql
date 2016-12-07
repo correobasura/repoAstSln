@@ -1,4 +1,10 @@
-delete from datos_temp where fecha not in(select fecha from astr);commit;
+delete from Datos_Temp where fecha not in (SELECT fecha from astr);
+delete from POS_UNO_DATOS where fecha not in (SELECT fecha from astr);
+delete from POS_DOS_DATOS where fecha not in (SELECT fecha from astr);
+delete from POS_TRES_DATOS where fecha not in (SELECT fecha from astr);
+delete from POS_CUATRO_DATOS where fecha not in (SELECT fecha from astr);
+delete from SIGN_DATOS where fecha not in (SELECT fecha from astr);
+commit;
 declare
 cursor curposuno is SELECT * from pos_uno_datos order by fecha asc;
 cursor curposdos is SELECT * from pos_dos_datos order by fecha asc;
@@ -217,6 +223,10 @@ begin
 		FROM Datos_Temp
 		WHERE fecha = currec.fecha
 		AND posicion = 2;
+		IF currec.sinaparecer = var_min_dato_sin_aparecer
+			THEN var_ind_min_sin_aparecer := 1;
+		ELSE var_ind_min_sin_aparecer :=0;
+		END IF;
 	    IF currec.contadorultimoenrachas = var_min_dato_cont_ult_rach 
 	    	THEN var_ind_min_cont_ult_rach := 1;
 	    ELSE var_ind_min_cont_ult_rach := 0;
@@ -353,6 +363,10 @@ begin
 		FROM Datos_Temp
 		WHERE fecha = currec.fecha
 		AND posicion = 3;
+		IF currec.sinaparecer = var_min_dato_sin_aparecer
+			THEN var_ind_min_sin_aparecer := 1;
+		ELSE var_ind_min_sin_aparecer :=0;
+		END IF;
 	    IF currec.contadorultimoenrachas = var_min_dato_cont_ult_rach 
 	    	THEN var_ind_min_cont_ult_rach := 1;
 	    ELSE var_ind_min_cont_ult_rach := 0;
@@ -489,6 +503,10 @@ begin
 		FROM Datos_Temp
 		WHERE fecha = currec.fecha
 		AND posicion = 4;
+		IF currec.sinaparecer = var_min_dato_sin_aparecer
+			THEN var_ind_min_sin_aparecer := 1;
+		ELSE var_ind_min_sin_aparecer :=0;
+		END IF;
 	    IF currec.contadorultimoenrachas = var_min_dato_cont_ult_rach 
 	    	THEN var_ind_min_cont_ult_rach := 1;
 	    ELSE var_ind_min_cont_ult_rach := 0;
@@ -625,6 +643,10 @@ begin
 		FROM Datos_Temp
 		WHERE fecha = currec.fecha
 		AND posicion = 5;
+		IF currec.sinaparecer = var_min_dato_sin_aparecer
+			THEN var_ind_min_sin_aparecer := 1;
+		ELSE var_ind_min_sin_aparecer :=0;
+		END IF;
 	    IF currec.contadorultimoenrachas = var_min_dato_cont_ult_rach 
 	    	THEN var_ind_min_cont_ult_rach := 1;
 	    ELSE var_ind_min_cont_ult_rach := 0;
