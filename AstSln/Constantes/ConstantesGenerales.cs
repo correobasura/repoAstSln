@@ -43,6 +43,8 @@ namespace Constantes
         public const string INDICA_MIN_CONT_DESP_ACTUAL = "INDICA_MIN_CONT_DESP_ACTUAL";
         public const string INDICA_MIN_PUNTUA_TOTAL = "INDICA_MIN_PUNTUA_TOTAL";
         public const string INDICA_MAX_PUNTUA_TOTAL = "INDICA_MAX_PUNTUA_TOTAL";
+        public const string INDICA_MIN_SUMATORIA = "INDICA_MIN_SUMATORIA";
+        public const string INDICA_MAX_SUMATORIA = "INDICA_MAX_SUMATORIA";
         public const string DATOS_TEMP = "DATOS_TEMP";
         public const string AN_DAT_SIGN = "AN_DAT_SIGN";
         public const string AN_DAT_POS_CUATRO = "AN_DAT_POS_CUATRO";

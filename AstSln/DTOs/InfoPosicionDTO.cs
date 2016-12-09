@@ -49,5 +49,11 @@ namespace DTOs
             get;
             set;
         }
+
+        public int CONTADORGENERAL
+        {
+            get;
+            set;
+        }
     }
 }

@@ -95,7 +95,6 @@ namespace Presenter
             //this.RecorrerElementosLista(listaDatosLun, _resultActualSol, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
             this.ValidarRachas(listaDatosLun, dictInfoPosUnoLun, dictInfoPosDosLun, dictInfoPosTresLun, dictInfoPosCuatroLun, dictInfoSignLun);
 
-
             //this.GuardarDatosTemporales();
 
             //var dict1 = AnalisisDatosPorPosicion.ValidarInfoPorAnalisisAtributos(dictInfoPosUnoLun, _astEntities, ConstantesGenerales.POS_UNO_DATOS, fechaFormat);
@@ -241,6 +240,7 @@ namespace Presenter
                         item.Value.DictRachasAgrupadasInt.Add(itemList, 1);
                     }
                 }
+                item.Value.CONTADORULTIMOENRACHAS = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
                 var sortedDict = from entry in item.Value.DictRachasAgrupadasInt orderby entry.Value descending select entry;
                 item.Value.DictRachasAgrupadasInt = sortedDict.ToDictionary(x => x.Key, x => x.Value);
 
@@ -255,6 +255,7 @@ namespace Presenter
                         item.Value.DictRachasAgrupadasIntDespActual.Add(itemList, 1);
                     }
                 }
+                item.Value.CONTADORULTIMOENRACHASDESACTUA = item.Value.DictRachasAgrupadasIntDespActual.Where(x => x.Key == item.Value.RachasAcumuladasDespActual.Last()).FirstOrDefault().Value;
                 sortedDict = from entry in item.Value.DictRachasAgrupadasIntDespActual orderby entry.Value descending select entry;
                 item.Value.DictRachasAgrupadasIntDespActual = sortedDict.ToDictionary(x => x.Key, x => x.Value);
             }
@@ -279,6 +280,7 @@ namespace Presenter
                         item.Value.DictRachasAgrupadasInt.Add(itemList, 1);
                     }
                 }
+                item.Value.CONTADORULTIMOENRACHAS = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
                 var sortedDict = from entry in item.Value.DictRachasAgrupadasInt orderby entry.Value descending select entry;
                 item.Value.DictRachasAgrupadasInt = sortedDict.ToDictionary(x => x.Key, x => x.Value);
 
@@ -293,6 +295,7 @@ namespace Presenter
                         item.Value.DictRachasAgrupadasIntDespActual.Add(itemList, 1);
                     }
                 }
+                item.Value.CONTADORULTIMOENRACHASDESACTUA = item.Value.DictRachasAgrupadasIntDespActual.Where(x => x.Key == item.Value.RachasAcumuladasDespActual.Last()).FirstOrDefault().Value;
                 sortedDict = from entry in item.Value.DictRachasAgrupadasIntDespActual orderby entry.Value descending select entry;
                 item.Value.DictRachasAgrupadasIntDespActual = sortedDict.ToDictionary(x => x.Key, x => x.Value);
             }
@@ -608,8 +611,8 @@ namespace Presenter
                 DATOS_TEMP_DEPUR dt = new DATOS_TEMP_DEPUR();
                 dt.ID = this.ObtenerValorSecuencia(dt);
                 dt.PUNTUACIONTOTAL = item.Value.PuntuacionTotal;
-                dt.CONTADORULTIMOENRACHAS = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
-                dt.CONTADORULTIMOENRACHASDESACTUA = item.Value.DictRachasAgrupadasIntDespActual.Where(x => x.Key == item.Value.RachasAcumuladasDespActual.Last()).FirstOrDefault().Value;
+                dt.CONTADORULTIMOENRACHAS = item.Value.CONTADORULTIMOENRACHAS;
+                dt.CONTADORULTIMOENRACHASDESACTUA = item.Value.CONTADORULTIMOENRACHASDESACTUA;
                 dt.CONTADORGENERAL = item.Value.RankContadorGeneral;
                 dt.CONTADORDIASEMANA = item.Value.RankContadorDiaSemana;
                 dt.CONTADORDIAMES = item.Value.RankContadorDiaMes;
@@ -646,8 +649,8 @@ namespace Presenter
                 DATOS_TEMP_DEPUR dt = new DATOS_TEMP_DEPUR();
                 dt.ID = this.ObtenerValorSecuencia(dt);
                 dt.PUNTUACIONTOTAL = item.Value.PuntuacionTotal;
-                dt.CONTADORULTIMOENRACHAS = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
-                dt.CONTADORULTIMOENRACHASDESACTUA = item.Value.DictRachasAgrupadasIntDespActual.Where(x => x.Key == item.Value.RachasAcumuladasDespActual.Last()).FirstOrDefault().Value;
+                dt.CONTADORULTIMOENRACHAS = item.Value.CONTADORULTIMOENRACHAS;
+                dt.CONTADORULTIMOENRACHASDESACTUA = item.Value.CONTADORULTIMOENRACHASDESACTUA;
                 dt.CONTADORGENERAL = item.Value.RankContadorGeneral;
                 dt.CONTADORDIASEMANA = item.Value.RankContadorDiaSemana;
                 dt.CONTADORDIAMES = item.Value.RankContadorDiaMes;
@@ -1757,66 +1760,209 @@ namespace Presenter
 
         private Dictionary<string, ObjectInfoDTO> ValidarIndicadoresPosicion(Dictionary<string, ObjectInfoDTO> dict, string tabla)
         {
-            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
             string fechaFormat = fecha.Day + "/" + fecha.Month + "/" + fecha.Year;
             InfoPosicionDTO infoPosicion = this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.SIGN_DATOS);
-            var listIndicadorSinAparecer = AnalisisDatosPorPosicion.ValidarIndicadorPosicion(_astEntities, ConstantesGenerales.INDICA_MIN_SIN_APARECER, tabla, fechaFormat, 1);
-            //var listIndComparaUltRachas = AnalisisDatosPorPosicion.ValidarIndicadorPosicion(_astEntities, ConstantesGenerales.COMPARA_ULT_RACH, tabla, fechaFormat, 0);
-            bool fechaNoSinAparecer = listIndicadorSinAparecer.IndexOf(this.fecha.Day) == -1;
-            //bool fechaNoComparaUltRach = listIndComparaUltRachas.IndexOf(this.fecha.Day) == -1;
-            var listIndicadorMinContGeneral = AnalisisDatosPorPosicion.ValidarIndicadorPosicion(_astEntities, ConstantesGenerales.INDICA_MIN_CONT_GENERAL, tabla, fechaFormat, 1);
-            bool fechaNoIndMinContadorGeneral = listIndicadorMinContGeneral.IndexOf(this.fecha.Day) == -1;
-            //if (fechaNoSinAparecer || fechaNoComparaUltRach)
-            var listIndicadorMinContDiaSemana = AnalisisDatosPorPosicion.ValidarIndicadorPosicion(_astEntities, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM, tabla, fechaFormat, 1);
-            bool fechaNoIndMinContadorDiaSem = listIndicadorMinContDiaSemana.IndexOf(this.fecha.Day) == -1;
-            if (fechaNoSinAparecer|| fechaNoIndMinContadorGeneral || fechaNoIndMinContadorDiaSem)
-                {
-                var indica_sin_aparecer = dict.First().Key;
+            bool fechaNoSinAparecer = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_SIN_APARECER, 1);
+            bool fechaNoUltRach = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_ULT_RACH, 1);
+            bool fechaNoComparaUltRachas = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.COMPARA_ULT_RACH, 0);
+            bool fechaNoMinContGeneral = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_CONT_GENERAL, 1);
+            bool fechaNoComparaContGeneral = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.COMPARA_CONT_GENERAL, 0);
+            bool fechaNoMinContDiaSemana = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM, 1);
+            bool fechaNoComparaContDiaSemana = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.COMPARA_CONT_DIA_SEM, 0);
+            bool fechaNoIndicaMinDiaMes = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES, 1);
+            bool fechaNoComparaContDiaMes = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.COMPARA_CONT_DIA_MES, 0);
+            bool fechaNoIndicaMinDiaMod = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD, 1);
+            bool fechaNoComparaContDiaMod = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.COMPARA_CONT_DIA_MOD, 0);
+            bool fechaNoIndicaMinMes = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_CONT_MES, 1);
+            bool fechaNoComparaContMes = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.COMPARA_CONT_MES, 0);
+            bool fechaNoIndicaMinDespActual = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_CONT_DESP_ACTUAL, 1);
+            bool fechaNoComparaContDespActual = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.COMPARA_CONT_DESP_ACTUAL, 0);
+            bool fechaNoMinPuntuaTotal = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_PUNTUA_TOTAL, 1);
+            bool fechaNoMaxPuntuaTotal = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MAX_PUNTUA_TOTAL, 1);
+            bool fechaNoMinSumatoria = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MIN_SUMATORIA, 1);
+            bool fechaNoMaxSumatoria = this.ObtenerBanderaIndicador(tabla, fechaFormat, ConstantesGenerales.INDICA_MAX_SUMATORIA, 1);
+
+            List<InfoEliminacionDTO> listaEliminar = new List<InfoEliminacionDTO>();
+            List<string> itemsEliminar = new List<string>();
+
+            List<string> llavesIndicadores = new List<string>();
+            string indicaMinSinAparecer = "indicaMinSinAparecer";
+            string indicaMinUltRach = "indicaMinUltRach";
+            string comparaUltRachas = "comparaUltRachas";
+            string indicaMinContGeneral = "indicaMinContGeneral";
+            string indicaComparaContGeneral = "indicaComparaContGeneral";
+            string indicaMinContDiaSemana = "indicaMinContDiaSemana";
+            string indicaComparaContDiaSemana = "indicaComparaContDiaSemana";
+            string indicaMinDiaMes = "indicaMinDiaMes";
+            string indicaComparaContDiaMes = "indicaComparaContDiaMes";
+            string indicaMinDiaMod = "indicaMinDiaMod";
+            string indicaComparaContDiaMod = "indicaComparaContDiaMod";
+            string indicaMinMes = "indicaMinMes";
+            string indicaComparaContMes = "indicaComparaContMes";
+            string indicaMinDespActual = "indicaMinDespActual";
+            string indicaComparaContDespActual = "indicaComparaContDespActual";
+            string indicaMinPuntuaTotal = "indicaMinPuntuaTotal";
+            string indicaMaxPuntuaTotal = "indicaMaxPuntuaTotal";
+            string indicaMinSumatoria = "indicaMinSumatoria";
+            string indicaMaxSumatoria = "indicaMaxSumatoria";
+
+            llavesIndicadores.Add(indicaMinSinAparecer);
+            llavesIndicadores.Add(indicaMinUltRach);
+            llavesIndicadores.Add(comparaUltRachas);
+            llavesIndicadores.Add(indicaMinContGeneral);
+            llavesIndicadores.Add(indicaComparaContGeneral);
+            llavesIndicadores.Add(indicaMinContDiaSemana);
+            llavesIndicadores.Add(indicaComparaContDiaSemana);
+            llavesIndicadores.Add(indicaMinDiaMes);
+            llavesIndicadores.Add(indicaComparaContDiaMes);
+            llavesIndicadores.Add(indicaMinDiaMod);
+            llavesIndicadores.Add(indicaComparaContDiaMod);
+            llavesIndicadores.Add(indicaMinMes);
+            llavesIndicadores.Add(indicaComparaContMes);
+            llavesIndicadores.Add(indicaMinDespActual);
+            llavesIndicadores.Add(indicaComparaContDespActual);
+            llavesIndicadores.Add(indicaMinPuntuaTotal);
+            llavesIndicadores.Add(indicaMaxPuntuaTotal);
+            llavesIndicadores.Add(indicaMinSumatoria);
+            llavesIndicadores.Add(indicaMaxSumatoria);
+
+            if (fechaNoSinAparecer 
+                || fechaNoUltRach 
+                || fechaNoComparaUltRachas 
+                || fechaNoMinContGeneral 
+                || fechaNoComparaContGeneral
+                || fechaNoMinContDiaSemana 
+                || fechaNoComparaContDiaSemana 
+                || fechaNoIndicaMinDiaMes
+                || fechaNoComparaContDiaMes 
+                || fechaNoIndicaMinDiaMod  
+                || fechaNoComparaContDiaMod
+                || fechaNoIndicaMinMes 
+                || fechaNoComparaContMes 
+                || fechaNoIndicaMinDespActual 
+                || fechaNoComparaContDespActual
+                || fechaNoMinPuntuaTotal
+                || fechaNoMaxPuntuaTotal
+                || fechaNoMinSumatoria
+                || fechaNoMaxSumatoria)
+            {
                 var menorSinAparecer = dict.First().Value.RachasAcumuladas.Last();
-                var indica_sin_cont_general = dict.First().Key;
-                var menorContadorGeneral = dict.First().Value.RankContadorGeneral;
-                var indica_sin_cont_dia_sem = dict.First().Key;
-                var menorContadorDiaSem = dict.First().Value.RankContadorDiaSemana;
-                //var indica_compara_ult_rach = "";
-                //var valorComparaUltRach = dict.First().Value.DictRachasAgrupadasInt.Where(x => x.Key == dict.First().Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
+                var menorUltRachas = dict.First().Value.RachasAcumuladas.Last();
+                var menorContGeneral = dict.First().Value.RankContadorGeneral;
+                var menorContDiaSemana = dict.First().Value.RankContadorDiaSemana;
+                var menorContDiaMes = dict.First().Value.RankContadorDiaMes;
+                var menorDiaMod = dict.First().Value.RankContadorDiaModulo;
+                var menorMes = dict.First().Value.RankContadorMes;
+                var menorDespActual = dict.First().Value.ContadorDespuesActual;
+                var menorPuntuaTotal = dict.First().Value.PuntuacionTotal;
+                var mayorPuntuaTotal = dict.First().Value.PuntuacionTotal;
+                var menorSumatoria = dict.First().Value.RankContadorGeneral +
+                    dict.First().Value.RankContadorDiaSemana +
+                    dict.First().Value.RankContadorDiaMes +
+                    dict.First().Value.RankContadorDiaModulo +
+                    dict.First().Value.RankContadorMes +
+                    dict.First().Value.ContadorDespuesActual;
+                var mayorSumatoria = dict.First().Value.RankContadorGeneral +
+                    dict.First().Value.RankContadorDiaSemana +
+                    dict.First().Value.RankContadorDiaMes +
+                    dict.First().Value.RankContadorDiaModulo +
+                    dict.First().Value.RankContadorMes +
+                    dict.First().Value.ContadorDespuesActual;
                 foreach (var item in dict)
                 {
-                    if (fechaNoSinAparecer && item.Value.RachasAcumuladas.Last() < menorSinAparecer)
-                    {
-                        menorSinAparecer = item.Value.RachasAcumuladas.Last();
-                        indica_sin_aparecer = item.Key;
-                    }
-                    if (fechaNoIndMinContadorGeneral && item.Value.RankContadorGeneral < menorContadorGeneral)
-                    {
-                        menorSinAparecer = item.Value.RankContadorGeneral;
-                        indica_sin_cont_general = item.Key;
-                    }
-                    if (fechaNoIndMinContadorDiaSem && item.Value.RankContadorDiaSemana < menorContadorDiaSem)
-                    {
-                        menorContadorDiaSem = item.Value.RankContadorDiaSemana;
-                        indica_sin_cont_dia_sem = item.Key;
-                    }
-                    //if (fechaNoComparaUltRach && item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value < infoPosicion.CONTADORDESPUESACTUAL)
-                    //{
-                    //    valorComparaUltRach = item.Value.DictRachasAgrupadasInt.Where(x => x.Key == item.Value.RachasAcumuladas.Last()).FirstOrDefault().Value;
-                    //    indica_compara_ult_rach = item.Key;
-                    //}
-                }
-                if (fechaNoSinAparecer)
-                {
-                    tempDic.Remove(indica_sin_aparecer);
-                }
-                //tempDic.Remove(indica_compara_ult_rach);
-                tempDic.Remove(indica_sin_cont_general);
-                tempDic.Remove(indica_sin_cont_dia_sem);
+                    int sumatoria = item.Value.RankContadorGeneral + 
+                        item.Value.RankContadorDiaSemana +
+                        item.Value.RankContadorDiaMes +
+                        item.Value.RankContadorDiaModulo +
+                        item.Value.RankContadorMes +
+                        item.Value.ContadorDespuesActual;
+                    menorSinAparecer = this.AdicionarElementoEliminar(fechaNoSinAparecer, item.Value.RachasAcumuladas.Last(), menorSinAparecer, indicaMinSinAparecer, item.Key, false, listaEliminar);
+                    menorUltRachas = this.AdicionarElementoEliminar(fechaNoUltRach, item.Value.RachasAcumuladas.Last(), menorUltRachas, indicaMinUltRach, item.Key, false, listaEliminar);
+                    this.AdicionarElementoEliminar(fechaNoComparaUltRachas, item.Value.CONTADORULTIMOENRACHAS, infoPosicion.CONTADORULTIMOENRACHAS, comparaUltRachas, item.Key, true, listaEliminar);
+                    //menorContGeneral = this.AdicionarElementoEliminar(fechaNoMinContGeneral, item.Value.RankContadorGeneral, menorContGeneral, indicaMinContGeneral, item.Key, false, listaEliminar);
+                    //this.AdicionarElementoEliminar(fechaNoComparaContGeneral, item.Value.RankContadorGeneral, infoPosicion.CONTADORGENERAL, indicaComparaContGeneral, item.Key, true, listaEliminar);
+                    menorContDiaSemana = this.AdicionarElementoEliminar(fechaNoMinContDiaSemana, item.Value.RankContadorDiaSemana, menorContDiaSemana, indicaMinContDiaSemana, item.Key, false, listaEliminar);
+                    this.AdicionarElementoEliminar(fechaNoComparaContDiaSemana, item.Value.RankContadorDiaSemana, infoPosicion.CONTADORDIASEMANA, indicaComparaContDiaSemana, item.Key, true, listaEliminar);
+                    menorContDiaMes = this.AdicionarElementoEliminar(fechaNoIndicaMinDiaMes, item.Value.RankContadorDiaMes, menorContDiaMes, indicaMinDiaMes, item.Key, false, listaEliminar);
+                    this.AdicionarElementoEliminar(fechaNoComparaContDiaMes, item.Value.RankContadorDiaMes, infoPosicion.CONTADORDIAMES, indicaComparaContDiaMes, item.Key, true, listaEliminar);
+                    menorDiaMod = this.AdicionarElementoEliminar(fechaNoIndicaMinDiaMod, item.Value.RankContadorDiaModulo, menorDiaMod, indicaMinDiaMod, item.Key, false, listaEliminar);
+                    this.AdicionarElementoEliminar(fechaNoComparaContDiaMod, item.Value.RankContadorDiaModulo, infoPosicion.CONTADORDIAMODULO, indicaComparaContDiaMod, item.Key, true, listaEliminar);
+                    menorMes = this.AdicionarElementoEliminar(fechaNoIndicaMinMes, item.Value.RankContadorMes, menorMes, indicaMinMes, item.Key, false, listaEliminar);
+                    this.AdicionarElementoEliminar(fechaNoComparaContMes, item.Value.RankContadorMes, infoPosicion.CONTADORMES, indicaComparaContMes, item.Key, true, listaEliminar);
+                    menorDespActual = this.AdicionarElementoEliminar(fechaNoIndicaMinDespActual, item.Value.ContadorDespuesActual, menorDespActual, indicaMinDespActual, item.Key, false, listaEliminar);
+                    this.AdicionarElementoEliminar(fechaNoComparaContDespActual, item.Value.ContadorDespuesActual, infoPosicion.CONTADORDESPUESACTUAL, indicaComparaContDespActual, item.Key, true, listaEliminar);
+                    menorPuntuaTotal = this.AdicionarElementoEliminar(fechaNoMinPuntuaTotal, item.Value.PuntuacionTotal, menorPuntuaTotal, indicaMinPuntuaTotal, item.Key, false, listaEliminar);
+                    mayorPuntuaTotal = this.AdicionarElementoEliminar(fechaNoMaxPuntuaTotal, item.Value.PuntuacionTotal, mayorPuntuaTotal, indicaMaxPuntuaTotal, item.Key, false, listaEliminar, true);
+                    menorSumatoria = this.AdicionarElementoEliminar(fechaNoMinSumatoria, sumatoria, menorSumatoria, indicaMaxPuntuaTotal, item.Key, false, listaEliminar);
+                    mayorSumatoria = this.AdicionarElementoEliminar(fechaNoMaxPuntuaTotal, sumatoria, mayorSumatoria, indicaMaxPuntuaTotal, item.Key, false, listaEliminar, true);
 
-            }            
-            //string consulta = string.Format(ConstantesConsultas.QUERY_SUMATORIA_DATOS, tabla, fechaFormat);
-            //DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(consulta);
-            //int totalDatos = (data.AsEnumerable().Count() * 90) / 100;
-            //return data.AsEnumerable().Take(totalDatos).ToList();
+                }
+            }
+            if (listaEliminar.Count() > 0)
+            {
+                foreach (var i in llavesIndicadores)
+                {
+                    List<InfoEliminacionDTO> subList = (from x in listaEliminar where x.LlaveAnalisis == i select x).ToList();
+                    if (subList.Count() > 0)
+                    {
+                        int min = (from x in subList select x.Valor).Min();
+                        itemsEliminar.AddRange((from x in subList where x.Valor == min select x.LlaveEliminarString).ToList());
+                    }
+                }
+            }
+            var keysToInclude = dict.Keys.Except(itemsEliminar).ToList();
+            var tempDic = (from entry in dict where keysToInclude.IndexOf(entry.Key) != -1 select entry).ToDictionary(x => x.Key, x => x.Value);
             return tempDic;
         }
 
+        private int AdicionarElementoEliminar(bool banderaCondicion, int valorComparado, int valorComparador, string claveElemento, string claveDict, bool esComparar, List<InfoEliminacionDTO> listaEliminar, bool validarMayor =false)
+        {
+            if (esComparar)
+            {
+                if (banderaCondicion && valorComparado == valorComparador)
+                {
+                    InfoEliminacionDTO obj = new InfoEliminacionDTO();
+                    obj.LlaveAnalisis = claveElemento;
+                    obj.LlaveEliminarString = claveDict;
+                    obj.Valor = valorComparador;
+                    listaEliminar.Add(obj);
+                }
+
+            }
+            else
+            {
+                if (!validarMayor)
+                {
+                    if (banderaCondicion && valorComparado < valorComparador)
+                    {
+                        InfoEliminacionDTO obj = new InfoEliminacionDTO();
+                        obj.LlaveAnalisis = claveElemento;
+                        obj.LlaveEliminarString = claveDict;
+                        valorComparador = valorComparado;
+                        obj.Valor = valorComparador;
+                        listaEliminar.Add(obj);
+                    }
+                }
+                else
+                {
+                    if (banderaCondicion && valorComparado > valorComparador)
+                    {
+                        InfoEliminacionDTO obj = new InfoEliminacionDTO();
+                        obj.LlaveAnalisis = claveElemento;
+                        obj.LlaveEliminarString = claveDict;
+                        valorComparador = valorComparado;
+                        obj.Valor = valorComparador;
+                        listaEliminar.Add(obj);
+                    }
+                }
+                
+            }
+            return valorComparador;
+        }
+
+        private bool ObtenerBanderaIndicador(string tabla, string fechaFormat, string columna, int valorComparar)
+        {
+            return AnalisisDatosPorPosicion.ValidarIndicadorPosicion(_astEntities, columna, tabla, fechaFormat, valorComparar).IndexOf(this.fecha.Day) == -1;
+        }
     }
 }

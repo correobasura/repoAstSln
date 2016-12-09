@@ -115,6 +115,10 @@ namespace DTOs
 
         public int RankContadorMes { get; set; }
 
+        public int CONTADORULTIMOENRACHAS { get; set; }
+
+        public int CONTADORULTIMOENRACHASDESACTUA { get; set; }
+
         //public int RankContadorDiaAnio { get; set; }
 
         //public int RankContadorDiaAnioModulo { get; set; }
