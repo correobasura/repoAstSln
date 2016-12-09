@@ -45,6 +45,10 @@ var_min_dato_puntua_total NUMBER := 0;
 var_indica_min_puntua_total NUMBER := 0;
 var_max_dato_puntua_total NUMBER := 0;
 var_indica_max_puntua_total NUMBER := 0;
+var_indica_min_sumatoria NUMBER;
+var_indica_max_sumatoria NUMBER;
+var_min_dato_sumatoria_valores NUMBER;
+var_max_dato_sumatoria_valores NUMBER;
 begin
 	for currec in curposuno
 	loop
@@ -56,8 +60,10 @@ begin
 			MIN(contadordiamodulo), 
 			MIN(contadormes), 
 			MIN(ContadorDespuesActual), 
-			MIN(PuntuacionTotal), 
-			MAX(PuntuacionTotal)
+			MIN(PuntuacionTotal), 			
+			MAX(PuntuacionTotal),
+			MIN(SUMATORIAVALORES),
+			MAX(SUMATORIAVALORES)
 		INTO var_min_dato_sin_aparecer,
 			var_min_dato_cont_ult_rach, 
 			var_min_dato_cont_general, 
@@ -67,7 +73,9 @@ begin
 			var_min_dato_cont_mes, 
 			var_min_dato_cont_desp_actual, 
 			var_min_dato_puntua_total, 
-			var_max_dato_puntua_total
+			var_max_dato_puntua_total,
+			var_min_dato_sumatoria_valores,
+			var_max_dato_sumatoria_valores
 		FROM Datos_Temp
 		WHERE fecha = currec.fecha
 		AND posicion = 1;
@@ -165,16 +173,24 @@ begin
 			THEN var_indica_max_puntua_total := 1;
 		ELSE var_indica_max_puntua_total := 0;
 		END IF;
+		IF currec.SUMATORIAVALORES = var_min_dato_sumatoria_valores 
+			THEN var_indica_min_sumatoria := 1;
+		ELSE var_indica_min_sumatoria := 0;
+		END IF;
+		IF currec.SUMATORIAVALORES = var_max_dato_sumatoria_valores 
+			THEN var_indica_max_sumatoria := 1;
+		ELSE var_indica_max_sumatoria := 0;
+		END IF;
 		INSERT INTO AN_DAT_POS_UNO(ID, INDICA_MIN_SIN_APARECER, INDICA_MIN_ULT_RACH, COMPARA_ULT_RACH, INDICA_MIN_CONT_GENERAL, COMPARA_CONT_GENERAL, 
 								INDICA_MIN_CONT_DIA_SEM, COMPARA_CONT_DIA_SEM, INDICA_MIN_CONT_DIA_MES, COMPARA_CONT_DIA_MES, 
 								INDICA_MIN_CONT_DIA_MOD, COMPARA_CONT_DIA_MOD, INDICA_MIN_CONT_MES, COMPARA_CONT_MES, 
 								INDICA_MIN_CONT_DESP_ACTUAL, COMPARA_CONT_DESP_ACTUAL, INDICA_MIN_PUNTUA_TOTAL, 
-								INDICA_MAX_PUNTUA_TOTAL, DIAMES, FECHA)
+								INDICA_MAX_PUNTUA_TOTAL, INDICA_MIN_SUMATORIA, INDICA_MAX_SUMATORIA, DIAMES, FECHA)
 	 		VALUES (SQ_AN_DAT_POS_UNO.nextval, var_ind_min_sin_aparecer, var_ind_min_cont_ult_rach, var_comparador_ult_rach, var_ind_min_cont_general, var_comparador_general, 
 	 				var_ind_min_cont_dia_semana, var_comparador_dia_semana, var_ind_min_cont_dia_mes, var_comparador_dia_mes, 
 	 				var_ind_min_cont_dia_modulo, var_comparador_dia_modulo, var_ind_min_cont_mes, var_comparador_mes, 
 	 				var_ind_min_cont_desp_actual, var_comparador_desp_actual, var_indica_min_puntua_total, 
-	 				var_indica_max_puntua_total, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
+	 				var_indica_max_puntua_total, var_indica_min_sumatoria, var_indica_max_sumatoria, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
 		var_anterior_cont_ult_rach := currec.contadorultimoenrachas;
 		var_anterior_cont_general := currec.contadorgeneral;
 		var_anterior_cont_dia_semana := currec.contadordiasemana;
@@ -183,6 +199,8 @@ begin
 		var_anterior_cont_mes := currec.contadormes;
 		var_anterior_cont_desp_actual := currec.ContadorDespuesActual;
 	end loop;
+	var_indica_max_sumatoria:= 0;
+	var_indica_max_sumatoria := 0;
 	var_ind_min_sin_aparecer := 0;
 	var_ind_min_cont_ult_rach := 0; 
 	var_comparador_ult_rach := 0; 
@@ -209,7 +227,9 @@ begin
 			MIN(contadormes), 
 			MIN(ContadorDespuesActual), 
 			MIN(PuntuacionTotal), 
-			MAX(PuntuacionTotal)
+			MAX(PuntuacionTotal),			
+			MIN(SUMATORIAVALORES),
+			MAX(SUMATORIAVALORES)
 		INTO var_min_dato_sin_aparecer,
 			var_min_dato_cont_ult_rach, 
 			var_min_dato_cont_general, 
@@ -219,7 +239,9 @@ begin
 			var_min_dato_cont_mes, 
 			var_min_dato_cont_desp_actual, 
 			var_min_dato_puntua_total, 
-			var_max_dato_puntua_total
+			var_max_dato_puntua_total,
+			var_min_dato_sumatoria_valores,
+			var_max_dato_sumatoria_valores
 		FROM Datos_Temp
 		WHERE fecha = currec.fecha
 		AND posicion = 2;
@@ -305,16 +327,24 @@ begin
 			THEN var_indica_max_puntua_total := 1;
 		ELSE var_indica_max_puntua_total := 0;
 		END IF;
+		IF currec.SUMATORIAVALORES = var_min_dato_sumatoria_valores 
+			THEN var_indica_min_sumatoria := 1;
+		ELSE var_indica_min_sumatoria := 0;
+		END IF;
+		IF currec.SUMATORIAVALORES = var_max_dato_sumatoria_valores 
+			THEN var_indica_max_sumatoria := 1;
+		ELSE var_indica_max_sumatoria := 0;
+		END IF;
 		INSERT INTO AN_DAT_POS_DOS(ID, INDICA_MIN_SIN_APARECER, INDICA_MIN_ULT_RACH, COMPARA_ULT_RACH, INDICA_MIN_CONT_GENERAL, COMPARA_CONT_GENERAL, 
 								INDICA_MIN_CONT_DIA_SEM, COMPARA_CONT_DIA_SEM, INDICA_MIN_CONT_DIA_MES, COMPARA_CONT_DIA_MES, 
 								INDICA_MIN_CONT_DIA_MOD, COMPARA_CONT_DIA_MOD, INDICA_MIN_CONT_MES, COMPARA_CONT_MES, 
 								INDICA_MIN_CONT_DESP_ACTUAL, COMPARA_CONT_DESP_ACTUAL, INDICA_MIN_PUNTUA_TOTAL, 
-								INDICA_MAX_PUNTUA_TOTAL, DIAMES, FECHA)
+								INDICA_MAX_PUNTUA_TOTAL, INDICA_MIN_SUMATORIA, INDICA_MAX_SUMATORIA, DIAMES, FECHA)
 			VALUES (SQ_AN_DAT_POS_DOS.nextval, var_ind_min_sin_aparecer, var_ind_min_cont_ult_rach, var_comparador_ult_rach, var_ind_min_cont_general, var_comparador_general, 
 					var_ind_min_cont_dia_semana, var_comparador_dia_semana, var_ind_min_cont_dia_mes, var_comparador_dia_mes, 
 					var_ind_min_cont_dia_modulo, var_comparador_dia_modulo, var_ind_min_cont_mes, var_comparador_mes, 
 					var_ind_min_cont_desp_actual, var_comparador_desp_actual, var_indica_min_puntua_total, 
-					var_indica_max_puntua_total, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
+					var_indica_max_puntua_total, var_indica_min_sumatoria, var_indica_max_sumatoria, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
 		var_anterior_cont_ult_rach := currec.contadorultimoenrachas;
 		var_anterior_cont_general := currec.contadorgeneral;
 		var_anterior_cont_dia_semana := currec.contadordiasemana;
@@ -323,6 +353,8 @@ begin
 		var_anterior_cont_mes := currec.contadormes;
 		var_anterior_cont_desp_actual := currec.ContadorDespuesActual;
 	end loop;
+	var_indica_max_sumatoria:= 0;
+	var_indica_max_sumatoria := 0;
 	var_ind_min_sin_aparecer := 0;
 	var_ind_min_cont_ult_rach := 0; 
 	var_comparador_ult_rach := 0; 
@@ -349,7 +381,9 @@ begin
 			MIN(contadormes), 
 			MIN(ContadorDespuesActual), 
 			MIN(PuntuacionTotal), 
-			MAX(PuntuacionTotal)
+			MAX(PuntuacionTotal),			
+			MIN(SUMATORIAVALORES),
+			MAX(SUMATORIAVALORES)
 		INTO var_min_dato_sin_aparecer,
 			var_min_dato_cont_ult_rach, 
 			var_min_dato_cont_general, 
@@ -359,7 +393,9 @@ begin
 			var_min_dato_cont_mes, 
 			var_min_dato_cont_desp_actual, 
 			var_min_dato_puntua_total, 
-			var_max_dato_puntua_total
+			var_max_dato_puntua_total,
+			var_min_dato_sumatoria_valores,
+			var_max_dato_sumatoria_valores
 		FROM Datos_Temp
 		WHERE fecha = currec.fecha
 		AND posicion = 3;
@@ -445,16 +481,24 @@ begin
 			THEN var_indica_max_puntua_total := 1;
 		ELSE var_indica_max_puntua_total := 0;
 		END IF;
+		IF currec.SUMATORIAVALORES = var_min_dato_sumatoria_valores 
+			THEN var_indica_min_sumatoria := 1;
+		ELSE var_indica_min_sumatoria := 0;
+		END IF;
+		IF currec.SUMATORIAVALORES = var_max_dato_sumatoria_valores 
+			THEN var_indica_max_sumatoria := 1;
+		ELSE var_indica_max_sumatoria := 0;
+		END IF;
 		INSERT INTO AN_DAT_POS_TRES(ID, INDICA_MIN_SIN_APARECER, INDICA_MIN_ULT_RACH, COMPARA_ULT_RACH, INDICA_MIN_CONT_GENERAL, COMPARA_CONT_GENERAL, 
 								INDICA_MIN_CONT_DIA_SEM, COMPARA_CONT_DIA_SEM, INDICA_MIN_CONT_DIA_MES, COMPARA_CONT_DIA_MES, 
 								INDICA_MIN_CONT_DIA_MOD, COMPARA_CONT_DIA_MOD, INDICA_MIN_CONT_MES, COMPARA_CONT_MES, 
 								INDICA_MIN_CONT_DESP_ACTUAL, COMPARA_CONT_DESP_ACTUAL, INDICA_MIN_PUNTUA_TOTAL, 
-								INDICA_MAX_PUNTUA_TOTAL, DIAMES, FECHA)
+								INDICA_MAX_PUNTUA_TOTAL, INDICA_MIN_SUMATORIA, INDICA_MAX_SUMATORIA, DIAMES, FECHA)
 			VALUES (SQ_AN_DAT_POS_TRES.nextval, var_ind_min_sin_aparecer, var_ind_min_cont_ult_rach, var_comparador_ult_rach, var_ind_min_cont_general, var_comparador_general, 
 					var_ind_min_cont_dia_semana, var_comparador_dia_semana, var_ind_min_cont_dia_mes, var_comparador_dia_mes, 
 					var_ind_min_cont_dia_modulo, var_comparador_dia_modulo, var_ind_min_cont_mes, var_comparador_mes, 
 					var_ind_min_cont_desp_actual, var_comparador_desp_actual, var_indica_min_puntua_total, 
-					var_indica_max_puntua_total, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
+					var_indica_max_puntua_total, var_indica_min_sumatoria, var_indica_max_sumatoria, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
 		var_anterior_cont_ult_rach := currec.contadorultimoenrachas;
 		var_anterior_cont_general := currec.contadorgeneral;
 		var_anterior_cont_dia_semana := currec.contadordiasemana;
@@ -463,6 +507,8 @@ begin
 		var_anterior_cont_desp_actual := currec.ContadorDespuesActual;
 		var_anterior_cont_mes := currec.contadormes;
 	end loop;
+	var_indica_max_sumatoria:= 0;
+	var_indica_max_sumatoria := 0;
 	var_ind_min_sin_aparecer := 0;
 	var_ind_min_cont_ult_rach := 0; 
 	var_comparador_ult_rach := 0; 
@@ -489,7 +535,9 @@ begin
 			MIN(contadormes), 
 			MIN(ContadorDespuesActual), 
 			MIN(PuntuacionTotal), 
-			MAX(PuntuacionTotal)
+			MAX(PuntuacionTotal),			
+			MIN(SUMATORIAVALORES),
+			MAX(SUMATORIAVALORES)
 		INTO var_min_dato_sin_aparecer,
 			var_min_dato_cont_ult_rach, 
 			var_min_dato_cont_general, 
@@ -499,7 +547,9 @@ begin
 			var_min_dato_cont_mes, 
 			var_min_dato_cont_desp_actual, 
 			var_min_dato_puntua_total, 
-			var_max_dato_puntua_total
+			var_max_dato_puntua_total,
+			var_min_dato_sumatoria_valores,
+			var_max_dato_sumatoria_valores
 		FROM Datos_Temp
 		WHERE fecha = currec.fecha
 		AND posicion = 4;
@@ -585,16 +635,24 @@ begin
 			THEN var_indica_max_puntua_total := 1;
 		ELSE var_indica_max_puntua_total := 0;
 		END IF;
+		IF currec.SUMATORIAVALORES = var_min_dato_sumatoria_valores 
+			THEN var_indica_min_sumatoria := 1;
+		ELSE var_indica_min_sumatoria := 0;
+		END IF;
+		IF currec.SUMATORIAVALORES = var_max_dato_sumatoria_valores 
+			THEN var_indica_max_sumatoria := 1;
+		ELSE var_indica_max_sumatoria := 0;
+		END IF;
 		INSERT INTO AN_DAT_POS_CUATRO(ID, INDICA_MIN_SIN_APARECER, INDICA_MIN_ULT_RACH, COMPARA_ULT_RACH, INDICA_MIN_CONT_GENERAL, COMPARA_CONT_GENERAL, 
 								INDICA_MIN_CONT_DIA_SEM, COMPARA_CONT_DIA_SEM, INDICA_MIN_CONT_DIA_MES, COMPARA_CONT_DIA_MES, 
 								INDICA_MIN_CONT_DIA_MOD, COMPARA_CONT_DIA_MOD, INDICA_MIN_CONT_MES, COMPARA_CONT_MES, 
 								INDICA_MIN_CONT_DESP_ACTUAL, COMPARA_CONT_DESP_ACTUAL, INDICA_MIN_PUNTUA_TOTAL, 
-								INDICA_MAX_PUNTUA_TOTAL, DIAMES, FECHA)
+								INDICA_MAX_PUNTUA_TOTAL, INDICA_MIN_SUMATORIA, INDICA_MAX_SUMATORIA, DIAMES, FECHA)
 			VALUES (SQ_AN_DAT_POS_CUATRO.nextval, var_ind_min_sin_aparecer, var_ind_min_cont_ult_rach, var_comparador_ult_rach, var_ind_min_cont_general, var_comparador_general, 
 					var_ind_min_cont_dia_semana, var_comparador_dia_semana, var_ind_min_cont_dia_mes, var_comparador_dia_mes, 
 					var_ind_min_cont_dia_modulo, var_comparador_dia_modulo, var_ind_min_cont_mes, var_comparador_mes, 
 					var_ind_min_cont_desp_actual, var_comparador_desp_actual, var_indica_min_puntua_total, 
-					var_indica_max_puntua_total, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
+					var_indica_max_puntua_total, var_indica_min_sumatoria, var_indica_max_sumatoria, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
 		var_anterior_cont_ult_rach := currec.contadorultimoenrachas;
 		var_anterior_cont_general := currec.contadorgeneral;
 		var_anterior_cont_dia_semana := currec.contadordiasemana;
@@ -603,6 +661,8 @@ begin
 		var_anterior_cont_mes := currec.contadormes;
 		var_anterior_cont_desp_actual := currec.ContadorDespuesActual;
 	end loop;
+	var_indica_max_sumatoria:= 0;
+	var_indica_max_sumatoria := 0;
 	var_ind_min_sin_aparecer := 0;
 	var_ind_min_cont_ult_rach := 0; 
 	var_comparador_ult_rach := 0; 
@@ -629,7 +689,9 @@ begin
 			MIN(contadormes), 
 			MIN(ContadorDespuesActual), 
 			MIN(PuntuacionTotal), 
-			MAX(PuntuacionTotal)
+			MAX(PuntuacionTotal),			
+			MIN(SUMATORIAVALORES),
+			MAX(SUMATORIAVALORES)
 		INTO var_min_dato_sin_aparecer,
 			var_min_dato_cont_ult_rach, 
 			var_min_dato_cont_general, 
@@ -639,7 +701,9 @@ begin
 			var_min_dato_cont_mes, 
 			var_min_dato_cont_desp_actual, 
 			var_min_dato_puntua_total, 
-			var_max_dato_puntua_total
+			var_max_dato_puntua_total,
+			var_min_dato_sumatoria_valores,
+			var_max_dato_sumatoria_valores
 		FROM Datos_Temp
 		WHERE fecha = currec.fecha
 		AND posicion = 5;
@@ -725,16 +789,24 @@ begin
 			THEN var_indica_max_puntua_total := 1;
 		ELSE var_indica_max_puntua_total := 0;
 		END IF;
+		IF currec.SUMATORIAVALORES = var_min_dato_sumatoria_valores 
+			THEN var_indica_min_sumatoria := 1;
+		ELSE var_indica_min_sumatoria := 0;
+		END IF;
+		IF currec.SUMATORIAVALORES = var_max_dato_sumatoria_valores 
+			THEN var_indica_max_sumatoria := 1;
+		ELSE var_indica_max_sumatoria := 0;
+		END IF;
 		INSERT INTO AN_DAT_SIGN(ID, INDICA_MIN_SIN_APARECER, INDICA_MIN_ULT_RACH, COMPARA_ULT_RACH, INDICA_MIN_CONT_GENERAL, COMPARA_CONT_GENERAL, 
 								INDICA_MIN_CONT_DIA_SEM, COMPARA_CONT_DIA_SEM, INDICA_MIN_CONT_DIA_MES, COMPARA_CONT_DIA_MES, 
 								INDICA_MIN_CONT_DIA_MOD, COMPARA_CONT_DIA_MOD, INDICA_MIN_CONT_MES, COMPARA_CONT_MES, 
 								INDICA_MIN_CONT_DESP_ACTUAL, COMPARA_CONT_DESP_ACTUAL, INDICA_MIN_PUNTUA_TOTAL, 
-								INDICA_MAX_PUNTUA_TOTAL, DIAMES, FECHA)
+								INDICA_MAX_PUNTUA_TOTAL, INDICA_MIN_SUMATORIA, INDICA_MAX_SUMATORIA, DIAMES, FECHA)
 			VALUES (SQ_AN_DAT_SIGN.nextval, var_ind_min_sin_aparecer, var_ind_min_cont_ult_rach, var_comparador_ult_rach, var_ind_min_cont_general, 
 					var_comparador_general, var_ind_min_cont_dia_semana, var_comparador_dia_semana, var_ind_min_cont_dia_mes, 
 					var_comparador_dia_mes, var_ind_min_cont_dia_modulo, var_comparador_dia_modulo, var_ind_min_cont_mes, 
 					var_comparador_mes, var_ind_min_cont_desp_actual, var_comparador_desp_actual, 
-					var_indica_min_puntua_total, var_indica_max_puntua_total, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
+					var_indica_min_puntua_total, var_indica_max_puntua_total, var_indica_min_sumatoria, var_indica_max_sumatoria, EXTRACT(DAY FROM currec.fecha), currec.FECHA);
 		var_anterior_cont_ult_rach := currec.contadorultimoenrachas;
 		var_anterior_cont_general := currec.contadorgeneral;
 		var_anterior_cont_dia_semana := currec.contadordiasemana;

@@ -270,11 +270,12 @@ begin
   select MIN(fecha) into var_fecha_ini from an_dat_sign;
 	FOR cur_rec IN cur_datos
   LOOP
-		IF cur_rec.indica_min_sin_aparecer = 1 
-			THEN 
-			var_contador := cur_rec.indica_min_sin_aparecer - var_fecha_ini;
-			var_fecha_ini := cur_rec.indica_min_sin_aparecer;
+		IF cur_rec.indica_min_ult_rach = 1 THEN 
+			var_contador := cur_rec.fecha - var_fecha_ini;
+			var_fecha_ini := cur_rec.fecha;
 			DBMS_OUTPUT.PUT_LINE(var_contador);
 		END IF;
 	END LOOP;
 end;
+
+SELECT COUNT(*) AS Contador, DIAMES AS Valor FROM {0} WHERE {1} = 1 AND fecha <= TO_DATE('{2}','dd/MM/yyyy') GROUP BY DIAMES

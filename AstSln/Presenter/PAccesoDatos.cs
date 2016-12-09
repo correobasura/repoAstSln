@@ -1895,7 +1895,6 @@ namespace Presenter
                     mayorPuntuaTotal = this.AdicionarElementoEliminar(fechaNoMaxPuntuaTotal, item.Value.PuntuacionTotal, mayorPuntuaTotal, indicaMaxPuntuaTotal, item.Key, false, listaEliminar, true);
                     menorSumatoria = this.AdicionarElementoEliminar(fechaNoMinSumatoria, sumatoria, menorSumatoria, indicaMinSumatoria, item.Key, false, listaEliminar);
                     mayorSumatoria = this.AdicionarElementoEliminar(fechaNoMaxSumatoria, sumatoria, mayorSumatoria, indicaMaxSumatoria, item.Key, false, listaEliminar, true);
-
                 }
             }
             if (listaEliminar.Count() > 0)
