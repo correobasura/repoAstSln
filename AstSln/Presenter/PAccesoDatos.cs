@@ -1893,8 +1893,8 @@ namespace Presenter
                     this.AdicionarElementoEliminar(fechaNoComparaContDespActual, item.Value.ContadorDespuesActual, infoPosicion.CONTADORDESPUESACTUAL, indicaComparaContDespActual, item.Key, true, listaEliminar);
                     menorPuntuaTotal = this.AdicionarElementoEliminar(fechaNoMinPuntuaTotal, item.Value.PuntuacionTotal, menorPuntuaTotal, indicaMinPuntuaTotal, item.Key, false, listaEliminar);
                     mayorPuntuaTotal = this.AdicionarElementoEliminar(fechaNoMaxPuntuaTotal, item.Value.PuntuacionTotal, mayorPuntuaTotal, indicaMaxPuntuaTotal, item.Key, false, listaEliminar, true);
-                    menorSumatoria = this.AdicionarElementoEliminar(fechaNoMinSumatoria, sumatoria, menorSumatoria, indicaMaxPuntuaTotal, item.Key, false, listaEliminar);
-                    mayorSumatoria = this.AdicionarElementoEliminar(fechaNoMaxPuntuaTotal, sumatoria, mayorSumatoria, indicaMaxPuntuaTotal, item.Key, false, listaEliminar, true);
+                    menorSumatoria = this.AdicionarElementoEliminar(fechaNoMinSumatoria, sumatoria, menorSumatoria, indicaMinSumatoria, item.Key, false, listaEliminar);
+                    mayorSumatoria = this.AdicionarElementoEliminar(fechaNoMaxSumatoria, sumatoria, mayorSumatoria, indicaMaxSumatoria, item.Key, false, listaEliminar, true);
 
                 }
             }
