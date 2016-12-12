@@ -24,7 +24,9 @@ namespace Presenter
         {
             //bool fechaNoSinAparecer = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_POS_UNO, ConstantesGenerales.INDICA_MIN_SIN_APARECER, 1, fechaFormat, dia);
             //bool fechaNoUltRach = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_POS_UNO, ConstantesGenerales.INDICA_MIN_ULT_RACH, 1, fechaFormat, dia);
+            bool fechaNoMaxUltRachas = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MAX_ULT_RACH, 1, fechaFormat, dia);
             bool fechaNoComparaUltRachas = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_POS_UNO, ConstantesGenerales.COMPARA_ULT_RACH, 0, fechaFormat, dia);
+            //bool fechaNoMaxUltRachasDesActu = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MAX_CONT_ULT_RACH_DES_A, 1, fechaFormat, dia);
             bool fechaNoMinContGeneral = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_POS_UNO, ConstantesGenerales.INDICA_MIN_CONT_GENERAL, 1, fechaFormat, dia);
             bool fechaNoComparaContGeneral = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_POS_UNO, ConstantesGenerales.COMPARA_CONT_GENERAL, 0, fechaFormat, dia);
             bool fechaNoMinContDiaSemana = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_POS_UNO, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM, 1, fechaFormat, dia);
@@ -48,7 +50,9 @@ namespace Presenter
             if (
                 //fechaNoSinAparecer
                 //|| fechaNoUltRach
+                //fechaNoMaxUltRachas
                 fechaNoComparaUltRachas
+                //|| fechaNoMaxUltRachasDesActu
                 || fechaNoMinContGeneral
                 || fechaNoComparaContGeneral
                 || fechaNoMinContDiaSemana
@@ -67,21 +71,23 @@ namespace Presenter
                 || fechaNoMaxSumatoria
                 )
             {
-                var menorSinAparecer = dict.First().Value.RachasAcumuladas.Last();
-                var menorUltRachas = dict.First().Value.DictRachasAgrupadasInt[dict.First().Value.RachasAcumuladas.Last()];
+                //var menorSinAparecer = dict.First().Value.RachasAcumuladas.Last();
+                //var menorUltRachas = dict.First().Value.DictRachasAgrupadasInt[dict.First().Value.RachasAcumuladas.Last()];
+                //var mayorUltRachas = dict.First().Value.DictRachasAgrupadasInt[dict.First().Value.RachasAcumuladas.Last()];
+                //var mayorUltRachasDesActu = dict.First().Value.DictRachasAgrupadasIntDespActual[dict.First().Value.RachasAcumuladasDespActual.Last()];
                 var menorContGeneral = dict.First().Value.RankContadorGeneral;
                 var menorContDiaSemana = dict.First().Value.RankContadorDiaSemana;
-                var menorContDiaMes = dict.First().Value.RankContadorDiaMes;
+                //var menorContDiaMes = dict.First().Value.RankContadorDiaMes;
                 var menorDiaMod = dict.First().Value.RankContadorDiaModulo;
-                var menorMes = dict.First().Value.RankContadorMes;
-                var menorDespActual = dict.First().Value.ContadorDespuesActual;
+                //var menorMes = dict.First().Value.RankContadorMes;
+                //var menorDespActual = dict.First().Value.ContadorDespuesActual;
                 var menorPuntuaTotal = dict.First().Value.PuntuacionTotal;
-                var mayorPuntuaTotal = dict.First().Value.PuntuacionTotal;
-                var menorSumatoria = dict.First().Value.RankContadorDiaSemana +
-                    dict.First().Value.RankContadorDiaMes +
-                    dict.First().Value.RankContadorDiaModulo +
-                    dict.First().Value.RankContadorMes +
-                    dict.First().Value.ContadorDespuesActual;
+                //var mayorPuntuaTotal = dict.First().Value.PuntuacionTotal;
+                //var menorSumatoria = dict.First().Value.RankContadorDiaSemana +
+                //    dict.First().Value.RankContadorDiaMes +
+                //    dict.First().Value.RankContadorDiaModulo +
+                //    dict.First().Value.RankContadorMes +
+                //    dict.First().Value.ContadorDespuesActual;
                 var mayorSumatoria = dict.First().Value.RankContadorDiaSemana +
                     dict.First().Value.RankContadorDiaMes +
                     dict.First().Value.RankContadorDiaModulo +
@@ -94,10 +100,13 @@ namespace Presenter
                         item.Value.RankContadorDiaModulo +
                         item.Value.RankContadorMes +
                         item.Value.ContadorDespuesActual;
-                    int lastUltimoRachas = item.Value.DictRachasAgrupadasInt[item.Value.RachasAcumuladas.Last()];
+                    //int lastUltimoRachas = item.Value.DictRachasAgrupadasInt[item.Value.RachasAcumuladas.Last()];
+                    //int lastUltimoRachasDespActual = item.Value.DictRachasAgrupadasIntDespActual[item.Value.RachasAcumuladasDespActual.Last()];
                     //menorSinAparecer = AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoSinAparecer, item.Value.RachasAcumuladas.Last(), menorSinAparecer, ConstantesGenerales.INDICAMINSINAPARECER, item.Key, false, listaEliminar);
                     //menorUltRachas = AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoUltRach, item.Value.RachasAcumuladas.Last(), menorUltRachas, ConstantesGenerales.INDICAMINULTRACH, item.Key, false, listaEliminar);
+                    //mayorUltRachas = AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoMaxUltRachas, lastUltimoRachas, mayorUltRachas, ConstantesGenerales.INDICAMAXULTRACH, item.Key, false, listaEliminar, true);
                     AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoComparaUltRachas, item.Value.CONTADORULTIMOENRACHAS, infoPosicion.CONTADORULTIMOENRACHAS, ConstantesGenerales.COMPARAULTRACHAS, item.Key, true, listaEliminar);
+                    //mayorUltRachasDesActu = AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoMaxUltRachasDesActu, lastUltimoRachasDespActual, mayorUltRachasDesActu, ConstantesGenerales.INDICAMAXULTRACHDESACT, item.Key, false, listaEliminar, true);
                     menorContGeneral = AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoMinContGeneral, item.Value.RankContadorGeneral, menorContGeneral, ConstantesGenerales.INDICAMINCONTGENERAL, item.Key, false, listaEliminar);
                     AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoComparaContGeneral, item.Value.RankContadorGeneral, infoPosicion.CONTADORGENERAL, ConstantesGenerales.INDICACOMPARACONTGENERAL, item.Key, true, listaEliminar);
                     menorContDiaSemana = AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoMinContDiaSemana, item.Value.RankContadorDiaSemana, menorContDiaSemana, ConstantesGenerales.INDICAMINCONTDIASEMANA, item.Key, false, listaEliminar);
