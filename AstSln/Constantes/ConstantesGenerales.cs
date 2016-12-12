@@ -92,5 +92,9 @@ namespace Constantes
         public const string INDICAMAXPUNTUATOTAL = "indicaMaxPuntuaTotal";
         public const string INDICAMINSUMATORIA = "indicaMinSumatoria";
         public const string INDICAMAXSUMATORIA = "indicaMaxSumatoria";
+        public const string INDICA_MAX_ULT_RACH = "INDICA_MAX_ULT_RACH";
+        public const string INDICAMAXULTRACH = "indicaMaxUltRach";
+        public const string INDICAMAXULTRACHDESACT = "indicaMaxUltRachDesAct";
+        public const string INDICA_MAX_CONT_ULT_RACH_DES_A = "INDICA_MAX_CONT_ULT_RACH_DES_A";
     }
 }

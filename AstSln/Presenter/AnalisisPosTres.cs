@@ -67,7 +67,7 @@ namespace Presenter
                 )
             {
                 var menorSinAparecer = dict.First().Value.RachasAcumuladas.Last();
-                var menorUltRachas = dict.First().Value.RachasAcumuladas.Last();
+                var menorUltRachas = dict.First().Value.DictRachasAgrupadasInt[dict.First().Value.RachasAcumuladas.Last()];
                 var menorContGeneral = dict.First().Value.RankContadorGeneral;
                 var menorContDiaSemana = dict.First().Value.RankContadorDiaSemana;
                 var menorContDiaMes = dict.First().Value.RankContadorDiaMes;
@@ -93,6 +93,7 @@ namespace Presenter
                         item.Value.RankContadorDiaModulo +
                         item.Value.RankContadorMes +
                         item.Value.ContadorDespuesActual;
+                    int lastUltimoRachas = item.Value.DictRachasAgrupadasInt[item.Value.RachasAcumuladas.Last()];
                     menorSinAparecer = AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoSinAparecer, item.Value.RachasAcumuladas.Last(), menorSinAparecer, ConstantesGenerales.INDICAMINSINAPARECER, item.Key, false, listaEliminar);
                     //menorUltRachas = AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoUltRach, item.Value.RachasAcumuladas.Last(), menorUltRachas, ConstantesGenerales.INDICAMINULTRACH, item.Key, false, listaEliminar);
                     AnalisisPosicionGeneral.AdicionarElementoEliminar(fechaNoComparaUltRachas, item.Value.CONTADORULTIMOENRACHAS, infoPosicion.CONTADORULTIMOENRACHAS, ConstantesGenerales.COMPARAULTRACHAS, item.Key, true, listaEliminar);

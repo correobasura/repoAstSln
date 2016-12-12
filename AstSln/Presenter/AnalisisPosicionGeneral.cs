@@ -56,6 +56,8 @@ namespace Presenter
             List<string> llavesIndicadores = new List<string>(); llavesIndicadores.Add(ConstantesGenerales.INDICAMINSINAPARECER);
             llavesIndicadores.Add(ConstantesGenerales.INDICAMINULTRACH);
             llavesIndicadores.Add(ConstantesGenerales.COMPARAULTRACHAS);
+            llavesIndicadores.Add(ConstantesGenerales.INDICAMAXULTRACH);
+            llavesIndicadores.Add(ConstantesGenerales.INDICAMAXULTRACHDESACT);
             llavesIndicadores.Add(ConstantesGenerales.INDICAMINCONTGENERAL);
             llavesIndicadores.Add(ConstantesGenerales.INDICACOMPARACONTGENERAL);
             llavesIndicadores.Add(ConstantesGenerales.INDICAMINCONTDIASEMANA);

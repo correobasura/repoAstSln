@@ -97,11 +97,11 @@ namespace Presenter
 
             //this.GuardarDatosTemporales();
 
-            //var dict1 = AnalisisPosUno.ValidarIndicadoresPosicion(_astEntities, dictInfoPosUnoLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.POS_UNO_DATOS), this.fechaFormat, this.fecha.Day);
-            //var dict2 = AnalisisPosDos.ValidarIndicadoresPosicion(_astEntities, dictInfoPosDosLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.POS_DOS_DATOS), this.fechaFormat, this.fecha.Day);
-            //var dict3 = AnalisisPosTres.ValidarIndicadoresPosicion(_astEntities, dictInfoPosTresLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.POS_TRES_DATOS), this.fechaFormat, this.fecha.Day);
-            //var dict4 = AnalisisPosCuatro.ValidarIndicadoresPosicion(_astEntities, dictInfoPosCuatroLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.POS_CUATRO_DATOS), this.fechaFormat, this.fecha.Day);
-            //var dict5 = AnalisisSign.ValidarIndicadoresPosicion(_astEntities, dictInfoSignLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.SIGN_DATOS), this.fechaFormat, this.fecha.Day);
+            var dict1 = AnalisisPosUno.ValidarIndicadoresPosicion(_astEntities, dictInfoPosUnoLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.POS_UNO_DATOS), this.fechaFormat, this.fecha.Day);
+            var dict2 = AnalisisPosDos.ValidarIndicadoresPosicion(_astEntities, dictInfoPosDosLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.POS_DOS_DATOS), this.fechaFormat, this.fecha.Day);
+            var dict3 = AnalisisPosTres.ValidarIndicadoresPosicion(_astEntities, dictInfoPosTresLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.POS_TRES_DATOS), this.fechaFormat, this.fecha.Day);
+            var dict4 = AnalisisPosCuatro.ValidarIndicadoresPosicion(_astEntities, dictInfoPosCuatroLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.POS_CUATRO_DATOS), this.fechaFormat, this.fecha.Day);
+            var dict5 = AnalisisSign.ValidarIndicadoresPosicion(_astEntities, dictInfoSignLun, this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.SIGN_DATOS), this.fechaFormat, this.fecha.Day);
 
             //var dict1 = this.ValidarAparicionesDespActual(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
             //var dict2 = this.ValidarAparicionesDespActual(dictInfoPosDosLun, ConstantesGenerales.POS_DOS_DATOS);
@@ -165,11 +165,11 @@ namespace Presenter
             //this.RevisarValoresMinimos(dict3, "PosTresLunDep", ConstantesGenerales.AN_DAT_POS_TRES, ConstantesTipoSor.POSICION_TRES, ConstantesGenerales.POS_TRES_DATOS);
             //this.RevisarValoresMinimos(dict4, "PosCuatroLunDep", ConstantesGenerales.AN_DAT_POS_CUATRO, ConstantesTipoSor.POSICION_CUATRO, ConstantesGenerales.POS_CUATRO_DATOS);
             //this.RevisarValoresMinimos(dict5, "PosSignDep", ConstantesGenerales.AN_DAT_SIGN, ConstantesTipoSor.POSICION_CINCO, ConstantesGenerales.SIGN_DATOS);
-            //this.GuardarDatosTemporalesDepurados(dict1, 1);
-            //this.GuardarDatosTemporalesDepurados(dict2, 2);
-            //this.GuardarDatosTemporalesDepurados(dict3, 3);
-            //this.GuardarDatosTemporalesDepurados(dict4, 4);
-            //this.GuardarDatosTemporalesDepurados(dict5, 5);
+            this.GuardarDatosTemporalesDepurados(dict1, 1);
+            this.GuardarDatosTemporalesDepurados(dict2, 2);
+            this.GuardarDatosTemporalesDepurados(dict3, 3);
+            this.GuardarDatosTemporalesDepurados(dict4, 4);
+            this.GuardarDatosTemporalesDepurados(dict5, 5);
             //this.EscribirDatosArchivo(dictInfoPosUnoLun, "APosUnoLun");
             //this.EscribirDatosArchivo(dictInfoPosDosLun, "BPosDosLun");
             //this.EscribirDatosArchivo(dictInfoPosTresLun, "CPosTresLun");
