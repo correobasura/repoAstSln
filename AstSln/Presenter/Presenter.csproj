@@ -50,6 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnalisisDatosPorPosicion.cs" />
+    <Compile Include="AnalisisPosCuatro.cs" />
+    <Compile Include="AnalisisPosDos.cs" />
+    <Compile Include="AnalisisPosicionGeneral.cs" />
+    <Compile Include="AnalisisPosTres.cs" />
+    <Compile Include="AnalisisPosUno.cs" />
+    <Compile Include="AnalisisSign.cs" />
     <Compile Include="ManejoContadores.cs" />
     <Compile Include="PAccesoDatos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

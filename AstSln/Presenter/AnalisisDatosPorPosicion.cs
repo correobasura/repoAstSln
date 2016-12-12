@@ -69,16 +69,5 @@ namespace Presenter
             return data.AsEnumerable().ToList();
         }
 
-        public static List<int> ValidarIndicadorPosicion(AstEntities _astEntities, string columna, string tabla, string fecha, int datoComparar)
-        {
-            string consulta = string.Format(ConstantesConsultas.QUERY_CONTADOR_INDICADORES, tabla, columna, datoComparar, fecha);
-            DbRawSqlQuery<ContadorValorDTO> data = _astEntities.Database.SqlQuery<ContadorValorDTO>(consulta);
-            var listContadorValor = data.AsEnumerable().ToList();
-            int min = (from x in listContadorValor select x.Contador).Min();
-            int max = (from x in listContadorValor select x.Contador).Max();
-            int media = (max + min) / 2;
-            return (from x in listContadorValor where x.Contador >= media select x.Valor).ToList();
-        }
-
     }
 }

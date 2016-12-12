@@ -73,6 +73,24 @@ namespace Constantes
         public const string CONTADORDESPUESOTROTIPO = "CONTADORDESPUESOTROTIPO";
         public const string CONTADORDESPUESSIGNACTUAL = "CONTADORDESPUESSIGNACTUAL";
         public const string SUMATORIAVALORES = "SUMATORIAVALORES";
-        
+        public const string INDICAMINSINAPARECER = "indicaMinSinAparecer";
+        public const string INDICAMINULTRACH = "indicaMinUltRach";
+        public const string COMPARAULTRACHAS = "comparaUltRachas";
+        public const string INDICAMINCONTGENERAL = "indicaMinContGeneral";
+        public const string INDICACOMPARACONTGENERAL = "indicaComparaContGeneral";
+        public const string INDICAMINCONTDIASEMANA = "indicaMinContDiaSemana";
+        public const string INDICACOMPARACONTDIASEMANA = "indicaComparaContDiaSemana";
+        public const string INDICAMINDIAMES = "indicaMinDiaMes";
+        public const string INDICACOMPARACONTDIAMES = "indicaComparaContDiaMes";
+        public const string INDICAMINDIAMOD = "indicaMinDiaMod";
+        public const string INDICACOMPARACONTDIAMOD = "indicaComparaContDiaMod";
+        public const string INDICAMINMES = "indicaMinMes";
+        public const string INDICACOMPARACONTMES = "indicaComparaContMes";
+        public const string INDICAMINDESPACTUAL = "indicaMinDespActual";
+        public const string INDICACOMPARACONTDESPACTUAL = "indicaComparaContDespActual";
+        public const string INDICAMINPUNTUATOTAL = "indicaMinPuntuaTotal";
+        public const string INDICAMAXPUNTUATOTAL = "indicaMaxPuntuaTotal";
+        public const string INDICAMINSUMATORIA = "indicaMinSumatoria";
+        public const string INDICAMAXSUMATORIA = "indicaMaxSumatoria";
     }
 }
