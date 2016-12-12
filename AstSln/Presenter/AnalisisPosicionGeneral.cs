@@ -217,5 +217,20 @@ namespace Presenter
             var tempDic = (from entry in dict where keysToInclude.IndexOf(entry.Key) != -1 select entry).ToDictionary(x => x.Key, x => x.Value);
             return tempDic;
         }
+
+        /// <summary>
+        /// Método que realiza la consulta de los valores agrupados para las coincidencias de un valor siguiente
+        /// </summary>
+        /// <param name="columna">Columna de la tabla sobre la que se realiza la consulta</param>
+        /// <param name="tablaValidar">Tabla para validar los datos</param>
+        /// <param name="valorComparar">Valor sobre el que se realiza la comparacion</param>
+        /// <returns></returns>
+        public static List<int> AgruparContadoresDespuesActual(AstEntities _astEntities, string tablaValidar, string columna, int valorComparar, string fechaFormat, int cantidadTomar)
+        {
+            string consulta = string.Format(ConstantesConsultas.QUERY_AGRUPAR_APARICIONES_DESP_ACTUAL, columna, tablaValidar, valorComparar, fechaFormat);
+            DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(consulta);
+            List<QueryInfo> lista = data.AsEnumerable().Take(cantidadTomar).ToList();
+            return (from x in lista select x.ClaveNum).ToList();
+        }
     }
 }

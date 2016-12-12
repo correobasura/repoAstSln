@@ -141,5 +141,19 @@ namespace Presenter
             var tempDic = (from entry in dict where keysToInclude.IndexOf(entry.Key) != -1 select entry).ToDictionary(x => x.Key, x => x.Value);
             return tempDic;
         }
+
+        public static Dictionary<string, ObjectInfoDTO> ValidarAparicionesDespActual(AstEntities _astEntities, Dictionary<string, ObjectInfoDTO> dict, InfoPosicionDTO infoPosSign, string fechaFormat, string tabla)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            List<int> listaMenoresDatos = AnalisisPosicionGeneral.AgruparContadoresDespuesActual(_astEntities, tabla, ConstantesGenerales.CONTADORDESPUESACTUAL, infoPosSign.CONTADORDESPUESACTUAL, fechaFormat, 3);
+            foreach (var item in dict)
+            {
+                if (listaMenoresDatos.IndexOf(item.Value.ContadorDespuesActual) != -1)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
     }
 }

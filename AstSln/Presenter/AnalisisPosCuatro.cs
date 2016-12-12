@@ -126,5 +126,19 @@ namespace Presenter
             }
             return AnalisisPosicionGeneral.RemoverElementosListaDiccionario(dict, listaEliminar, llavesIndicadores);
         }
+
+        public static Dictionary<int, ObjectInfoDTO> ValidarAparicionesDespActual(AstEntities _astEntities, Dictionary<int, ObjectInfoDTO> dict, InfoPosicionDTO infoPosSign, string fechaFormat, string tabla)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            List<int> listaMenoresDatos = AnalisisPosicionGeneral.AgruparContadoresDespuesActual(_astEntities, tabla, ConstantesGenerales.CONTADORDESPUESACTUAL, infoPosSign.CONTADORDESPUESACTUAL, fechaFormat, 2);
+            foreach (var item in dict)
+            {
+                if (listaMenoresDatos.IndexOf(item.Value.ContadorDespuesActual) != -1)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
     }
 }
