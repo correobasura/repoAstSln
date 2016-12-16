@@ -29,5 +29,6 @@ namespace Model.DataContextModel
         public Nullable<decimal> SUMATORIAVALORES { get; set; }
         public Nullable<decimal> CONTADORDESPUESSIGNACTUAL { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
+        public Nullable<decimal> DIAMES { get; set; }
     }
 }

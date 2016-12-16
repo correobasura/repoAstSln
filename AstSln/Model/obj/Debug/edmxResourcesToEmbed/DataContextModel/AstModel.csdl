@@ -1,11 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="AstModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="AstEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="AN_DAT_POS_CUATRO" EntityType="AstModel.AN_DAT_POS_CUATRO" />
-    <EntitySet Name="AN_DAT_POS_DOS" EntityType="AstModel.AN_DAT_POS_DOS" />
-    <EntitySet Name="AN_DAT_POS_TRES" EntityType="AstModel.AN_DAT_POS_TRES" />
-    <EntitySet Name="AN_DAT_POS_UNO" EntityType="AstModel.AN_DAT_POS_UNO" />
-    <EntitySet Name="AN_DAT_SIGN" EntityType="AstModel.AN_DAT_SIGN" />
     <EntitySet Name="ASTR" EntityType="AstModel.ASTR" />
     <EntitySet Name="DATOS_TEMP" EntityType="AstModel.DATOS_TEMP" />
     <EntitySet Name="DATOS_TEMP_DEPUR" EntityType="AstModel.DATOS_TEMP_DEPUR" />
@@ -15,131 +10,6 @@
     <EntitySet Name="POS_UNO_DATOS" EntityType="AstModel.POS_UNO_DATOS" />
     <EntitySet Name="SIGN_DATOS" EntityType="AstModel.SIGN_DATOS" />
   </EntityContainer>
-  <EntityType Name="AN_DAT_POS_CUATRO">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="FECHA" Type="DateTime" />
-  </EntityType>
-  <EntityType Name="AN_DAT_POS_DOS">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="FECHA" Type="DateTime" />
-  </EntityType>
-  <EntityType Name="AN_DAT_POS_TRES">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="FECHA" Type="DateTime" />
-  </EntityType>
-  <EntityType Name="AN_DAT_POS_UNO">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="FECHA" Type="DateTime" />
-  </EntityType>
-  <EntityType Name="AN_DAT_SIGN">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="FECHA" Type="DateTime" />
-  </EntityType>
   <EntityType Name="ASTR">
     <Key>
       <PropertyRef Name="ID" />
@@ -219,6 +89,7 @@
     <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="FECHA" Type="DateTime" />
+    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="POS_DOS_DATOS">
     <Key>
@@ -239,6 +110,7 @@
     <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="FECHA" Type="DateTime" />
+    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="POS_TRES_DATOS">
     <Key>
@@ -259,6 +131,7 @@
     <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="FECHA" Type="DateTime" />
+    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="POS_UNO_DATOS">
     <Key>
@@ -279,6 +152,7 @@
     <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="FECHA" Type="DateTime" />
+    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="SIGN_DATOS">
     <Key>
@@ -299,5 +173,6 @@
     <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="FECHA" Type="DateTime" />
+    <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
   </EntityType>
 </Schema>

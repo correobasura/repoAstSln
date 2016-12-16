@@ -5,19 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="263ef9685078485685ee55ea39014cac" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="AstModel.AN_DAT_POS_CUATRO" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AstModel.AN_DAT_POS_DOS" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AstModel.AN_DAT_POS_TRES" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AstModel.AN_DAT_POS_UNO" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AstModel.AN_DAT_SIGN" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AstModel.ASTR" Width="1.5" PointX="2.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AstModel.DATOS_TEMP" Width="1.5" PointX="4.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AstModel.DATOS_TEMP_DEPUR" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AstModel.POS_CUATRO_DATOS" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AstModel.POS_DOS_DATOS" Width="1.5" PointX="8.75" PointY="5.75" />
-        <EntityTypeShape EntityType="AstModel.POS_TRES_DATOS" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AstModel.POS_UNO_DATOS" Width="1.5" PointX="10.75" PointY="5.75" />
-        <EntityTypeShape EntityType="AstModel.SIGN_DATOS" Width="1.5" PointX="8.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AstModel.ASTR" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AstModel.DATOS_TEMP" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AstModel.DATOS_TEMP_DEPUR" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AstModel.POS_CUATRO_DATOS" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AstModel.POS_DOS_DATOS" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AstModel.POS_TRES_DATOS" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AstModel.POS_UNO_DATOS" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AstModel.SIGN_DATOS" Width="1.5" PointX="6.75" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

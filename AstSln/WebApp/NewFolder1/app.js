@@ -2,12 +2,12 @@
     'use strict';
 
     angular.module('app', [
-        // Angular modules 
+        // Angular modules
         'ngRoute'
 
-        // Custom modules 
+        // Custom modules
 
         // 3rd Party Modules
-        
+
     ]);
 })();

@@ -5,131 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AstModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AN_DAT_POS_CUATRO">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="date" />
-        </EntityType>
-        <EntityType Name="AN_DAT_POS_DOS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="date" />
-        </EntityType>
-        <EntityType Name="AN_DAT_POS_TRES">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="date" />
-        </EntityType>
-        <EntityType Name="AN_DAT_POS_UNO">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="date" />
-        </EntityType>
-        <EntityType Name="AN_DAT_SIGN">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="number" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="date" />
-        </EntityType>
         <EntityType Name="ASTR">
           <Key>
             <PropertyRef Name="ID" />
@@ -209,6 +84,7 @@
           <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="date" />
+          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="POS_DOS_DATOS">
           <Key>
@@ -229,6 +105,7 @@
           <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="date" />
+          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="POS_TRES_DATOS">
           <Key>
@@ -249,6 +126,7 @@
           <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="date" />
+          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="POS_UNO_DATOS">
           <Key>
@@ -269,6 +147,7 @@
           <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="date" />
+          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="SIGN_DATOS">
           <Key>
@@ -289,13 +168,9 @@
           <Property Name="SUMATORIAVALORES" Type="number" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="number" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="date" />
+          <Property Name="DIAMES" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityContainer Name="AstModelStoreContainer">
-          <EntitySet Name="AN_DAT_POS_CUATRO" EntityType="Self.AN_DAT_POS_CUATRO" Schema="USERSORT" store:Type="Tables" />
-          <EntitySet Name="AN_DAT_POS_DOS" EntityType="Self.AN_DAT_POS_DOS" Schema="USERSORT" store:Type="Tables" />
-          <EntitySet Name="AN_DAT_POS_TRES" EntityType="Self.AN_DAT_POS_TRES" Schema="USERSORT" store:Type="Tables" />
-          <EntitySet Name="AN_DAT_POS_UNO" EntityType="Self.AN_DAT_POS_UNO" Schema="USERSORT" store:Type="Tables" />
-          <EntitySet Name="AN_DAT_SIGN" EntityType="Self.AN_DAT_SIGN" Schema="USERSORT" store:Type="Tables" />
           <EntitySet Name="ASTR" EntityType="Self.ASTR" Schema="USERSORT" store:Type="Tables" />
           <EntitySet Name="DATOS_TEMP" EntityType="Self.DATOS_TEMP" Schema="USERSORT" store:Type="Tables" />
           <EntitySet Name="DATOS_TEMP_DEPUR" EntityType="Self.DATOS_TEMP_DEPUR" Schema="USERSORT" store:Type="Tables" />
@@ -310,11 +185,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="AstModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AstEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AN_DAT_POS_CUATRO" EntityType="AstModel.AN_DAT_POS_CUATRO" />
-          <EntitySet Name="AN_DAT_POS_DOS" EntityType="AstModel.AN_DAT_POS_DOS" />
-          <EntitySet Name="AN_DAT_POS_TRES" EntityType="AstModel.AN_DAT_POS_TRES" />
-          <EntitySet Name="AN_DAT_POS_UNO" EntityType="AstModel.AN_DAT_POS_UNO" />
-          <EntitySet Name="AN_DAT_SIGN" EntityType="AstModel.AN_DAT_SIGN" />
           <EntitySet Name="ASTR" EntityType="AstModel.ASTR" />
           <EntitySet Name="DATOS_TEMP" EntityType="AstModel.DATOS_TEMP" />
           <EntitySet Name="DATOS_TEMP_DEPUR" EntityType="AstModel.DATOS_TEMP_DEPUR" />
@@ -324,131 +194,6 @@
           <EntitySet Name="POS_UNO_DATOS" EntityType="AstModel.POS_UNO_DATOS" />
           <EntitySet Name="SIGN_DATOS" EntityType="AstModel.SIGN_DATOS" />
         </EntityContainer>
-        <EntityType Name="AN_DAT_POS_CUATRO">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="AN_DAT_POS_DOS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="AN_DAT_POS_TRES">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="AN_DAT_POS_UNO">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="AN_DAT_SIGN">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_SIN_APARECER" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_ULT_RACH" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_GENERAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_SEM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DIA_MOD" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_MES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COMPARA_CONT_DESP_ACTUAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MIN_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="INDICA_MAX_PUNTUA_TOTAL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="DateTime" />
-        </EntityType>
         <EntityType Name="ASTR">
           <Key>
             <PropertyRef Name="ID" />
@@ -528,6 +273,7 @@
           <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="DateTime" />
+          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="POS_DOS_DATOS">
           <Key>
@@ -548,6 +294,7 @@
           <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="DateTime" />
+          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="POS_TRES_DATOS">
           <Key>
@@ -568,6 +315,7 @@
           <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="DateTime" />
+          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="POS_UNO_DATOS">
           <Key>
@@ -588,6 +336,7 @@
           <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="DateTime" />
+          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="SIGN_DATOS">
           <Key>
@@ -608,6 +357,7 @@
           <Property Name="SUMATORIAVALORES" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="CONTADORDESPUESSIGNACTUAL" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="FECHA" Type="DateTime" />
+          <Property Name="DIAMES" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -615,136 +365,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AstModelStoreContainer" CdmEntityContainer="AstEntities">
-          <EntitySetMapping Name="AN_DAT_POS_CUATRO">
-            <EntityTypeMapping TypeName="AstModel.AN_DAT_POS_CUATRO">
-              <MappingFragment StoreEntitySet="AN_DAT_POS_CUATRO">
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
-                <ScalarProperty Name="INDICA_MAX_PUNTUA_TOTAL" ColumnName="INDICA_MAX_PUNTUA_TOTAL" />
-                <ScalarProperty Name="INDICA_MIN_PUNTUA_TOTAL" ColumnName="INDICA_MIN_PUNTUA_TOTAL" />
-                <ScalarProperty Name="COMPARA_CONT_DESP_ACTUAL" ColumnName="COMPARA_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DESP_ACTUAL" ColumnName="INDICA_MIN_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
-                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
-                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_SIN_APARECER" ColumnName="INDICA_MIN_SIN_APARECER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AN_DAT_POS_DOS">
-            <EntityTypeMapping TypeName="AstModel.AN_DAT_POS_DOS">
-              <MappingFragment StoreEntitySet="AN_DAT_POS_DOS">
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
-                <ScalarProperty Name="INDICA_MAX_PUNTUA_TOTAL" ColumnName="INDICA_MAX_PUNTUA_TOTAL" />
-                <ScalarProperty Name="INDICA_MIN_PUNTUA_TOTAL" ColumnName="INDICA_MIN_PUNTUA_TOTAL" />
-                <ScalarProperty Name="COMPARA_CONT_DESP_ACTUAL" ColumnName="COMPARA_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DESP_ACTUAL" ColumnName="INDICA_MIN_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
-                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
-                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_SIN_APARECER" ColumnName="INDICA_MIN_SIN_APARECER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AN_DAT_POS_TRES">
-            <EntityTypeMapping TypeName="AstModel.AN_DAT_POS_TRES">
-              <MappingFragment StoreEntitySet="AN_DAT_POS_TRES">
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
-                <ScalarProperty Name="INDICA_MAX_PUNTUA_TOTAL" ColumnName="INDICA_MAX_PUNTUA_TOTAL" />
-                <ScalarProperty Name="INDICA_MIN_PUNTUA_TOTAL" ColumnName="INDICA_MIN_PUNTUA_TOTAL" />
-                <ScalarProperty Name="COMPARA_CONT_DESP_ACTUAL" ColumnName="COMPARA_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DESP_ACTUAL" ColumnName="INDICA_MIN_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
-                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
-                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_SIN_APARECER" ColumnName="INDICA_MIN_SIN_APARECER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AN_DAT_POS_UNO">
-            <EntityTypeMapping TypeName="AstModel.AN_DAT_POS_UNO">
-              <MappingFragment StoreEntitySet="AN_DAT_POS_UNO">
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
-                <ScalarProperty Name="INDICA_MAX_PUNTUA_TOTAL" ColumnName="INDICA_MAX_PUNTUA_TOTAL" />
-                <ScalarProperty Name="INDICA_MIN_PUNTUA_TOTAL" ColumnName="INDICA_MIN_PUNTUA_TOTAL" />
-                <ScalarProperty Name="COMPARA_CONT_DESP_ACTUAL" ColumnName="COMPARA_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DESP_ACTUAL" ColumnName="INDICA_MIN_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
-                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
-                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_SIN_APARECER" ColumnName="INDICA_MIN_SIN_APARECER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AN_DAT_SIGN">
-            <EntityTypeMapping TypeName="AstModel.AN_DAT_SIGN">
-              <MappingFragment StoreEntitySet="AN_DAT_SIGN">
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
-                <ScalarProperty Name="INDICA_MAX_PUNTUA_TOTAL" ColumnName="INDICA_MAX_PUNTUA_TOTAL" />
-                <ScalarProperty Name="INDICA_MIN_PUNTUA_TOTAL" ColumnName="INDICA_MIN_PUNTUA_TOTAL" />
-                <ScalarProperty Name="COMPARA_CONT_DESP_ACTUAL" ColumnName="COMPARA_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DESP_ACTUAL" ColumnName="INDICA_MIN_CONT_DESP_ACTUAL" />
-                <ScalarProperty Name="COMPARA_CONT_MES" ColumnName="COMPARA_CONT_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_MES" ColumnName="INDICA_MIN_CONT_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MOD" ColumnName="COMPARA_CONT_DIA_MOD" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MOD" ColumnName="INDICA_MIN_CONT_DIA_MOD" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_MES" ColumnName="COMPARA_CONT_DIA_MES" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_MES" ColumnName="INDICA_MIN_CONT_DIA_MES" />
-                <ScalarProperty Name="COMPARA_CONT_DIA_SEM" ColumnName="COMPARA_CONT_DIA_SEM" />
-                <ScalarProperty Name="INDICA_MIN_CONT_DIA_SEM" ColumnName="INDICA_MIN_CONT_DIA_SEM" />
-                <ScalarProperty Name="COMPARA_CONT_GENERAL" ColumnName="COMPARA_CONT_GENERAL" />
-                <ScalarProperty Name="INDICA_MIN_CONT_GENERAL" ColumnName="INDICA_MIN_CONT_GENERAL" />
-                <ScalarProperty Name="COMPARA_ULT_RACH" ColumnName="COMPARA_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_ULT_RACH" ColumnName="INDICA_MIN_ULT_RACH" />
-                <ScalarProperty Name="INDICA_MIN_SIN_APARECER" ColumnName="INDICA_MIN_SIN_APARECER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ASTR">
             <EntityTypeMapping TypeName="AstModel.ASTR">
               <MappingFragment StoreEntitySet="ASTR">
@@ -811,6 +431,7 @@
           <EntitySetMapping Name="POS_CUATRO_DATOS">
             <EntityTypeMapping TypeName="AstModel.POS_CUATRO_DATOS">
               <MappingFragment StoreEntitySet="POS_CUATRO_DATOS">
+                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
                 <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
                 <ScalarProperty Name="SUMATORIAVALORES" ColumnName="SUMATORIAVALORES" />
@@ -832,6 +453,7 @@
           <EntitySetMapping Name="POS_DOS_DATOS">
             <EntityTypeMapping TypeName="AstModel.POS_DOS_DATOS">
               <MappingFragment StoreEntitySet="POS_DOS_DATOS">
+                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
                 <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
                 <ScalarProperty Name="SUMATORIAVALORES" ColumnName="SUMATORIAVALORES" />
@@ -853,6 +475,7 @@
           <EntitySetMapping Name="POS_TRES_DATOS">
             <EntityTypeMapping TypeName="AstModel.POS_TRES_DATOS">
               <MappingFragment StoreEntitySet="POS_TRES_DATOS">
+                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
                 <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
                 <ScalarProperty Name="SUMATORIAVALORES" ColumnName="SUMATORIAVALORES" />
@@ -874,6 +497,7 @@
           <EntitySetMapping Name="POS_UNO_DATOS">
             <EntityTypeMapping TypeName="AstModel.POS_UNO_DATOS">
               <MappingFragment StoreEntitySet="POS_UNO_DATOS">
+                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
                 <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
                 <ScalarProperty Name="SUMATORIAVALORES" ColumnName="SUMATORIAVALORES" />
@@ -895,6 +519,7 @@
           <EntitySetMapping Name="SIGN_DATOS">
             <EntityTypeMapping TypeName="AstModel.SIGN_DATOS">
               <MappingFragment StoreEntitySet="SIGN_DATOS">
+                <ScalarProperty Name="DIAMES" ColumnName="DIAMES" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
                 <ScalarProperty Name="CONTADORDESPUESSIGNACTUAL" ColumnName="CONTADORDESPUESSIGNACTUAL" />
                 <ScalarProperty Name="SUMATORIAVALORES" ColumnName="SUMATORIAVALORES" />

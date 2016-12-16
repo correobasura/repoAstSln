@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Model.DataContextModel;
+﻿using System.Collections.Generic;
 
 namespace DTOs
 {
     public class ObjectInfoDTO
     {
-
         public ObjectInfoDTO()
         {
             this.RachasAparicion = new List<int>();

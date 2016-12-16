@@ -80,6 +80,7 @@ CREATE TABLE POS_UNO_DATOS(
 	ContadorDespuesActual NUMBER,
 	SumatoriaValores NUMBER,
 	ContadorDespuesSignActual NUMBER,
+	DiaMes NUMBER,
 	Fecha DATE
 );
 
@@ -98,6 +99,7 @@ CREATE TABLE POS_DOS_DATOS(
 	ContadorDespuesActual NUMBER,
 	SumatoriaValores NUMBER,
 	ContadorDespuesSignActual NUMBER,
+	DiaMes NUMBER,
 	Fecha DATE
 );
 
@@ -116,6 +118,7 @@ CREATE TABLE POS_TRES_DATOS(
 	ContadorDespuesActual NUMBER,
 	SumatoriaValores NUMBER,
 	ContadorDespuesSignActual NUMBER,
+	DiaMes NUMBER,
 	Fecha DATE
 );
 
@@ -134,6 +137,7 @@ CREATE TABLE POS_CUATRO_DATOS(
 	ContadorDespuesActual NUMBER,
 	SumatoriaValores NUMBER,
 	ContadorDespuesSignActual NUMBER,
+	DiaMes NUMBER,
 	Fecha DATE
 );
 
@@ -152,6 +156,7 @@ CREATE TABLE SIGN_DATOS(
 	ContadorDespuesActual NUMBER,
 	SumatoriaValores NUMBER,
 	ContadorDespuesSignActual NUMBER,
+	DiaMes NUMBER,
 	Fecha DATE
 );
 

@@ -4,8 +4,6 @@ using Model.DataContextModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presenter
 {
@@ -22,27 +20,27 @@ namespace Presenter
         /// <returns>Estrucutra con datos depurados</returns>
         public static Dictionary<string, ObjectInfoDTO> ValidarIndicadoresPosicion(AstEntities _astEntities, Dictionary<string, ObjectInfoDTO> dict, InfoPosicionDTO infoPosicion, string fechaFormat, int dia)
         {
-            bool fechaNoSinAparecer = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_SIN_APARECER, 1, fechaFormat, dia);
-            bool fechaNoUltRach = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_ULT_RACH, 1, fechaFormat, dia);
+            bool fechaNoSinAparecer = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_SIN_APARECER, 1, fechaFormat, dia);
+            bool fechaNoUltRach = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_ULT_RACH, 1, fechaFormat, dia);
             //bool fechaNoMaxUltRachas = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MAX_ULT_RACH, 1, fechaFormat, dia);
-            bool fechaNoComparaUltRachas = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.COMPARA_ULT_RACH, 0, fechaFormat, dia);
+            bool fechaNoComparaUltRachas = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.COMPARA_ULT_RACH, 0, fechaFormat, dia);
             bool fechaNoMaxUltRachasDesActu = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MAX_CONT_ULT_RACH_DES_A, 1, fechaFormat, dia);
             //bool fechaNoMinContGeneral = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_CONT_GENERAL, 1, fechaFormat, dia);
             //bool fechaNoComparaContGeneral = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.COMPARA_CONT_GENERAL, 0, fechaFormat, dia);
             //bool fechaNoMinContDiaSemana = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_CONT_DIA_SEM, 1, fechaFormat, dia);
             //bool fechaNoComparaContDiaSemana = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.COMPARA_CONT_DIA_SEM, 0, fechaFormat, dia);
-            bool fechaNoIndicaMinDiaMes = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES, 1, fechaFormat, dia);
+            bool fechaNoIndicaMinDiaMes = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_CONT_DIA_MES, 1, fechaFormat, dia);
             //bool fechaNoComparaContDiaMes = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.COMPARA_CONT_DIA_MES, 0, fechaFormat, dia);
             //bool fechaNoIndicaMinDiaMod = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_CONT_DIA_MOD, 1, fechaFormat, dia);
             //bool fechaNoComparaContDiaMod = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.COMPARA_CONT_DIA_MOD, 0, fechaFormat, dia);
             //bool fechaNoIndicaMinMes = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_CONT_MES, 1, fechaFormat, dia);
             //bool fechaNoComparaContMes = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.COMPARA_CONT_MES, 0, fechaFormat, dia);
             //bool fechaNoIndicaMinDespActual = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_CONT_DESP_ACTUAL, 1, fechaFormat, dia);
-            bool fechaNoComparaContDespActual = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.COMPARA_CONT_DESP_ACTUAL, 0, fechaFormat, dia);
-            bool fechaNoMinPuntuaTotal = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_PUNTUA_TOTAL, 1, fechaFormat, dia);
-            bool fechaNoMaxPuntuaTotal = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MAX_PUNTUA_TOTAL, 1, fechaFormat, dia);
-            bool fechaNoMinSumatoria = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_SUMATORIA, 1, fechaFormat, dia);
-            bool fechaNoMaxSumatoria = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities,  ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MAX_SUMATORIA, 1, fechaFormat, dia);
+            bool fechaNoComparaContDespActual = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.COMPARA_CONT_DESP_ACTUAL, 0, fechaFormat, dia);
+            bool fechaNoMinPuntuaTotal = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_PUNTUA_TOTAL, 1, fechaFormat, dia);
+            bool fechaNoMaxPuntuaTotal = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MAX_PUNTUA_TOTAL, 1, fechaFormat, dia);
+            bool fechaNoMinSumatoria = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MIN_SUMATORIA, 1, fechaFormat, dia);
+            bool fechaNoMaxSumatoria = AnalisisPosicionGeneral.ObtenerBanderaIndicador(_astEntities, ConstantesGenerales.AN_DAT_SIGN, ConstantesGenerales.INDICA_MAX_SUMATORIA, 1, fechaFormat, dia);
 
             List<InfoEliminacionDTO> listaEliminar = new List<InfoEliminacionDTO>();
             List<string> itemsEliminar = new List<string>();
@@ -142,10 +140,56 @@ namespace Presenter
             return tempDic;
         }
 
+        public static Dictionary<string, ObjectInfoDTO> ValidarAbsolutoSinAparecer(Dictionary<string, ObjectInfoDTO> dict)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            foreach (var item in dict)
+            {
+                int valorAbs = Math.Abs(item.Value.RachasAcumuladas.Last());
+                bool eliminar = valorAbs == item.Value.CONTADORULTIMOENRACHAS
+                               || valorAbs == item.Value.RankContadorGeneral
+                               || valorAbs == item.Value.RankContadorDiaMes
+                               || valorAbs == item.Value.RankContadorDiaModulo;
+                if (eliminar)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
+
         public static Dictionary<string, ObjectInfoDTO> ValidarAparicionesDespActual(AstEntities _astEntities, Dictionary<string, ObjectInfoDTO> dict, InfoPosicionDTO infoPosSign, string fechaFormat, string tabla)
         {
             var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
-            List<int> listaMenoresDatos = AnalisisPosicionGeneral.AgruparContadoresDespuesActual(_astEntities, tabla, ConstantesGenerales.CONTADORDESPUESACTUAL, infoPosSign.CONTADORDESPUESACTUAL, fechaFormat, 3);
+            List<int> listaMenoresDatos = AnalisisPosicionGeneral.AgruparContadoresDespuesActual(_astEntities, tabla, ConstantesGenerales.CONTADORDIAMODULO, infoPosSign.CONTADORDIAMODULO, fechaFormat, 2);
+            foreach (var item in dict)
+            {
+                if (listaMenoresDatos.IndexOf(item.Value.ContadorDespuesActual) != -1)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
+
+        public static Dictionary<string, ObjectInfoDTO> ContarDatosPosicionDiaMes(AstEntities _astEntities, Dictionary<string, ObjectInfoDTO> dict, InfoPosicionDTO infoPosSign, string fechaFormat, string tabla, int dia)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            List<int> listaMenoresDatos = AnalisisPosicionGeneral.ContarDatosPosicionDiaMes(_astEntities, tabla, ConstantesGenerales.CONTADORDIASEMANA, dia, fechaFormat);
+            foreach (var item in dict)
+            {
+                if (listaMenoresDatos.IndexOf(item.Value.ContadorDespuesActual) == -1)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
+
+        public static Dictionary<string, ObjectInfoDTO> ContarDatosPosicionDiaSemana(AstEntities _astEntities, Dictionary<string, ObjectInfoDTO> dict, InfoPosicionDTO infoPosSign, string fechaFormat, string tabla, int dia)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            List<int> listaMenoresDatos = AnalisisPosicionGeneral.ContarDatosPosicionDiaSemana(_astEntities, tabla, ConstantesGenerales.CONTADORDIASEMANA, dia, fechaFormat);
             foreach (var item in dict)
             {
                 if (listaMenoresDatos.IndexOf(item.Value.ContadorDespuesActual) != -1)

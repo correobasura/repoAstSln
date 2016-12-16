@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Constantes
+﻿namespace Constantes
 {
     public class ConstantesConsultas
     {
@@ -25,10 +19,13 @@ namespace Constantes
         public const string QUERY_CONSULTA_AN_DATOS = "SELECT {0} FROM {1} WHERE fecha < TO_DATE('{2}','dd/MM/yyyy') ORDER BY FECHA DESC";
         public const string QUERY_AN_DATOS_COUNT_COLUMN = "SELECT COUNT(*) AS CONTADOR, DIAMES AS VALOR FROM {0} WHERE {1} = 1 AND fecha < TO_DATE('{2}','dd/MM/yyyy') GROUP BY DIAMES ORDER BY 1";
         public const string QUERY_COUNT_DATOS_DESP_ACTUAL_COLUMNA = "SELECT COUNT(*) AS Contador, {0} AS Valor FROM {1} WHERE fecha IN (SELECT fecha+1 FROM {1} WHERE {0} = {2}) AND fecha < TO_DATE('{3}','dd/MM/yyyy') GROUP BY {0} ORDER BY 1";
-        public const string QUERY_DATOS_ANTERIOR_POSICION = "SELECT CONTADORDIASEMANA AS CONTADORDIASEMANA, CONTADORDIAMES AS CONTADORDIAMES, CONTADORDIAMODULO AS CONTADORDIAMODULO, CONTADORMES AS CONTADORMES, CONTADORDESPUESACTUAL AS CONTADORDESPUESACTUAL, CONTADORULTIMOENRACHAS AS CONTADORULTIMOENRACHAS, CONTADORGENERAL AS CONTADORGENERAL FROM {0} WHERE fecha = TO_DATE('{1}','dd/MM/yyyy')";
+        public const string QUERY_DATOS_ANTERIOR_POSICION = "SELECT CONTADORDIASEMANA AS CONTADORDIASEMANA, CONTADORDIAMES AS CONTADORDIAMES, CONTADORDIAMODULO AS CONTADORDIAMODULO, CONTADORMES AS CONTADORMES, CONTADORDESPUESACTUAL AS CONTADORDESPUESACTUAL, CONTADORULTIMOENRACHAS AS CONTADORULTIMOENRACHAS, CONTADORGENERAL AS CONTADORGENERAL, SUMATORIAVALORES AS SUMATORIAVALORES FROM {0} WHERE fecha = TO_DATE('{1}','dd/MM/yyyy')";
         public const string QUERY_DATOS_SIN_APARECER = "SELECT COUNT(*) AS Contador, sinaparecer AS Valor FROM {0} WHERE fecha < TO_DATE('{1}','dd/MM/yyyy') GROUP BY sinaparecer ORDER BY 1 DESC, 2 DESC";
         public const string QUERY_DATOS_ANALISIS_POSICION_TABLA_SIGN = "select a.{0} from (select RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank, {0} from {1} where fecha >= TO_DATE('{2}','dd/MM/yyyy')-50 group by {0}) a where a.rank <= 6";
         public const string QUERY_DATOS_ANALISIS_POSICION_TABLA = "select a.{0} from (select RANK () OVER (ORDER BY COUNT(*) DESC) AS Rank, {0} from {1} where fecha >= TO_DATE('{2}','dd/MM/yyyy')-50 group by {0}) a where a.rank <= 5";
         public const string QUERY_CONTADOR_INDICADORES = "SELECT COUNT(*) AS Contador, DIAMES AS Valor FROM {0} WHERE {1} = {2} AND fecha <= TO_DATE('{3}','dd/MM/yyyy') GROUP BY DIAMES";
+        public const string QUERY_CONTADOR_POSICION_DIA_MES = "SELECT count(*) AS Contador, {0} AS Valor FROM {1} WHERE diames = {2} AND fecha < TO_DATE('{3}','dd/MM/yyyy') GROUP BY {0}";
+        public const string QUERY_CONTADOR_POSICION_DIA_SEMANA = "SELECT count(*) AS Contador, {0} AS Valor FROM {1} WHERE TO_CHAR(fecha,'D')={2} AND fecha < TO_DATE('{3}','dd/MM/yyyy') GROUP BY {0} order by 1";
+
     }
 }

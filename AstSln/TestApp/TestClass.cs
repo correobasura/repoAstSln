@@ -1,10 +1,6 @@
 ﻿using IView;
 using Presenter;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestApp
 {
@@ -16,7 +12,6 @@ namespace TestApp
         {
             for (int i = -30; i < 0; i++)
             {
-
                 _pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(i));
                 _pAccesoDatos.ObtenerResultados();
             }

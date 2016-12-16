@@ -4,8 +4,6 @@ using Model.DataContextModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presenter
 {
@@ -126,6 +124,23 @@ namespace Presenter
                 }
             }
             return AnalisisPosicionGeneral.RemoverElementosListaDiccionario(dict, listaEliminar, llavesIndicadores);
+        }
+
+        public static Dictionary<int, ObjectInfoDTO> ValidarAbsolutoSinAparecer(Dictionary<int, ObjectInfoDTO> dict)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            foreach (var item in dict)
+            {
+                int valorAbs = Math.Abs(item.Value.RachasAcumuladas.Last());
+                bool eliminar = valorAbs == item.Value.RankContadorGeneral
+                               || valorAbs == item.Value.RankContadorDiaModulo
+                               || valorAbs == item.Value.RankContadorMes;
+                if (eliminar)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
         }
     }
 }

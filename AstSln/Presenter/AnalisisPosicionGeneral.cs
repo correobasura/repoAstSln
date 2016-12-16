@@ -1,12 +1,9 @@
 ﻿using Constantes;
 using DTOs;
 using Model.DataContextModel;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presenter
 {
@@ -28,7 +25,7 @@ namespace Presenter
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="_astEntities">Objeto que instancia la bd para la realización de las consultas</param>>
         /// <param name="columna">columna de la tabla a analizar</param>
@@ -101,7 +98,6 @@ namespace Presenter
                     obj.Valor = valorComparador;
                     listaEliminar.Add(obj);
                 }
-
             }
             else
             {
@@ -129,7 +125,6 @@ namespace Presenter
                         listaEliminar.Add(obj);
                     }
                 }
-
             }
             return valorComparador;
         }
@@ -158,7 +153,6 @@ namespace Presenter
                     obj.Valor = valorComparador;
                     listaEliminar.Add(obj);
                 }
-
             }
             else
             {
@@ -186,7 +180,6 @@ namespace Presenter
                         listaEliminar.Add(obj);
                     }
                 }
-
             }
             return valorComparador;
         }
@@ -231,6 +224,43 @@ namespace Presenter
             DbRawSqlQuery<QueryInfo> data = _astEntities.Database.SqlQuery<QueryInfo>(consulta);
             List<QueryInfo> lista = data.AsEnumerable().Take(cantidadTomar).ToList();
             return (from x in lista select x.ClaveNum).ToList();
+        }
+
+        /// <summary>
+        /// Método que realiza la consulta de los valores agrupados para las coincidencias de un valor siguiente
+        /// </summary>
+        /// <param name="columna">Columna de la tabla sobre la que se realiza la consulta</param>
+        /// <param name="tablaValidar">Tabla para validar los datos</param>
+        /// <param name="valorComparar">Valor sobre el que se realiza la comparacion</param>
+        /// <returns></returns>
+        public static List<int> ContarDatosPosicionDiaMes(AstEntities _astEntities, string tablaValidar, string columna, int dia, string fechaFormat)
+        {
+            string consulta = string.Format(ConstantesConsultas.QUERY_CONTADOR_POSICION_DIA_MES, columna, tablaValidar, dia, fechaFormat);
+            DbRawSqlQuery<ContadorValorDTO> data = _astEntities.Database.SqlQuery<ContadorValorDTO>(consulta);
+            var listContadorValor = data.AsEnumerable().ToList();
+            int min = (from x in listContadorValor select x.Contador).Min();
+            int max = (from x in listContadorValor select x.Contador).Max();
+            int media = (max + min) / 2;
+            return (from x in listContadorValor where x.Contador >= media select x.Valor).ToList();
+        }
+
+        /// <summary>
+        /// Método que realiza la consulta de los valores agrupados para las coincidencias de un valor siguiente
+        /// </summary>
+        /// <param name="columna">Columna de la tabla sobre la que se realiza la consulta</param>
+        /// <param name="tablaValidar">Tabla para validar los datos</param>
+        /// <param name="valorComparar">Valor sobre el que se realiza la comparacion</param>
+        /// <returns></returns>
+        public static List<int> ContarDatosPosicionDiaSemana(AstEntities _astEntities, string tablaValidar, string columna, int dia, string fechaFormat)
+        {
+            dia = dia == 0 ? 7 : dia;
+            string consulta = string.Format(ConstantesConsultas.QUERY_CONTADOR_POSICION_DIA_SEMANA, columna, tablaValidar, dia, fechaFormat);
+            DbRawSqlQuery<ContadorValorDTO> data = _astEntities.Database.SqlQuery<ContadorValorDTO>(consulta);
+            var listContadorValor = data.AsEnumerable().Take(3).ToList();
+            //int min = (from x in listContadorValor select x.Contador).Min();
+            //int max = (from x in listContadorValor select x.Contador).Max();
+            //int media = (max + min) / 2;
+            return (from x in listContadorValor select x.Valor).ToList();
         }
     }
 }
