@@ -109,16 +109,16 @@ namespace Presenter
             InfoPosicionDTO infoPosCuatro = this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.POS_CUATRO_DATOS);
             InfoPosicionDTO infoPosSign = this.ObtenerUltimoObjetoPosicion(ConstantesGenerales.SIGN_DATOS);
 
-            var dict1 = AnalisisPosUno.ValidarIndicadoresPosicion(_astEntities, dictInfoPosUnoLun, infoPosUno, this.fechaFormat, this.fecha.Day);
-            var dict2 = AnalisisPosDos.ValidarIndicadoresPosicion(_astEntities, dictInfoPosDosLun, infoPosDos, this.fechaFormat, this.fecha.Day);
-            var dict3 = AnalisisPosTres.ValidarIndicadoresPosicion(_astEntities, dictInfoPosTresLun, infoPosTres, this.fechaFormat, this.fecha.Day);
-            var dict4 = AnalisisPosCuatro.ValidarIndicadoresPosicion(_astEntities, dictInfoPosCuatroLun, infoPosCuatro, this.fechaFormat, this.fecha.Day);
+            //var dict1 = AnalisisPosUno.ValidarIndicadoresPosicion(_astEntities, dictInfoPosUnoLun, infoPosUno, this.fechaFormat, this.fecha.Day);
+            //var dict2 = AnalisisPosDos.ValidarIndicadoresPosicion(_astEntities, dictInfoPosDosLun, infoPosDos, this.fechaFormat, this.fecha.Day);
+            //var dict3 = AnalisisPosTres.ValidarIndicadoresPosicion(_astEntities, dictInfoPosTresLun, infoPosTres, this.fechaFormat, this.fecha.Day);
+            //var dict4 = AnalisisPosCuatro.ValidarIndicadoresPosicion(_astEntities, dictInfoPosCuatroLun, infoPosCuatro, this.fechaFormat, this.fecha.Day);
             var dict5 = AnalisisSign.ValidarIndicadoresPosicion(_astEntities, dictInfoSignLun, infoPosSign, this.fechaFormat, this.fecha.Day);
 
-            dict1 = AnalisisPosUno.ValidarAbsolutoSinAparecer(dict1);
-            dict2 = AnalisisPosDos.ValidarAbsolutoSinAparecer(dict2);
-            dict3 = AnalisisPosTres.ValidarAbsolutoSinAparecer(dict3);
-            dict4 = AnalisisPosCuatro.ValidarAbsolutoSinAparecer(dict4);
+            //dict1 = AnalisisPosUno.ValidarAbsolutoSinAparecer(dict1);
+            //dict2 = AnalisisPosDos.ValidarAbsolutoSinAparecer(dict2);
+            //dict3 = AnalisisPosTres.ValidarAbsolutoSinAparecer(dict3);
+            //dict4 = AnalisisPosCuatro.ValidarAbsolutoSinAparecer(dict4);
             dict5 = AnalisisSign.ValidarAbsolutoSinAparecer(dict5);
 
             //var dict1 = this.ValidarAparicionesDespActual(dictInfoPosUnoLun, ConstantesGenerales.POS_UNO_DATOS);
@@ -127,7 +127,7 @@ namespace Presenter
             //dict3 = AnalisisPosTres.ValidarAparicionesDespActual(_astEntities, dict3, infoPosSign, this.fechaFormat, ConstantesGenerales.POS_TRES_DATOS);
             //dict4 = AnalisisPosCuatro.ValidarAparicionesDespActual(_astEntities, dict4, infoPosSign, this.fechaFormat, ConstantesGenerales.POS_CUATRO_DATOS);
             //dict5 = AnalisisSign.ValidarAparicionesDespActual(_astEntities, dict5, infoPosSign, this.fechaFormat, ConstantesGenerales.SIGN_DATOS);
-            //dict5 = AnalisisSign.ContarDatosPosicionDiaSemana(_astEntities, dict5, infoPosSign, this.fechaFormat, ConstantesGenerales.SIGN_DATOS, (int)this.fecha.DayOfWeek);
+            //dict5 = AnalisisSign.ValidarSumatoriasColumnas(dict5);
 
             //dict1 = this.ValidarSinAparecer(dict1, ConstantesGenerales.POS_UNO_DATOS);
             //dict2 = this.ValidarSinAparecer(dict2, ConstantesGenerales.POS_DOS_DATOS);
@@ -184,10 +184,10 @@ namespace Presenter
             //this.RevisarValoresMinimos(dict3, "PosTresLunDep", ConstantesGenerales.AN_DAT_POS_TRES, ConstantesTipoSor.POSICION_TRES, ConstantesGenerales.POS_TRES_DATOS);
             //this.RevisarValoresMinimos(dict4, "PosCuatroLunDep", ConstantesGenerales.AN_DAT_POS_CUATRO, ConstantesTipoSor.POSICION_CUATRO, ConstantesGenerales.POS_CUATRO_DATOS);
             //this.RevisarValoresMinimos(dict5, "PosSignDep", ConstantesGenerales.AN_DAT_SIGN, ConstantesTipoSor.POSICION_CINCO, ConstantesGenerales.SIGN_DATOS);
-            this.GuardarDatosTemporalesDepurados(dict1, 1);
-            this.GuardarDatosTemporalesDepurados(dict2, 2);
-            this.GuardarDatosTemporalesDepurados(dict3, 3);
-            this.GuardarDatosTemporalesDepurados(dict4, 4);
+            //this.GuardarDatosTemporalesDepurados(dict1, 1);
+            //this.GuardarDatosTemporalesDepurados(dict2, 2);
+            //this.GuardarDatosTemporalesDepurados(dict3, 3);
+            //this.GuardarDatosTemporalesDepurados(dict4, 4);
             this.GuardarDatosTemporalesDepurados(dict5, 5);
             //this.EscribirDatosArchivo(dictInfoPosUnoLun, "APosUnoLun");
             //this.EscribirDatosArchivo(dictInfoPosDosLun, "BPosDosLun");

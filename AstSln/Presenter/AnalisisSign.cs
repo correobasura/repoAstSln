@@ -199,5 +199,36 @@ namespace Presenter
             }
             return tempDic;
         }
+
+        public static Dictionary<string, ObjectInfoDTO> ValidarSumatoriasColumnas(Dictionary<string, ObjectInfoDTO> dict)
+        {
+            var tempDic = dict.ToDictionary(x => x.Key, x => x.Value);
+            int minCONTADORGENERAL_CONTADORDIASEMANA_CONTADORDIAMES = 14;
+            int maxCONTADORGENERAL_CONTADORDIASEMANA_CONTADORDIAMES = 28;
+            int minCONTADORDIASEMANA_CONTADORDIAMES_CONTADORDIAMODULO = 14;
+            int maxCONTADORDIASEMANA_CONTADORDIAMES_CONTADORDIAMODULO = 29;
+            int minCONTADORDIAMES_CONTADORDIAMODULO_CONTADORMES = 12;
+            int maxCONTADORDIAMES_CONTADORDIAMODULO_CONTADORMES = 27;
+            foreach (var item in dict)
+            {
+                int general = item.Value.RankContadorGeneral;
+                int diaSemana = item.Value.RankContadorDiaSemana;
+                int diaMes = item.Value.RankContadorDiaMes;
+                int diaModulo = item.Value.RankContadorDiaModulo;
+                int mes = item.Value.RankContadorMes;
+                bool eliminar = true;
+                eliminar &= (general + diaSemana + diaMes) < minCONTADORGENERAL_CONTADORDIASEMANA_CONTADORDIAMES
+                    || (general + diaSemana + diaMes) > maxCONTADORGENERAL_CONTADORDIASEMANA_CONTADORDIAMES;
+                eliminar &= (diaSemana + diaMes + diaModulo) < minCONTADORDIASEMANA_CONTADORDIAMES_CONTADORDIAMODULO
+                    || (diaSemana + diaMes + diaModulo) > maxCONTADORDIASEMANA_CONTADORDIAMES_CONTADORDIAMODULO;
+                eliminar &= (diaMes + diaModulo + mes) < minCONTADORDIAMES_CONTADORDIAMODULO_CONTADORMES
+                    || (diaMes + diaModulo + mes) > maxCONTADORDIAMES_CONTADORDIAMODULO_CONTADORMES;
+                if(eliminar && tempDic.Count() > 1)
+                {
+                    tempDic.Remove(item.Key);
+                }
+            }
+            return tempDic;
+        }
     }
 }

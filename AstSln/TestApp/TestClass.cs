@@ -10,9 +10,16 @@ namespace TestApp
 
         public TestClass()
         {
-            for (int i = -30; i < 0; i++)
+            //for (int i = -30; i < 0; i++)
+            //{
+            //    _pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(i));
+            //    _pAccesoDatos.ObtenerResultados();
+            //}
+            string dateTime = "12/11/2016";
+            DateTime dt = Convert.ToDateTime(dateTime);
+            for (int i = 0; i < 30; i++)
             {
-                _pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(i));
+                _pAccesoDatos = new PAccesoDatos(this, dt.AddDays(i));
                 _pAccesoDatos.ObtenerResultados();
             }
             //_pAccesoDatos = new PAccesoDatos(this, DateTime.Today.AddDays(-10));
